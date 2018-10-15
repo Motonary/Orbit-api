@@ -4,14 +4,15 @@ module.exports = {
   entry: {
     'bundle': './src/javascripts/app.js'
   },
-  // [name]にはentryポイントのkeyが挿入される
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: '/'
   },
   devServer: {
     contentBase: 'dist',
     port: 4000,
+    historyApiFallback: true,
     inline: true
   },
   module: {

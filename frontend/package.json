@@ -7,17 +7,20 @@
   "license": "ISC",
   "scripts": {
     "release": "webpack --mode production --config webpack.config.js",
-    "watch": "webpack-dev-server --mode development"
+    "watch": "webpack-dev-server --mode development --history-api-fallback"
   },
   "description": "== README",
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "keymirror": "^0.1.1",
     "lodash": "^4.17.11",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
+    "redux-form": "^6.8.0",
     "redux-promise": "^0.6.0"
   },
   "devDependencies": {
