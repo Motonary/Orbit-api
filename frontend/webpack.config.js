@@ -26,6 +26,12 @@ module.exports = {
             presets: ["@babel/preset-env", "@babel/preset-react"]
           }
         }
+      },
+      {
+        enforce: 'pre',
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader'
       }
     ]
   }

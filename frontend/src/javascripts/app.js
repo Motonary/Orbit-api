@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import promise from 'redux-promise'
 
-import reducers from './reducers';
-import LoginForm from './components/login-form'
-import SignupForm from './components/signup-form'
+import reducers from './reducers'
+import LoginForm from './components/login_form'
+import SignupForm from './components/signup_form'
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
 
 
 ReactDOM.render(
@@ -23,4 +23,4 @@ ReactDOM.render(
       </div>
     </BrowserRouter>
   </Provider>
-  , document.getElementById('app'));
+  , document.getElementById('app'))

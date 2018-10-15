@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+import { createUser } from '../actions/users'
 
 class SignupForm extends Component {
   renderField({ label, type, input, meta: { touched, error } }) {
@@ -16,7 +17,7 @@ class SignupForm extends Component {
     )
   }
 
-  onSubmit({ username, email, password}) {
+  onSubmit({ username, email, password }) {
     this.props.createUser(username, email, password)
   }
 
@@ -61,4 +62,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: 'Signup'
-})(conenct(null, {})(SignupForm))
+})(connect(null, { createUser })(SignupForm))
