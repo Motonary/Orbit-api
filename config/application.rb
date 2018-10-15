@@ -31,5 +31,13 @@ module OrbitApiApp
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # TODO: 本番環境でのCORSの設定必要
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'localhost:4000'
+        resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
+      end
+    end
   end
 end
