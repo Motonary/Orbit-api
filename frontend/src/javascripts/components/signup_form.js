@@ -18,7 +18,9 @@ class SignupForm extends Component {
   }
 
   onSubmit({ username, email, password }) {
-    this.props.createUser(username, email, password)
+    this.props.createUser(username, email, password, (newUserId) => {
+      this.props.history.push(`/users/${newUserId}`)
+    })
   }
 
   render() {
