@@ -7,7 +7,8 @@
 
 # Rails.application.config.middleware.insert_before 0, Rack::Cors do
 #   allow do
-#     origins 'example.com'
+#     # TODO: Production環境では訂正
+#     origins 'localhost:4000'
 #
 #     resource '*',
 #       headers: :any,

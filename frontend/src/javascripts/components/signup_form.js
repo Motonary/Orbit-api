@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createUser } from '../actions/users'
 
@@ -26,16 +27,17 @@ class SignupForm extends Component {
   render() {
     return(
       <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
-        <Field label="Name"     name="username" type="text"     component={this.renderField} />
-        <Field label="Email"    name="email"    type="text"     component={this.renderField} />
+        <Field label="Name" name="username" type="text" component={this.renderField} />
+        <Field label="Email" name="email" type="text" component={this.renderField} />
         <Field label="Password" name="password" type="password" component={this.renderField} />
+        <Field label="Confirmation" name="confirmation" type="password" component={this.renderField} />
         <button type="submit" className="btn btn-primary">Submit</button>
+        <Link to="/login">Sign in</Link>
       </form>
     )
   }
 }
 
-// onChangeでバリデーションをかけてエラーメッセージを表示
 function validate(values) {
   const errors = {}
 
@@ -58,10 +60,16 @@ function validate(values) {
   } else if (values.password.length < 6) {
     errors.password = "Password must contain at least 6 characters"
   }
+
+  if (!values.confirmation) {
+    errors.confirmation = "Password confirmation required"
+  } else if (values.password !== values.confirmation) {
+    errors.confirmation = "Not match to password"
+  }
   return errors
 }
 
 export default reduxForm({
   validate,
-  form: 'Signup'
+  form: 'SignupForm'
 })(connect(null, { createUser })(SignupForm))
