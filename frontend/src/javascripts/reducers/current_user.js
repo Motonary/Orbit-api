@@ -1,9 +1,9 @@
 import { actionTypes } from '../constants'
 
-export default (state = {}, action) => {
+export default (state = null, action) => {
   switch(action.type) {
-    case actionTypes.CREATE_USER:
-      return action.newUser
+    case actionTypes.SET_CURRENT_USER:
+      return action.currentUser
 
     default:
       return state

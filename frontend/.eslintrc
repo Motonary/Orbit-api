@@ -4,7 +4,7 @@
     "eslint:recommended",
     "plugin:react/recommended"
   ],
-  "plugins": ["react"], # プラグインのデフォルトルールで不都合があったら変更推奨
+  "plugins": ["react"],
   # TODO: あとでRule追加　https://eslint.org/docs/rules/
   "rules": {
     "semi": [2, "never"], # not allow semi-colon

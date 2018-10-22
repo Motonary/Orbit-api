@@ -11,6 +11,8 @@ gem 'bcrypt'
 gem 'react-rails'
 gem 'foreman'
 gem 'rack-cors'
+gem 'knock'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
