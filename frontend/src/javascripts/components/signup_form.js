@@ -18,8 +18,8 @@ class SignupForm extends Component {
     )
   }
 
-  onSubmit({ username, email, password }) {
-    this.props.createUser(username, email, password, (newUserId) => {
+  onSubmit({ username, email, password, confirmation }) {
+    this.props.createUser(username, email, password, confirmation, (newUserId) => {
       this.props.history.push(`/users/${newUserId}`)
     })
   }
@@ -32,7 +32,7 @@ class SignupForm extends Component {
         <Field label="Password" name="password" type="password" component={this.renderField} />
         <Field label="Confirmation" name="confirmation" type="password" component={this.renderField} />
         <button type="submit" className="btn btn-primary">Submit</button>
-        <Link to="/login">Sign in</Link>
+        <Link to="/guests/login">Sign in</Link>
       </form>
     )
   }

@@ -30,7 +30,7 @@ class LoginForm extends Component {
         <Field label="Email" name="email" type="text" component={this.renderField} />
         <Field label="Password" name="password" type="password" component={this.renderField} />
         <button type="submit" className="btn btn-primary">Submit</button>
-        <Link to="/signup">Sign up</Link>
+        <Link to="/guests/signup">Sign up</Link>
       </form>
     )
   }

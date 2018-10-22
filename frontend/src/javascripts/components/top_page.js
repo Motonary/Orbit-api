@@ -14,8 +14,6 @@ class TopPage extends Component {
   }
 }
 
-function mapStateToProps({ currentUser }) {
-  return { currentUser }
-}
-
-export default connect(mapStateToProps)(TopPage)
+export default connect(
+  ({ currentUser }) => ({ currentUser })
+)(TopPage)

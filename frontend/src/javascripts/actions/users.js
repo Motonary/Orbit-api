@@ -1,16 +1,17 @@
 import axios from 'axios'
 import { actionTypes, ROOT_URL } from '../constants'
 
-// TODO: catchを書く
-export function createUser(username, email, password, callback) {
-  return axios.post(`${ROOT_URL}/api/signup`, { username, email, password })
-    .then(res => {
+export function createUser(name, email, password, password_confirmation, callback) {
+  return axios.post(`${ROOT_URL}/api/signup`, {
+    user: { name, email, password, password_confirmation }
+  }).then(res => {
       callback(res.data.id)
+      createSession(email, password)
       return {
-        type: actionTypes.CREATE_USER,
-        newUser: res.data
+        type: actionTypes.SET_CURRENT_USER,
+        currentUser: res.data
       }
-    })
+    }).catch(() => alert('Sorry, something went wrong...'))
 }
 
 export function createSession(email, password, callback) {
@@ -20,19 +21,17 @@ export function createSession(email, password, callback) {
       localStorage.setItem('jwt', res.data.jwt.token)
       callback(res.data.loginUser.id)
       return {
-        type: actionTypes.CREATE_SESSION,
-        loginUser: res.data.loginUser
+        type: actionTypes.SET_CURRENT_USER,
+        currentUser: res.data.loginUser
       }
-    })
+    }).catch(() => alert('Sorry, something went wrong...'))
 }
 
 export function fetchCurrentUser(jwt) {
-  return axios.get(`${ROOT_URL}/api/current_user`, {
-    params: { jwt }
-  }).then(res => {
+  return axios.get(`${ROOT_URL}/api/current_user`, { params: { jwt } }).then(res => {
     return {
       type: actionTypes.SET_CURRENT_USER,
       currentUser: res.data
     }
-  })
+  }).catch(() => alert('Sorry, something went wrong...'))
 }
