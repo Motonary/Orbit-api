@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_22_032209) do
+ActiveRecord::Schema.define(version: 2018_10_22_105730) do
+
+  create_table "assignments", force: :cascade do |t|
+    t.string "title"
+    t.text "detail"
+    t.datetime "deadline"
+    t.integer "planet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "planets", force: :cascade do |t|
+    t.integer "type"
+    t.integer "size"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
