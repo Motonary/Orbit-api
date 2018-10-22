@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-class UserShow extends Component {
+class TopPage extends Component {
   render() {
     const { currentUser } = this.props
     if (!currentUser) {
@@ -18,4 +18,4 @@ function mapStateToProps({ currentUser }) {
   return { currentUser }
 }
 
-export default connect(mapStateToProps)(UserShow)
+export default connect(mapStateToProps)(TopPage)

@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { actionTypes } from '../constants'
+import { actionTypes, ROOT_URL } from '../constants'
 
+// TODO: catchを書く
 export function createUser(username, email, password, callback) {
-  // TODO: ProductionではURL訂正
-  return axios.post('http://localhost:3000/api/signup', { username, email, password })
+  return axios.post(`${ROOT_URL}/api/signup`, { username, email, password })
     .then(res => {
       callback(res.data.id)
       return {
@@ -14,13 +14,25 @@ export function createUser(username, email, password, callback) {
 }
 
 export function createSession(email, password, callback) {
-  // TODO: ProductionではURL訂正
-  return axios.post('http://localhost:3000/api/signup', { email, password })
+  const request = {'auth': {'email': email, 'password': password}}
+  return axios.post(`${ROOT_URL}/api/user_token`, request)
     .then(res => {
-      callback(res.data.id)
+      localStorage.setItem('jwt', res.data.jwt.token)
+      callback(res.data.loginUser.id)
       return {
-        type: actionTypes.CREATE_USER,
-        newUser: res.data
+        type: actionTypes.CREATE_SESSION,
+        loginUser: res.data.loginUser
       }
     })
+}
+
+export function fetchCurrentUser(jwt) {
+  return axios.get(`${ROOT_URL}/api/current_user`, {
+    params: { jwt }
+  }).then(res => {
+    return {
+      type: actionTypes.SET_CURRENT_USER,
+      currentUser: res.data
+    }
+  })
 }

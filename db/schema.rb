@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_15_024040) do
+ActiveRecord::Schema.define(version: 2018_10_22_032209) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -19,7 +19,9 @@ ActiveRecord::Schema.define(version: 2018_10_15_024040) do
     t.string "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "session_token"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["session_token"], name: "index_users_on_session_token", unique: true
   end
 
 end

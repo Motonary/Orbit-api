@@ -58,6 +58,8 @@ GEM
     crass (1.0.4)
     erubi (1.7.1)
     execjs (2.7.0)
+    faker (1.9.1)
+      i18n (>= 0.7)
     ffi (1.9.25)
     foreman (0.85.0)
       thor (~> 0.19.1)
@@ -174,6 +176,7 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
   byebug
+  faker
   foreman
   jbuilder (~> 2.5)
   knock
