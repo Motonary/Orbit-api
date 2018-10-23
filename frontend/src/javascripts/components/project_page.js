@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-class TopPage extends Component {
+class ProjectPage extends Component {
   render() {
     const { currentUser } = this.props
     if (!currentUser) {
@@ -54,4 +54,4 @@ class TopPage extends Component {
 
 export default connect(
   ({ currentUser }) => ({ currentUser })
-)(TopPage)
+)(ProjectPage)

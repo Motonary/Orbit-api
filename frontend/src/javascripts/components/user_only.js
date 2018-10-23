@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Header from './header'
 import TopPage from './top_page'
+import ProjectPage from './project_page'
 import Footer from './footer'
 
 class UserOnly extends Component {
@@ -14,7 +15,8 @@ class UserOnly extends Component {
         <div>
           <Header />
           <Switch>
-            <Route path={`${url}/:id`} component={TopPage} />
+            <Route exact path={`${url}/:userId/projects/:projectId`} component={ProjectPage} />
+            <Route exact path={`${url}/:userId`} component={TopPage} />
             <Route render={() => <h2>404 Not Found</h2>} />
           </Switch>
           <Footer />
