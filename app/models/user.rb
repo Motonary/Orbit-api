@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_secure_password
   before_save { email.downcase! }
 
-  has_many :planets, dependent: :destroy
+  has_and_belongs_to_many :projects
   has_many :assignments, through: :planets, dependent: :destroy
 
   validates :name,  presence: true, length: { maximum: 50 }

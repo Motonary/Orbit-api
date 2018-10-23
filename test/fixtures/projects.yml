@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id              :integer          not null, primary key
+#  title           :string
+#  fixed_star_type :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  fixed_star_type: 1
+
+two:
+  title: MyString
+  fixed_star_type: 1
