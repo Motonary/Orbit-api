@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 2018_10_22_105730) do
   end
 
   create_table "planets", force: :cascade do |t|
-    t.integer "type"
-    t.integer "size"
+    t.integer "planet_type"
+    t.integer "planet_size"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
