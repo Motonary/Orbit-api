@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: sub_assignments
+#
+#  id             :integer          not null, primary key
+#  title          :string
+#  detail         :text
+#  deadline       :datetime
+#  satellite_type :integer
+#  assignmant_id  :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  detail: MyText
+  deadline: 2018-10-23 22:23:57
+  satellite_type: 1
+  assignmant_id: 1
+
+two:
+  title: MyString
+  detail: MyText
+  deadline: 2018-10-23 22:23:57
+  satellite_type: 1
+  assignmant_id: 1

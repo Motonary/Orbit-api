@@ -1,6 +1,23 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  name            :string
+#  email           :string
+#  password_digest :string
+#  project_id      :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  session_token   :string
+#
+
 class User < ApplicationRecord
   has_secure_password
   before_save { email.downcase! }
+
+  has_and_belongs_to_many :projects
+  has_many :assignments, through: :planets, dependent: :destroy
 
   validates :name,  presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
