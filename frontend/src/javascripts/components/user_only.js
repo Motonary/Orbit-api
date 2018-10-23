@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import Header from './header'
 import TopPage from './top_page'
+import Footer from './footer'
 
 class UserOnly extends Component {
   render() {
@@ -10,10 +12,12 @@ class UserOnly extends Component {
     return(
       this.props.currentUser ? (
         <div>
+          <Header />
           <Switch>
             <Route path={`${url}/:id`} component={TopPage} />
             <Route render={() => <h2>404 Not Found</h2>} />
           </Switch>
+          <Footer />
         </div>
       ) : <Redirect to="/guests/login" />
     )

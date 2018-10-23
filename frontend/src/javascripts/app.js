@@ -10,6 +10,8 @@ import UserOnly from './components/user_only'
 import GuestOnly from './components/guest_only'
 import AboutPage from './components/about_page'
 
+import '../stylesheets/style.scss'
+
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
 
 ReactDOM.render(
