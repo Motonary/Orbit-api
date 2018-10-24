@@ -5,15 +5,12 @@ import { connect } from 'react-redux'
 import { createSession } from '../../actions/users'
 
 class LoginForm extends Component {
-  renderField({ placeholder, type, input, meta: { touched, error } }) {
-    const classNames = `form-group ${touched && error ? 'has-danger' : ''} field-style fieled-text`
+  renderField({ label, type, input, meta: { touched, error } }) {
+    const classNames = `form-group ${touched && error ? 'has-danger' : ''}`
     return(
       <div className={classNames}>
-        <input
-          className="text-style"
-          placeholder={placeholder}
-          type={type}
-          {...input} />
+        <label>{label}</label>
+        <input className="form-control" type={type} {...input} />
         <div className="text-help">
           {touched ? error: ''}
         </div>
@@ -30,9 +27,10 @@ class LoginForm extends Component {
   render() {
     return(
       <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
-        <Field placeholder="E M A I L   A D R E S S" name="email" type="text" component={this.renderField} />
-        <Field placeholder="P A S S W O R D" name="password" type="password" component={this.renderField} />
-        <button type="submit" className="submit-btn">SIGN IN</button>
+        <Field label="Email" name="email" type="text" component={this.renderField} />
+        <Field label="Password" name="password" type="password" component={this.renderField} />
+        <button type="submit" className="btn btn-primary">Submit</button>
+        <Link to="/guests/signup">Sign up</Link>
       </form>
     )
   }

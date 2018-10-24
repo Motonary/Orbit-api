@@ -9,12 +9,8 @@ import Main from './components/index/main'
 import UserOnly from './components/users/user-only'
 import GuestOnly from './components/guests/guest-only'
 import AboutPage from './components/guests/about-page'
-import TopPage from './components/top_page'
 
-import '../stylesheets/common.scss'
-import '../stylesheets/form_field.scss'
-import '../stylesheets/top_page.scss'
-import '../stylesheets/project_page.scss'
+import '../stylesheets/style.scss'
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
 
@@ -25,7 +21,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/guests" component={GuestOnly} />
           <Route path="/users" component={UserOnly} />
-          <Route exact path="/" component={TopPage} />
+          <Route exact path="/" component={AboutPage} />
           <Route render={() => <h2>404 Not Found</h2>} />
         </Switch>
       </Main>
