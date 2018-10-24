@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { fetchCurrentUser } from '../actions/users'
+import { fetchCurrentUser } from '../../actions/users'
 
 class Main extends Component {
   constructor(props) {

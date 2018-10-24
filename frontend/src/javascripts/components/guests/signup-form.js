@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { createUser } from '../actions/users'
+import { createUser } from '../../actions/users'
 
 class SignupForm extends Component {
   renderField({ label, type, input, meta: { touched, error } }) {
