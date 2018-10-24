@@ -6,12 +6,14 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import promise from 'redux-promise'
 import reducers from './reducers'
 import Main from './components/main'
-import TopPage from './components/top_page';
+import TopPage from './components/top_page'
 import UserOnly from './components/user_only'
 import GuestOnly from './components/guest_only'
-import AboutPage from './components/about_page'
+//import AboutPage from './components/about_page'
 
-import '../stylesheets/style.scss'
+import '../stylesheets/common.scss'
+import '../stylesheets/top_page.scss'
+import '../stylesheets/project_page.scss'
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
 

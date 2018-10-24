@@ -7,7 +7,7 @@ export default class AboutPage extends Component {
     return(
       <div>
         <div>Hello, About Page!</div>
-        <Link to="/guests/login">Sign in </Link>
+        <Link to="/guests/login">Sign in</Link>
       </div>
     )
   }
