@@ -136,6 +136,7 @@ body {
     margin: auto;
     animation: rotate $second-orbit-speed linear reverse infinite;
     word-wrap: break-word;
+    cursor: pointer;
   }
   .planet-small-3 {
     width: percentage($third-orbit-small-planet);
@@ -307,4 +308,8 @@ body {
       transform: translateX(100%);
     }
   }
+}
+
+a {
+  cursor: pointer;
 }

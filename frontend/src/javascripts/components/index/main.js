@@ -1,22 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { JWT } from '../../constants'
 import { fetchCurrentUser } from '../../actions/users'
 
 class Main extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { jwt: sessionStorage.getItem('jwt') }
-  }
-
   componentDidMount() {
-    const { jwt } = this.state
-    if (jwt) this.props.fetchCurrentUser(jwt)
+    if (JWT) this.props.fetchCurrentUser()
   }
 
   render() {
     return (
-      (this.state.jwt && !this.props.currentUser) ?
+      (JWT && !this.props.currentUser) ?
         <div>Loading...</div> : this.props.children
     )
   }
