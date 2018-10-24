@@ -3,6 +3,10 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 class Header extends Component {
+  onClickBackButton() {
+    this.props.history.goBack()
+  }
+
   render() {
     return (
       <div>
@@ -11,7 +15,7 @@ class Header extends Component {
         </div>
         <Link to="/hoge">HiSTORY</Link>
         <Link to="/hoge">SETTING</Link>
-        <Link to="/hoge">BACK</Link>
+        <a onClick={this.onClickBackButton.bind(this)}>BACK</a>
       </div>
     )
   }

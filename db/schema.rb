@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_23_135335) do
+ActiveRecord::Schema.define(version: 2018_10_24_083327) do
 
   create_table "assignments", force: :cascade do |t|
     t.string "title"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 2018_10_23_135335) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "projects_users", id: false, force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "user_id", null: false
+    t.index ["project_id"], name: "index_projects_users_on_project_id"
+    t.index ["user_id"], name: "index_projects_users_on_user_id"
+  end
+
   create_table "sub_assignments", force: :cascade do |t|
     t.string "title"
     t.text "detail"
@@ -48,16 +55,7 @@ ActiveRecord::Schema.define(version: 2018_10_23_135335) do
     t.string "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "session_token"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["session_token"], name: "index_users_on_session_token", unique: true
-  end
-
-  create_table "users_projects", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "project_id"
-    t.index ["project_id"], name: "index_users_projects_on_project_id"
-    t.index ["user_id"], name: "index_users_projects_on_user_id"
   end
 
 end
