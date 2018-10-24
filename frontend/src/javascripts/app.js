@@ -8,7 +8,6 @@ import reducers from './reducers'
 import Main from './components/index/main'
 import UserOnly from './components/users/user-only'
 import GuestOnly from './components/guests/guest-only'
-import AboutPage from './components/guests/about-page'
 import TopPage from './components/top_page'
 
 import '../stylesheets/common.scss'
