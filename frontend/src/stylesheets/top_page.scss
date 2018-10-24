@@ -1,0 +1,32 @@
+.top-page-container {
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+
+  .logo-container {
+    margin: 10px auto;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 505px;
+  }
+  .top-page-logo {
+    width: 600px;
+  }
+  .login-form {
+    margin: 0 auto;
+    width: 100%;
+    position: absolute;
+    bottom: 365px;
+  }
+  .planet-img-container {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+  }
+  .top-page-planet {
+    width: 90%;
+  }
+}

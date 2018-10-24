@@ -5,12 +5,15 @@ import { connect } from 'react-redux'
 import { createUser } from '../../actions/users'
 
 class SignupForm extends Component {
-  renderField({ label, type, input, meta: { touched, error } }) {
+  renderField({ placeholder, type, input, meta: { touched, error } }) {
     const classNames = `form-group ${touched && error ? 'has-danger' : ''}`
     return(
       <div className={classNames}>
-        <label>{label}</label>
-        <input className="form-control" type={type} {...input} />
+        <input
+          className="form-control"
+          placeholder={placeholder}
+          type={type}
+          {...input} />
         <div className="text-help">
           {touched ? error: ''}
         </div>
@@ -27,10 +30,10 @@ class SignupForm extends Component {
   render() {
     return(
       <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
-        <Field label="Name" name="username" type="text" component={this.renderField} />
-        <Field label="Email" name="email" type="text" component={this.renderField} />
-        <Field label="Password" name="password" type="password" component={this.renderField} />
-        <Field label="Confirmation" name="confirmation" type="password" component={this.renderField} />
+        <Field placeholder="NAME" name="username" type="text" component={this.renderField} />
+        <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
+        <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
+        <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderField} />
         <button type="submit" className="btn btn-primary">Submit</button>
         <Link to="/guests/login">Sign in</Link>
       </form>
