@@ -64,7 +64,7 @@ function validate(values) {
   if (!values.confirmation) {
     errors.confirmation = "Password confirmation required"
   } else if (values.password !== values.confirmation) {
-    errors.confirmation = "Not match to password"
+    errors.confirmation = "Not match password"
   }
   return errors
 }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import SignupForm from './signup_form'
-import LoginForm from './login_form'
+import SignupForm from './signup-form'
+import LoginForm from './login-form'
 
 class GuestOnly extends Component {
   render() {

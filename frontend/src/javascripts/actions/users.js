@@ -18,7 +18,7 @@ export function createSession(email, password, callback) {
   const request = {'auth': {'email': email, 'password': password}}
   return axios.post(`${ROOT_URL}/api/user_token`, request)
     .then(res => {
-      localStorage.setItem('jwt', res.data.jwt.token)
+      sessionStorage.setItem('jwt', res.data.jwt.token)
       callback(res.data.loginUser.id)
       return {
         type: actionTypes.SET_CURRENT_USER,

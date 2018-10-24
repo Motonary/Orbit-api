@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Header from './header'
-import TopPage from './top_page'
-import ProjectPage from './project_page'
+import TopPage from './top-page'
+import ProjectPage from './project-page'
 import Footer from './footer'
 
 class UserOnly extends Component {
