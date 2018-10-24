@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { fetchCurrentUser } from '../actions/users'
+import { fetchCurrentUser } from '../../actions/users'
 
 class Main extends Component {
   constructor(props) {
     super(props)
-    // FIXME: localStorageをsessionStorageに変更
-    this.state = { jwt: localStorage.getItem('jwt') }
+    this.state = { jwt: sessionStorage.getItem('jwt') }
   }
 
   componentDidMount() {

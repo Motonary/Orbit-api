@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { createUser } from '../actions/users'
+import { createUser } from '../../actions/users'
 
 class SignupForm extends Component {
   renderField({ placeholder, type, input, meta: { touched, error } }) {
@@ -67,7 +67,7 @@ function validate(values) {
   if (!values.confirmation) {
     errors.confirmation = "Password confirmation required"
   } else if (values.password !== values.confirmation) {
-    errors.confirmation = "Not match to password"
+    errors.confirmation = "Not match password"
   }
   return errors
 }

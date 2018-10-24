@@ -1,23 +1,57 @@
 import React, { Component } from 'react'
-//import { Link } from 'react-router-dom'
-import LoginForm from './login_form'
-import ImgLogo from '../../images/index/logo.png'
-import ImgPlanet from '../../images/index/top_earth.png'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
-export default class TopPage extends Component {
+class TopPage extends Component {
   render() {
-    return (
-      <div className="top-page-container">
-        <div className="img-container">
-          <img src={ImgLogo} className="top-page-logo" />
-        </div>
-        <div>
-          <LoginForm />
-        </div>
-        <div className="img-container">
-          <img src={ImgPlanet} className="top-page-planet" />
+    const { currentUser } = this.props
+    if (!currentUser) {
+      return <div>Loading....</div>
+    }
+
+    if (currentUser.id != this.props.match.params.userId) {
+      const correctPath = `/users/${currentUser.id}`
+      return <Redirect to={correctPath} />
+    }
+
+    return(
+      <div>
+        <div id="system">
+          <div id="fixed-star"></div>
+          <div className="circle1 common-circle">
+            <div className="common bottom first-orbit-motion">
+              <div className="planet-large-1 bg-color"></div>
+            </div>
+            <div className="common top first-orbit-motion">
+              <div className="planet-large-1 bg-color"></div>
+            </div>
+          </div>
+          <div className="circle2 common-circle">
+            <div className="common top second-orbit-motion">
+              <div className="planet-medium-2 bg-color"></div>
+              <div className="satelite-orbit">
+                <div className="common top satelite-orbit-motion">
+                  <div className="satelite bg-color"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="circle3 common-circle">
+            <div className="common right third-orbit-motion">
+              <div className="planet-small-3 bg-color"></div>
+              <div className="satelite-orbit">
+                <div className="common top satelite-orbit-motion">
+                  <div className="satelite bg-color"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
   }
 }
+
+export default connect(
+  ({ currentUser }) => ({ currentUser })
+)(TopPage)
