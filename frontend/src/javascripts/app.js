@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import promise from 'redux-promise'
 import reducers from './reducers'
 import Main from './components/main'
+import TopPage from './components/top_page';
 import UserOnly from './components/user_only'
 import GuestOnly from './components/guest_only'
 import AboutPage from './components/about_page'
@@ -21,7 +22,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/guests" component={GuestOnly} />
           <Route path="/users" component={UserOnly} />
-          <Route exact path="/" component={AboutPage} />
+          <Route exact path="/" component={TopPage} />
           <Route render={() => <h2>404 Not Found</h2>} />
         </Switch>
       </Main>

@@ -50,10 +50,9 @@ $satelite-orbit-scale: 1.5;
 $satelite-scale: 0.5;
 
 body {
-  width: 1100px;
-  height: 1100px;
-  margin: 0 auto;
+  margin: 0;
   background-color: #2C2963 !important;
+  background-image: image('./images/universe.png');
 }
 
 #system {
