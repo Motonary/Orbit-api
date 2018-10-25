@@ -61,10 +61,10 @@ $mypage-orbit: 600px;
       text-align: center;
       transform: skewX(30deg);
     }
-    
+
     .planet-large-2 {
-      width: percentage($second-orbit-large-planet);
-      height: percentage($second-orbit-large-planet);
+      width: percentage($first-orbit-large-planet);
+      height: percentage($first-orbit-large-planet);
       border-radius: 50%;
       position: absolute;
       top: 0;
