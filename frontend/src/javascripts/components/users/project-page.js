@@ -1,8 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { fetchAllAssignments, createAssignment, destroyAssignment } from '../../actions/assignments'
 
 class ProjectPage extends Component {
+  componentDidMount() {
+    this.props.fetchAllAssignments(this.props.match.params.projectId)
+  }
+
+  onClickPlanet() {
+    // TODO: タスク詳細のポップアップ実装,
+  }
+
+  onDropPlanet() {
+    this.props.createAssignment()
+  }
+
+  onDestroyPlanet() {
+
+  }
+
   render() {
     const { currentUser } = this.props
     if (!currentUser) {
@@ -14,6 +31,7 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
+    console.log(this.props.allAssignments)
     return(
       <div>
         <div id="system">
@@ -53,5 +71,6 @@ class ProjectPage extends Component {
 }
 
 export default connect(
-  ({ currentUser }) => ({ currentUser })
+  ({ currentUser, allAssignments }) => ({ currentUser, allAssignments }),
+  { fetchAllAssignments, createAssignment, destroyAssignment }
 )(ProjectPage)

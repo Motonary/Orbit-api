@@ -85,11 +85,7 @@ class MyPage extends Component {
   }
 }
 
-function mapStateToProps({currentUser, projects}) {
-  return { currentUser, projects }
-}
-
 export default connect(
-  mapStateToProps,
+  ({ currentUser, projects }) => ({ currentUser, projects }),
   { fetchAllProjects, createProject, destroyProject }
 )(MyPage)
