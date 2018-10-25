@@ -15,10 +15,10 @@ export default class TopPage extends Component {
           <img src={ImgLogo} className="top-page-logo" />
         </div>
         <div className="login-form">
+        {/*<h1 className="text-danger">Hi!</h1>*/}
           <Switch>
             <Route path={`${url}/login`} component={LoginForm} />
             <Route path={`${url}/signup`} component={SignupForm} />
-            <Route render={() => <h2>404 Not Found</h2>} />
           </Switch>
         </div>
         <div className="planet-img-container">

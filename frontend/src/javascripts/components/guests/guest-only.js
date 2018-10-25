@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import SignupForm from './signup-form'
-import LoginForm from './login-form'
+import TopPage from './top-page'
 
 class GuestOnly extends Component {
   render() {
@@ -13,8 +12,8 @@ class GuestOnly extends Component {
       (!currentUser) ? (
         <div>
           <Switch>
-            <Route path={`${url}/login`} component={LoginForm} />
-            <Route path={`${url}/signup`} component={SignupForm} />
+            <Route exact path={`${url}/login`} component={TopPage} />
+            <Route exact path={`${url}/signup`} component={TopPage} />
             <Route render={() => <h2>404 Not Found</h2>} />
           </Switch>
         </div>
