@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { JWT } from '../../constants'
 import { fetchAllProjects, createProject, destroyProject } from '../../actions/projects'
 
-class TopPage extends Component {
+class MyPage extends Component {
   componentDidMount() {
     // TODO: 最初ログインした時Projectが設定されないバグ修正
     if (JWT) this.props.fetchAllProjects()
@@ -92,4 +92,4 @@ function mapStateToProps({currentUser, projects}) {
 export default connect(
   mapStateToProps,
   { fetchAllProjects, createProject, destroyProject }
-)(TopPage)
+)(MyPage)
