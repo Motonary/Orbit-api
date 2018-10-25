@@ -9,7 +9,7 @@ class Header extends Component {
   onClickBackButton() {
     this.props.history.goBack()
   }
-
+  //TODO: 細かいデザインの調整必要　with IBUKI
   render() {
     return (
       <div id="header">

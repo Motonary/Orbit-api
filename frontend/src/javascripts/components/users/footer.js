@@ -40,7 +40,7 @@ class Footer extends Component {
       <li key={deleteIcon} className="disapperance"><img src={deleteIcon} className="delete-btn"/></li>
     )
   }
-
+  // TODO: footer の実際の細かい動き（planetholder＆destroyの設定）
   render() {
     return(
       <div id="footer">
