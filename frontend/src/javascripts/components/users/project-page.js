@@ -12,12 +12,14 @@ class ProjectPage extends Component {
     // TODO: タスク詳細のポップアップ実装,
   }
 
-  onDropPlanet() {
-    this.props.createAssignment()
+  onDropPlanet(title, detail, deadline, planet_type, planet_size, orbit_pos) {
+    this.props.createAssignment(
+      title, detail, deadline, planet_type, planet_size, orbit_pos, this.props.match.params.projectId
+    )
   }
 
-  onDestroyPlanet() {
-
+  onDestroyPlanet(assignmentId) {
+    this.props.destroyAssignment(assignmentId)
   }
 
   render() {
@@ -31,9 +33,16 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
-    console.log(this.props.allAssignments)
+    console.log(this.props.allAssignments) // current_projectに結びつくassignments確認用
     return(
       <div>
+        {/*-----------------------------T E S T---------------------------------------*/}
+        <a
+          className="text-danger"
+          onClick={this.onDropPlanet.bind(this, "A", "B", null, 2, 2, 2)}
+        >CREATE</a>
+        <a className="text-danger" onClick={this.onDestroyPlanet.bind(this, 2)}>DESTROY</a>
+        {/*---------------------------------------------------------------------------*/}
         <div id="system">
           <div id="fixed-star"></div>
           <div className="circle1 common-circle">

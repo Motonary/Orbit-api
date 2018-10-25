@@ -6,7 +6,7 @@ export function fetchAllProjects() {
     'Authorization': `Bearer ${JWT}`
   } }).then(res => {
     return {
-      type: actionTypes.SET_CURRENT_USER_ALL_PROJECTS,
+      type: actionTypes.SET_ALL_PROJECTS,
       currentUserAllProjects: res.data
     }
   }).catch(() => alert('Sorry, something went wrong...'))
@@ -22,7 +22,7 @@ export function createProject(title, starType, callback) {
   }).then(res => {
       callback(res.data[res.data.length - 1].id)
       return {
-        type: actionTypes.SET_CURRENT_USER_ALL_PROJECTS,
+        type: actionTypes.SET_ALL_PROJECTS,
         currentUserAllProjects: res.data
       }
     }).catch(() => alert('Sorry, something went wrong...'))
@@ -35,7 +35,7 @@ export function destroyProject(projectId) {
     headers: { 'Authorization': `Bearer ${JWT}` }
   }).then(res => {
       return {
-        type: actionTypes.SET_CURRENT_USER_ALL_PROJECTS,
+        type: actionTypes.SET_ALL_PROJECTS,
         currentUserAllProjects: res.data
       }
     }).catch(() => alert('Sorry, something went wrong...'))
