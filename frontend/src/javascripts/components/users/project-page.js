@@ -1,11 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { fetchAllAssignments, createAssignment, destroyAssignment } from '../../actions/assignments'
+import { fetchRevolvingAssignments,
+         createAssignment,
+         destroyAssignment,
+         restoreAssignment } from '../../actions/assignments'
 
 class ProjectPage extends Component {
+  constructor(props) {
+    super(props)
+    // DRYにするためstateで定義
+    this.state = {
+      userId: props.match.params.userId,
+      projectId: props.match.params.projectId
+    }
+  }
+
   componentDidMount() {
-    this.props.fetchAllAssignments(this.props.match.params.projectId)
+    this.props.fetchRevolvingAssignments(this.state.projectId)
   }
 
   onClickPlanet() {
@@ -14,12 +26,16 @@ class ProjectPage extends Component {
 
   onDropPlanet(title, detail, deadline, planet_type, planet_size, orbit_pos) {
     this.props.createAssignment(
-      title, detail, deadline, planet_type, planet_size, orbit_pos, this.props.match.params.projectId
+      title, detail, deadline, planet_type, planet_size, orbit_pos, this.state.projectId
     )
   }
 
   onDestroyPlanet(assignmentId) {
-    this.props.destroyAssignment(assignmentId, this.props.match.params.projectId)
+    this.props.destroyAssignment(assignmentId, this.state.projectId)
+  }
+
+  onRestorePlanet(assignmentId) {
+    this.props.restoreAssignment(assignmentId, this.state.projectId)
   }
 
   render() {
@@ -28,7 +44,7 @@ class ProjectPage extends Component {
       return <div>Loading....</div>
     }
 
-    if (currentUser.id != this.props.match.params.userId) {
+    if (currentUser.id != this.state.userId) {
       const correctPath = `/users/${currentUser.id}`
       return <Redirect to={correctPath} />
     }
@@ -40,8 +56,9 @@ class ProjectPage extends Component {
         <a
           className="text-danger"
           onClick={this.onDropPlanet.bind(this, "A", "B", null, 2, 2, 2)}
-        >CREATE</a>
-        <a className="text-danger" onClick={this.onDestroyPlanet.bind(this, 2)}>DESTROY</a>
+        >CREATE | </a>
+        <a className="text-danger" onClick={this.onDestroyPlanet.bind(this, 3)}>DESTROY | </a>
+        <a className="text-danger" onClick={this.onRestorePlanet.bind(this, 3)}>RESTORE</a>
         {/*---------------------------------------------------------------------------*/}
         <div id="system">
           <div id="fixed-star"></div>
@@ -81,5 +98,5 @@ class ProjectPage extends Component {
 
 export default connect(
   ({ currentUser, allAssignments }) => ({ currentUser, allAssignments }),
-  { fetchAllAssignments, createAssignment, destroyAssignment }
+  { fetchRevolvingAssignments, createAssignment, destroyAssignment, restoreAssignment }
 )(ProjectPage)

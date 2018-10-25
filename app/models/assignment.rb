@@ -26,10 +26,8 @@ class Assignment < ApplicationRecord
   validates :planet_size, presence: true, numericality: { less_than_or_equal_to: 2 }
   validates :orbit_pos,   presence: true, numericality: { less_than_or_equal_to: 3 }
   validates :project_id,  presence: true
-  validates :done_flag,   presence: true
-  validates :destroyed_flag, presence: true
 
-  enum planet_type: { Earth: 0, Mars: 1, Venus: 2, Jupiter: 3, Saturn: 4 }
-  enum planet_size: { small: 0, medium: 1, large: 2 }
+  enum planet_type: [:Earth, :Mars, :Venus, :Jupiter, :Saturn]
+  enum planet_size: [:small, :medium, :large]
   enum orbit_pos:   [1, 2, 3]
 end

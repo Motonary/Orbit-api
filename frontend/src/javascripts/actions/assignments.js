@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { actionTypes, ROOT_URL, JWT} from '../constants'
 
-export function fetchAllAssignments(projectId) {
-  return axios.get(`${ROOT_URL}/api/assignments`, {
+export function fetchRevolvingAssignments(projectId) {
+  return axios.get(`${ROOT_URL}/api/assignments/revolving`, {
     headers: { 'Authorization': `Bearer ${JWT}` },
     params: { project_id: projectId }
    }).then(res => {
@@ -11,6 +11,10 @@ export function fetchAllAssignments(projectId) {
       allAssignments: res.data
     }
   }).catch(() => alert('Sorry, something went wrong...'))
+}
+
+export function fetchDestroyedAssignments(projectId) {
+  // hogehoge
 }
 
 export function createAssignment(title, detail, deadline, type, size, pos, projectId) {
@@ -29,8 +33,8 @@ export function createAssignment(title, detail, deadline, type, size, pos, proje
 
 export function destroyAssignment(assignmentId, projectId) {
   return axios({
-    method: 'delete',
-    url: `${ROOT_URL}/api/assignments/${assignmentId}`,
+    method: 'patch',
+    url: `${ROOT_URL}/api/assignments/${assignmentId}/destroy`,
     headers: { 'Authorization': `Bearer ${JWT}` },
     params: { project_id: projectId }
   }).then(res => {
@@ -41,6 +45,16 @@ export function destroyAssignment(assignmentId, projectId) {
   }).catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function restoreAssignment(assignmentId) {
-  // hogehoge
+export function restoreAssignment(assignmentId, projectId) {
+  return axios({
+    method: 'patch',
+    url: `${ROOT_URL}/api/assignments/${assignmentId}/restore`,
+    headers: { 'Authorization': `Bearer ${JWT}` },
+    params: { project_id: projectId }
+  }).then(res => {
+    return {
+      type: actionTypes.SET_ALL_ASSIGNMENTS,
+      allAssignments: res.data
+    }
+  }).catch(() => alert('Sorry, something went wrong...'))
 }
