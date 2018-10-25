@@ -5,9 +5,8 @@
     "plugin:react/recommended"
   ],
   "plugins": ["react"],
-  # TODO: あとでRule追加　https://eslint.org/docs/rules/
   "rules": {
-    "semi": [2, "never"], # not allow semi-colon
+    "semi": [2, "never"],
     "space-before-function-paren" : [2, "never"],
     "react/prop-types": "off"
   },

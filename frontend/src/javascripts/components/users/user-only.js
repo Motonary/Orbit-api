@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Header from './header'
-import TopPage from '../top_page'
+import Mypage from './mypage'
 import ProjectPage from './project-page'
 import Footer from './footer'
 

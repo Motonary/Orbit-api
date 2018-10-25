@@ -2,13 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import promise from 'redux-promise'
 import reducers from './reducers'
 import Main from './components/index/main'
 import UserOnly from './components/users/user-only'
 import GuestOnly from './components/guests/guest-only'
-import AboutPage from './components/guests/about-page'
 import TopPage from './components/top_page'
 
 import '../stylesheets/common.scss'
@@ -25,6 +24,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/guests" component={GuestOnly} />
           <Route path="/users" component={UserOnly} />
+          {/*}<Route exact path="/" render={() => <Redirect to="/guests/login" />} /> */}
           <Route exact path="/" component={TopPage} />
           <Route render={() => <h2>404 Not Found</h2>} />
         </Switch>
