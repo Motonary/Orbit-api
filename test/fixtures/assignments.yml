@@ -2,16 +2,18 @@
 #
 # Table name: assignments
 #
-#  id          :integer          not null, primary key
-#  title       :string
-#  detail      :text
-#  deadline    :datetime
-#  planet_type :integer
-#  planet_size :integer
-#  orbit_pos   :integer
-#  project_id  :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id             :integer          not null, primary key
+#  title          :string
+#  detail         :text
+#  deadline       :datetime
+#  planet_type    :integer
+#  planet_size    :integer
+#  orbit_pos      :integer
+#  project_id     :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  done_flag      :boolean          default(FALSE)
+#  destroyed_flag :boolean          default(FALSE)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

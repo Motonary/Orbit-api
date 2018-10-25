@@ -19,7 +19,7 @@ class ProjectPage extends Component {
   }
 
   onDestroyPlanet(assignmentId) {
-    this.props.destroyAssignment(assignmentId)
+    this.props.destroyAssignment(assignmentId, this.props.match.params.projectId)
   }
 
   render() {

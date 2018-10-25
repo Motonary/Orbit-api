@@ -27,6 +27,20 @@ export function createAssignment(title, detail, deadline, type, size, pos, proje
   }).catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function destroyAssignment() {
+export function destroyAssignment(assignmentId, projectId) {
+  return axios({
+    method: 'delete',
+    url: `${ROOT_URL}/api/assignments/${assignmentId}`,
+    headers: { 'Authorization': `Bearer ${JWT}` },
+    params: { project_id: projectId }
+  }).then(res => {
+    return {
+      type: actionTypes.SET_ALL_ASSIGNMENTS,
+      allAssignments: res.data
+    }
+  }).catch(() => alert('Sorry, something went wrong...'))
+}
 
+export function restoreAssignment(assignmentId) {
+  // hogehoge
 }
