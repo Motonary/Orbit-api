@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { JWT } from '../../constants'
 import { fetchAllProjects, createProject, destroyProject } from '../../actions/projects'
+import ImgUser from '../../../images/main/user_default_icon.png'
 
 class MyPage extends Component {
   componentDidMount() {
@@ -49,39 +50,26 @@ class MyPage extends Component {
     })
 
     return(
-      <div>
-        <div id="system">
-          <div id="fixed-star"></div>
-          <div className="circle2 common-circle">
-            <div className="common top second-orbit-motion">
-              <div
-                className="planet-medium-2 bg-color"
-                onClick={this.onClickFixedStar.bind(this, 1 /* 仮デフォルト引数 */)}
-              ></div>
-            </div>
+      <div id="project-list">
+        <div id="user-info">
+          <div className="user-img-container">
+            <img src={ImgUser} className="user-img" />
+          </div>
+          <div className="user-name">
+            <span>WELCOME</span><br />
+            {currentUser.name}
           </div>
         </div>
-
-        <input
-          className="form-control"
-          onKeyDown={this.onDropFixedStar.bind(this, 1 /* 仮デフォルト引数 */)}
-          placeholder="Type title and press enter key"
-         />
-         {/* ProjectStateの変化を見やすくするための簡易的なテーブル。 */}
-        <table border="2" className="text-danger">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>タイトル</th>
-              <th>恒星ID</th>
-            </tr>
-          </thead>
-          <tbody>
-            {projectTable}
-          </tbody>
-        </table>
+        <div className="orbit-circle">
+          <div className="common top mypage-orbit-motion">
+            <div
+              className="planet-large-2 bg-color"
+              onClick={this.onClickFixedStar.bind(this, 1 /* 仮デフォルト引数 */)}
+            ></div>
+          </div>
+        </div>
       </div>
-    )
+  )
   }
 }
 
