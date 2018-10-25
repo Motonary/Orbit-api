@@ -9,14 +9,12 @@ class GuestOnly extends Component {
     const { currentUser } = this.props
 
     return(
-      (!currentUser) ? (
-        <div>
+      !currentUser ? (
           <Switch>
             <Route exact path={`${url}/login`} component={TopPage} />
             <Route exact path={`${url}/signup`} component={TopPage} />
             <Route render={() => <h2>404 Not Found</h2>} />
           </Switch>
-        </div>
       ) : <Redirect to={`/users/${currentUser.id}`} />
     )
   }

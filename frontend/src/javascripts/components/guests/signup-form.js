@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createUser } from '../../actions/users'
 
 class SignupForm extends Component {
   renderField({ placeholder, type, input, meta: { touched, error } }) {
-    const classNames = `form-group ${touched && error ? 'has-danger' : ''}`
+    const classNames = `form-group ${touched && error ? 'has-danger' : ''} field-style fieled-text`
     return(
       <div className={classNames}>
         <input
-          className="form-control"
+          className="text-style"
           placeholder={placeholder}
           type={type}
           {...input} />
@@ -34,8 +33,7 @@ class SignupForm extends Component {
         <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
         <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
         <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderField} />
-        <button type="submit" className="btn btn-primary">Submit</button>
-        <Link to="/guests/login">Sign in</Link>
+        <button type="submit" className="submit-btn">Submit</button>
       </form>
     )
   }
