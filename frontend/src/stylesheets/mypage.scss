@@ -1,0 +1,127 @@
+@import "orbit_size_initializer";
+
+$mypage-orbit: 600px;
+
+#project-list {
+  width: 100%;
+  height: 90%;
+
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #user-info {
+    margin: 0 auto;
+    width: 500px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+
+    .user-img-container {
+      margin: 0;
+      width: 100px;
+      height: 100px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      padding: 15px 0;
+
+      .user-img {
+        width: 70px;
+        height: 70px;
+      }
+    }
+    .user-name {
+      margin-left: 40px;
+      text-align: left;
+      width: 250px;
+      color: #fff;
+      line-height: 40px;
+      font-weight: lighter;
+      letter-spacing: 5px;
+    }
+  }
+
+  .orbit-circle {
+    width: $mypage-orbit;
+    height: $mypage-orbit;
+    position: absolute;
+    margin: 0 auto;
+    border: 1px #fff;
+    border-style: solid;
+    border-radius: 50%;
+    transform: skewX(-30deg);
+
+    .common {
+      width: 50%;
+      height: 50%;
+      position: absolute;
+      left: 25%;
+      top: 25%;
+      text-align: center;
+      transform: skewX(30deg);
+    }
+    
+    .planet-large-2 {
+      width: percentage($second-orbit-large-planet);
+      height: percentage($second-orbit-large-planet);
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      animation: rotate $first-orbit-speed linear reverse infinite;
+      word-wrap: break-word;
+      transform: skewX(30deg);
+    }
+
+    .top {
+      position: absolute;
+      left: 25%;
+      top: -25%;
+      transform-origin: center 150%;
+      transform: skewX(30deg);
+    }
+    .right {
+      position: absolute;
+      left: 75%;
+      top: 25%;
+      transform-origin: -50% center;
+    }
+    .left {
+      position: absolute;
+      left: -25%;
+      top: 25%;
+      transform-origin: -50% center;
+    }
+    .bottom {
+      position: absolute;
+      left: 25%;
+      top: 75%;
+      transform-origin: center -50%;
+    }
+
+    .mypage-orbit-motion {
+      animation: rotate $first-orbit-speed linear infinite;
+    }
+    .pause-animation {
+      animation-play-state: paused;
+    }
+    .restart-animation {
+      animation-play-state: running;
+    }
+  }
+  .bg-color {
+    background: linear-gradient(#FFB3E7,#FF54C9);
+  }
+  @keyframes rotate {
+    0% {
+     transform: rotate(0deg);
+    }
+      100% {
+      transform: rotate(360deg);
+    }
+  }
+}
