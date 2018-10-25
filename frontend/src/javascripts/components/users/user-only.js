@@ -21,7 +21,7 @@ class UserOnly extends Component {
           </Switch>
           <Footer />
         </div>
-      ) : <Redirect to="/guests/login" />
+      ) : <Redirect to="/guests/signin" />
     )
   }
 }
