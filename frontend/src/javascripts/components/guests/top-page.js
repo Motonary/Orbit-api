@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import LoginForm from './login-form'
+import SigninForm from './signin-form'
 import SignupForm from './signup-form'
 import ImgLogo from '../../../images/index/logo.png'
 import ImgPlanet from '../../../images/index/top_earth.png'
@@ -12,9 +12,9 @@ export default class TopPage extends Component {
         <div className="logo-container">
           <img src={ImgLogo} className="top-page-logo" />
         </div>
-        <div className="login-form">
+        <div className="signin-form">
           <Switch>
-            <Route exact path="/guests/login" component={LoginForm} />
+            <Route exact path="/guests/signin" component={SigninForm} />
             <Route exact path="/guests/signup" component={SignupForm} />
           </Switch>
         </div>

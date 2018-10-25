@@ -20,10 +20,10 @@ export function createSession(email, password, callback) {
   } })
   .then(res => {
       sessionStorage.setItem('jwt', res.data.jwt.token)
-      callback(res.data.loginUser.id)
+      callback(res.data.signinUser.id)
       return {
         type: actionTypes.SET_CURRENT_USER,
-        currentUser: res.data.loginUser
+        currentUser: res.data.signinUser
       }
     }).catch(() => alert('Sorry, something went wrong...'))
 }

@@ -33,7 +33,7 @@ class SignupForm extends Component {
         <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
         <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
         <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderField} />
-        <button type="submit" className="submit-btn">Submit</button>
+        <button type="submit" className="submit-btn">SIGN UP</button>
       </form>
     )
   }

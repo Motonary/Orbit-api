@@ -23,7 +23,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/guests" component={GuestOnly} />
           <Route path="/users" component={UserOnly} />
-          <Route exact path="/" render={() => <Redirect to="/guests/login" />} />
+          <Route exact path="/" render={() => <Redirect to="/guests/signin" />} />
           <Route render={() => <h2>404 Not Found</h2>} />
         </Switch>
       </Main>

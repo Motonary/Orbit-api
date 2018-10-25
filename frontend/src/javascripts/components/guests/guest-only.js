@@ -11,7 +11,7 @@ class GuestOnly extends Component {
     return(
       !currentUser ? (
           <Switch>
-            <Route exact path={`${url}/login`} component={TopPage} />
+            <Route exact path={`${url}/signin`} component={TopPage} />
             <Route exact path={`${url}/signup`} component={TopPage} />
             <Route render={() => <h2>404 Not Found</h2>} />
           </Switch>
