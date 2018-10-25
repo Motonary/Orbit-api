@@ -65,7 +65,7 @@ class MyPage extends Component {
         <input
           className="form-control"
           onKeyDown={this.onDropFixedStar.bind(this, 1 /* 仮デフォルト引数 */)}
-          placeholder="Type title and press enter key"
+          placeholder="Create Project? Type title and press enter key"
          />
          {/* ProjectStateの変化を見やすくするための簡易的なテーブル。 */}
         <table border="2" className="text-danger">

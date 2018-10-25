@@ -8,7 +8,6 @@ import reducers from './reducers'
 import Main from './components/index/main'
 import UserOnly from './components/users/user-only'
 import GuestOnly from './components/guests/guest-only'
-import TopPage from './components/top_page'
 
 import '../stylesheets/common.scss'
 import '../stylesheets/form_field.scss'
@@ -24,8 +23,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/guests" component={GuestOnly} />
           <Route path="/users" component={UserOnly} />
-          {/*}<Route exact path="/" render={() => <Redirect to="/guests/login" />} /> */}
-          <Route exact path="/" component={TopPage} />
+          <Route exact path="/" render={() => <Redirect to="/guests/signin" />} />
           <Route render={() => <h2>404 Not Found</h2>} />
         </Switch>
       </Main>

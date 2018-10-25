@@ -3,7 +3,7 @@ import { Field, reduxForm} from 'redux-form'
 import { connect } from 'react-redux'
 import { createSession } from '../../actions/users'
 
-class LoginForm extends Component {
+class SigninForm extends Component {
   renderField({ placeholder, type, input, meta: { touched, error } }) {
     const classNames = `form-group ${touched && error ? 'has-danger' : ''} field-style fieled-text`
     return(
@@ -21,7 +21,7 @@ class LoginForm extends Component {
   }
 
   onSubmit({ email, password }) {
-    this.props.createSession(email, password, (userId) => {
+    this.props.createSession(email, password, userId => {
       this.props.history.push(`/users/${userId}`)
     })
   }
@@ -58,5 +58,5 @@ function validate(values) {
 
 export default reduxForm({
   validate,
-  form: 'LoginForm'
-})(connect(null, { createSession })(LoginForm))
+  form: 'SigninForm'
+})(connect(null, { createSession })(SigninForm))
