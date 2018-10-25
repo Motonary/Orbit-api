@@ -12,7 +12,7 @@ export default class TopPage extends Component {
         <div className="logo-container">
           <img src={ImgLogo} className="top-page-logo" />
         </div>
-        <div className="signin-form">
+        <div className="sign-form">
           <Switch>
             <Route exact path="/guests/signin" component={SigninForm} />
             <Route exact path="/guests/signup" component={SignupForm} />
