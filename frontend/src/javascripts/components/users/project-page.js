@@ -30,7 +30,7 @@ class ProjectPage extends Component {
   }
 
   onDestroyPlanet(assignmentId) {
-    this.props.destroyAssignment(assignmentId, this.state.projectId)
+    this.props.destroyAssignment(assignmentId)
   }
 
   render() {
@@ -44,7 +44,7 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
-    console.log(this.props.allAssignments) // current_projectに結びつくassignments確認用
+    console.log(this.props.revolvingAssignments) // current_projectに結びつくassignments確認用
     return(
       <div>
         {/*-----------------------------T E S T---------------------------------------*/}
@@ -91,6 +91,6 @@ class ProjectPage extends Component {
 }
 
 export default connect(
-  ({ currentUser, allAssignments }) => ({ currentUser, allAssignments }),
+  ({ currentUser, revolvingAssignments }) => ({ currentUser, revolvingAssignments }),
   { fetchRevolvingAssignments, createAssignment, destroyAssignment }
 )(ProjectPage)

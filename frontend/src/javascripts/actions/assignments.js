@@ -7,8 +7,8 @@ export function fetchRevolvingAssignments(projectId) {
     params: { project_id: projectId }
    }).then(res => {
     return {
-      type: actionTypes.SET_ALL_ASSIGNMENTS,
-      allAssignments: res.data
+      type: actionTypes.FETCH_REVOLVING_ASSIGNMENTS,
+      revolvingAssignments: res.data
     }
   }).catch(() => alert('Sorry, something went wrong...'))
 }
@@ -18,7 +18,7 @@ export function fetchDestroyedAssignments() {
     headers: { 'Authorization': `Bearer ${JWT}` }
    }).then(res => {
     return {
-      type: actionTypes.SET_DESTROYED_ASSIGNMENTS,
+      type: actionTypes.FETCH_DESTROYED_ASSIGNMENTS,
       destroyedAssignments: res.data
     }
   }).catch(() => alert('Sorry, something went wrong...'))
@@ -32,22 +32,21 @@ export function createAssignment(title, detail, deadline, type, size, pos, proje
     params: { title, detail, deadline, type, size, pos, project_id: projectId }
   }).then(res => {
     return {
-      type: actionTypes.SET_ALL_ASSIGNMENTS,
-      allAssignments: res.data
+      type: actionTypes.CREATE_ASSIGNMENT,
+      newAssignment: res.data
     }
   }).catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function destroyAssignment(assignmentId, projectId) {
+export function destroyAssignment(assignmentId) {
   return axios({
     method: 'patch',
     url: `${ROOT_URL}/api/assignments/${assignmentId}/destroy`,
-    headers: { 'Authorization': `Bearer ${JWT}` },
-    params: { project_id: projectId }
-  }).then(res => {
+    headers: { 'Authorization': `Bearer ${JWT}` }
+  }).then(() => {
     return {
-      type: actionTypes.SET_ALL_ASSIGNMENTS,
-      allAssignments: res.data
+      type: actionTypes.DESTROY_ASSIGNMENT,
+      assignmentId
     }
   }).catch(() => alert('Sorry, something went wrong...'))
 }
@@ -57,10 +56,10 @@ export function restoreAssignment(assignmentId) {
     method: 'patch',
     url: `${ROOT_URL}/api/assignments/${assignmentId}/restore`,
     headers: { 'Authorization': `Bearer ${JWT}` }
-  }).then(res => {
+  }).then(() => {
     return {
-      type: actionTypes.DESTROY_ASSIGNMENT,
-      justDestroyedAssignment: res.data
+      type: actionTypes.RESTORE_ASSIGNMENT,
+      assignmentId
     }
   }).catch(() => alert('Sorry, something went wrong...'))
 }
