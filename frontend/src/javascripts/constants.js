@@ -1,11 +1,20 @@
 import keyMirror from 'keymirror'
 
 export const actionTypes = keyMirror({
+  // User
   SET_CURRENT_USER: null,
-  SET_ALL_PROJECTS: null,
-  SET_ALL_ASSIGNMENTS: null,
-  SET_DESTROYED_ASSIGNMENTS: null,
-  DESTROY_ASSIGNMENT: null
+
+  // Projects
+  FETCH_ALL_PROJECTS: null,
+  CREATE_PROJECT: null,
+  DESTROY_PROJECT: null,
+
+  // Assignments
+  FETCH_REVOLVING_ASSIGNMENTS: null,
+  FETCH_DESTROYED_ASSIGNMENTS: null,
+  CREATE_ASSIGNMENT: null,
+  DESTROY_ASSIGNMENT: null,
+  RESTORE_ASSIGNMENT: null
 })
 
 // TODO: developmentとproductionで使い分け
