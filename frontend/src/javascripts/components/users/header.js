@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ImgHistoryIcon from '../../../images/main/history_icon.png'
 import ImgSettingIcon from '../../../images/main/setting_icon.png'
 import ImgBackIcon from '../../../images/main/back_icon.png'
 
-class Header extends Component {
+export default class Header extends Component {
   onClickBackButton() {
     this.props.history.goBack()
   }
-  //TODO: 細かいデザインの調整必要　with IBUKI
+//TODO: 細かいデザインの調整必要 with IBUKI
   render() {
     const { currentUser } = this.props
     return (
@@ -27,7 +26,3 @@ class Header extends Component {
     )
   }
 }
-
-export default connect(
-  ({ currentUser }) => ({ currentUser })
-)(Header)

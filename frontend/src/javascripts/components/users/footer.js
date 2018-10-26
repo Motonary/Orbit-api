@@ -5,26 +5,26 @@ import { DeleteIcons } from './delete-icon'
 
 class Footer extends Component {
   componentDidMount() {
-    let planet_list = document.getElementById("planet-list");
-    planet_list.style.display = 'none';
+    let planet_list = document.getElementById("planet-list")
+    planet_list.style.display = 'none'
   }
 
-  onClickOpenPlanetHolder(e) {
-    let target_class = document.getElementsByClassName("open-planet-holder");
-    let planet_holder = document.getElementById("planet-holder");
-    let planet_list = document.getElementById("planet-list");
+  onClickOpenPlanetHolder() {
+    const target_class = document.getElementsByClassName("open-planet-holder")
+    const planet_list = document.getElementById("planet-list")
+    //const planet_holder = document.getElementById("planet-holder")
 
     // メニュー表示/非表示
     if(target_class[0].classList.contains("click-rotate")) {
-       target_class[0].classList.remove("click-rotate");
-       planet_list.classList.remove("is-show");
-       planet_list.style.display = 'none';
+       target_class[0].classList.remove("click-rotate")
+       planet_list.classList.remove("is-show")
+       planet_list.style.display = 'none'
        //planet_holder.classList.remove('holder-border');
     } else {
-      target_class[0].classList.add("click-rotate");
-      planet_list.classList.add("is-show");
-      planet_list.style.display = '';
-      planet_list.style.width = '400px';
+      target_class[0].classList.add("click-rotate")
+      planet_list.classList.add("is-show")
+      planet_list.style.display = ''
+      planet_list.style.width = '400px'
       //planet_holder.classList.add('holder-border');
     }
   }
