@@ -6,16 +6,15 @@ class Api::ProjectsController < ApplicationController
   end
 
   def create
-    # TODO: renderするのは新しく作ったprojectのみにする
     # TODO: Strong_parameter
     new_project = current_user.projects.new(
       title: params[:title],fixed_star_type: params[:star_type].to_i
     )
-    new_project.save and render json: current_user.projects
+    new_project.save and render json: new_project
   end
 
   def destroy
     unnecessary_project = Project.find(params[:id])
-    unnecessary_project.destroy and render json: current_user.projects
+    unnecessary_project.destroy and head :ok
   end
 end

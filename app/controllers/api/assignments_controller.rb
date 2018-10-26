@@ -1,8 +1,7 @@
 class Api::AssignmentsController < ApplicationController
   before_action :authenticate_user
-  before_action :set_current_project, except: [:fetch_destroyed, :restore]
+  before_action :set_current_project, only: [:fetch_revolving, :create]
 
-  # TODO: 排除
   def set_current_project
     @current_project = Project.find(params[:project_id])
   end
@@ -17,7 +16,6 @@ class Api::AssignmentsController < ApplicationController
   end
 
   def create
-    # TODO: ajax通信量を加味するとrenderするのはnew_projectだけにしてreducer側でstateにpushすべき
     # TODO: strong_parameter
     new_assignment = @current_project.assignments.new(
       title: params[:title],
@@ -27,19 +25,16 @@ class Api::AssignmentsController < ApplicationController
       planet_size: params[:size].to_i,
       orbit_pos: params[:pos].to_i
     )
-    new_assignment.save and render json: @current_project.assignments.where(destroyed_flag: false)
+    new_assignment.save and render json: new_assignment
   end
 
   def destroy
     destroyed_assignment = Assignment.find(params[:id])
-    destroyed_assignment.update_attribute(:destroyed_flag, true)
-    render json: @current_project.assignments.where(destroyed_flag: false)
+    destroyed_assignment.update_attribute(:destroyed_flag, true) and head :ok
   end
 
   def restore
-    # TODO: saveに変える(上も)
     restored_assignment = Assignment.find(params[:id])
-    restored_assignment.update_attribute(:destroyed_flag, false)
-    render json: restored_assignment
+    restored_assignment.update_attribute(:destroyed_flag, false) and head :ok
   end
 end
