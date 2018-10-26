@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { fetchRevolvingAssignments,
          createAssignment,
-         destroyAssignment,
-         restoreAssignment } from '../../actions/assignments'
+         destroyAssignment } from '../../actions/assignments'
 
 class ProjectPage extends Component {
   constructor(props) {
@@ -34,10 +33,6 @@ class ProjectPage extends Component {
     this.props.destroyAssignment(assignmentId, this.state.projectId)
   }
 
-  onRestorePlanet(assignmentId) {
-    this.props.restoreAssignment(assignmentId, this.state.projectId)
-  }
-
   render() {
     const { currentUser } = this.props
     if (!currentUser) {
@@ -57,8 +52,7 @@ class ProjectPage extends Component {
           className="text-danger"
           onClick={this.onDropPlanet.bind(this, "A", "B", null, 2, 2, 2)}
         >CREATE | </a>
-        <a className="text-danger" onClick={this.onDestroyPlanet.bind(this, 3)}>DESTROY | </a>
-        <a className="text-danger" onClick={this.onRestorePlanet.bind(this, 3)}>RESTORE</a>
+        <a className="text-danger" onClick={this.onDestroyPlanet.bind(this, 7)}>DESTROY</a>
         {/*---------------------------------------------------------------------------*/}
         <div id="system">
           <div id="fixed-star"></div>
@@ -98,5 +92,5 @@ class ProjectPage extends Component {
 
 export default connect(
   ({ currentUser, allAssignments }) => ({ currentUser, allAssignments }),
-  { fetchRevolvingAssignments, createAssignment, destroyAssignment, restoreAssignment }
+  { fetchRevolvingAssignments, createAssignment, destroyAssignment }
 )(ProjectPage)

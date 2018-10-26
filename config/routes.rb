@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
     resources :assignments, only: :create
     get 'assignments/revolving' => 'assignments#fetch_revolving'
+    get 'assignments/destroyed' => 'assignments#fetch_destroyed'
     patch 'assignments/:id/destroy' => 'assignments#destroy'
     patch 'assignments/:id/restore' => 'assignments#restore'
   end

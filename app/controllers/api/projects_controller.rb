@@ -7,6 +7,7 @@ class Api::ProjectsController < ApplicationController
 
   def create
     # TODO: renderするのは新しく作ったprojectのみにする
+    # TODO: Strong_parameter
     new_project = current_user.projects.new(
       title: params[:title],fixed_star_type: params[:star_type].to_i
     )

@@ -8,12 +8,13 @@ class Header extends Component {
   }
 
   render() {
+    const { currentUser } = this.props
     return (
       <div>
         <div className="text-primary">
-          {this.props.currentUser.name}
+          {currentUser.name}
         </div>
-        <Link to="/hoge">HiSTORY</Link>
+        <Link to={`/users/${currentUser.id}/history`}>HISTORY</Link>
         <Link to="/hoge">SETTING</Link>
         <a onClick={this.onClickBackButton.bind(this)}>BACK</a>
       </div>
