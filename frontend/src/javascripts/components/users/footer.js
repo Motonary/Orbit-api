@@ -5,14 +5,14 @@ import { DeleteIcons } from './delete-icon'
 
 class Footer extends Component {
   componentDidMount() {
-    var planet_list = document.getElementById("planet-list");
+    let planet_list = document.getElementById("planet-list");
     planet_list.style.display = 'none';
   }
 
-  onClickOpenPlanetHolder(event) {
-    var target_class = document.getElementsByClassName("open-planet-holder");
-    var planet_holder = document.getElementById("planet-holder");
-    var planet_list = document.getElementById("planet-list");
+  onClickOpenPlanetHolder(e) {
+    let target_class = document.getElementsByClassName("open-planet-holder");
+    let planet_holder = document.getElementById("planet-holder");
+    let planet_list = document.getElementById("planet-list");
 
     // メニュー表示/非表示
     if(target_class[0].classList.contains("click-rotate")) {
