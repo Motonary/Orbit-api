@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ImgHistoryIcon from '../../../images/main/history_icon.png'
 import ImgSettingIcon from '../../../images/main/setting_icon.png'
 import ImgBackIcon from '../../../images/main/back_icon.png'
 
-export default class Header extends Component {
+class Header extends Component {
   onClickBackButton() {
     this.props.history.goBack()
   }
@@ -26,3 +27,7 @@ export default class Header extends Component {
     )
   }
 }
+
+export default connect(
+  ({ currentUser }) => ({ currentUser })
+)(Header)
