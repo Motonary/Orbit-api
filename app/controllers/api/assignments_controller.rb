@@ -24,8 +24,9 @@ class Api::AssignmentsController < ApplicationController
       planet_type: params[:type].to_i,
       planet_size: params[:size].to_i,
       orbit_pos: params[:pos].to_i
+      # assignment_params
     )
-    new_assignment.save and render json: new_assignment
+    new_assignment.save! and render json: new_assignment
   end
 
   def destroy
@@ -37,4 +38,11 @@ class Api::AssignmentsController < ApplicationController
     restored_assignment = Assignment.find(params[:id])
     restored_assignment.update_attribute(:destroyed_flag, false) and head :ok
   end
+
+  # private
+  #
+  #   def assignment_params
+  #     debugger
+  #     params.require(:assignment).permit(:title, :detail, :deadline, :type, :size, :pos)
+  #   end
 end
