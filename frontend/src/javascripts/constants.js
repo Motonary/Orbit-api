@@ -3,7 +3,8 @@ import keyMirror from 'keymirror'
 export const actionTypes = keyMirror({
   SET_CURRENT_USER: null,
   SET_ALL_PROJECTS: null,
-  SET_ALL_ASSIGNMENTS: null
+  SET_ALL_ASSIGNMENTS: null,
+  SET_DESTROYED_ASSIGNMENTS: null,
 })
 
 // TODO: developmentとproductionで使い分け
