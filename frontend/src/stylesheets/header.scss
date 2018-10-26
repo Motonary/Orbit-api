@@ -1,0 +1,39 @@
+$container-width: 130px;
+
+#header {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  text-align: center;
+  font-size: 14px;
+  font-weight: lighter;
+  letter-spacing: 2px;
+
+  .icon-container {
+    width: $container-width;
+    color: #fff;
+    cursor: pointer;
+    align-items: center;
+    .icon {
+      width: 50px;
+      height: 50px;
+    }
+    &:link {
+      text-decoration: none;
+    }
+  }
+  .back-icon-container {
+    display: block;
+    width: $container-width;
+    color: #fff;
+    cursor: pointer;
+    align-items: center;
+    .icon {
+      width: 50px;
+      height: 50px;
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

@@ -44,7 +44,6 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
-    console.log(this.props.revolvingAssignments) // current_projectに結びつくassignments確認用
     return(
       <div>
         {/*-----------------------------T E S T---------------------------------------*/}

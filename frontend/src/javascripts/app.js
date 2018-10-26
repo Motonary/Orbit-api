@@ -12,7 +12,11 @@ import GuestOnly from './components/guests/guest-only'
 import '../stylesheets/common.scss'
 import '../stylesheets/form_field.scss'
 import '../stylesheets/top_page.scss'
+import '../stylesheets/page_container.scss'
+import '../stylesheets/mypage.scss'
 import '../stylesheets/project_page.scss'
+import '../stylesheets/header.scss'
+import '../stylesheets/footer.scss'
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
 

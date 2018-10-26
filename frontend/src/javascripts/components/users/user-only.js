@@ -13,8 +13,8 @@ class UserOnly extends Component {
 
     return(
       this.props.currentUser ? (
-        <div>
-          <Header history={this.props.history}/>
+        <div className="page-container">
+          <Header history={this.props.history} />
           <Switch>
             <Route exact path={`${url}/:userId/projects/:projectId`} component={ProjectPage} />
             <Route exact path={`${url}/:userId/history`} component={HistoryPage} />

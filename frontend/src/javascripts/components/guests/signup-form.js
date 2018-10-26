@@ -28,7 +28,7 @@ class SignupForm extends Component {
 
   render() {
     return(
-      <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
+      <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))} className="signup-form">
         <Field placeholder="NAME" name="username" type="text" component={this.renderField} />
         <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
         <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
