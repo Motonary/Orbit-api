@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { fetchRevolvingAssignments,
          createAssignment,
          destroyAssignment } from '../../actions/assignments'
+import { PlanetImgs } from './planet-img';
 
 class ProjectPage extends Component {
   constructor(props) {
@@ -33,6 +34,20 @@ class ProjectPage extends Component {
     this.props.destroyAssignment(assignmentId, this.state.projectId)
   }
 
+  addSatelitePlanet() {
+    const conditional_class1 = document.getElementsByClassName("second-orbit-motion")
+    const conditional_class2 = document.getElementsByClassName("third-orbit-motion")
+    const target_class = document.getElementsByClassName("planet-large-1")
+    const target_width = target_class[0].getBoundingClientRect().width
+
+    if(conditional_class1[0].children[1].classList.contains("satelite-orbit")){
+      conditional_class1[0].children[1].style.width = target_width + "px"
+      conditional_class1[0].children[1].style.height = target_width + "px"
+      conditional_class2[0].children[1].style.width = target_width + "px"
+      conditional_class2[0].children[1].style.height = target_width + "px"
+    }
+  }
+
   render() {
     const { currentUser } = this.props
     if (!currentUser) {
@@ -46,41 +61,32 @@ class ProjectPage extends Component {
 
     //console.log(this.props.allAssignments) // current_projectに結びつくassignments確認用
     return(
-      <div>
-        {/*-----------------------------T E S T---------------------------------------*/}
-        <a
-          className="text-danger"
-          onClick={this.onDropPlanet.bind(this, "A", "B", null, 2, 2, 2)}
-        >CREATE | </a>
-        <a className="text-danger" onClick={this.onDestroyPlanet.bind(this, 7)}>DESTROY</a>
-        {/*---------------------------------------------------------------------------*/}
-        <div id="system">
-          <div id="fixed-star"></div>
-          <div className="circle1 common-circle">
-            <div className="common bottom first-orbit-motion">
-              <div className="planet-large-1 bg-color"></div>
-            </div>
-            <div className="common top first-orbit-motion">
-              <div className="planet-large-1 bg-color"></div>
-            </div>
+      <div id="project-orbit">
+        <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs[0]} /></div>
+        <div className="circle1 common-circle">
+          <div className="common bottom first-orbit-motion">
+            <div className="planet-large-1"><img src={PlanetImgs[3]} /></div>
           </div>
-          <div className="circle2 common-circle">
-            <div className="common top second-orbit-motion">
-              <div className="planet-medium-2 bg-color"></div>
-              <div className="satelite-orbit">
-                <div className="common top satelite-orbit-motion">
-                  <div className="satelite bg-color"></div>
-                </div>
+          <div className="common top first-orbit-motion">
+            <div className="planet-large-1"><img src={PlanetImgs[5]} /></div>
+          </div>
+        </div>
+        <div className="circle2 common-circle">
+          <div className="common top second-orbit-motion">
+            <div className="planet-medium-2"><img src={PlanetImgs[7]} /></div>
+            <div className="satelite-orbit">
+              <div className="common top satelite-orbit-motion">
+                <div className="satelite"><img src={PlanetImgs[13]} /></div>
               </div>
             </div>
           </div>
-          <div className="circle3 common-circle">
-            <div className="common right third-orbit-motion">
-              <div className="planet-small-3 bg-color"></div>
-              <div className="satelite-orbit">
-                <div className="common top satelite-orbit-motion">
-                  <div className="satelite bg-color"></div>
-                </div>
+        </div>
+        <div className="circle3 common-circle">
+          <div className="common right third-orbit-motion">
+            <div className="planet-small-3"><img src={PlanetImgs[10]} /></div>
+            <div className="satelite-orbit">
+              <div className="common top satelite-orbit-motion">
+                <div className="satelite"><img src={PlanetImgs[14]} /></div>
               </div>
             </div>
           </div>
