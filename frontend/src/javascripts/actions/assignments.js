@@ -52,16 +52,15 @@ export function destroyAssignment(assignmentId, projectId) {
   }).catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function restoreAssignment(assignmentId, projectId) {
+export function restoreAssignment(assignmentId) {
   return axios({
     method: 'patch',
     url: `${ROOT_URL}/api/assignments/${assignmentId}/restore`,
-    headers: { 'Authorization': `Bearer ${JWT}` },
-    params: { project_id: projectId }
+    headers: { 'Authorization': `Bearer ${JWT}` }
   }).then(res => {
     return {
-      type: actionTypes.SET_ALL_ASSIGNMENTS,
-      allAssignments: res.data
+      type: actionTypes.DESTROY_ASSIGNMENT,
+      justDestroyedAssignment: res.data
     }
   }).catch(() => alert('Sorry, something went wrong...'))
 }

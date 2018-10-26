@@ -1,7 +1,8 @@
 class Api::AssignmentsController < ApplicationController
   before_action :authenticate_user
-  before_action :set_current_project, except: :fetch_destroyed
+  before_action :set_current_project, except: [:fetch_destroyed, :restore]
 
+  # TODO: 排除
   def set_current_project
     @current_project = Project.find(params[:project_id])
   end
@@ -36,8 +37,9 @@ class Api::AssignmentsController < ApplicationController
   end
 
   def restore
+    # TODO: saveに変える(上も)
     restored_assignment = Assignment.find(params[:id])
     restored_assignment.update_attribute(:destroyed_flag, false)
-    render json: @current_project.assignments.where(destroyed_flag: false)
+    render json: restored_assignment
   end
 end

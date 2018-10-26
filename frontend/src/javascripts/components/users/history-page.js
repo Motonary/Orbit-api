@@ -7,23 +7,23 @@ class HistoryPage extends Component {
     this.props.fetchDestroyedAssignments()
   }
 
-  renderDestroyedAssignments() {
-
+  renderDestroyedAssignments(eachAssignment) {
+    return <div key={eachAssignment.id}>{eachAssignment.title}</div>
   }
 
-  onRestoreAssignment() {
-    this.props.restoreAssignment()
+  onRestoreAssignment(assignmentId) {
+    this.props.restoreAssignment(assignmentId)
   }
 
   render() {
-    // const
-    // if ()
-    console.log(this.props.destroyedAssignments)
+    const { destroyedAssignments } = this.props
+    if (!destroyedAssignments) return <div>Loading...</div>
+    
     return(
       <div>
         <div>Hello, history page!</div>
-        <a onClick={this.onRestoreAssignment.bind(this)}>RESTORE</a>
-        {/*}<div>{this.props.destroyedAssignments.map(this.renderDestroyedAssignments)}</div>*/}
+        <a onClick={this.onRestoreAssignment.bind(this, 7)}>RESTORE</a>
+        <div>{destroyedAssignments.map(this.renderDestroyedAssignments)}</div>
       </div>
     )
   }
