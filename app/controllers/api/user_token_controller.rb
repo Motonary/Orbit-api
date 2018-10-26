@@ -3,7 +3,13 @@ class Api::UserTokenController < Knock::AuthTokenController
   before_action :authenticate #TODO: 正直これの役割よくわかってないからあとでちゃんと理解
 
   def create
-    signin_user = User.find_by(email: params[:auth][:email])
+    signin_user = User.find_by(email: authenticate_params[:email])
     render json: { jwt: auth_token, signinUser: signin_user }
   end
+
+  private
+
+    def authenticate_params
+      params.require(:auth).permit(:email, :password)
+    end
 end
