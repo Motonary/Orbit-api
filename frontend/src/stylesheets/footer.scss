@@ -1,0 +1,95 @@
+$available-planet-size: 40px;
+$holder-height: 100px;
+
+#footer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  #planet-holder {
+    display: flex;
+    width: 400px;
+    height: $holder-height;
+    margin: 0 10px;
+    padding: 0 10px;
+    vertical-align: middle;
+
+    .open-planet {
+      width: $holder-height;
+      height: $holder-height;
+      text-align: center;
+      margin: 0 5px 0 0;
+      transform: rotate(0deg);
+      transition: 1s linear;
+    }
+    .click-rotate {
+      transform: rotate(45deg);
+    }
+    .planet-holder-img {
+      width: $holder-height;
+      height: $holder-height;
+    }
+
+    ul#planet-list {
+      display: flex;
+      align-items: center;
+      overflow: scroll;
+      margin: 0;
+      padding: 0;
+      width: 0;
+      transition: 1000ms linear;
+
+      li.planet {
+        list-style: none;
+        color: #fff;
+        width: $available-planet-size;
+        height: $available-planet-size;
+        margin-right: 10px;
+
+        .planet-img {
+          width: $available-planet-size;
+          height: $available-planet-size;
+        }
+      }
+    }
+    .is-show {
+      width: 400px;
+    }
+  }
+  #disapperance-holder {
+    height: $holder-height;
+    margin: 0 10px;
+    padding: 0;
+
+    ul#disapperance-list {
+      display: flex;
+      margin: 0 5px;
+      padding: 0;
+
+      li.disapperance {
+        list-style: none;
+        width: $holder-height;
+        height: $holder-height;
+        margin-right: 10px;
+        cursor: pointer;
+
+        .delete-btn {
+          width: $holder-height;
+          height: $holder-height;
+        }
+      }
+    }
+  }
+  .holder-border {
+    border: solid 1px #000;
+    border-radius: 20px;
+  }
+  .holder-border：before {
+    animation: img-wrap 2s cubic-bezier(.4, 0, .2, 1) forwards;
+  }
+  @keyframes img-wrap {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
