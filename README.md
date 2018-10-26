@@ -5,7 +5,7 @@ Welcome to OrbitApp!
 $ git clone git@github.com:BuddiX/orbit-app.git  
 $ cd frontend
 $ npm install && cd -
-$ oreman start
+$ foreman start
 ```
 ## URL
 https://orbit7.herokuapp.com/
