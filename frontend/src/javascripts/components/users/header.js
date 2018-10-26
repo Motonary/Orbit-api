@@ -11,9 +11,10 @@ class Header extends Component {
   }
   //TODO: 細かいデザインの調整必要　with IBUKI
   render() {
+    const { currentUser } = this.props
     return (
       <div id="header">
-        <Link to="/hoge" className="icon-container">HISTORY
+        <Link to={`/users/${currentUser.id}/history`} className="icon-container">HISTORY
           <img src={ImgHistoryIcon} className="icon" />
         </Link>
         <Link to="/hoge" className="icon-container">SETTING

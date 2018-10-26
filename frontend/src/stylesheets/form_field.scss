@@ -2,45 +2,57 @@
 
 @mixin placeholder($color) {
   &::placeholder {
-    font-size: 12px;
+    font-size: 13px;
     font-family: orator-std, monospace;
-    font-stretch: ultra-expanded;
+    font-weight: lighter;
+    letter-spacing: 4px;
     color: $color;
   }
   // IE
   &:-ms-input-placeholder {
-    font-size: 12px;
+    font-size: 14px;
     font-family: orator-std, monospace;
-    font-stretch: ultra-expanded;
+    font-weight: lighter;
+    letter-spacing: 4px;
     color: $color;
   }
 
   // Edge
   &::-ms-input-placeholder {
-    font-size: 12px;
+    font-size: 14px;
     font-family: orator-std, monospace;
-    font-stretch: ultra-expanded;
+    font-weight: lighter;
+    letter-spacing: 4px;
     color: $color;
   }
 
   //mozila
   ::-moz-placeholder {
-    font-size: 12px;
+    font-size: 14px;
     font-family: orator-std, monospace;
-    font-stretch: ultra-expanded;
+    font-weight: lighter;
+    letter-spacing: 4px;
     color: $color;
   }
 }
 
+.signup-form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 740px;
+}
+
 .field-style {
   display: block;
-  width: 400px;
-  margin: 20px auto;
+  width: 350px;
+  margin: 10px auto;
   color: #fff;
 
   input {
-    @include placeholder(#808080);
-    width: 400px;
+    @include placeholder(#ddd);
+    width: 350px;
     text-align: center;
     background-color: $bg-common-color;
     border: 1px solid #fff;
@@ -69,6 +81,6 @@
   line-height: 1.5;
   font-family: sans-serif;
   font-style: normal;
-  font-weight: 200;
-  font-stretch: ultra-expanded;
+  font-weight: lighter;
+  letter-spacing: 4px;
 }

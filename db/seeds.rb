@@ -1,3 +1,4 @@
+# TODO: User以外のモデルもseed作る
 User.destroy_all
 
 User.create!({
