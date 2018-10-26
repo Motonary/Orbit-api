@@ -6,8 +6,11 @@ class Api::ProjectsController < ApplicationController
   end
 
   def create
-    current_user.projects.create(title: params[:title],fixed_star_type: params[:star_type].to_i)
-    render json: current_user.projects
+    # TODO: renderするのは新しく作ったprojectのみにする
+    new_project = current_user.projects.new(
+      title: params[:title],fixed_star_type: params[:star_type].to_i
+    )
+    new_project.save and render json: current_user.projects
   end
 
   def destroy
