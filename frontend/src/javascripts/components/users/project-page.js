@@ -31,7 +31,7 @@ class ProjectPage extends Component {
   }
 
   onDestroyPlanet(assignmentId) {
-    this.props.destroyAssignment(assignmentId, this.state.projectId)
+    this.props.destroyAssignment(assignmentId)
   }
 
   addSatelitePlanet() {
@@ -59,7 +59,6 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
-    //console.log(this.props.allAssignments) // current_projectに結びつくassignments確認用
     return(
       <div id="project-orbit">
         <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs[0]} /></div>
@@ -97,6 +96,6 @@ class ProjectPage extends Component {
 }
 
 export default connect(
-  ({ currentUser, allAssignments }) => ({ currentUser, allAssignments }),
+  ({ currentUser, revolvingAssignments }) => ({ currentUser, revolvingAssignments }),
   { fetchRevolvingAssignments, createAssignment, destroyAssignment }
 )(ProjectPage)
