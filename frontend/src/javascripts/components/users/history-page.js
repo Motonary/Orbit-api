@@ -40,13 +40,11 @@ class HistoryPage extends Component {
     function test(i){
       for(let j=0; j<5; j++){
         list.push(<li className="planet"><img src={PlanetImgs[i+j]} className="stored-planet" /></li>)
-        console.log(list)
       }
     }
 
     for(let i=0; i<3; i++){
       test(i)
-      console.log(list)
       lists.push(<div className="planet-list-row">{list}</div>)
       list.length = 0
     }

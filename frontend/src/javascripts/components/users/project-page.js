@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { fetchRevolvingAssignments,
          createAssignment,
          destroyAssignment } from '../../actions/assignments'
-import { PlanetImgs } from './planet-img';
+import { PlanetImgs } from '../../constant'
 
 class ProjectPage extends Component {
   constructor(props) {
@@ -22,15 +22,6 @@ class ProjectPage extends Component {
 
   onClickPlanet() {
     // TODO: タスク詳細のポップアップ実装,
-    const target_class1 = document.getElementsByClassName("first-orbit-motion")
-    const target_class2 = document.getElementsByClassName("second-orbit-motion")
-    const target_class3 = document.getElementsByClassName("third-orbit-motion")
-    const target_class4 = document.getElementsByClassName("satelite-orbit-motion")
-
-    target_class1[0].classList.add("pause-animation");
-    target_class1[1].classList.add("pause-animation");
-    target_class2[0].classList.add("pause-animation");
-    target_class3[0].classList.add("pause-animation");
   }
 
   onDropPlanet(title, detail, deadline, planet_type, planet_size, orbit_pos) {
