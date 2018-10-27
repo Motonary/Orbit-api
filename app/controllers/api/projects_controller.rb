@@ -6,12 +6,7 @@ class Api::ProjectsController < ApplicationController
   end
 
   def create
-    # 数値をparameterとして渡すと自動的に文字列に変換してされるため一々assignment_params
-    # を参照しなければならず、気持ち悪い。to_iをうまく排除できないだろうか？
-    new_project = current_user.projects.new(
-      title: project_params[:title],
-      fixed_star_type: project_params[:star_type].to_i
-    )
+    new_project = current_user.projects.new(project_params)
     new_project.save! and render json: new_project
   end
 

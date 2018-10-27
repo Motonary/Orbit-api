@@ -6,9 +6,9 @@
 #  title          :string
 #  detail         :text
 #  deadline       :datetime
-#  planet_type    :integer
-#  planet_size    :integer
-#  orbit_pos      :integer
+#  planet_type    :string
+#  planet_size    :string
+#  orbit_pos      :string
 #  project_id     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

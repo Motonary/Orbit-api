@@ -44,13 +44,12 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
-    console.log(this.props.revolvingAssignments) // current_projectに結びつくassignments確認用
     return(
       <div>
         {/*-----------------------------T E S T---------------------------------------*/}
         <a
           className="text-danger"
-          onClick={this.onDropPlanet.bind(this, "A", "B", null, 2, 2, 2)}
+          onClick={this.onDropPlanet.bind(this, "A", "B", null, "Earth", "medium", "center")}
         >CREATE | </a>
         <a className="text-danger" onClick={this.onDestroyPlanet.bind(this, 7)}>DESTROY</a>
         {/*---------------------------------------------------------------------------*/}
