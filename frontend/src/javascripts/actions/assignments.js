@@ -29,7 +29,7 @@ export function createAssignment(title, detail, deadline, type, size, pos, proje
     method: 'post',
     url: `${ROOT_URL}/api/assignments`,
     headers: { 'Authorization': `Bearer ${JWT}` },
-    params: { title, detail, deadline, type, size, pos, project_id: projectId }
+    data: { assignment: { title, detail, deadline, type, size, pos }, project_id: projectId }
   }).then(res => {
     return {
       type: actionTypes.CREATE_ASSIGNMENT,

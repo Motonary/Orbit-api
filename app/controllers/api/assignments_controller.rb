@@ -16,15 +16,15 @@ class Api::AssignmentsController < ApplicationController
   end
 
   def create
-    # TODO: strong_parameter
+    # 数値をparameterとして渡すと自動的に文字列に変換してされるため一々assignment_params
+    # を参照しなければならず、気持ち悪い。to_iをうまく排除できないだろうか？
     new_assignment = @current_project.assignments.new(
-      title: params[:title],
-      detail: params[:detail],
-      deadline: params[:deadline], # jsとrubyではdatetimeの記法が違うので注意
-      planet_type: params[:type].to_i,
-      planet_size: params[:size].to_i,
-      orbit_pos: params[:pos].to_i
-      # assignment_params
+      title: assignment_params[:title],
+      detail: assignment_params[:detail],
+      deadline: assignment_params[:deadline], # jsとrubyではdatetimeの記法が違うので注意
+      planet_type: assignment_params[:type].to_i,
+      planet_size: assignment_params[:size].to_i,
+      orbit_pos: assignment_params[:pos].to_i
     )
     new_assignment.save! and render json: new_assignment
   end
@@ -39,10 +39,9 @@ class Api::AssignmentsController < ApplicationController
     restored_assignment.update_attribute(:destroyed_flag, false) and head :ok
   end
 
-  # private
-  #
-  #   def assignment_params
-  #     debugger
-  #     params.require(:assignment).permit(:title, :detail, :deadline, :type, :size, :pos)
-  #   end
+  private
+
+    def assignment_params
+      params.require(:assignment).permit(:title, :detail, :deadline, :type, :size, :pos)
+    end
 end

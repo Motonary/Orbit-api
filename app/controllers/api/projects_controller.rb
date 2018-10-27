@@ -6,10 +6,11 @@ class Api::ProjectsController < ApplicationController
   end
 
   def create
-    # TODO: Strong_parameter
+    # 数値をparameterとして渡すと自動的に文字列に変換してされるため一々assignment_params
+    # を参照しなければならず、気持ち悪い。to_iをうまく排除できないだろうか？
     new_project = current_user.projects.new(
-      title: params[:title],fixed_star_type: params[:star_type].to_i
-      # project_params
+      title: project_params[:title],
+      fixed_star_type: project_params[:star_type].to_i
     )
     new_project.save! and render json: new_project
   end
@@ -19,9 +20,9 @@ class Api::ProjectsController < ApplicationController
     unnecessary_project.destroy and head :ok
   end
 
-  # private
-  #
-  #   def project_params
-  #       params.require(:project).permit(:title, :fixed_star_type)
-  #   end
+  private
+
+    def project_params
+        params.require(:project).permit(:title, :fixed_star_type)
+    end
 end
