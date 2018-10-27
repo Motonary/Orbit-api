@@ -9,17 +9,35 @@ class Footer extends Component {
     planet_list.style.display = 'none'
   }
 
+  motionControll() {
+    const target_classes = [
+      document.getElementsByClassName("first-orbit-motion"),
+      document.getElementsByClassName("second-orbit-motion"),
+      document.getElementsByClassName("third-orbit-motion"),
+      document.getElementsByClassName("satelite-orbit-motion")
+    ]
+
+    target_classes.map((target) => {
+      for(let i=0; i<target.length; i++){
+        target[i].classList.toggle("pause-animation")
+        target[i].classList.toggle("start-animation")
+      }
+    })
+  }
+
   onClickOpenPlanetHolder() {
     const target_class = document.getElementsByClassName("open-planet-holder")
     const planet_list = document.getElementById("planet-list")
     //const planet_holder = document.getElementById("planet-holder")
 
+    this.motionControll()
+
     // メニュー表示/非表示
     if(target_class[0].classList.contains("click-rotate")) {
-       target_class[0].classList.remove("click-rotate")
-       planet_list.classList.remove("is-show")
-       planet_list.style.display = 'none'
-       //planet_holder.classList.remove('holder-border');
+      target_class[0].classList.remove("click-rotate")
+      planet_list.classList.remove("is-show")
+      planet_list.style.display = 'none'
+      //planet_holder.classList.remove('holder-border');
     } else {
       target_class[0].classList.add("click-rotate")
       planet_list.classList.add("is-show")
