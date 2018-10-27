@@ -22,6 +22,15 @@ class ProjectPage extends Component {
 
   onClickPlanet() {
     // TODO: タスク詳細のポップアップ実装,
+    const target_class1 = document.getElementsByClassName("first-orbit-motion")
+    const target_class2 = document.getElementsByClassName("second-orbit-motion")
+    const target_class3 = document.getElementsByClassName("third-orbit-motion")
+    const target_class4 = document.getElementsByClassName("satelite-orbit-motion")
+
+    target_class1[0].classList.add("pause-animation");
+    target_class1[1].classList.add("pause-animation");
+    target_class2[0].classList.add("pause-animation");
+    target_class3[0].classList.add("pause-animation");
   }
 
   onDropPlanet(title, detail, deadline, planet_type, planet_size, orbit_pos) {
@@ -34,11 +43,26 @@ class ProjectPage extends Component {
     this.props.destroyAssignment(assignmentId)
   }
 
+  addPlanet(e) {
+    console.log(e.target)
+    let target_class = e.target
+    let common_planet_tag = document.createElement('div')
+    let planet_tag = document.createElement('div')
+    let img_tag = document.createElement('img')
+    common_planet_tag.className = "common top second-orbit-motion start-animation"
+    planet_tag.className = "planet-medium-2"
+    img_tag.src = PlanetImgs[1]
+
+    planet_tag.appendChild(img_tag)
+    common_planet_tag.appendChild(planet_tag)
+    target_class.appendChild(common_planet_tag)
+  }
+
   addSatelitePlanet() {
-    const conditional_class1 = document.getElementsByClassName("second-orbit-motion")
-    const conditional_class2 = document.getElementsByClassName("third-orbit-motion")
-    const target_class = document.getElementsByClassName("planet-large-1")
-    const target_width = target_class[0].getBoundingClientRect().width
+    let conditional_class1 = document.getElementsByClassName("second-orbit-motion")
+    let conditional_class2 = document.getElementsByClassName("third-orbit-motion")
+    let target_class = document.getElementsByClassName("planet-large-1")
+    let target_width = 1.5 * target_class[0].getBoundingClientRect().width
 
     if(conditional_class1[0].children[1].classList.contains("satelite-orbit")){
       conditional_class1[0].children[1].style.width = target_width + "px"
@@ -62,29 +86,31 @@ class ProjectPage extends Component {
     return(
       <div id="project-orbit">
         <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs[0]} /></div>
-        <div className="circle1 common-circle">
-          <div className="common bottom first-orbit-motion">
-            <div className="planet-large-1"><img src={PlanetImgs[3]} /></div>
+        <div className="circle1 common-circle" onClick={this.addPlanet.bind(this)} >
+          <div className="common bottom first-orbit-motion start-animation">
+            <div className="planet-large-1">
+              <img src={PlanetImgs[3]} className="planet" onClick={this.onClickPlanet.bind(this)}/>
+            </div>
           </div>
-          <div className="common top first-orbit-motion">
+          <div className="common top first-orbit-motion start-animation">
             <div className="planet-large-1"><img src={PlanetImgs[5]} /></div>
           </div>
         </div>
-        <div className="circle2 common-circle">
-          <div className="common top second-orbit-motion">
+        <div className="circle2 common-circle" onClick={this.addPlanet.bind(this)} >
+          <div className="common bottom second-orbit-motion start-animation">
             <div className="planet-medium-2"><img src={PlanetImgs[7]} /></div>
             <div className="satelite-orbit">
-              <div className="common top satelite-orbit-motion">
+              <div className="common top satelite-orbit-motion start-animation">
                 <div className="satelite"><img src={PlanetImgs[13]} /></div>
               </div>
             </div>
           </div>
         </div>
         <div className="circle3 common-circle">
-          <div className="common right third-orbit-motion">
+          <div className="common right third-orbit-motion start-animation">
             <div className="planet-small-3"><img src={PlanetImgs[10]} /></div>
             <div className="satelite-orbit">
-              <div className="common top satelite-orbit-motion">
+              <div className="common top satelite-orbit-motion start-animation">
                 <div className="satelite"><img src={PlanetImgs[14]} /></div>
               </div>
             </div>
