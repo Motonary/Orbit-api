@@ -17,7 +17,7 @@ class Header extends Component {
         <Link to={`/users/${currentUser.id}/history`} className="icon-container">HISTORY
           <img src={ImgHistoryIcon} className="icon" />
         </Link>
-        <Link to="/hoge" className="icon-container">SETTING
+        <Link to={`/users/${currentUser.id}/edit`} className="icon-container">SETTING
           <img src={ImgSettingIcon} className="icon" />
         </Link>
         <a onClick={this.onClickBackButton.bind(this)} className="back-icon-container">BACK

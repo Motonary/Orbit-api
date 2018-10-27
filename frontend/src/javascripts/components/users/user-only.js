@@ -5,6 +5,7 @@ import Header from './header'
 import Mypage from './mypage'
 import ProjectPage from './project-page'
 import HistoryPage from './history-page'
+import ProfilePage from './profile-page'
 import Footer from './footer'
 
 class UserOnly extends Component {
@@ -18,6 +19,7 @@ class UserOnly extends Component {
           <Switch>
             <Route exact path={`${url}/:userId/projects/:projectId`} component={ProjectPage} />
             <Route exact path={`${url}/:userId/history`} component={HistoryPage} />
+            <Route exact path={`${url}/:userId/edit`} component={ProfilePage} />
             <Route exact path={`${url}/:userId`} component={Mypage} />
             <Route render={() => <h2>404 Not Found</h2>} />
           </Switch>
