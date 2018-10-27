@@ -24,18 +24,23 @@ export function fetchDestroyedAssignments() {
   }).catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function createAssignment(title, detail, deadline, type, size, pos, projectId) {
-  return axios({
-    method: 'post',
-    url: `${ROOT_URL}/api/assignments`,
-    headers: { 'Authorization': `Bearer ${JWT}` },
-    params: { title, detail, deadline, type, size, pos, project_id: projectId }
-  }).then(res => {
-    return {
-      type: actionTypes.CREATE_ASSIGNMENT,
-      newAssignment: res.data
-    }
-  }).catch(() => alert('Sorry, something went wrong...'))
+export function createAssignment(
+  title, detail, deadline, planet_type, planet_size, orbit_pos, projectId
+) {
+    return axios({
+      method: 'post',
+      url: `${ROOT_URL}/api/assignments`,
+      headers: { 'Authorization': `Bearer ${JWT}` },
+      data: {
+        assignment: { title, detail, deadline, planet_type, planet_size, orbit_pos },
+        project_id: projectId
+      }
+    }).then(res => {
+      return {
+        type: actionTypes.CREATE_ASSIGNMENT,
+        newAssignment: res.data
+      }
+    }).catch(() => alert('Sorry, something went wrong...'))
 }
 
 export function destroyAssignment(assignmentId) {
