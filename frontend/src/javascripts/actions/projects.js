@@ -17,7 +17,7 @@ export function createProject(title, starType, callback) {
     method: 'post',
     url: `${ROOT_URL}/api/projects`,
     headers: { 'Authorization': `Bearer ${JWT}` },
-    params: { title, star_type: starType }
+    data: { project: { title, star_type: starType } }
   }).then(res => {
       callback(res.data.id)
       return {

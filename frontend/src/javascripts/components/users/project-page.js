@@ -49,7 +49,7 @@ class ProjectPage extends Component {
         {/*-----------------------------T E S T---------------------------------------*/}
         <a
           className="text-danger"
-          onClick={this.onDropPlanet.bind(this, "A", "B", null, 2, 2, 2)}
+          onClick={this.onDropPlanet.bind(this, "A", "B", null, "Earth", "medium", "center")}
         >CREATE | </a>
         <a className="text-danger" onClick={this.onDestroyPlanet.bind(this, 7)}>DESTROY</a>
         {/*---------------------------------------------------------------------------*/}

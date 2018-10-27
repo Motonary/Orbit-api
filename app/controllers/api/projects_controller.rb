@@ -6,11 +6,7 @@ class Api::ProjectsController < ApplicationController
   end
 
   def create
-    # TODO: Strong_parameter
-    new_project = current_user.projects.new(
-      title: params[:title],fixed_star_type: params[:star_type].to_i
-      # project_params
-    )
+    new_project = current_user.projects.new(project_params)
     new_project.save! and render json: new_project
   end
 
@@ -19,9 +15,9 @@ class Api::ProjectsController < ApplicationController
     unnecessary_project.destroy and head :ok
   end
 
-  # private
-  #
-  #   def project_params
-  #       params.require(:project).permit(:title, :fixed_star_type)
-  #   end
+  private
+
+    def project_params
+        params.require(:project).permit(:title, :fixed_star_type)
+    end
 end
