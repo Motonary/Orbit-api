@@ -8,6 +8,10 @@ $container-width: 130px;
   font-size: 14px;
   font-weight: lighter;
   letter-spacing: 2px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 200;
 
   .icon-container {
     width: $container-width;

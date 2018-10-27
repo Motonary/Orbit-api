@@ -5,13 +5,13 @@
 html {
   width: 100%;
   height: 100%;
-  margin: 0;
 }
 body {
   width: 100%;
   height: 100%;
   margin: 0;
-  background-image: url("../images/universe.png");
+  background: #0D171F url("../images/universe.png") repeat center center;
+  background-size:cover;
 }
 .container {
   width: 100%;

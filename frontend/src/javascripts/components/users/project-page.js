@@ -78,7 +78,7 @@ class ProjectPage extends Component {
         <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs[0]} /></div>
         <div className="circle1 common-circle" onClick={this.addPlanet.bind(this)} >
           <div className="common bottom first-orbit-motion start-animation">
-            <div className="planet-large-1">
+            <div className="planet-large-1">momo
               <img src={PlanetImgs[3]} className="planet" onClick={this.onClickPlanet.bind(this)}/>
             </div>
           </div>
