@@ -14,8 +14,8 @@ class Project < ApplicationRecord
   has_many :assignments, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 30 }
-  validates :fixed_star_type, presence: true, numericality: { less_than_or_equal_to: 4 }
+  validates :fixed_star_type, presence: true
 
   # TODO: たこ焼きとかサッカーボール追加
-  enum fixed_star_type: { Earth: 0, Mars: 1, Venus: 2, Jupiter: 3, Saturn: 4 }
+  enum fixed_star_type: ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn']
 end

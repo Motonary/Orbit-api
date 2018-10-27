@@ -16,16 +16,7 @@ class Api::AssignmentsController < ApplicationController
   end
 
   def create
-    # TODO: strong_parameter
-    new_assignment = @current_project.assignments.new(
-      title: params[:title],
-      detail: params[:detail],
-      deadline: params[:deadline], # jsとrubyではdatetimeの記法が違うので注意
-      planet_type: params[:type].to_i,
-      planet_size: params[:size].to_i,
-      orbit_pos: params[:pos].to_i
-      # assignment_params
-    )
+    new_assignment = @current_project.assignments.new(assignment_params)
     new_assignment.save! and render json: new_assignment
   end
 
@@ -39,10 +30,9 @@ class Api::AssignmentsController < ApplicationController
     restored_assignment.update_attribute(:destroyed_flag, false) and head :ok
   end
 
-  # private
-  #
-  #   def assignment_params
-  #     debugger
-  #     params.require(:assignment).permit(:title, :detail, :deadline, :type, :size, :pos)
-  #   end
+  private
+
+    def assignment_params
+      params.require(:assignment).permit(:title, :detail, :deadline, :planet_type, :planet_size, :orbit_pos)
+    end
 end
