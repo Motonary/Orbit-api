@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { fetchRevolvingAssignments,
          createAssignment,
          destroyAssignment } from '../../actions/assignments'
-import { PlanetImgs } from '../../constant'
+import { PlanetImgs } from '../../constants'
 
 class ProjectPage extends Component {
   constructor(props) {
