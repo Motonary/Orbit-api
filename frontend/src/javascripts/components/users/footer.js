@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ImgHolderOpen from '../../../images/main/planet_holder_btn.png'
-import { PlanetImgs } from './planet-img'
-import { DeleteIcons } from './delete-icon'
+import { PlanetImgs } from '../../constants'
+import { DeleteIcons } from '../../constants'
 
 class Footer extends Component {
   componentDidMount() {
