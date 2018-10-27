@@ -6,7 +6,7 @@
 #  title          :string
 #  detail         :text
 #  deadline       :datetime
-#  satellite_type :string
+#  satellite_type :integer
 #  assignmant_id  :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
@@ -20,5 +20,5 @@ class SubAssignment < ApplicationRecord
   validates :satellite_type, presence: true
   validates :assignmant_id, presence: true
 
-  enum satellite_type: { Earth: 'Earth', Mars: 'Mars', Venus: 'Venus', Jupiter: 'Jupiter', Saturn: 'Saturn' }
+  enum satellite_type: ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn']
 end

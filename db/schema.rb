@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_27_023702) do
+ActiveRecord::Schema.define(version: 2018_10_27_032102) do
 
   create_table "assignments", force: :cascade do |t|
     t.string "title"
     t.text "detail"
     t.datetime "deadline"
-    t.string "planet_type"
-    t.string "planet_size"
-    t.string "orbit_pos"
+    t.integer "planet_type"
+    t.integer "planet_size"
+    t.integer "orbit_pos"
     t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2018_10_27_023702) do
 
   create_table "projects", force: :cascade do |t|
     t.string "title"
-    t.string "fixed_star_type"
+    t.integer "fixed_star_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2018_10_27_023702) do
     t.string "title"
     t.text "detail"
     t.datetime "deadline"
-    t.string "satellite_type"
+    t.integer "satellite_type"
     t.integer "assignmant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

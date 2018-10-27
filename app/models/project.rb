@@ -4,7 +4,7 @@
 #
 #  id              :integer          not null, primary key
 #  title           :string
-#  fixed_star_type :string
+#  fixed_star_type :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -17,5 +17,5 @@ class Project < ApplicationRecord
   validates :fixed_star_type, presence: true
 
   # TODO: たこ焼きとかサッカーボール追加
-  enum fixed_star_type: { Earth: 'Earth', Mars: 'Mars', Venus: 'Venus', Jupiter: 'Jupiter', Saturn: 'Saturn' }
+  enum fixed_star_type: ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn']
 end

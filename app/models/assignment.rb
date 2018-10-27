@@ -6,9 +6,9 @@
 #  title          :string
 #  detail         :text
 #  deadline       :datetime
-#  planet_type    :string
-#  planet_size    :string
-#  orbit_pos      :string
+#  planet_type    :integer
+#  planet_size    :integer
+#  orbit_pos      :integer
 #  project_id     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
@@ -27,7 +27,7 @@ class Assignment < ApplicationRecord
   validates :orbit_pos,   presence: true
   validates :project_id,  presence: true
 
-  enum planet_type: { Earth: 'Earth', Mars: 'Mars', Venus: 'Venus', Jupiter: 'Jupiter', Saturn: 'Saturn' }
-  enum planet_size: { small: 'small', medium: 'medium', large: 'large' }
-  enum orbit_pos:   { inside: 'inside', center: 'center', outside: 'outside' }
+  enum planet_type: ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn']
+  enum planet_size: ['small', 'medium', 'large']
+  enum orbit_pos:   ['inside', 'center', 'outside']
 end
