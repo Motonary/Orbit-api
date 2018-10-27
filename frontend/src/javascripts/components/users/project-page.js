@@ -44,7 +44,6 @@ class ProjectPage extends Component {
   }
 
   addPlanet(e) {
-    console.log(e.target)
     let target_class = e.target
     let common_planet_tag = document.createElement('div')
     let planet_tag = document.createElement('div')
@@ -59,10 +58,10 @@ class ProjectPage extends Component {
   }
 
   addSatelitePlanet() {
-    let conditional_class1 = document.getElementsByClassName("second-orbit-motion")
-    let conditional_class2 = document.getElementsByClassName("third-orbit-motion")
-    let target_class = document.getElementsByClassName("planet-large-1")
-    let target_width = 1.5 * target_class[0].getBoundingClientRect().width
+    const conditional_class1 = document.getElementsByClassName("second-orbit-motion")
+    const conditional_class2 = document.getElementsByClassName("third-orbit-motion")
+    const target_class = document.getElementsByClassName("planet-large-1")
+    const target_width = 1.5 * target_class[0].getBoundingClientRect().width
 
     if(conditional_class1[0].children[1].classList.contains("satelite-orbit")){
       conditional_class1[0].children[1].style.width = target_width + "px"
