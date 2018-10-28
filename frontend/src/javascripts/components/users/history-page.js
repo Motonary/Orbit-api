@@ -18,7 +18,7 @@ class HistoryPage extends Component {
   render() {
     const { destroyedAssignments } = this.props
     if (!destroyedAssignments) return <div>Loading...</div>
-    
+
     return(
       <div>
         <div>Hello, history page!</div>
