@@ -9,7 +9,7 @@ class HistoryPage extends Component {
   }
 
   renderDestroyedAssignments(eachAssignment) {
-    return <div key={eachAssignment.id}>{eachAssignment.title}</div>
+    return <li key={eachAssignment.id}>{eachAssignment.title}</li>
   }
 
   onRestoreAssignment(assignmentId) {
@@ -29,44 +29,18 @@ class HistoryPage extends Component {
       })
     )
   }
-  sample() {
-    //描画コンテキストの取得
-    var canvas = document.getElementById('sample1')
-    if (canvas.getContext) {
-
-      //var context = canvas.getContext('2d')
-
-    }
-  }
 
   render() {
     const { destroyedAssignments } = this.props
     if (!destroyedAssignments) return <div>Loading...</div>
-
-    //var list = []
-    //let lists = []
-    /*
-    function test(i){
-      for(let j=0; j<5; j++){
-        list.push(<li className="planet"><img src={PlanetImgs[i+j]} className="stored-planet" /></li>)
-      }
-    }
-
-    for(let i=0; i<3; i++){
-      test(i)
-      lists.push(<div className="planet-list-row">{list}</div>)
-      list.length = 0
-    }*/
-
-
 
     return(
       <div id="history-container">
         {/*<a onClick={this.onRestoreAssignment.bind(this, 7)}>RESTORE</a>*/}
         {/*<div>{destroyedAssignments.map(this.renderDestroyedAssignments)}</div>*/}
         <ul id="stored-planet-list">
+
         </ul>
-        <canvas id="sample1"></canvas>
       </div>
     )
   }
