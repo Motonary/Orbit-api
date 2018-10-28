@@ -7,7 +7,7 @@
 #  detail         :text
 #  deadline       :datetime
 #  satellite_type :integer
-#  assignmant_id  :integer
+#  assignment_id  :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
@@ -18,7 +18,7 @@ class SubAssignment < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   validates :detail, length: { maximum: 140 }
   validates :satellite_type, presence: true
-  validates :assignmant_id, presence: true
+  validates :assignment_id, presence: true
 
   enum satellite_type: ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn']
 end
