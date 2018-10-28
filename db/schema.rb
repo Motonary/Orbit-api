@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_27_032102) do
+ActiveRecord::Schema.define(version: 2018_10_28_011026) do
 
   create_table "assignments", force: :cascade do |t|
     t.string "title"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2018_10_27_032102) do
     t.text "detail"
     t.datetime "deadline"
     t.integer "satellite_type"
-    t.integer "assignmant_id"
+    t.integer "assignment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 2018_10_27_032102) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

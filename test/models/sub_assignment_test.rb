@@ -7,7 +7,7 @@
 #  detail         :text
 #  deadline       :datetime
 #  satellite_type :integer
-#  assignmant_id  :integer
+#  assignment_id  :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
