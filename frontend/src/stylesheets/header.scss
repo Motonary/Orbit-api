@@ -2,38 +2,94 @@ $container-width: 130px;
 
 #header {
   margin-top: 20px;
-  display: flex;
-  justify-content: flex-end;
   text-align: center;
   font-size: 14px;
   font-weight: lighter;
   letter-spacing: 2px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 200;
 
-  .icon-container {
-    width: $container-width;
+  .user-info {
+    display: block;
+    width: 300px;
     color: #fff;
     cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
     align-items: center;
-    .icon {
+
+    position: fixed;
+    top: 30px;
+    left: 100px;
+
+    .user-img-container {
       width: 50px;
       height: 50px;
+      margin: 0;
+      padding: 4px 3px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+
+      .user-img {
+        width: 40px;
+        height: 40px;
+      }
     }
-    &:link {
+    .user-name {
+      margin-left: 10px;
+      text-align: left;
+      width: 100px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: lighter;
+      letter-spacing: 5px;
+    }
+
+    &:hover {
       text-decoration: none;
     }
   }
-  .back-icon-container {
-    display: block;
-    width: $container-width;
-    color: #fff;
+  .links-container {
     cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
     align-items: center;
-    .icon {
-      width: 50px;
-      height: 50px;
+
+    position: fixed;
+    top: 20px;
+    right: 30px;
+
+    .icon-container {
+      display: block;
+      width: $container-width;
+      color: #fff;
+      cursor: pointer;
+      align-items: center;
+      .icon {
+        width: 50px;
+        height: 50px;
+      }
+      &:link {
+        text-decoration: none;
+      }
     }
-    &:hover {
-      text-decoration: none;
+    .back-icon-container {
+      display: block;
+      width: $container-width;
+      color: #fff;
+      cursor: pointer;
+      align-items: center;
+      .icon {
+        width: 50px;
+        height: 50px;
+      }
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
 }

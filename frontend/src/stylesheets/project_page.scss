@@ -3,6 +3,8 @@
 #project-orbit {
   width: 100%;
   height: 90%;
+  overflow: scroll;
+  margin: 20px auto;
 
   #fixed-star {
     width: $fixed-start-scale;
@@ -45,7 +47,7 @@
   .common-circle {
     margin: 0 auto;
     border: 1px #fff;
-    border-style: dashed;
+    border-style: solid;
     border-radius: 50%;
   }
 
@@ -163,7 +165,7 @@
     left: 0;
     margin: auto;
     border: 1px #fff;
-    border-style: dashed;
+    border-style: solid;
     border-radius: 50%;
   }
   .satelite {
