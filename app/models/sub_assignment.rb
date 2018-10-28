@@ -20,5 +20,6 @@ class SubAssignment < ApplicationRecord
   validates :satellite_type, presence: true
   validates :assignment_id, presence: true
 
-  enum satellite_type: ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn']
+  enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
+                     :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
 end
