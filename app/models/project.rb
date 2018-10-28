@@ -13,7 +13,7 @@ class Project < ApplicationRecord
   has_and_belongs_to_many :users
   has_many :assignments, dependent: :destroy
 
-  validates :title, presence: true, length: { maximum: 30 }
+  validates :title, presence: true, length: { maximum: 50 }
   validates :fixed_star_type, presence: true
 
   # TODO: たこ焼きとかサッカーボール追加
