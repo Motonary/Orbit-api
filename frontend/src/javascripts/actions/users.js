@@ -33,7 +33,6 @@ export function fetchCurrentUser() {
      'Authorization': `Bearer ${JWT}`
    } })
     .then(res => {
-      console.log(res.data)
       return {
         type: actionTypes.SET_CURRENT_USER,
         currentUser: res.data
