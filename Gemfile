@@ -12,7 +12,6 @@ gem 'react-rails'
 gem 'foreman'
 gem 'rack-cors'
 gem 'knock'
-gem 'faker'
 gem 'annotate'
 
 group :development, :test do
