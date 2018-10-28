@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
 class ProfileUpdateForm extends Component {
-  renderTextField({ placeholder, type, input, meta: { touched, error } }) {
+  renderField({ placeholder, type, input, meta: { touched, error } }) {
     const classNames = `form-group ${touched && error ? 'has-danger' : ''} field-style fieled-text`
     return(
       <div className={classNames}>
@@ -19,13 +19,8 @@ class ProfileUpdateForm extends Component {
     )
   }
 
-  renderImageField({ type }) {
-    return(
-      <input type={type}/>
-    )
-  }
-
-  onSubmit({ username, email, password, confirmation }) {
+  onSubmit({ username, email, password, confirmation }, e) {
+    console.log(e)
     this.props.createUser(username, email, password, confirmation, (newUserId) => {
       this.props.history.push(`/users/${newUserId}`)
     })
@@ -34,11 +29,11 @@ class ProfileUpdateForm extends Component {
   render() {
     return(
       <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))} className="signup-form">
-        <Field name="avatar" type="file" component={this.renderImageField} />
-        <Field placeholder="NAME" name="username" type="text" component={this.renderTextField} />
-        <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderTextField} />
-        <Field placeholder="PASSWORD" name="password" type="password" component={this.renderTextField} />
-        <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderTextField} />
+        <Field name="avatar" type="file" component={this.renderField} />
+        <Field placeholder="NAME" name="username" type="text" component={this.renderField} />
+        <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
+        <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
+        <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderField} />
         <button type="submit" className="submit-btn">SIGN UP</button>
       </form>
     )
@@ -48,6 +43,7 @@ class ProfileUpdateForm extends Component {
 function validate(values) {
   const errors = {}
 
+  console.log(values)
   if (values.username && values.username.length > 50) {
     errors.username = "Too long username"
   }

@@ -37,19 +37,6 @@ class MyPage extends Component {
       return <Redirect to={`/users/${currentUser.id}`} />
     }
 
-    // ProjectStateの変化を見やすくするための暫定的なテーブル。
-    /*
-    var { projects } = this.props
-    if (!projects) projects = []
-    const projectTable = projects.map(project => {
-      return(
-        <tr key={project.id}>
-          <td>{project.id}</td>
-          <td>{project.title}</td>
-          <td>{project.fixed_star_type}</td>
-        </tr>
-      )
-    })*/
     //TODO: 歪みが子要素まで反映されているので親要素のみに留められないか
     return(
       <div id="project-list">
@@ -71,8 +58,7 @@ class MyPage extends Component {
           </div>
         </div>
       </div>
-
-  )
+    )
   }
 }
 
