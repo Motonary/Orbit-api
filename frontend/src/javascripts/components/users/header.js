@@ -11,6 +11,10 @@ class Header extends Component {
     this.props.history.goBack()
   }
 
+  onClickHeaderLeft() {
+    this.props.history.push(`/users/${this.props.currentUser.id}`)
+  }
+
   renderHeaderRight(pathname, currentUser) {
     switch(true) {
       case /\/users\/[1-9]\d*\/edit/.test(pathname):
@@ -59,7 +63,7 @@ class Header extends Component {
     return (
       <div id="header">
         <div id="project-list">
-          <a id="user-info">
+          <a id="user-info" onClick={this.onClickHeaderLeft.bind(this)}>
             <div className="user-img-container">
               <img src={ImgUser} className="user-img" />
             </div>
