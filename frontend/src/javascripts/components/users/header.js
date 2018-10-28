@@ -13,35 +13,56 @@ class Header extends Component {
     this.props.history.push(`/users/${this.props.currentUser.id}`)
   }
 
+  renderHeaderLeft(pathname, currentUser) {
+    switch(true) {
+      case pathname === `/users/${currentUser.id}`:
+        return (
+          <div></div>
+        )
+
+      default:
+        return (
+          <a className="user-info" onClick={this.onClickHeaderLeft.bind(this)}>
+            <div className="user-img-container">
+              <img src={ImgDefaultUser} className="user-img" />
+            </div>
+            <div className="user-name">
+              {currentUser.name}
+            </div>
+          </a>
+        )
+    }
+  }
+
   renderHeaderRight(pathname, currentUser) {
     switch(true) {
       case /\/users\/[1-9]\d*\/edit/.test(pathname):
-      return (
-        <div>
-          <Link to={`/users/${currentUser.id}/history`} className="icon-container">HISTORY
-            <img src={HeaderIcons[0]} className="icon" />
-          </Link>
-          <a onClick={this.onClickBackButton.bind(this)} className="back-icon-container">BACK
-            <img src={HeaderIcons[2]} className="icon" />
-          </a>
-        </div>
-      )
+        return (
+          <div className="links-container">
+            <Link to={`/users/${currentUser.id}/history`} className="icon-container">HISTORY
+              <img src={HeaderIcons[0]} className="icon" />
+            </Link>
+            <a onClick={this.onClickBackButton.bind(this)} className="back-icon-container">BACK
+              <img src={HeaderIcons[2]} className="icon" />
+            </a>
+          </div>
+        )
 
       case /\/users\/[1-9]\d*\/history/.test(pathname):
-      return (
-        <div>
-          <Link to={`/users/${currentUser.id}/edit`} className="icon-container">SETTING
-            <img src={HeaderIcons[1]} className="icon" />
-          </Link>
-          <a onClick={this.onClickBackButton.bind(this)} className="back-icon-container">BACK
-            <img src={HeaderIcons[2]} className="icon" />
-          </a>
-        </div>
-      )
+        return (
+          <div className="links-container">
+            <Link to={`/users/${currentUser.id}/edit`} className="icon-container">SETTING
+              <img src={HeaderIcons[1]} className="icon" />
+            </Link>
+            <a onClick={this.onClickBackButton.bind(this)} className="back-icon-container">BACK
+              <img src={HeaderIcons[2]} className="icon" />
+            </a>
+          </div>
+        )
 
       case /(\/users\/[1-9]\d*)|(\/users\/[1-9]\d*\/projects\/[1-9]\d*)/.test(pathname):
         return (
-          <div>
+          <div className="links-container">
             <Link to={`/users/${currentUser.id}/history`} className="icon-container">HISTORY
               <img src={HeaderIcons[0]} className="icon" />
             </Link>
@@ -60,16 +81,7 @@ class Header extends Component {
     const { currentUser, location: { pathname } } = this.props
     return (
       <div id="header">
-        <div id="project-list">
-          <a id="user-info" onClick={this.onClickHeaderLeft.bind(this)}>
-            <div className="user-img-container">
-              <img src={ImgDefaultUser} className="user-img" />
-            </div>
-            <div className="user-name">
-              {currentUser.name}
-            </div>
-          </a>
-        </div>
+        { this.renderHeaderLeft(pathname, currentUser) }
         { this.renderHeaderRight(pathname, currentUser) }
       </div>
     )

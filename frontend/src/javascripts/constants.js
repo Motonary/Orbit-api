@@ -53,7 +53,7 @@ export const actionTypes = keyMirror({
   RESTORE_ASSIGNMENT: null
 })
 
-export const HeaderIcons = [ ImgHistoryIcon, ImgSettingIcon, ImgBackIcon ]
+export const HeaderIcons = [ImgHistoryIcon, ImgSettingIcon, ImgBackIcon]
 
 export const ImgDefaultUser = ImgUser
 
