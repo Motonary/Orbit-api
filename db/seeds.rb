@@ -1,5 +1,7 @@
-# TODO: User以外のモデルもseed作る
 User.destroy_all
+Project.destroy_all
+Assignment.destroy_all
+SubAssignment.destroy_all
 
 User.create!({
   name: 'ririco722',
@@ -7,11 +9,3 @@ User.create!({
   password: 'password',
   password_confirmation: 'password'
 })
-
-100.times do |n|
-  User.create!(name: Faker::Name.first_name,
-               email: Faker::Internet.email,
-               password: "password",
-               password_confirmation: "password",
-               )
-end
