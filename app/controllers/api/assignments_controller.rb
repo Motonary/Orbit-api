@@ -24,12 +24,12 @@ class Api::AssignmentsController < ApplicationController
 
   def destroy
     destroyed_assignment = Assignment.find(params[:id])
-    destroyed_assignment.update_attribute(:destroyed_flag, true) and head :ok
+    destroyed_assignment.update_attributes(destroyed_flag: true, destroyed_at: Time.current) and head :ok
   end
 
   def restore
     restored_assignment = Assignment.find(params[:id])
-    restored_assignment.update_attribute(:destroyed_flag, false) and head :ok
+    restored_assignment.update_attributes(destroyed_flag: false, destroyed_at: null) and head :ok
   end
 
   private

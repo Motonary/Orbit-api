@@ -25,17 +25,18 @@ kanojo_project = Project.first
 kanojo_project.assignments.create!({
   title: 'Prepare much water',
   detail: '35L is required',
-  deadline: Time.new(2018, 12, 25, 00, 00, 00),
+  deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
   planet_type: 'Mars',
   planet_size: 'large',
   orbit_pos: 'inside',
-  destroyed_flag: true
+  destroyed_flag: true,
+  destroyed_at: 1.day.ago
 })
 
 kanojo_project.assignments.create!({
   title: 'Prepare much carbon',
   detail: '20kg is required',
-  deadline: Time.new(2018, 12, 25, 00, 00, 00),
+  deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
   planet_type: 'Jupiter',
   planet_size: 'medium',
   orbit_pos: 'center',
@@ -45,7 +46,7 @@ kanojo_project.assignments.create!({
 kanojo_project.assignments.create!({
   title: 'Prepare a bit ammonia and so on',
   detail: '4L ammonia and a little lime, rin, fluorine is required',
-  deadline: Time.new(2018, 12, 25, 00, 00, 00),
+  deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
   planet_type: 'Saturn',
   planet_size: 'small',
   orbit_pos: 'inside'
@@ -53,8 +54,8 @@ kanojo_project.assignments.create!({
 
 kanojo_project.assignments.create!({
   title: 'Synthesize them!',
-  detail: 'You\'ll get ideal kanojo and avoid lonely Christmas:)',
-  deadline: Time.new(2018, 12, 25, 00, 00, 00),
+  detail: 'I\'ll get ideal kanojo and avoid lonely Christmas:)',
+  deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
   planet_type: 'Venus',
   planet_size: 'large',
   orbit_pos: 'outside'
@@ -70,7 +71,9 @@ synthesis_assignment.sub_assignments.create!({
 })
 
 synthesis_assignment.sub_assignments.create!({
-  title: 'Say goodbye to your virginity',
+  title: 'Say goodbye to my virginity',
   detail: 'Happy Christmas',
   satellite_type: 'Earth',
+  destroyed_flag: true,
+  destroyed_at: Time.current
 })
