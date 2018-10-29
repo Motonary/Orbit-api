@@ -11,10 +11,14 @@ class Api::AssignmentsController < ApplicationController
   end
 
   def fetch_destroyed
-    # render json: Assignment.joins(project: :users).merge(User.where(id: current_user)).where(destroyed_flag: true)
-    @destroyed_assignments = Assignment.joins(project: :users).merge(User.where(id: current_user)).where(destroyed_flag: true)
-    @destroyed_sub_assignments = SubAssignment.joins(project: :users).merge(User.where(id: current_user)).where(destroyed_flag: true)
-    render 'destroyed_assignments', formats: 'json', handlers: 'jbuilder'
+    destroyed_assignments =
+      Assignment.joins(project: :users).merge(User.where(id: User.first)).where(destroyed_flag: true)
+    destroyed_sub_assignments =
+      SubAssignment.joins(assignment: [project: :users]).merge(User.where(id: User.first)).where(destroyed_flag: true)
+    @destroyed_all_assignments =
+      (destroyed_assignments + destroyed_sub_assignments).sort_by(&:destroyed_at).reverse
+    # render 'destroyed_assignments', formats: 'json', handlers: 'jbuilder'
+    render json: @destroyed_all_assignments
   end
 
   def create

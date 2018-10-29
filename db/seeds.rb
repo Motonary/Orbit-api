@@ -49,7 +49,9 @@ kanojo_project.assignments.create!({
   deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
   planet_type: 'Saturn',
   planet_size: 'small',
-  orbit_pos: 'inside'
+  orbit_pos: 'inside',
+  destroyed_flag: true,
+  destroyed_at: Time.current.prev_month
 })
 
 kanojo_project.assignments.create!({
@@ -62,18 +64,18 @@ kanojo_project.assignments.create!({
 })
 
 # A sub_assignment
-synthesis_assignment = Assignment.find(4)
+create_kanojo_assignment = Assignment.find(4)
 
-synthesis_assignment.sub_assignments.create!({
+create_kanojo_assignment.sub_assignments.create!({
   title: 'Say goodbye to your virginity',
   detail: 'Happy Christmas',
   satellite_type: 'Earth',
 })
 
-synthesis_assignment.sub_assignments.create!({
-  title: 'Say goodbye to my virginity',
-  detail: 'Happy Christmas',
-  satellite_type: 'Earth',
+create_kanojo_assignment.sub_assignments.create!({
+  title: 'Hogehoge',
+  detail: 'fugafuga',
+  satellite_type: 'Takoyaki',
   destroyed_flag: true,
-  destroyed_at: Time.current
+  destroyed_at: Time.current.next_year
 })
