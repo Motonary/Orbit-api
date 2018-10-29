@@ -22,14 +22,6 @@ class ProjectPage extends Component {
 
   onClickPlanet() {
     // TODO: タスク詳細のポップアップ実装,
-    const target_class1 = document.getElementsByClassName("first-orbit-motion")
-    const target_class2 = document.getElementsByClassName("second-orbit-motion")
-    const target_class3 = document.getElementsByClassName("third-orbit-motion")
-
-    target_class1[0].classList.add("pause-animation")
-    target_class1[1].classList.add("pause-animation")
-    target_class2[0].classList.add("pause-animation")
-    target_class3[0].classList.add("pause-animation")
   }
 
   onDropPlanet(title, detail, deadline, planet_type, planet_size, orbit_pos) {
@@ -86,7 +78,7 @@ class ProjectPage extends Component {
         <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs[0]} /></div>
         <div className="circle1 common-circle" onClick={this.addPlanet.bind(this)} >
           <div className="common bottom first-orbit-motion start-animation">
-            <div className="planet-large-1">
+            <div className="planet-large-1">momo
               <img src={PlanetImgs[3]} className="planet" onClick={this.onClickPlanet.bind(this)}/>
             </div>
           </div>
