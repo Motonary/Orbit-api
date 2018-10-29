@@ -11,8 +11,10 @@ class Api::AssignmentsController < ApplicationController
   end
 
   def fetch_destroyed
-    # TODO: SQLの知識ないけどもう少しうまくできそう？特にmergeのところ
-    render json: Assignment.joins(project: :users).merge(User.where(id: current_user)).where(destroyed_flag: true)
+    # render json: Assignment.joins(project: :users).merge(User.where(id: current_user)).where(destroyed_flag: true)
+    @destroyed_assignments = Assignment.joins(project: :users).merge(User.where(id: current_user)).where(destroyed_flag: true)
+    @destroyed_sub_assignments = SubAssignment.joins(project: :users).merge(User.where(id: current_user)).where(destroyed_flag: true)
+    render 'destroyed_assignments', formats: 'json', handlers: 'jbuilder'
   end
 
   def create

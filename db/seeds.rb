@@ -28,7 +28,8 @@ kanojo_project.assignments.create!({
   deadline: Time.new(2018, 12, 25, 00, 00, 00),
   planet_type: 'Mars',
   planet_size: 'large',
-  orbit_pos: 'inside'
+  orbit_pos: 'inside',
+  destroyed_flag: true
 })
 
 kanojo_project.assignments.create!({
@@ -37,7 +38,8 @@ kanojo_project.assignments.create!({
   deadline: Time.new(2018, 12, 25, 00, 00, 00),
   planet_type: 'Jupiter',
   planet_size: 'medium',
-  orbit_pos: 'center'
+  orbit_pos: 'center',
+  done_flag: true
 })
 
 kanojo_project.assignments.create!({
@@ -60,6 +62,12 @@ kanojo_project.assignments.create!({
 
 # A sub_assignment
 synthesis_assignment = Assignment.find(4)
+
+synthesis_assignment.sub_assignments.create!({
+  title: 'Say goodbye to your virginity',
+  detail: 'Happy Christmas',
+  satellite_type: 'Earth',
+})
 
 synthesis_assignment.sub_assignments.create!({
   title: 'Say goodbye to your virginity',

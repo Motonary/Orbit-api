@@ -14,6 +14,7 @@
 #  updated_at     :datetime         not null
 #  done_flag      :boolean          default(FALSE)
 #  destroyed_flag :boolean          default(FALSE)
+#  destroyed_at   :datetime
 #
 
 require 'test_helper'
