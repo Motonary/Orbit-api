@@ -15,8 +15,23 @@ class Api::AssignmentsController < ApplicationController
     destroyed_sub_assignments = SubAssignment.search_with_user(current_user).search_destroyed
     @destroyed_all_assignments =
       (destroyed_assignments + destroyed_sub_assignments).sort_by(&:destroyed_at).reverse
-    # render 'destroyed_assignments', formats: 'json', handlers: 'jbuilder'
-    render json: @destroyed_all_assignments
+
+    handlable_assignments = {}
+
+    @destroyed_all_assignments.each do |assignment|
+      year = assignment.destroyed_at.strftime('%Y')
+      date = assignment.destroyed_at.strftime('%m/%d')
+      if handlable_assignments[year]
+        if handlable_assignments[year][date]
+          handlable_assignments[year][date].push assignment
+        else
+          handlable_assignments[year][date] = [assignment]
+        end
+      else
+        handlable_assignments[year] = { date => [assignment] }
+      end
+    end
+    render json: handlable_assignments
   end
 
   def create
