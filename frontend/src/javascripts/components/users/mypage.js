@@ -36,7 +36,6 @@ class MyPage extends Component {
     if (currentUser.id != this.props.match.params.userId) {
       return <Redirect to={`/users/${currentUser.id}`} />
     }
-
     //TODO: 歪みが子要素まで反映されているので親要素のみに留められないか
     return(
       <div id="project-list">

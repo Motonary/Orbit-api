@@ -8,7 +8,6 @@ class Main extends Component {
   componentDidMount() {
     if (JWT) this.props.fetchCurrentUser()
   }
-
   render() {
     return (
       (JWT && !this.props.currentUser) ?
