@@ -11,10 +11,8 @@ class Api::AssignmentsController < ApplicationController
   end
 
   def fetch_destroyed
-    destroyed_assignments =
-      Assignment.joins(project: :users).merge(User.where(id: User.first)).where(destroyed_flag: true)
-    destroyed_sub_assignments =
-      SubAssignment.joins(assignment: [project: :users]).merge(User.where(id: User.first)).where(destroyed_flag: true)
+    destroyed_assignments = Assignment.search_with_user(current_user).search_destroyed
+    destroyed_sub_assignments = SubAssignment.search_with_user(current_user).search_destroyed
     @destroyed_all_assignments =
       (destroyed_assignments + destroyed_sub_assignments).sort_by(&:destroyed_at).reverse
     # render 'destroyed_assignments', formats: 'json', handlers: 'jbuilder'

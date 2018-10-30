@@ -32,4 +32,7 @@ class Assignment < ApplicationRecord
                      :Neptune, :Jupiter, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
   enum planet_size: [:small, :medium, :large]
   enum orbit_pos:   [:inside, :center, :outside]
+
+  scope :search_with_user, -> user { joins(project: :users).merge(User.id_is user.id) }
+  scope :search_destroyed, -> { where(destroyed_flag: true) }
 end
