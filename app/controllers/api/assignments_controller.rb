@@ -13,25 +13,27 @@ class Api::AssignmentsController < ApplicationController
   def fetch_destroyed
     destroyed_assignments = Assignment.search_with_user(current_user).search_destroyed
     destroyed_sub_assignments = SubAssignment.search_with_user(current_user).search_destroyed
-    @destroyed_all_assignments =
+    # 惑星と衛星を混ぜてから、破壊された日時の新しい順にソート
+    destroyed_all_assignments =
       (destroyed_assignments + destroyed_sub_assignments).sort_by(&:destroyed_at).reverse
 
-    handlable_assignments = {}
+    # 返すデータを{yyyy:{dd:[{...}, {...}, ...], dd:[{...}, ...], ...}, yyyy: {...}, ...}の形に整形
+    manageable_assignments = {}
 
-    @destroyed_all_assignments.each do |assignment|
+    destroyed_all_assignments.each do |assignment|
       year = assignment.destroyed_at.strftime('%Y')
       date = assignment.destroyed_at.strftime('%m/%d')
-      if handlable_assignments[year]
-        if handlable_assignments[year][date]
-          handlable_assignments[year][date].push assignment
+      if manageable_assignments[year]
+        if manageable_assignments[year][date]
+          manageable_assignments[year][date].push assignment
         else
-          handlable_assignments[year][date] = [assignment]
+          manageable_assignments[year][date] = [assignment]
         end
       else
-        handlable_assignments[year] = { date => [assignment] }
+        manageable_assignments[year] = { date => [assignment] }
       end
     end
-    render json: handlable_assignments
+    render json: manageable_assignments
   end
 
   def create
@@ -46,7 +48,7 @@ class Api::AssignmentsController < ApplicationController
 
   def restore
     restored_assignment = Assignment.find(params[:id])
-    restored_assignment.update_attributes(destroyed_flag: false, destroyed_at: null) and head :ok
+    restored_assignment.update_attributes(destroyed_flag: false, destroyed_at: nil) and head :ok
   end
 
   private
