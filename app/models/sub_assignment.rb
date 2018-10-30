@@ -10,6 +10,8 @@
 #  assignment_id  :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  destroyed_at   :datetime
+#  destroyed_flag :boolean          default(FALSE)
 #
 
 class SubAssignment < ApplicationRecord
@@ -22,4 +24,7 @@ class SubAssignment < ApplicationRecord
 
   enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
                      :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
+
+  scope :search_with_user, -> user { joins(assignment: [project: :users]).merge(User.id_is user.id) }
+  scope :search_destroyed, -> { where(destroyed_flag: true) }
 end
