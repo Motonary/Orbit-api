@@ -14,6 +14,7 @@
 #  updated_at     :datetime         not null
 #  done_flag      :boolean          default(FALSE)
 #  destroyed_flag :boolean          default(FALSE)
+#  destroyed_at   :datetime
 #
 
 class Assignment < ApplicationRecord
@@ -27,8 +28,11 @@ class Assignment < ApplicationRecord
   validates :orbit_pos,   presence: true
   validates :project_id,  presence: true
 
-  enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
-                     :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
+  enum planet_type: [:Uranus, :Mercury, :Pluto, :Saturn, :Earth, :Moon, :Love, :Mars,
+                     :Neptune, :Jupiter, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
   enum planet_size: [:small, :medium, :large]
   enum orbit_pos:   [:inside, :center, :outside]
+
+  scope :search_with_user, -> user { joins(project: :users).merge(User.id_is user.id) }
+  scope :search_destroyed, -> { where(destroyed_flag: true) }
 end
