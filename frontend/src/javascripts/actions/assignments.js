@@ -83,7 +83,7 @@ export function disselectAssignment(assignmentId) {
   }
 }
 
-export function selectAssignment(assignmentId) {
+export function nullifySelectedAssignment() {
   return {
     type: actionTypes.NULLIFY_SELECTED_ASSIGNMENT
   }
