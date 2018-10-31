@@ -10,7 +10,7 @@ const Planet = (orbit) => {
     return(
       planet_list.map((object) => {
         return(
-          <div key={object.id} className="common right first-orbit-motion start-animation">
+          <div key={object.id} className={`common right ${object.orbit_pos}-orbit-motion start-animation`}>
             <div className={`planet-${object.planet_size}-${object.orbit_pos}`} >
               <PopupBox data={object} />
               <img src={PlanetImgs[object.planet_type]} className="planet" />

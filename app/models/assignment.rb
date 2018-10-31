@@ -34,7 +34,7 @@ class Assignment < ApplicationRecord
 
   enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune, :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
   enum planet_size: [:small, :medium, :large]
-  enum orbit_pos:   [:inside, :center, :outside]
+  enum orbit_pos:   [:first, :second, :third]
 
   scope :search_with_user, -> user { joins(project: :users).merge(User.id_is user.id) }
   scope :search_destroyed, -> { where(destroyed_flag: true) }

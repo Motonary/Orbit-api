@@ -60,7 +60,7 @@
     text-align: center;
     z-index: -100;
   }
-  .planet-large-inside {
+  .planet-large-first {
     width: percentage($first-orbit-large-planet);
     height: percentage($first-orbit-large-planet);
     border-radius: 50%;
@@ -73,7 +73,7 @@
     animation: rotate $first-orbit-speed linear reverse infinite;
     word-wrap: break-word;
   }
-  .planet-medium-inside {
+  .planet-medium-first {
     width: percentage($first-orbit-medium-planet);
     height: percentage($first-orbit-medium-planet);
     border-radius: 50%;
@@ -86,7 +86,7 @@
     animation: rotate $first-orbit-speed linear reverse infinite;
     word-wrap: break-word;
   }
-  .planet-small-inside {
+  .planet-small-first {
     width: percentage($first-orbit-small-planet);
     height: percentage($first-orbit-small-planet);
     border-radius: 50%;
@@ -99,7 +99,7 @@
     animation: rotate $first-orbit-speed linear reverse infinite;
     word-wrap: break-word;
   }
-  .planet-large-center {
+  .planet-large-second {
     width: percentage($second-orbit-large-planet);
     height: percentage($second-orbit-large-planet);
     border-radius: 50%;
@@ -112,7 +112,7 @@
     animation: rotate $second-orbit-speed linear reverse infinite;
     word-wrap: break-word;
   }
-  .planet-medium-center {
+  .planet-medium-second {
     width: percentage($second-orbit-medium-planet);
     height: percentage($second-orbit-medium-planet);
     border-radius: 50%;
@@ -125,7 +125,7 @@
     animation: rotate $second-orbit-speed linear reverse infinite;
     word-wrap: break-word;
   }
-  .planet-small-center {
+  .planet-small-second {
     width: percentage($second-orbit-small-planet);
     height: percentage($second-orbit-small-planet);
     border-radius: 50%;
@@ -138,7 +138,7 @@
     animation: rotate $second-orbit-speed linear reverse infinite;
     word-wrap: break-word;
   }
-  .planet-large-outside {
+  .planet-large-third {
     width: percentage($third-orbit-large-planet);
     height: percentage($third-orbit-large-planet);
     border-radius: 50%;
@@ -151,7 +151,7 @@
     animation: rotate $third-orbit-speed linear reverse infinite;
     word-wrap: break-word;
   }
-  .planet-medium-outside {
+  .planet-medium-third {
     width: percentage($third-orbit-medium-planet);
     height: percentage($third-orbit-medium-planet);
     border-radius: 50%;
@@ -164,7 +164,7 @@
     animation: rotate $third-orbit-speed linear reverse infinite;
     word-wrap: break-word;
   }
-  .planet-small-outside {
+  .planet-small-third {
     width: percentage($third-orbit-small-planet);
     height: percentage($third-orbit-small-planet);
     border-radius: 50%;
