@@ -1,13 +1,14 @@
 import React from 'react'
 
-const PopupBox = (data) => {
-  //console.log(data)
+const PopupBox = (assignmentInfo) => {
+  const datas = assignmentInfo.data
+
   return(
     <div className="detail-balloon">
-      <div className="assignment-title">{data.data.title}</div>
-      <span>{data.data.deadline}</span>
+      <div className="assignment-title">{datas.title}</div>
+      <span>{datas.deadline}</span>
       <div className="assignment-description">
-        {data.data.detail}
+        {datas.detail}
       </div>
       <div className="select-btn">選択</div>
     </div>

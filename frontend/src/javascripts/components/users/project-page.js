@@ -30,16 +30,16 @@ class ProjectPage extends Component {
     const secundusOrbit = []
     const tertiusOrbit = []
 
-    nextProps.revolvingAssignments.map((object) => {
-      switch (object.orbit_pos) {
-        case 'inside':
-          primoOrbit.push(object)
+    nextProps.revolvingAssignments.map((assignment) => {
+      switch (assignment.orbit_pos) {
+        case 'primo':
+          primoOrbit.push(assignment)
           break
-        case 'center':
-          secundusOrbit.push(object)
+        case 'secundus':
+          secundusOrbit.push(assignment)
           break
-        case 'outside':
-          tertiusOrbit.push(object)
+        case 'tertius':
+          tertiusOrbit.push(assignment)
           break
       }
     })
@@ -61,13 +61,6 @@ class ProjectPage extends Component {
   }
 
   onMouseOver() {
-    //let target_planet = e.target.parentNode
-
-    //const target_planet_size = target_planet.className.split('-')[1]
-    //const target_orbit_pos = target_planet.className.split('-')[2]
-
-    //console.log(el)
-    //target_planet.appendChild(img_tag)
 
   }
 
@@ -88,7 +81,7 @@ class ProjectPage extends Component {
   addSatelitePlanet() {
     const conditional_class1 = document.getElementsByClassName("secundus-orbit-motion")
     const conditional_class2 = document.getElementsByClassName("tertius-orbit-motion")
-    const target_class = document.getElementsByClassName("planet-large-inside")
+    const target_class = document.getElementsByClassName("planet-large-primo")
     const target_width = 1.5 * target_class[0].getBoundingClientRect().width
 
     if(conditional_class1[0].children[1].classList.contains("satelite-orbit")){
@@ -109,6 +102,7 @@ class ProjectPage extends Component {
       const correctPath = `/users/${currentUser.id}`
       return <Redirect to={correctPath} />
     }
+    console.log(this.props)
 
     return(
       <div id="project-orbit">
@@ -116,7 +110,7 @@ class ProjectPage extends Component {
         <div className="circle1 common-circle" onClick={this.addPlanet.bind(this)} >
           <Planet orbit={this.state.primoOrbit} />
           <div className="common top primo-orbit-motion start-animation">
-            <div className="planet-large-inside" data-value={0} onMouseOver={this.onMouseOver.bind(this)}>
+            <div className="planet-large-primo" onMouseOver={this.onMouseOver.bind(this)}>
               <img src={PlanetImgs.Earth} />
             </div>
           </div>
@@ -124,7 +118,7 @@ class ProjectPage extends Component {
         <div className="circle2 common-circle" onClick={this.addPlanet.bind(this)} >
           <Planet orbit={this.state.secundusOrbit} />
           <div className="common top secundus-orbit-motion start-animation">
-            <div className="planet-medium-center"><img src={PlanetImgs.Jupitar} /></div>
+            <div className="planet-medium-secundus"><img src={PlanetImgs.Jupitar} /></div>
             <div className="satelite-orbit">
               <div className="common top satelite-orbit-motion start-animation">
                 <div className="satelite"><img src={PlanetImgs.Love} /></div>
@@ -134,7 +128,7 @@ class ProjectPage extends Component {
         </div>
         <div className="circle3 common-circle">
           <div className="common right tertius-orbit-motion start-animation">
-            <div className="planet-small-outside"><img src={PlanetImgs.Sirius} /></div>
+            <div className="planet-small-tertius"><img src={PlanetImgs.Sirius} /></div>
             <div className="satelite-orbit">
               <div className="common top satelite-orbit-motion start-animation">
                 <div className="satelite"><img src={PlanetImgs.Ball} /></div>

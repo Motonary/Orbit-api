@@ -7,8 +7,8 @@
   margin: 20px auto;
 
   #fixed-star {
-    width: $fixed-start-scale;
-    height: $fixed-start-scale;
+    width: $fixed-star-scale;
+    height: $fixed-star-scale;
     margin: 0 auto;
     position: absolute;
     top: $fixed-star-position;
@@ -16,8 +16,8 @@
     z-index: 100;
 
     img {
-      width: $fixed-start-scale;
-      height: $fixed-start-scale;
+      width: $fixed-star-scale;
+      height: $fixed-star-scale;
     }
   }
   .circle1 {
@@ -244,6 +244,7 @@
     border: 1px #fff;
     border-style: solid;
     border-radius: 50%;
+    z-index: 100;
   }
   .satelite {
     width: percentage($satelite-scale);
@@ -257,6 +258,7 @@
     border-radius: 50%;
     animation: rotate $satelite-orbit-speed linear reverse infinite;
     word-wrap: break-word;
+    z-index: 200;
   }
 
   //popup-box

@@ -50,6 +50,18 @@ end
     destroyed_at: 1.days.ago
   })
 end
+2.times do |i|
+  kanojo_project.assignments.create!({
+    title: Faker::Lorem.word,
+    detail: Faker::Lorem.sentence,
+    deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
+    planet_type: planet_keys[rand(0...14)],
+    planet_size: size_keys[rand(0...2)],
+    orbit_pos: pos_keys[rand(0...2)],
+    destroyed_flag: true,
+    destroyed_at: Time.current.last_year
+  })
+end
 
 # A sub_assignment
 create_kanojo_assignment1 = Assignment.find_by(id: 2)
