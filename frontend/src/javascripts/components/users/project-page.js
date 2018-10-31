@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom'
 import { fetchRevolvingAssignments,
          createAssignment,
          destroyAssignment } from '../../actions/assignments'
+import anime from 'animejs'
+
 import { PlanetImgs } from '../../constants'
 import Planet from '../molecules/planet'
 
@@ -16,7 +18,8 @@ class ProjectPage extends Component {
       projectId: props.match.params.projectId,
       primoOrbit: [],
       secundusOrbit: [],
-      tertiusOrbit: []
+      tertiusOrbit: [],
+      selectedPlanet: []
     }
   }
 
@@ -24,13 +27,13 @@ class ProjectPage extends Component {
     this.props.fetchRevolvingAssignments(this.state.projectId)
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     //FIXME: this.stateを総取っ替えしてるから変更箇所だけ挿入みたいにしたいが、これしかない？
     const primoOrbit = []
     const secundusOrbit = []
     const tertiusOrbit = []
 
-    nextProps.revolvingAssignments.map((assignment) => {
+    prevProps.revolvingAssignments.map((assignment) => {
       switch (assignment.orbit_pos) {
         case 'primo':
           primoOrbit.push(assignment)
@@ -56,12 +59,148 @@ class ProjectPage extends Component {
     )
   }
 
+  onClickDestroyPlanets(e) {
+    const target_id = this.state.selectedPlanet
+    var parent = []
+    var canvasEl = []
+    var ctx = []
+    target_id.map((id_name) => {
+      let tar = document.getElementById(id_name)
+      parent.push(tar.parentNode)
+      canvasEl.push(tar)
+      ctx.push(tar.getContext('2d'))
+    })
+    console.log(parent[0].clientHeight)
+
+    const numberOfParticules = 100
+    var pointerX = 0
+    var pointerY = 0
+    var tap = 'mousedown'
+    const colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C']
+    //const colors = ['#FFF', '#FFF', '#FFF', '#FFF']
+
+    function setCanvasSize() {
+      var i = 0
+      canvasEl.map((target) => {
+        target.width = parent[i].clientWidth
+        target.height = parent[i].clientHeight
+        target.style.zIndex = 500
+        target.getContext('2d').scale(2, 2)
+        i++
+      })
+    }
+
+    function updateCoords(e) {
+      pointerX = 50
+      pointerY = 50
+    }
+
+    function removeImg() {
+      parent.map((doc) => {
+        console.log(doc.firstElementChild.firstElementChild)
+        let child = doc.firstElementChild.firstElementChild
+        doc.firstElementChild.removeChild(child)
+      })
+    }
+
+    function setParticuleDirection(p) {
+      var angle = anime.random(0, 360) * Math.PI / 180
+      var value = anime.random(50, 180)
+      var radius = [-1, 1][anime.random(0, 1)] * value
+      return {
+        x: p.x + radius * Math.cos(angle),
+        y: p.y + radius * Math.sin(angle)
+      }
+    }
+
+    function createParticule(x,y) {
+      var p = {}
+      p.x = x
+      p.y = y
+      p.color = colors[anime.random(0, colors.length - 1)]
+      p.radius = anime.random(10, 20)
+      p.endPos = setParticuleDirection(p)
+      p.draw = function() {
+        ctx.map((tar) => {
+          tar.beginPath()
+          tar.arc(p.x, p.y, p.radius, 0, 2 * Math.PI, true)
+          tar.fillStyle = p.color
+          tar.fill()
+        })
+      }
+      return p
+    }
+
+    function renderParticule(anim) {
+      for (var i = 0; i < anim.animatables.length; i++) {
+        anim.animatables[i].target.draw()
+      }
+    }
+
+    function animateParticules(x, y) {
+      var particules = []
+      for (var i = 0; i < numberOfParticules; i++) {
+        particules.push(createParticule(x, y))
+      }
+      anime.timeline().add({
+        targets: particules,
+        x: function(p) { return p.endPos.x; },
+        y: function(p) { return p.endPos.y; },
+        radius: 0.1,
+        duration: anime.random(1200, 1800),
+        easing: 'easeOutExpo',
+        update: renderParticule
+      })
+    }
+
+    var render = anime({
+      duration: Infinity,
+      update: function() {
+        let i = 0
+        ctx.map((val) => {
+          val.clearRect(0, 0, canvasEl[i].width, canvasEl[i].height)
+          i++
+        })
+      }
+    })
+
+    //var centerX = window.innerWidth / 2;
+    //var centerY = window.innerHeight / 2;
+
+    setCanvasSize()
+    window.addEventListener('resize', setCanvasSize, false)
+    render.play()
+    updateCoords()
+    removeImg()
+    animateParticules(pointerX, pointerY)
+  }
+
+  onSelected(e) {
+    const target = e.target.parentNode.nextElementSibling
+    const clientRect = target.getBoundingClientRect()
+    let selectedPlanet = this.state.selectedPlanet
+
+    // ページの左端から、要素の左端までの距離
+    var px = window.pageXOffset + clientRect.left
+    // ページの上端から、要素の上端までの距離
+    var py = window.pageYOffset + clientRect.top
+
+    selectedPlanet.push(target.id)
+
+    this.setState(selectedPlanet)
+
+    console.log(this.state.selectedPlanet)
+  }
+
   onDestroyPlanet(assignmentId) {
     this.props.destroyAssignment(assignmentId)
   }
 
-  onMouseOver() {
+  onMouseOver(e) {
+    const target_planet = e.target.parentNode
 
+    //target_planet.style.display = "inline-block"
+    console.log(target_planet.style.display)
   }
 
   addPlanet(e) {
@@ -70,7 +209,7 @@ class ProjectPage extends Component {
     let planet_tag = document.createElement('div')
     let img_tag = document.createElement('img')
     common_planet_tag.className = "common top secundus-orbit-motion start-animation"
-    planet_tag.className = "planet-medium-center"
+    planet_tag.className = "planet-medium-secundus"
     img_tag.src = PlanetImgs.Uranus
 
     planet_tag.appendChild(img_tag)
@@ -108,15 +247,15 @@ class ProjectPage extends Component {
       <div id="project-orbit">
         <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs.Uranus} /></div>
         <div className="circle1 common-circle" onClick={this.addPlanet.bind(this)} >
-          <Planet orbit={this.state.primoOrbit} />
-          <div className="common top primo-orbit-motion start-animation">
-            <div className="planet-large-primo" onMouseOver={this.onMouseOver.bind(this)}>
+          <Planet orbit={this.state.primoOrbit} onMouseOver={this.onMouseOver.bind(this)} />
+          <div className="common top primo-orbit-motion start-animation" >
+            <div className="planet-large-primo" onClick={this.onSelected.bind(this)}>
               <img src={PlanetImgs.Earth} />
             </div>
+            <canvas id="momomomo" className="canvas"></canvas>
           </div>
         </div>
         <div className="circle2 common-circle" onClick={this.addPlanet.bind(this)} >
-          <Planet orbit={this.state.secundusOrbit} />
           <div className="common top secundus-orbit-motion start-animation">
             <div className="planet-medium-secundus"><img src={PlanetImgs.Jupitar} /></div>
             <div className="satelite-orbit">
@@ -136,6 +275,7 @@ class ProjectPage extends Component {
             </div>
           </div>
         </div>
+        <div onClick={this.onClickDestroyPlanets.bind(this)}>YOOOO</div>
       </div>
     )
   }
