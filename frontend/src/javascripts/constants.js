@@ -51,7 +51,9 @@ export const actionTypes = keyMirror({
   CREATE_ASSIGNMENT: null,
   DESTROY_ASSIGNMENT: null,
   RESTORE_ASSIGNMENT: null,
-  SELECT_ASSIGNMENT: null
+  SELECT_ASSIGNMENT: null,
+  DISSELECT_ASSIGNMENT: null,
+  NULLIFY_SELECTED_ASSIGNMENT: null
 })
 
 export const HeaderIcons = [ImgHistoryIcon, ImgSettingIcon, ImgBackIcon]

@@ -33,7 +33,11 @@ export function selectedAssignments(state = null, action) {
     case actionTypes.SELET_ASSIGNMENT:
       return [...state, action.assignmentId]
 
-    // TODO(Yuki): 選択解除の処理書く
+    case actionTypes.DISSELECT_ASSIGNMENT:
+      return _.remove([...state], eachState => eachState.id !== action.assignmentId)
+
+    case actionTypes.NULLIFY_SELECTED_ASSIGNMENT:
+      return [...state] = null
 
     default:
       return state
