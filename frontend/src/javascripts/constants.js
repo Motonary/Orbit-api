@@ -50,7 +50,8 @@ export const actionTypes = keyMirror({
   FETCH_DESTROYED_ASSIGNMENTS: null,
   CREATE_ASSIGNMENT: null,
   DESTROY_ASSIGNMENT: null,
-  RESTORE_ASSIGNMENT: null
+  RESTORE_ASSIGNMENT: null,
+  SELECT_ASSIGNMENT: null
 })
 
 export const HeaderIcons = [ImgHistoryIcon, ImgSettingIcon, ImgBackIcon]

@@ -68,3 +68,10 @@ export function restoreAssignment(assignmentId) {
     }
   }).catch(() => alert('Sorry, something went wrong...'))
 }
+
+export function selectAssignment(assignmentId) {
+  return {
+    type: actionTypes.SELECT_ASSIGNMENT,
+    assignmentId
+  }
+}
