@@ -7,33 +7,38 @@ class Api::AssignmentsController < ApplicationController
   end
 
   def fetch_revolving
-    render json: @current_project.assignments.where(destroyed_flag: false)
+    manageable_revolving_assignments = {
+      'primo': Assignment.fetch_revolving_on_orbit(@current_project.id, 0),
+      'secundus': Assignment.fetch_revolving_on_orbit(@current_project.id, 1),
+      'tertius': Assignment.fetch_revolving_on_orbit(@current_project.id, 2)
+    }
+    render json: manageable_revolving_assignments
   end
 
   def fetch_destroyed
-    destroyed_assignments = Assignment.search_with_user(current_user).search_destroyed
-    destroyed_sub_assignments = SubAssignment.search_with_user(current_user).search_destroyed
+    destroyed_assignments = Assignment.fetch_with_user(current_user).fetch_destroyed
+    destroyed_sub_assignments = SubAssignment.fetch_with_user(current_user).fetch_destroyed
     # 惑星と衛星を混ぜてから、破壊された日時の新しい順にソート
     destroyed_all_assignments =
       (destroyed_assignments + destroyed_sub_assignments).sort_by(&:destroyed_at).reverse
 
     # 返すデータを{yyyy:{dd:[{...}, {...}, ...], dd:[{...}, ...], ...}, yyyy: {...}, ...}の形に整形
-    manageable_assignments = {}
+    manageable_destroyed_assignments = {}
 
     destroyed_all_assignments.each do |assignment|
       year = assignment.destroyed_at.strftime('%Y')
       date = assignment.destroyed_at.strftime('%m/%d')
-      if manageable_assignments[year]
-        if manageable_assignments[year][date]
-          manageable_assignments[year][date].push assignment
+      if manageable_destroyed_assignments[year]
+        if manageable_destroyed_assignments[year][date]
+          manageable_destroyed_assignments[year][date].push assignment
         else
-          manageable_assignments[year][date] = [assignment]
+          manageable_destroyed_assignments[year][date] = [assignment]
         end
       else
-        manageable_assignments[year] = { date => [assignment] }
+        manageable_destroyed_assignments[year] = { date => [assignment] }
       end
     end
-    render json: manageable_assignments
+    render json: manageable_destroyed_assignments
   end
 
   def create

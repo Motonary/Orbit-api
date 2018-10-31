@@ -72,7 +72,7 @@ class ProjectPage extends Component {
       const correctPath = `/users/${currentUser.id}`
       return <Redirect to={correctPath} />
     }
-
+    console.log(this.props.revolvingAssignments)
     return(
       <div id="project-orbit">
         <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs[0]} /></div>
