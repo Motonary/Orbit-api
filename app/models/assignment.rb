@@ -32,7 +32,7 @@ class Assignment < ApplicationRecord
     where(project_id: project_id).where(destroyed_flag: false)
   }
 
-  #enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune, :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
+  enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune, :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
   enum planet_size: [:small, :medium, :large]
   enum orbit_pos:   [:inside, :center, :outside]
 
