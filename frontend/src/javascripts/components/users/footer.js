@@ -46,18 +46,7 @@ class Footer extends Component {
       //planet_holder.classList.add('holder-border');
     }
   }
-
-  renderPlanetImgList(planetImg) {
-    return (
-      <li key={planetImg} className="planet" draggable="true"><img src={planetImg} className="planet-img"/></li>
-    )
-  }
-
-  renderDeleteIconList(deleteIcon) {
-    return (
-      <li key={deleteIcon} className="disapperance"><img src={deleteIcon} className="delete-btn"/></li>
-    )
-  }
+  
   // TODO: footer の実際の細かい動き（planetholder＆destroyの設定）
   render() {
     return(
@@ -67,12 +56,20 @@ class Footer extends Component {
             <img src={ImgHolderOpen} className="planet-holder-img"/>
           </div>
           <ul id="planet-list">
-            { PlanetImgs.map(this.renderPlanetImgList) }
+            { PlanetImgs.map((key, planetImg) => {
+              return (
+                <li key={planetImg} className="planet" draggable="true"><img src={planetImg} className="planet-img"/></li>
+              )
+            }) }
           </ul>
         </div>
         <div id="disapperance-holder">
           <ul id="disapperance-list">
-            { DeleteIcons.map(this.renderDeleteIconList) }
+            { DeleteIcons.map((deleteIcon) => {
+              return (
+                <li key={deleteIcon} className="disapperance"><img src={deleteIcon} className="delete-btn"/></li>
+              )
+            }) }
           </ul>
         </div>
       </div>

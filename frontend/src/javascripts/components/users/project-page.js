@@ -78,7 +78,7 @@ class ProjectPage extends Component {
     let img_tag = document.createElement('img')
     common_planet_tag.className = "common top secundus-orbit-motion start-animation"
     planet_tag.className = "planet-medium-center"
-    img_tag.src = PlanetImgs[1]
+    img_tag.src = PlanetImgs.Uranus
 
     planet_tag.appendChild(img_tag)
     common_planet_tag.appendChild(planet_tag)
@@ -112,32 +112,32 @@ class ProjectPage extends Component {
 
     return(
       <div id="project-orbit">
-        <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs[0]} /></div>
+        <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs.Uranus} /></div>
         <div className="circle1 common-circle" onClick={this.addPlanet.bind(this)} >
           <Planet orbit={this.state.primoOrbit} />
           <div className="common top primo-orbit-motion start-animation">
             <div className="planet-large-inside" data-value={0} onMouseOver={this.onMouseOver.bind(this)}>
-              <img src={PlanetImgs[5]} />
+              <img src={PlanetImgs.Earth} />
             </div>
           </div>
         </div>
         <div className="circle2 common-circle" onClick={this.addPlanet.bind(this)} >
           <Planet orbit={this.state.secundusOrbit} />
           <div className="common top secundus-orbit-motion start-animation">
-            <div className="planet-medium-center"><img src={PlanetImgs[7]} /></div>
+            <div className="planet-medium-center"><img src={PlanetImgs.Jupitar} /></div>
             <div className="satelite-orbit">
               <div className="common top satelite-orbit-motion start-animation">
-                <div className="satelite"><img src={PlanetImgs[13]} /></div>
+                <div className="satelite"><img src={PlanetImgs.Love} /></div>
               </div>
             </div>
           </div>
         </div>
         <div className="circle3 common-circle">
           <div className="common right tertius-orbit-motion start-animation">
-            <div className="planet-small-outside"><img src={PlanetImgs[10]} /></div>
+            <div className="planet-small-outside"><img src={PlanetImgs.Sirius} /></div>
             <div className="satelite-orbit">
               <div className="common top satelite-orbit-motion start-animation">
-                <div className="satelite"><img src={PlanetImgs[14]} /></div>
+                <div className="satelite"><img src={PlanetImgs.Ball} /></div>
               </div>
             </div>
           </div>

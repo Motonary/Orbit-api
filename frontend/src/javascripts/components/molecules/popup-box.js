@@ -1,7 +1,7 @@
 import React from 'react'
 
 const PopupBox = (data) => {
-  console.log(data)
+  //console.log(data)
   return(
     <div className="detail-balloon">
       <div className="assignment-title">{data.data.title}</div>

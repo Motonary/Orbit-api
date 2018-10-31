@@ -57,9 +57,10 @@ export const HeaderIcons = [ImgHistoryIcon, ImgSettingIcon, ImgBackIcon]
 
 export const ImgDefaultUser = ImgUser
 
-export const PlanetImgs = [
-  ImgStar1, ImgStar2, ImgStar3, ImgStar4, ImgStar5, ImgStar6, ImgStar7, ImgStar8,
-  ImgStar9, ImgStar10, ImgStar11, ImgStar12, ImgStar13, ImgStar14, ImgStar15
-]
+export const PlanetImgs = {
+  Uranus: ImgStar1, Mercury: ImgStar2, Pluto: ImgStar3, Jupitar: ImgStar4, Earth: ImgStar5,
+  Moon: ImgStar6, Love: ImgStar7, Mars: ImgStar8, Neputune: ImgStar9, Sirius: ImgStar10,
+  Sun: ImgStar11, Venus: ImgStar12, Takoyaki: ImgStar13, Ball: ImgStar14, Egg: ImgStar15
+}
 
 export const DeleteIcons = [DeleteIcon1, DeleteIcon2, DeleteIcon3]
