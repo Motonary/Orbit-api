@@ -46,7 +46,15 @@ class Footer extends Component {
       //planet_holder.classList.add('holder-border');
     }
   }
-  
+  renderPlanetList() {
+    //FIXME もっといい方法ないか
+    let list = []
+    for(let key in PlanetImgs) {
+        list.push(<li key={key} className="planet" draggable="true"><img src={PlanetImgs[key]} className="planet-img"/></li>)
+    }
+    return(list)
+  }
+
   // TODO: footer の実際の細かい動き（planetholder＆destroyの設定）
   render() {
     return(
@@ -56,11 +64,7 @@ class Footer extends Component {
             <img src={ImgHolderOpen} className="planet-holder-img"/>
           </div>
           <ul id="planet-list">
-            { PlanetImgs.map((key, planetImg) => {
-              return (
-                <li key={planetImg} className="planet" draggable="true"><img src={planetImg} className="planet-img"/></li>
-              )
-            }) }
+            {this.renderPlanetList()}
           </ul>
         </div>
         <div id="disapperance-holder">
