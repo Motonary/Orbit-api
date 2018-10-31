@@ -11,9 +11,9 @@ class Footer extends Component {
 
   motionControll() {
     const target_classes = [
-      document.getElementsByClassName("first-orbit-motion"),
-      document.getElementsByClassName("second-orbit-motion"),
-      document.getElementsByClassName("third-orbit-motion"),
+      document.getElementsByClassName("primo-orbit-motion"),
+      document.getElementsByClassName("secundus-orbit-motion"),
+      document.getElementsByClassName("tertius-orbit-motion"),
       document.getElementsByClassName("satelite-orbit-motion")
     ]
 

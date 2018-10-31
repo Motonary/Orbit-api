@@ -14,9 +14,9 @@ class ProjectPage extends Component {
     this.state = {
       userId: props.match.params.userId,
       projectId: props.match.params.projectId,
-      firstOrbit: [],
-      secondOrbit: [],
-      thirdOrbit: []
+      primoOrbit: [],
+      secundusOrbit: [],
+      tertiusOrbit: []
     }
   }
 
@@ -26,24 +26,24 @@ class ProjectPage extends Component {
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     //FIXME: this.stateを総取っ替えしてるから変更箇所だけ挿入みたいにしたいが、これしかない？
-    const firstOrbit = []
-    const secondOrbit = []
-    const thirdOrbit = []
+    const primoOrbit = []
+    const secundusOrbit = []
+    const tertiusOrbit = []
 
     nextProps.revolvingAssignments.map((object) => {
       switch (object.orbit_pos) {
         case 'inside':
-          firstOrbit.push(object)
+          primoOrbit.push(object)
           break
         case 'center':
-          secondOrbit.push(object)
+          secundusOrbit.push(object)
           break
         case 'outside':
-          thirdOrbit.push(object)
+          tertiusOrbit.push(object)
           break
       }
     })
-    this.setState({firstOrbit, secondOrbit, thirdOrbit})
+    this.setState({primoOrbit, secundusOrbit, tertiusOrbit})
   }
 
   onClickPlanet() {
@@ -76,7 +76,7 @@ class ProjectPage extends Component {
     let common_planet_tag = document.createElement('div')
     let planet_tag = document.createElement('div')
     let img_tag = document.createElement('img')
-    common_planet_tag.className = "common top second-orbit-motion start-animation"
+    common_planet_tag.className = "common top secundus-orbit-motion start-animation"
     planet_tag.className = "planet-medium-center"
     img_tag.src = PlanetImgs[1]
 
@@ -86,8 +86,8 @@ class ProjectPage extends Component {
   }
 
   addSatelitePlanet() {
-    const conditional_class1 = document.getElementsByClassName("second-orbit-motion")
-    const conditional_class2 = document.getElementsByClassName("third-orbit-motion")
+    const conditional_class1 = document.getElementsByClassName("secundus-orbit-motion")
+    const conditional_class2 = document.getElementsByClassName("tertius-orbit-motion")
     const target_class = document.getElementsByClassName("planet-large-inside")
     const target_width = 1.5 * target_class[0].getBoundingClientRect().width
 
@@ -114,16 +114,16 @@ class ProjectPage extends Component {
       <div id="project-orbit">
         <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs[0]} /></div>
         <div className="circle1 common-circle" onClick={this.addPlanet.bind(this)} >
-          <Planet orbit={this.state.firstOrbit} />
-          <div className="common top first-orbit-motion start-animation">
+          <Planet orbit={this.state.primoOrbit} />
+          <div className="common top primo-orbit-motion start-animation">
             <div className="planet-large-inside" data-value={0} onMouseOver={this.onMouseOver.bind(this)}>
               <img src={PlanetImgs[5]} />
             </div>
           </div>
         </div>
         <div className="circle2 common-circle" onClick={this.addPlanet.bind(this)} >
-          <Planet orbit={this.state.secondOrbit} />
-          <div className="common top second-orbit-motion start-animation">
+          <Planet orbit={this.state.secundusOrbit} />
+          <div className="common top secundus-orbit-motion start-animation">
             <div className="planet-medium-center"><img src={PlanetImgs[7]} /></div>
             <div className="satelite-orbit">
               <div className="common top satelite-orbit-motion start-animation">
@@ -133,7 +133,7 @@ class ProjectPage extends Component {
           </div>
         </div>
         <div className="circle3 common-circle">
-          <div className="common right third-orbit-motion start-animation">
+          <div className="common right tertius-orbit-motion start-animation">
             <div className="planet-small-outside"><img src={PlanetImgs[10]} /></div>
             <div className="satelite-orbit">
               <div className="common top satelite-orbit-motion start-animation">
