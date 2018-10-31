@@ -21,6 +21,25 @@ export function revolvingAssignments(state = {}, action) {
   }
 }
 
+export function selectedProjects(state = null, action) {
+  switch(action.type) {
+    default:
+      return state
+  }
+}
+
+export function selectedAssignments(state = null, action) {
+  switch(action.type) {
+    case actionTypes.SELET_ASSIGNMENT:
+      return [...state, action.assignmentId]
+
+    // TODO(Yuki): 選択解除の処理書く
+
+    default:
+      return state
+  }
+}
+
 export function destroyedAssignments(state = null, action) {
   switch(action.type) {
     case actionTypes.FETCH_DESTROYED_ASSIGNMENTS:
