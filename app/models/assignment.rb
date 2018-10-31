@@ -36,6 +36,9 @@ class Assignment < ApplicationRecord
   enum planet_size: [:small, :medium, :large]
   enum orbit_pos:   [:primo, :secundus, :tertius]
 
-  scope :search_with_user, -> user { joins(project: :users).merge(User.id_is user.id) }
-  scope :search_destroyed, -> { where(destroyed_flag: true) }
+  scope :fetch_with_user, -> user { joins(project: :users).merge(User.id_is user.id) }
+  scope :fetch_destroyed, -> { where(destroyed_flag: true) }
+  scope :fetch_revolving_on_orbit, -> (project_id, orbit_pos) {
+    where(project_id: project_id).where(orbit_pos: orbit_pos).where(destroyed_flag: false)
+  }
 end

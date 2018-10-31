@@ -21,7 +21,7 @@
       height: $fixed-star-scale;
     }
   }
-  .circle1 {
+  .circle-primo {
     width: $primo-orbit;
     height: $primo-orbit;
     position: absolute;
@@ -29,7 +29,7 @@
     left: $primo-orbit-position;
     z-index: 90;
   }
-  .circle2 {
+  .circle-secundus {
     width: $secundus-orbit;
     height: $secundus-orbit;
     position: absolute;
@@ -37,7 +37,7 @@
     left: $secundus-orbit-position;
     z-index: 80;
   }
-  .circle3 {
+  .circle-tertius {
     width: $tertius-orbit;
     height: $tertius-orbit;
     position: absolute;

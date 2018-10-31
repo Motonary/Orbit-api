@@ -17,7 +17,6 @@ export function fetchDestroyedAssignments() {
   return axios.get(`${ROOT_URL}/api/assignments/destroyed`, {
     headers: { 'Authorization': `Bearer ${JWT}` }
    }).then(res => {
-     //console.log(res.data)
     return {
       type: actionTypes.FETCH_DESTROYED_ASSIGNMENTS,
       destroyedAssignments: res.data

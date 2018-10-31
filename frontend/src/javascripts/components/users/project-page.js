@@ -7,6 +7,7 @@ import { fetchRevolvingAssignments,
 import anime from 'animejs'
 
 import { PlanetImgs } from '../../constants'
+import CircleOrbit from '../molecules/circle-orbit'
 import Planet from '../molecules/planet'
 
 class ProjectPage extends Component {
@@ -16,37 +17,12 @@ class ProjectPage extends Component {
     this.state = {
       userId: props.match.params.userId,
       projectId: props.match.params.projectId,
-      primoOrbit: [],
-      secundusOrbit: [],
-      tertiusOrbit: [],
       selectedPlanet: []
     }
   }
 
   componentDidMount() {
     this.props.fetchRevolvingAssignments(this.state.projectId)
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    //FIXME: this.stateを総取っ替えしてるから変更箇所だけ挿入みたいにしたいが、これしかない？
-    const primoOrbit = []
-    const secundusOrbit = []
-    const tertiusOrbit = []
-
-    nextProps.revolvingAssignments.map((assignment) => {
-      switch (assignment.orbit_pos) {
-        case 'primo':
-          primoOrbit.push(assignment)
-          break
-        case 'secundus':
-          secundusOrbit.push(assignment)
-          break
-        case 'tertius':
-          tertiusOrbit.push(assignment)
-          break
-      }
-    })
-    this.setState({primoOrbit, secundusOrbit, tertiusOrbit})
   }
 
   onClickPlanet() {
@@ -180,18 +156,6 @@ class ProjectPage extends Component {
     animateParticules(pointerX, pointerY)
   }
 
-  onSelected(e) {
-    const target = e.target.parentNode.nextElementSibling
-
-    let selectedPlanet = this.state.selectedPlanet
-
-    selectedPlanet.push(target.id)
-
-    this.setState(selectedPlanet)
-
-    console.log(this.state.selectedPlanet)
-  }
-
   onDestroyPlanet(assignmentId) {
     this.props.destroyAssignment(assignmentId)
   }
@@ -235,30 +199,12 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
-    console.log(this.state.primoOrbit)
-
     return(
       <div id="project-orbit">
         <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs.Uranus} /></div>
-        <div className="circle1 common-circle" onClick={this.addPlanet.bind(this)} >
-          <Planet orbit='primo' />
-          <div className="common top primo-orbit-motion start-animation" >
-            <div className="planet-large-primo" onClick={this.onSelected.bind(this)}>
-              <img src={PlanetImgs.Earth} />
-            </div>
-            <canvas id="momomomo" className="canvas"></canvas>
-          </div>
-        </div>
-        <div className="circle2 common-circle" onClick={this.addPlanet.bind(this)} >
-          <div className="common top secundus-orbit-motion start-animation">
-            <div className="planet-medium-secundus"><img src={PlanetImgs.Jupitar} /></div>
-          </div>
-        </div>
-        <div className="circle3 common-circle">
-          <div className="common right tertius-orbit-motion start-animation">
-            <div className="planet-small-tertius"><img src={PlanetImgs.Sirius} /></div>
-          </div>
-        </div>
+        <CircleOrbit orbit="primo"/>
+        <CircleOrbit orbit="secundus"/>
+        <CircleOrbit orbit="tertius"/>
         <div onClick={this.onClickDestroyPlanets.bind(this)}>YOOOO</div>
       </div>
     )

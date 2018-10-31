@@ -1,25 +1,13 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PopupBox from './popup-box'
 import { PlanetImgs } from '../../constants'
-
-/*
-const Planet = (orbit) => {
-  console.log(orbit)
-  return(<div>LOLO</div>)
-}
-export default Planet
-*/
 
 class Planet extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props, "construct")
-
-    this.state = {
-      planetList: this.props.revolvingAssignments[this.props.orbit]
-    }
   }
-
 
   onMouseOver(e) {
     const target_planet = e.target.parentNode
@@ -29,15 +17,17 @@ class Planet extends Component {
   }
 
   render() {
-    if(!this.state.planetList) { return(<div>Loading...</div>) }
+    const pos = ['top', 'right', 'left', 'bottom']
 
-    if (this.state.planetList.length == 0) { return(<div>Loading...</div>) }
+    if(!this.props.revolvingAssignments) { return(<div>Loading...</div>) }
 
     return(
-      this.state.planetList.map((assignmentInfo) => {
-        //console.log(assignmentInfo, "rendered")
+      this.props.revolvingAssignments[this.props.orbit].map((assignmentInfo) => {
+        let tmp = pos[Math.floor(Math.random() * 4)]
+        _.pull(pos, tmp)
+
         return(
-          <div key={assignmentInfo.id} className={`common right ${assignmentInfo.orbit_pos}-orbit-motion start-animation`}>
+          <div key={assignmentInfo.id} className={`common ${tmp} ${assignmentInfo.orbit_pos}-orbit-motion start-animation`}>
             <div className={`planet-${assignmentInfo.planet_size}-${assignmentInfo.orbit_pos}`} onMouseOver={ this.onMouseOver.bind(this) }>
               <PopupBox assignmentInfo={assignmentInfo} />
               <img src={PlanetImgs[assignmentInfo.planet_type]} className="planet" />
@@ -50,4 +40,4 @@ class Planet extends Component {
   }
 }
 
-export default connet(({revolvingAssignments} => ({revolvingAssignments}))(Planet)
+export default connect(({revolvingAssignments}) => ({revolvingAssignments}))(Planet)
