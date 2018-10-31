@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import ImgHolderOpen from '../../../images/main/planet_holder_btn.png'
+import { connect } from 'react-redux'
+import { nullifySelectedAssignment } from '../../actions/assignments'
+
+import ImgHolderOpen from '../../../images/footer/planet_holder_btn.png'
 import { PlanetImgs } from '../../constants'
 import { DeleteIcons } from '../../constants'
 
@@ -7,6 +10,125 @@ class Footer extends Component {
   componentDidMount() {
     let planet_list = document.getElementById("planet-list")
     planet_list.style.display = 'none'
+  }
+
+  onClickDestroyPlanets(e) {
+    const target_ids = this.props.selectedAssignments
+
+    var parent = []
+    var canvasEl = []
+    var ctx = []
+
+    if(target_ids.length > 0) {
+      target_ids.map((id) => {
+        let tar = document.getElementById(id)
+        parent.push(tar.parentNode)
+        canvasEl.push(tar)
+        ctx.push(tar.getContext('2d'))
+      })
+      console.log(parent[0].clientHeight)
+    }
+
+    const numberOfParticules = 80
+    //const colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C']
+    const colors = ['#FFF', '#FFF', '#FFF', '#FFF']
+
+    var pointerX = 0
+    var pointerY = 0
+
+    function setCanvasSize() {
+      var i = 0
+      canvasEl.map((target) => {
+        target.style.display = ''
+        target.width = parent[i].clientWidth
+        target.height = parent[i].clientHeight
+        target.style.zIndex = 500
+        target.getContext('2d').scale(2, 2)
+        i++
+      })
+    }
+
+    function updateCoords(e) {
+      pointerX = 50
+      pointerY = 50
+    }
+
+    function removeImg() {
+      parent.map((doc) => {
+        console.log(doc.firstElementChild.firstElementChild)
+        let child = doc.firstElementChild.firstElementChild
+        doc.firstElementChild.removeChild(child)
+      })
+    }
+
+    function setParticuleDirection(p) {
+      var angle = anime.random(0, 360) * Math.PI / 180
+      var value = anime.random(50, 180)
+      var radius = [-1, 1][anime.random(0, 1)] * value
+      return {
+        x: p.x + radius * Math.cos(angle),
+        y: p.y + radius * Math.sin(angle)
+      }
+    }
+
+    function createParticule(x,y) {
+      let p = {}
+      p.x = x
+      p.y = y
+      p.color = colors[anime.random(0, colors.length - 1)]
+      p.radius = anime.random(10, 20)
+      p.endPos = setParticuleDirection(p)
+      p.draw = function() {
+        ctx.map((tar) => {
+          tar.beginPath()
+          tar.arc(p.x, p.y, p.radius, 0, 2 * Math.PI, true)
+          tar.fillStyle = p.color
+          tar.fill()
+        })
+      }
+      return p
+    }
+
+    function renderParticule(anim) {
+      for (let i = 0; i < anim.animatables.length; i++) {
+        anim.animatables[i].target.draw()
+      }
+    }
+
+    function animateParticules(x, y) {
+      var particules = []
+      for (let i = 0; i < numberOfParticules; i++) {
+        particules.push(createParticule(x, y))
+      }
+      anime.timeline().add({
+        targets: particules,
+        x: function(p) { return p.endPos.x; },
+        y: function(p) { return p.endPos.y; },
+        radius: 0.1,
+        duration: anime.random(1200, 1800),
+        easing: 'easeOutExpo',
+        update: renderParticule
+      })
+    }
+
+    var render = anime({
+      duration: Infinity,
+      update: function() {
+        let i = 0
+        ctx.map((val) => {
+          val.clearRect(0, 0, canvasEl[i].width, canvasEl[i].height)
+          i++
+        })
+      }
+    })
+
+    setCanvasSize()
+    window.addEventListener('resize', setCanvasSize, false)
+    render.play()
+    updateCoords()
+    removeImg()
+    animateParticules(pointerX, pointerY)
+    this.props.nullifySelectedAssignment()
   }
 
   motionControll() {
@@ -46,8 +168,9 @@ class Footer extends Component {
       //planet_holder.classList.add('holder-border');
     }
   }
+
   renderPlanetList() {
-    //FIXME もっといい方法ないか
+    //FIXME: もっといい方法ないか
     let list = []
     for(let key in PlanetImgs) {
         list.push(<li key={key} className="planet" draggable="true"><img src={PlanetImgs[key]} className="planet-img"/></li>)
@@ -71,7 +194,9 @@ class Footer extends Component {
           <ul id="disapperance-list">
             { DeleteIcons.map((deleteIcon) => {
               return (
-                <li key={deleteIcon} className="disapperance"><img src={deleteIcon} className="delete-btn"/></li>
+                <li key={deleteIcon} className="disapperance" onClick={this.onClickDestroyPlanets.bind(this)}>
+                  <img src={deleteIcon} className="delete-btn"/>
+                </li>
               )
             }) }
           </ul>
@@ -81,4 +206,6 @@ class Footer extends Component {
   }
 }
 
-export default Footer
+export default connect(({selectedAssignments}) => ({selectedAssignments}),
+  { nullifySelectedAssignment }
+)(Footer)
