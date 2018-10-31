@@ -1,5 +1,14 @@
 import keyMirror from 'keymirror'
 
+//HeaderIcons
+import ImgHistoryIcon from '../images/main/history_icon.png'
+import ImgSettingIcon from '../images/main/setting_icon.png'
+import ImgBackIcon from '../images/main/back_icon.png'
+
+//default user image
+import ImgUser from '../images/main/user_default_icon.png'
+
+//planet images
 import ImgStar1 from '../images/planets/star_1.png'
 import ImgStar2 from '../images/planets/star_2.png'
 import ImgStar3 from '../images/planets/star_3.png'
@@ -15,6 +24,8 @@ import ImgStar12 from '../images/planets/star_12.png'
 import ImgStar13 from '../images/planets/star_13.png'
 import ImgStar14 from '../images/planets/star_14.png'
 import ImgStar15 from '../images/planets/star_15.png'
+
+//delete icons
 import DeleteIcon1 from '../images/main/delete_btn_1.png'
 import DeleteIcon2 from '../images/main/delete_btn_2.png'
 import DeleteIcon3 from '../images/main/delete_btn_3.png'
@@ -41,6 +52,10 @@ export const actionTypes = keyMirror({
   DESTROY_ASSIGNMENT: null,
   RESTORE_ASSIGNMENT: null
 })
+
+export const HeaderIcons = [ImgHistoryIcon, ImgSettingIcon, ImgBackIcon]
+
+export const ImgDefaultUser = ImgUser
 
 export const PlanetImgs = [
   ImgStar1, ImgStar2, ImgStar3, ImgStar4, ImgStar5, ImgStar6, ImgStar7, ImgStar8,

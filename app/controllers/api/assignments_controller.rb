@@ -11,8 +11,29 @@ class Api::AssignmentsController < ApplicationController
   end
 
   def fetch_destroyed
-    # TODO: SQLの知識ないけどもう少しうまくできそう？特にmergeのところ
-    render json: Assignment.joins(project: :users).merge(User.where(id: current_user)).where(destroyed_flag: true)
+    destroyed_assignments = Assignment.search_with_user(current_user).search_destroyed
+    destroyed_sub_assignments = SubAssignment.search_with_user(current_user).search_destroyed
+    # 惑星と衛星を混ぜてから、破壊された日時の新しい順にソート
+    destroyed_all_assignments =
+      (destroyed_assignments + destroyed_sub_assignments).sort_by(&:destroyed_at).reverse
+
+    # 返すデータを{yyyy:{dd:[{...}, {...}, ...], dd:[{...}, ...], ...}, yyyy: {...}, ...}の形に整形
+    manageable_assignments = {}
+
+    destroyed_all_assignments.each do |assignment|
+      year = assignment.destroyed_at.strftime('%Y')
+      date = assignment.destroyed_at.strftime('%m/%d')
+      if manageable_assignments[year]
+        if manageable_assignments[year][date]
+          manageable_assignments[year][date].push assignment
+        else
+          manageable_assignments[year][date] = [assignment]
+        end
+      else
+        manageable_assignments[year] = { date => [assignment] }
+      end
+    end
+    render json: manageable_assignments
   end
 
   def create
@@ -22,12 +43,12 @@ class Api::AssignmentsController < ApplicationController
 
   def destroy
     destroyed_assignment = Assignment.find(params[:id])
-    destroyed_assignment.update_attribute(:destroyed_flag, true) and head :ok
+    destroyed_assignment.update_attributes(destroyed_flag: true, destroyed_at: Time.current) and head :ok
   end
 
   def restore
     restored_assignment = Assignment.find(params[:id])
-    restored_assignment.update_attribute(:destroyed_flag, false) and head :ok
+    restored_assignment.update_attributes(destroyed_flag: false, destroyed_at: nil) and head :ok
   end
 
   private
