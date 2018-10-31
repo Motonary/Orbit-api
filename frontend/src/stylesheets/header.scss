@@ -12,11 +12,10 @@ $container-width: 130px;
   z-index: 200;
 
   .user-info {
-    display: block;
     width: 300px;
     color: #fff;
     cursor: pointer;
-    display: flex;
+    display: none;
     justify-content: flex-start;
     flex-wrap: wrap;
     align-items: center;
@@ -52,6 +51,9 @@ $container-width: 130px;
       text-decoration: none;
     }
   }
+  .show-left {
+    display: flex;
+  }
   .links-container {
     cursor: pointer;
     display: flex;
@@ -64,7 +66,7 @@ $container-width: 130px;
     right: 30px;
 
     .icon-container {
-      display: block;
+      display: none;
       width: $container-width;
       color: #fff;
       cursor: pointer;
@@ -78,7 +80,7 @@ $container-width: 130px;
       }
     }
     .back-icon-container {
-      display: block;
+      display: none;
       width: $container-width;
       color: #fff;
       cursor: pointer;
@@ -90,6 +92,9 @@ $container-width: 130px;
       &:hover {
         text-decoration: none;
       }
+    }
+    .show-right {
+      display: block;
     }
   }
 }
