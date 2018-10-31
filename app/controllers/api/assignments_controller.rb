@@ -7,7 +7,7 @@ class Api::AssignmentsController < ApplicationController
   end
 
   def fetch_revolving
-    render json: @current_project.assignments.where(destroyed_flag: false)
+    render json: Assignment.fetch_revolving(@current_project.id)
   end
 
   def fetch_destroyed

@@ -27,8 +27,11 @@ class Assignment < ApplicationRecord
   validates :orbit_pos,   presence: true
   validates :project_id,  presence: true
 
-  enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
-                     :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
+  scope :fetch_revolving, -> (project_id) {
+    where(project_id: project_id).where(destroyed_flag: false)
+  }
+
+  #enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune, :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
   enum planet_size: [:small, :medium, :large]
   enum orbit_pos:   [:inside, :center, :outside]
 end

@@ -56,8 +56,9 @@
     left: 25%;
     top: 25%;
     text-align: center;
+    z-index: -100;
   }
-  .planet-large-1 {
+  .planet-large-inside {
     width: percentage($first-orbit-large-planet);
     height: percentage($first-orbit-large-planet);
     border-radius: 50%;
@@ -70,7 +71,46 @@
     animation: rotate $first-orbit-speed linear reverse infinite;
     word-wrap: break-word;
   }
-  .planet-medium-2 {
+  .planet-medium-inside {
+    width: percentage($first-orbit-medium-planet);
+    height: percentage($first-orbit-medium-planet);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    animation: rotate $first-orbit-speed linear reverse infinite;
+    word-wrap: break-word;
+  }
+  .planet-small-inside {
+    width: percentage($first-orbit-small-planet);
+    height: percentage($first-orbit-small-planet);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    animation: rotate $first-orbit-speed linear reverse infinite;
+    word-wrap: break-word;
+  }
+  .planet-large-center {
+    width: percentage($second-orbit-large-planet);
+    height: percentage($second-orbit-large-planet);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    animation: rotate $second-orbit-speed linear reverse infinite;
+    word-wrap: break-word;
+  }
+  .planet-medium-center {
     width: percentage($second-orbit-medium-planet);
     height: percentage($second-orbit-medium-planet);
     border-radius: 50%;
@@ -82,10 +122,47 @@
     margin: auto;
     animation: rotate $second-orbit-speed linear reverse infinite;
     word-wrap: break-word;
-
-
   }
-  .planet-small-3 {
+  .planet-small-center {
+    width: percentage($second-orbit-small-planet);
+    height: percentage($second-orbit-small-planet);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    animation: rotate $second-orbit-speed linear reverse infinite;
+    word-wrap: break-word;
+  }
+  .planet-large-outside {
+    width: percentage($third-orbit-large-planet);
+    height: percentage($third-orbit-large-planet);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    animation: rotate $third-orbit-speed linear reverse infinite;
+    word-wrap: break-word;
+  }
+  .planet-medium-outside {
+    width: percentage($third-orbit-medium-planet);
+    height: percentage($third-orbit-medium-planet);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    animation: rotate $third-orbit-speed linear reverse infinite;
+    word-wrap: break-word;
+  }
+  .planet-small-outside {
     width: percentage($third-orbit-small-planet);
     height: percentage($third-orbit-small-planet);
     border-radius: 50%;
@@ -178,6 +255,51 @@
     border-radius: 50%;
     animation: rotate $satelite-orbit-speed linear reverse infinite;
     word-wrap: break-word;
+  }
+
+  //popup-box
+  .detail-balloon {
+    position: absolute;
+    display: inline-block;
+    margin: 1.5em auto;
+    padding: 7px 10px;
+    width: 250px;
+    height: 100px;
+    color: #fff;
+    font-size: 16px;
+    border: solid 3px #fff;
+    box-sizing: border-box;
+    opacity: 0.7;
+    top: -200px;
+    z-index: 1;
+
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: -24px;
+      left: 50%;
+      margin-left: -15px;
+      border: 12px solid transparent;
+      border-top: 12px solid #555;
+      z-index: 2;
+      opacity: 1;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      margin-left: -17px;
+      border: 14px solid transparent;
+      border-top: 14px solid #fff;
+    }
+
+    .description {
+      text-align: center;
+    }
+    .select-btn {
+
+    }
   }
   @keyframes rotate {
     0% {
