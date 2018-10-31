@@ -1,25 +1,53 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PopupBox from './popup-box'
 import { PlanetImgs } from '../../constants'
 
-
+/*
 const Planet = (orbit) => {
+  console.log(orbit)
+  return(<div>LOLO</div>)
+}
+export default Planet
+*/
 
-  const planet_list = orbit.orbit
+class Planet extends Component {
+  constructor(props) {
+    super(props)
+    console.log(this.props, "construct")
 
-  if(planet_list.length == 0) { return(<div>Loading...</div>) }
-  return(
-    planet_list.map((object) => {
-      return(
-        <div key={object.id} className={`common right ${object.orbit_pos}-orbit-motion start-animation`}>
-          <div className={`planet-${object.planet_size}-${object.orbit_pos}`} >
-            <PopupBox assignmentInfo={object} />
-            <img src={PlanetImgs[object.planet_type]} className="planet" />
+    this.state = {
+      planetList: this.props.revolvingAssignments[this.props.orbit]
+    }
+  }
+
+
+  onMouseOver(e) {
+    const target_planet = e.target.parentNode
+
+    //target_planet.style.display = "inline-block"
+    console.log(target_planet.style.display)
+  }
+
+  render() {
+    if(!this.state.planetList) { return(<div>Loading...</div>) }
+
+    if (this.state.planetList.length == 0) { return(<div>Loading...</div>) }
+
+    return(
+      this.state.planetList.map((assignmentInfo) => {
+        //console.log(assignmentInfo, "rendered")
+        return(
+          <div key={assignmentInfo.id} className={`common right ${assignmentInfo.orbit_pos}-orbit-motion start-animation`}>
+            <div className={`planet-${assignmentInfo.planet_size}-${assignmentInfo.orbit_pos}`} onMouseOver={ this.onMouseOver.bind(this) }>
+              <PopupBox assignmentInfo={assignmentInfo} />
+              <img src={PlanetImgs[assignmentInfo.planet_type]} className="planet" />
+              <canvas id={`${assignmentInfo.id}-${assignmentInfo.planet_type}`} className="canvas"></canvas>
+            </div>
           </div>
-        </div>
-      )
-    })
-  )
+        )
+      })
+    )
+  }
 }
 
-export default Planet
+export default connet(({revolvingAssignments} => ({revolvingAssignments}))(Planet)

@@ -27,13 +27,13 @@ class ProjectPage extends Component {
     this.props.fetchRevolvingAssignments(this.state.projectId)
   }
 
-  componentDidUpdate(prevProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     //FIXME: this.stateを総取っ替えしてるから変更箇所だけ挿入みたいにしたいが、これしかない？
     const primoOrbit = []
     const secundusOrbit = []
     const tertiusOrbit = []
 
-    prevProps.revolvingAssignments.map((assignment) => {
+    nextProps.revolvingAssignments.map((assignment) => {
       switch (assignment.orbit_pos) {
         case 'primo':
           primoOrbit.push(assignment)
@@ -61,9 +61,11 @@ class ProjectPage extends Component {
 
   onClickDestroyPlanets(e) {
     const target_id = this.state.selectedPlanet
+
     var parent = []
     var canvasEl = []
     var ctx = []
+
     target_id.map((id_name) => {
       let tar = document.getElementById(id_name)
       parent.push(tar.parentNode)
@@ -73,15 +75,18 @@ class ProjectPage extends Component {
     console.log(parent[0].clientHeight)
 
     const numberOfParticules = 100
+    const colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C']
+
     var pointerX = 0
     var pointerY = 0
     var tap = 'mousedown'
-    const colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C']
+
     //const colors = ['#FFF', '#FFF', '#FFF', '#FFF']
 
     function setCanvasSize() {
       var i = 0
       canvasEl.map((target) => {
+        target.style.display = ''
         target.width = parent[i].clientWidth
         target.height = parent[i].clientHeight
         target.style.zIndex = 500
@@ -177,13 +182,8 @@ class ProjectPage extends Component {
 
   onSelected(e) {
     const target = e.target.parentNode.nextElementSibling
-    const clientRect = target.getBoundingClientRect()
-    let selectedPlanet = this.state.selectedPlanet
 
-    // ページの左端から、要素の左端までの距離
-    var px = window.pageXOffset + clientRect.left
-    // ページの上端から、要素の上端までの距離
-    var py = window.pageYOffset + clientRect.top
+    let selectedPlanet = this.state.selectedPlanet
 
     selectedPlanet.push(target.id)
 
@@ -194,13 +194,6 @@ class ProjectPage extends Component {
 
   onDestroyPlanet(assignmentId) {
     this.props.destroyAssignment(assignmentId)
-  }
-
-  onMouseOver(e) {
-    const target_planet = e.target.parentNode
-
-    //target_planet.style.display = "inline-block"
-    console.log(target_planet.style.display)
   }
 
   addPlanet(e) {
@@ -241,13 +234,14 @@ class ProjectPage extends Component {
       const correctPath = `/users/${currentUser.id}`
       return <Redirect to={correctPath} />
     }
-    console.log(this.props)
+
+    console.log(this.state.primoOrbit)
 
     return(
       <div id="project-orbit">
         <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs.Uranus} /></div>
         <div className="circle1 common-circle" onClick={this.addPlanet.bind(this)} >
-          <Planet orbit={this.state.primoOrbit} onMouseOver={this.onMouseOver.bind(this)} />
+          <Planet orbit='primo' />
           <div className="common top primo-orbit-motion start-animation" >
             <div className="planet-large-primo" onClick={this.onSelected.bind(this)}>
               <img src={PlanetImgs.Earth} />
@@ -258,21 +252,11 @@ class ProjectPage extends Component {
         <div className="circle2 common-circle" onClick={this.addPlanet.bind(this)} >
           <div className="common top secundus-orbit-motion start-animation">
             <div className="planet-medium-secundus"><img src={PlanetImgs.Jupitar} /></div>
-            <div className="satelite-orbit">
-              <div className="common top satelite-orbit-motion start-animation">
-                <div className="satelite"><img src={PlanetImgs.Love} /></div>
-              </div>
-            </div>
           </div>
         </div>
         <div className="circle3 common-circle">
           <div className="common right tertius-orbit-motion start-animation">
             <div className="planet-small-tertius"><img src={PlanetImgs.Sirius} /></div>
-            <div className="satelite-orbit">
-              <div className="common top satelite-orbit-motion start-animation">
-                <div className="satelite"><img src={PlanetImgs.Ball} /></div>
-              </div>
-            </div>
           </div>
         </div>
         <div onClick={this.onClickDestroyPlanets.bind(this)}>YOOOO</div>
