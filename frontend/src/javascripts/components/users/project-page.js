@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { fetchRevolvingAssignments,
          createAssignment,
          destroyAssignment } from '../../actions/assignments'
+import { fetchProjectsOnBar } from '../../actions/projects'
 import { PlanetImgs } from '../../constants'
 
 class ProjectPage extends Component {
@@ -17,11 +18,16 @@ class ProjectPage extends Component {
   }
 
   componentDidMount() {
+    this.props.fetchProjectsOnBar(this.state.projectId)
     this.props.fetchRevolvingAssignments(this.state.projectId)
   }
 
   onClickPlanet() {
     // TODO: タスク詳細のポップアップ実装,
+  }
+
+  onClickFixedStarOnBar() {
+    this.props.changeCurrentProject(nextProjectId)
   }
 
   onDropPlanet(title, detail, deadline, planet_type, planet_size, orbit_pos) {
@@ -72,7 +78,11 @@ class ProjectPage extends Component {
       const correctPath = `/users/${currentUser.id}`
       return <Redirect to={correctPath} />
     }
-    console.log(this.props.revolvingAssignments)
+
+    console.log(this.props.projectsOnBar)
+    // this.props.projectsOnBarに、バーに表示されるべき恒星一覧が格納されてるのでmapとかでrenderして下さい
+    // nextProjectIdを渡してthis.onClickFixedStarOnBarを発火すると動的にreducerが変化します
+
     return(
       <div id="project-orbit">
         <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs[0]} /></div>
@@ -112,6 +122,8 @@ class ProjectPage extends Component {
 }
 
 export default connect(
-  ({ currentUser, revolvingAssignments }) => ({ currentUser, revolvingAssignments }),
-  { fetchRevolvingAssignments, createAssignment, destroyAssignment }
+  ({ currentUser, revolvingAssignments, projectsOnBar }) => (
+    { currentUser, revolvingAssignments, projectsOnBar }
+  ),
+  { fetchRevolvingAssignments, fetchProjectsOnBar, createAssignment, destroyAssignment }
 )(ProjectPage)

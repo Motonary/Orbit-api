@@ -42,6 +42,7 @@ export const actionTypes = keyMirror({
 
   // Projects
   FETCH_ALL_PROJECTS: null,
+  FETCH_PROJECTS_ON_BAR: null,
   CREATE_PROJECT: null,
   DESTROY_PROJECT: null,
 
