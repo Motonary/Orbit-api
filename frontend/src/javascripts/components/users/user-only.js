@@ -21,7 +21,7 @@ class UserOnly extends Component {
             <Route exact path={`${url}/:userId`} component={Mypage} />
             <Route render={() => <h2>404 Not Found</h2>} />
           </Switch>
-          <Footer />
+          <Footer {...this.props}/>
         </div>
       ) : <Redirect to="/guests/signin" />
     )

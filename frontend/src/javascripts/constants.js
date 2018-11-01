@@ -70,6 +70,7 @@ export const actionTypes = keyMirror({
 
   // Projects
   FETCH_ALL_PROJECTS: null,
+  FETCH_PROJECTS_ON_BAR: null,
   CREATE_PROJECT: null,
   DESTROY_PROJECT: null,
 
@@ -102,6 +103,6 @@ export const PlanetCheckedImgs = {
 
 export const DeleteIcons = [ DeleteIcon1, DeleteIcon2, DeleteIcon3 ]
 
-export const FooterIcons = [ RevivalIcon, ...DeleteIcons ]
+export const RevivalImg = RevivalIcon
 
 export const DeleteActions = { Meteorite: MeteoriteImg, Missile: MissileImg, BlackHole: BlackHoleImg }

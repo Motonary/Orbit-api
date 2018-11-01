@@ -3,9 +3,11 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { fetchRevolvingAssignments,
          createAssignment,
-         destroyAssignment } from '../../actions/assignments'
-import { selectAssignment, disselectAssignment } from '../../actions/assignments'
-
+         destroyAssignment,
+         selectAssignment,
+         disselectAssignment } from '../../actions/assignments'
+import { fetchProjectsOnBar } from '../../actions/projects'
+import anime from 'animejs'
 import { PlanetImgs } from '../../constants'
 import CircleOrbit from '../molecules/circle-orbit'
 
@@ -21,11 +23,16 @@ class ProjectPage extends Component {
   }
 
   componentDidMount() {
+    this.props.fetchProjectsOnBar(this.state.projectId)
     this.props.fetchRevolvingAssignments(this.state.projectId)
   }
 
   onClickPlanet() {
     // TODO: タスク詳細のポップアップ実装,
+  }
+
+  onClickFixedStarOnBar() {
+    this.props.changeCurrentProject(nextProjectId)
   }
 
   onDropPlanet(title, detail, deadline, planet_type, planet_size, orbit_pos) {
@@ -77,6 +84,10 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
+    console.log(this.props.projectsOnBar)
+    // this.props.projectsOnBarに、バーに表示されるべき恒星一覧が格納されてるのでmapとかでrenderして下さい
+    // nextProjectIdを渡してthis.onClickFixedStarOnBarを発火すると動的にreducerが変化します
+
     return(
       <div id="project-orbit">
         <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs.Uranus} /></div>
@@ -90,6 +101,9 @@ class ProjectPage extends Component {
 }
 
 export default connect(
-  ({ currentUser, revolvingAssignments, selectedAssignments }) => ({ currentUser, revolvingAssignments, selectedAssignments }),
-  { fetchRevolvingAssignments, createAssignment, destroyAssignment, selectAssignment, disselectAssignment }
+  ({ currentUser, revolvingAssignments, projectsOnBar, selectedAssignments }) => (
+    { currentUser, revolvingAssignments, projectsOnBar, selectedAssignments }
+  ),
+  { fetchRevolvingAssignments, fetchProjectsOnBar, createAssignment,
+    destroyAssignment, selectAssignment, disselectAssignment }
 )(ProjectPage)
