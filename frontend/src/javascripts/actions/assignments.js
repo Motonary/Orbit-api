@@ -75,3 +75,16 @@ export function selectAssignment(assignmentId) {
     assignmentId
   }
 }
+
+export function disselectAssignment(assignmentId) {
+  return {
+    type: actionTypes.DISSELECT_ASSIGNMENT,
+    assignmentId
+  }
+}
+
+export function nullifySelectedAssignment() {
+  return {
+    type: actionTypes.NULLIFY_SELECTED_ASSIGNMENT
+  }
+}

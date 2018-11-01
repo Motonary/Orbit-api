@@ -4,8 +4,16 @@ import { Redirect } from 'react-router-dom'
 import { fetchRevolvingAssignments,
          createAssignment,
          destroyAssignment } from '../../actions/assignments'
+<<<<<<< HEAD
 import { fetchProjectsOnBar } from '../../actions/projects'
+=======
+import { selectAssignment, disselectAssignment } from '../../actions/assignments'
+import anime from 'animejs'
+
+>>>>>>> 620574867789f889848c4343e6a682e7e483acfb
 import { PlanetImgs } from '../../constants'
+import CircleOrbit from '../molecules/circle-orbit'
+import Planet from '../molecules/planet'
 
 class ProjectPage extends Component {
   constructor(props) {
@@ -13,7 +21,8 @@ class ProjectPage extends Component {
     // DRYにするためstateで定義
     this.state = {
       userId: props.match.params.userId,
-      projectId: props.match.params.projectId
+      projectId: props.match.params.projectId,
+      selectedPlanet: []
     }
   }
 
@@ -45,9 +54,9 @@ class ProjectPage extends Component {
     let common_planet_tag = document.createElement('div')
     let planet_tag = document.createElement('div')
     let img_tag = document.createElement('img')
-    common_planet_tag.className = "common top second-orbit-motion start-animation"
-    planet_tag.className = "planet-medium-2"
-    img_tag.src = PlanetImgs[1]
+    common_planet_tag.className = "common top secundus-orbit-motion start-animation"
+    planet_tag.className = "planet-medium-secundus"
+    img_tag.src = PlanetImgs.Uranus
 
     planet_tag.appendChild(img_tag)
     common_planet_tag.appendChild(planet_tag)
@@ -55,9 +64,9 @@ class ProjectPage extends Component {
   }
 
   addSatelitePlanet() {
-    const conditional_class1 = document.getElementsByClassName("second-orbit-motion")
-    const conditional_class2 = document.getElementsByClassName("third-orbit-motion")
-    const target_class = document.getElementsByClassName("planet-large-1")
+    const conditional_class1 = document.getElementsByClassName("secundus-orbit-motion")
+    const conditional_class2 = document.getElementsByClassName("tertius-orbit-motion")
+    const target_class = document.getElementsByClassName("planet-large-primo")
     const target_width = 1.5 * target_class[0].getBoundingClientRect().width
 
     if(conditional_class1[0].children[1].classList.contains("satelite-orbit")){
@@ -79,51 +88,33 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
+<<<<<<< HEAD
     console.log(this.props.projectsOnBar)
     // this.props.projectsOnBarに、バーに表示されるべき恒星一覧が格納されてるのでmapとかでrenderして下さい
     // nextProjectIdを渡してthis.onClickFixedStarOnBarを発火すると動的にreducerが変化します
 
+=======
+>>>>>>> 620574867789f889848c4343e6a682e7e483acfb
     return(
       <div id="project-orbit">
-        <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs[0]} /></div>
-        <div className="circle1 common-circle" onClick={this.addPlanet.bind(this)} >
-          <div className="common bottom first-orbit-motion start-animation">
-            <div className="planet-large-1">momo
-              <img src={PlanetImgs[3]} className="planet" onClick={this.onClickPlanet.bind(this)}/>
-            </div>
-          </div>
-          <div className="common top first-orbit-motion start-animation">
-            <div className="planet-large-1"><img src={PlanetImgs[5]} /></div>
-          </div>
-        </div>
-        <div className="circle2 common-circle" onClick={this.addPlanet.bind(this)} >
-          <div className="common bottom second-orbit-motion start-animation">
-            <div className="planet-medium-2"><img src={PlanetImgs[7]} /></div>
-            <div className="satelite-orbit">
-              <div className="common top satelite-orbit-motion start-animation">
-                <div className="satelite"><img src={PlanetImgs[13]} /></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="circle3 common-circle">
-          <div className="common right third-orbit-motion start-animation">
-            <div className="planet-small-3"><img src={PlanetImgs[10]} /></div>
-            <div className="satelite-orbit">
-              <div className="common top satelite-orbit-motion start-animation">
-                <div className="satelite"><img src={PlanetImgs[14]} /></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs.Uranus} /></div>
+        <CircleOrbit orbit="primo"/>
+        <CircleOrbit orbit="secundus"/>
+        <CircleOrbit orbit="tertius"/>
+        {/*<div onClick={this.onClickDestroyPlanets.bind(this)}>YOOOO</div>*/}
       </div>
     )
   }
 }
 
 export default connect(
+<<<<<<< HEAD
   ({ currentUser, revolvingAssignments, projectsOnBar }) => (
     { currentUser, revolvingAssignments, projectsOnBar }
   ),
   { fetchRevolvingAssignments, fetchProjectsOnBar, createAssignment, destroyAssignment }
+=======
+  ({ currentUser, revolvingAssignments, selectedAssignments }) => ({ currentUser, revolvingAssignments, selectedAssignments }),
+  { fetchRevolvingAssignments, createAssignment, destroyAssignment, selectAssignment, disselectAssignment }
+>>>>>>> 620574867789f889848c4343e6a682e7e483acfb
 )(ProjectPage)

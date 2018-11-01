@@ -63,8 +63,8 @@ $mypage-orbit: 500px;
     }
 
     .planet-large-2 {
-      width: percentage($first-orbit-large-planet);
-      height: percentage($first-orbit-large-planet);
+      width: percentage($primo-orbit-large-planet);
+      height: percentage($primo-orbit-large-planet);
       border-radius: 50%;
       position: absolute;
       top: 0;
@@ -72,7 +72,7 @@ $mypage-orbit: 500px;
       bottom: 0;
       left: 0;
       margin: auto;
-      animation: rotate $first-orbit-speed linear reverse infinite;
+      animation: rotate $primo-orbit-speed linear reverse infinite;
       word-wrap: break-word;
       transform: skewX(30deg);
     }
@@ -104,7 +104,7 @@ $mypage-orbit: 500px;
     }
 
     .mypage-orbit-motion {
-      animation: rotate $first-orbit-speed linear infinite;
+      animation: rotate $primo-orbit-speed linear infinite;
     }
     .pause-animation {
       animation-play-state: paused;
