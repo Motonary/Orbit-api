@@ -29,7 +29,8 @@ ReactDOM.render(
         <Switch>
           <Route path="/guests" component={GuestOnly} />
           <Route path="/users" component={UserOnly} />
-          <Route exact path="/" render={() => <Redirect to="/guests/signin" />} />
+          {/*}<Route exact path="/" render={() => <Redirect to="/guests/signin" />} />*/}
+          <Route exact path="/" render={() => <div>Hello, OrbitApp!</div>} />
           <Route render={() => <h2>404 Not Found</h2>} />
         </Switch>
       </Main>
