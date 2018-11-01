@@ -22,7 +22,7 @@ class HistoryPage extends Component {
   }
   renderStoredPlanetList() {
     return (
-      PlanetImgs.map((planetImg) => {
+      PlanetImgs.map((key, planetImg) => {
         return (
           <li key={planetImg} className="planet"><img src={planetImg} className="stored-planet" /></li>
         )

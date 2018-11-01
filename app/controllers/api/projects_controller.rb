@@ -5,6 +5,10 @@ class Api::ProjectsController < ApplicationController
     render json: current_user.projects
   end
 
+  def fetch_on_bar
+    render json: current_user.projects.without_id(params[:current_project_id])
+  end
+
   def create
     new_project = current_user.projects.new(project_params)
     new_project.save! and render json: new_project
