@@ -9,6 +9,7 @@ class Footer extends Component {
     planet_list.style.display = 'none'
   }
 
+  // projectpagefunctions
   motionControll() {
     const target_classes = [
       document.getElementsByClassName("first-orbit-motion"),
