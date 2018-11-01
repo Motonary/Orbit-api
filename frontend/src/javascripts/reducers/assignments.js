@@ -9,7 +9,7 @@ export function revolvingAssignments(state = null, action) {
 
     case actionTypes.CREATE_ASSIGNMENT:
       const newAssignmentOrbit = action.newAssignment.orbit_pos
-      newState.newAssignmentOrbit.push(action.newAssignment)
+      newState[newAssignmentOrbit].push(action.newAssignment)
       return newState
 
     case actionTypes.DESTROY_ASSIGNMENT:
