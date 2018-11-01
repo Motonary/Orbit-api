@@ -6,6 +6,7 @@ import { ImgDefaultUser } from '../../constants'
 
 class Header extends Component {
   onClickBackButton() {
+    const FooterIcons = [...DeleteIcons, reviveIcon]
     this.props.history.goBack()
   }
 

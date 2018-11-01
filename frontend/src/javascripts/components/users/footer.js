@@ -106,8 +106,8 @@ class Footer extends Component {
       }
       anime.timeline().add({
         targets: particules,
-        x: function(p) { return p.endPos.x; },
-        y: function(p) { return p.endPos.y; },
+        x: function(p) { return p.endPos.x },
+        y: function(p) { return p.endPos.y },
         radius: 0.1,
         duration: anime.random(1200, 1800),
         easing: 'easeOutExpo',
@@ -133,6 +133,7 @@ class Footer extends Component {
     removeImg()
     animateParticules(pointerX, pointerY)
     this.props.nullifySelectedAssignment()
+
   }
 
   motionControll() {
