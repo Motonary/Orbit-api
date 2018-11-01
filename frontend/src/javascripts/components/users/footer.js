@@ -19,17 +19,12 @@ class Footer extends Component {
     planet_list.style.display = 'none'
   }
 
-<<<<<<< HEAD
   onClickOpenModal() {
     this.props.setModalStatus(true)
   }
 
   onClickDestroyPlanets(selectedAssignments) {
     const target_ids = selectedAssignments
-=======
-  onClickDestroyPlanets(e) {
-    const target_ids = this.props.selectedAssignments
->>>>>>> ea39dba600c2aaf4667be219e033a611ea690d39
 
     var parent = []
     var canvasEl = []
@@ -58,6 +53,8 @@ class Footer extends Component {
       canvasEl.map((target) => {
         target.style.width = parent[i].parentNode.clientWidth + 'px'
         target.style.height = parent[i].parentNode.clientHeight + 'px'
+        target.style.top = `-${parent[i].parentNode.clientWidth/2}px`
+        target.style.left = `-${parent[i].parentNode.clientHeight/2}px`
         target.width = parent[i].parentNode.clientWidth
         target.height = parent[i].parentNode.clientHeight
         target.style.zIndex = 500
@@ -67,8 +64,8 @@ class Footer extends Component {
     }
 
     function updateCoords() {
-      pointerX = 0
-      pointerY = 0
+      pointerX = 100
+      pointerY = 100
     }
 
     function removeImg() {
@@ -198,7 +195,7 @@ class Footer extends Component {
   renderDeleteIcons(deleteButtonsclasses) {
     return DeleteIcons.map(deleteIcon => {
       return (
-        <li key={deleteIcon} className={deleteButtonsclasses} onClick={this.onClickDestroyPlanets.bind(this)}>
+        <li key={deleteIcon} className={deleteButtonsclasses} onClick={this.onClickOpenModal.bind(this)}>
           <img src={deleteIcon} className="delete-btn"/>
         </li>
       )
@@ -233,20 +230,9 @@ class Footer extends Component {
           </ul>
         </div>
         <div id="disapperance-holder">
-<<<<<<< HEAD
-          <ul id="disapperance-list">
-            { DeleteIcons.map((deleteIcon) => {
-              return (
-                <li key={deleteIcon} className="disapperance" onClick={this.onClickOpenModal.bind(this)}>
-                  <img src={deleteIcon} className="delete-btn"/>
-                </li>
-              )
-            }) }
-=======
           <ul className="disapperance-list">
             <li className={revivalButtonClasses}><img src={RevivalImg} className="delete-btn"/></li>
             {this.renderDeleteIcons(deleteButtonsclasses)}
->>>>>>> ea39dba600c2aaf4667be219e033a611ea690d39
           </ul>
         </div>
         <ConfirmModal parentMethod={this.onClickDestroyPlanets} />
