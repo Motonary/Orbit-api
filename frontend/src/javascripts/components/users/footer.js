@@ -17,6 +17,10 @@ class Footer extends Component {
     planet_list.style.display = 'none'
   }
 
+  onClickOpenModal() {
+    this.props.setModalStatus(true)
+  }
+
   onClickDestroyPlanets(e) {
     const target_ids = this.props.selectedAssignments
 
@@ -106,8 +110,8 @@ class Footer extends Component {
       }
       anime.timeline().add({
         targets: particules,
-        x: function(p) { return p.endPos.x; },
-        y: function(p) { return p.endPos.y; },
+        x: function(p) { return p.endPos.x },
+        y: function(p) { return p.endPos.y },
         radius: 0.1,
         duration: anime.random(1200, 1800),
         easing: 'easeOutExpo',
@@ -198,13 +202,14 @@ class Footer extends Component {
           <ul id="disapperance-list">
             { DeleteIcons.map((deleteIcon) => {
               return (
-                <li key={deleteIcon} className="disapperance" onClick={this.onClickDestroyPlanets.bind(this)}>
+                <li key={deleteIcon} className="disapperance" onClick={this.onClickOpenModal.bind(this)}>
                   <img src={deleteIcon} className="delete-btn"/>
                 </li>
               )
             }) }
           </ul>
         </div>
+        <ConfirmModal />
       </div>
     )
   }

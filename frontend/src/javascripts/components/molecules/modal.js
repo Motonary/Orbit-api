@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import Modal from 'react-modal'
+
+import ConfirmBtn from '../atoms/confirm-btn'
 
 import { setModalStatus, resetModalStatus } from '../../actions/common'
 
@@ -19,10 +20,11 @@ const customStyles = {
 class ConfirmModal extends Component {
   constructor(props) {
     super(props)
-  }
 
-  openModal() {
-    this.props.setModalStatus(true)
+    this.state ={
+      destroy: "本当に選択タスクを破壊しますか？",
+      restore: "本当に選択したタスクを元の場所に戻しますか？"
+    }
   }
 
   afterOpenModal() {
@@ -35,7 +37,19 @@ class ConfirmModal extends Component {
 
   render(){
     return(
-      <div>TEST</div>
+      <Modal
+          isOpen={this.props.modalIsOpen}
+          onAfterOpen={this.afterOpenModal.bind(this)}
+          onRequestClose={this.props.modalIsOpen}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+        <div>{}</div>
+        <div>
+          <ConfirmBtn message="いいえ"/>
+          <ConfirmBtn message="はい"/>
+        </div>
+      </Modal>
     )
   }
 }
