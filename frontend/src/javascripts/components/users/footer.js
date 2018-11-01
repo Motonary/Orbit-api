@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import classNames from 'classnames'
 import anime from 'animejs'
 
 import ConfirmModal from '../molecules/modal'
@@ -9,6 +10,7 @@ import { setModalStatus, resetModalStatus } from '../../actions/common'
 
 import ImgHolderOpen from '../../../images/footer/planet_holder_btn.png'
 import { PlanetImgs } from '../../constants'
+import { RevivalImg } from '../../constants'
 import { DeleteIcons } from '../../constants'
 
 class Footer extends Component {
@@ -178,17 +180,42 @@ class Footer extends Component {
     //FIXME: もっといい方法ないか
     let list = []
     for(let key in PlanetImgs) {
-        list.push(<li key={key} className="planet" draggable="true"><img src={PlanetImgs[key]} className="planet-img"/></li>)
+      list.push(<li key={key} className="planet" draggable="true"><img src={PlanetImgs[key]} className="planet-img"/></li>)
     }
-    return(list)
+    return list
   }
 
-  // TODO: footer の実際の細かい動き（planetholder＆destroyの設定）
+  renderDeleteIcons(deleteButtonsclasses) {
+    return DeleteIcons.map(deleteIcon => {
+      return (
+        <li key={deleteIcon} className={deleteButtonsclasses} onClick={this.onClickDestroyPlanets.bind(this)}>
+          <img src={deleteIcon} className="delete-btn"/>
+        </li>
+      )
+    })
+  }
+
   render() {
+    const { currentUser, location: { pathname } } = this.props
+    const rootPath = `/users/${currentUser.id}`
+
+    const planetHolderClasses = classNames({
+      'open-planet-holder': true,
+      'holder-show': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects\/[1-9]\d*$/.test(pathname)
+    })
+    const revivalButtonClasses = classNames({
+      'disapperance': true,
+      'revival-button-show': pathname === `${rootPath}/history`
+    })
+    const deleteButtonsclasses = classNames({
+      'disapperance': true,
+      'delete-buttons-show': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects\/[1-9]\d*$/.test(pathname) || pathname === `${rootPath}/history`
+    })
+
     return(
       <div id="footer">
         <div id="planet-holder">
-          <div className="open-planet-holder" onClick={this.onClickOpenPlanetHolder.bind(this)}>
+          <div className={planetHolderClasses} onClick={this.onClickOpenPlanetHolder.bind(this)}>
             <img src={ImgHolderOpen} className="planet-holder-img"/>
           </div>
           <ul id="planet-list">
@@ -196,14 +223,9 @@ class Footer extends Component {
           </ul>
         </div>
         <div id="disapperance-holder">
-          <ul id="disapperance-list">
-            { DeleteIcons.map((deleteIcon) => {
-              return (
-                <li key={deleteIcon} className="disapperance" onClick={this.onClickDestroyPlanets.bind(this)}>
-                  <img src={deleteIcon} className="delete-btn"/>
-                </li>
-              )
-            }) }
+          <ul className="disapperance-list">
+            <li className={revivalButtonClasses}><img src={RevivalImg} className="delete-btn"/></li>
+            {this.renderDeleteIcons(deleteButtonsclasses)}
           </ul>
         </div>
       </div>
@@ -212,6 +234,6 @@ class Footer extends Component {
 }
 
 export default connect(
-  ({selectedAssignments, modalIsOpen}) => ({selectedAssignments, modalIsOpen}),
+  ({ currentUser, selectedAssignments, modalIsOpen }) => ({ currentUser, selectedAssignments, modalIsOpen }),
   { nullifySelectedAssignment, setModalStatus, resetModalStatus }
 )(Footer)

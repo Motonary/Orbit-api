@@ -34,6 +34,12 @@ $holder-height: 100px;
       width: $holder-height;
       height: $holder-height;
     }
+    .open-planet-holder {
+      display: none;
+    }
+    .holder-show {
+      display: block;
+    }
 
     ul#planet-list {
       display: flex;
@@ -66,10 +72,10 @@ $holder-height: 100px;
     margin: 0 10px;
     padding: 0;
 
-    ul#disapperance-list {
-      display: flex;
+    ul.disapperance-list {
       margin: 0 5px;
       padding: 0;
+      display: flex;
 
       li.disapperance {
         list-style: none;
@@ -77,11 +83,18 @@ $holder-height: 100px;
         height: $holder-height;
         margin-right: 10px;
         cursor: pointer;
+        display: none;
 
         .delete-btn {
           width: $holder-height;
           height: $holder-height;
         }
+      }
+      li.delete-buttons-show {
+        display: flex;
+      }
+      li.revival-button-show {
+        display: flex;
       }
     }
   }

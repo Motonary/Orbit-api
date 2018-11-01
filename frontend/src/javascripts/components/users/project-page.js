@@ -3,14 +3,11 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { fetchRevolvingAssignments,
          createAssignment,
-         destroyAssignment } from '../../actions/assignments'
-<<<<<<< HEAD
+         destroyAssignment,
+         selectAssignment,
+         disselectAssignment } from '../../actions/assignments'
 import { fetchProjectsOnBar } from '../../actions/projects'
-=======
-import { selectAssignment, disselectAssignment } from '../../actions/assignments'
 import anime from 'animejs'
-
->>>>>>> 620574867789f889848c4343e6a682e7e483acfb
 import { PlanetImgs } from '../../constants'
 import CircleOrbit from '../molecules/circle-orbit'
 import Planet from '../molecules/planet'
@@ -88,13 +85,10 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
-<<<<<<< HEAD
     console.log(this.props.projectsOnBar)
     // this.props.projectsOnBarに、バーに表示されるべき恒星一覧が格納されてるのでmapとかでrenderして下さい
     // nextProjectIdを渡してthis.onClickFixedStarOnBarを発火すると動的にreducerが変化します
 
-=======
->>>>>>> 620574867789f889848c4343e6a682e7e483acfb
     return(
       <div id="project-orbit">
         <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs.Uranus} /></div>
@@ -108,13 +102,9 @@ class ProjectPage extends Component {
 }
 
 export default connect(
-<<<<<<< HEAD
-  ({ currentUser, revolvingAssignments, projectsOnBar }) => (
-    { currentUser, revolvingAssignments, projectsOnBar }
+  ({ currentUser, revolvingAssignments, projectsOnBar, selectedAssignments }) => (
+    { currentUser, revolvingAssignments, projectsOnBar, selectedAssignments }
   ),
-  { fetchRevolvingAssignments, fetchProjectsOnBar, createAssignment, destroyAssignment }
-=======
-  ({ currentUser, revolvingAssignments, selectedAssignments }) => ({ currentUser, revolvingAssignments, selectedAssignments }),
-  { fetchRevolvingAssignments, createAssignment, destroyAssignment, selectAssignment, disselectAssignment }
->>>>>>> 620574867789f889848c4343e6a682e7e483acfb
+  { fetchRevolvingAssignments, fetchProjectsOnBar, createAssignment,
+    destroyAssignment, selectAssignment, disselectAssignment }
 )(ProjectPage)

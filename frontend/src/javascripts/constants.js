@@ -103,6 +103,6 @@ export const PlanetCheckedImgs = {
 
 export const DeleteIcons = [ DeleteIcon1, DeleteIcon2, DeleteIcon3 ]
 
-export const FooterIcons = [ DeleteIcon1, DeleteIcon2, DeleteIcon3, RevivalIcon ]
+export const RevivalImg = RevivalIcon
 
 export const DeleteActions = { Meteorite: MeteoriteImg, Missile: MissileImg, BlackHole: BlackHoleImg }
