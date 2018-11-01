@@ -36,7 +36,7 @@ import ImgStarChecked7 from '../images/planets_checked/star_7_check.png'
 import ImgStarChecked8 from '../images/planets_checked/star_8_check.png'
 import ImgStarChecked9 from '../images/planets_checked/star_9_check.png'
 import ImgStarChecked10 from '../images/planets_checked/star_10_check.png'
-import ImgStarChecked11 from '../images/planets_checked/star_11_check_check.png'
+import ImgStarChecked11 from '../images/planets_checked/star_11_check.png'
 import ImgStarChecked12 from '../images/planets_checked/star_12_check.png'
 import ImgStarChecked13 from '../images/planets_checked/star_13_check.png'
 import ImgStarChecked14 from '../images/planets_checked/star_14_check.png'
@@ -48,11 +48,11 @@ import DeleteIcon2 from '../images/footer/delete_btn_2.png'
 import DeleteIcon3 from '../images/footer/delete_btn_3.png'
 
 //revival icons
-import RevivalIcon from '../imgaes/footer/revival_btn.png'
+import RevivalIcon from '../images/footer/revival_btn.png'
 
 //delete action
 import MeteoriteImg from '../images/main/metor.png'
-import MissileImg from '../images/main/missle.png'
+import MissileImg from '../images/main/missile.png'
 import BlackHoleImg from '../images/main/blackhole.png'
 
 export const JWT = sessionStorage.getItem('jwt')

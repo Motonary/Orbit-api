@@ -10,7 +10,6 @@ class CircleOrbit extends Component {
   }
 
   render() {
-    console.log(this.props)
     return(
       <div className={`circle-${this.props.orbit} common-circle`} >
         <Planet orbit={this.props.orbit} />

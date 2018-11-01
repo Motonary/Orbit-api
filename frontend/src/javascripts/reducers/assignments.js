@@ -28,10 +28,10 @@ export function selectedProjects(state = null, action) {
   }
 }
 
-export function selectedAssignments(state = [], action) {
+export function selectedAssignments(state = null, action) {
   switch(action.type) {
-    case actionTypes.SELET_ASSIGNMENT:
-      return [...state.selectedAssignments, action.assignmentId]
+    case actionTypes.SELECT_ASSIGNMENT:
+      return [...state, action.assignmentId]
 
     case actionTypes.DISSELECT_ASSIGNMENT:
       return _.remove([...state.selectedAssignments], eachState => eachState.id !== action.assignmentId)

@@ -22,10 +22,10 @@ $secundus-orbit: $fixed-star-scale * $secundus-orbit-ratio;
 $tertius-orbit: $fixed-star-scale * $tertius-orbit-ratio;
 
 /* 各軌道における周回速度 */
-$primo-orbit-speed: 20s;
-$secundus-orbit-speed: 30s;
-$tertius-orbit-speed: 60s;
-$satelite-orbit-speed: 40s;
+$primo-orbit-speed: 40s;
+$secundus-orbit-speed: 60s;
+$tertius-orbit-speed: 80s;
+$satelite-orbit-speed: 60s;
 
 /* 各軌道における各惑星（大・中・小）の大きさ */
 $primo-orbit-large-planet: $large-planet-ratio / $primo-orbit-ratio;

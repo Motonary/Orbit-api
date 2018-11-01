@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { fetchRevolvingAssignments,
          createAssignment,
          destroyAssignment } from '../../actions/assignments'
+import { selectAssignment, disselectAssignment } from '../../actions/assignments'
 import anime from 'animejs'
 
 import { PlanetImgs } from '../../constants'
@@ -84,13 +85,13 @@ class ProjectPage extends Component {
         <CircleOrbit orbit="primo"/>
         <CircleOrbit orbit="secundus"/>
         <CircleOrbit orbit="tertius"/>
-        <div onClick={this.onClickDestroyPlanets.bind(this)}>YOOOO</div>
+        {/*<div onClick={this.onClickDestroyPlanets.bind(this)}>YOOOO</div>*/}
       </div>
     )
   }
 }
 
 export default connect(
-  ({ currentUser, revolvingAssignments }) => ({ currentUser, revolvingAssignments }),
-  { fetchRevolvingAssignments, createAssignment, destroyAssignment }
+  ({ currentUser, revolvingAssignments, selectedAssignments }) => ({ currentUser, revolvingAssignments, selectedAssignments }),
+  { fetchRevolvingAssignments, createAssignment, destroyAssignment, selectAssignment, disselectAssignment }
 )(ProjectPage)
