@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import anime from 'animejs'
+
+import ConfirmModal from '../molecules/modal'
+
 import { nullifySelectedAssignment } from '../../actions/assignments'
+import { setModalStatus, resetModalStatus } from '../../actions/common'
 
 import ImgHolderOpen from '../../../images/footer/planet_holder_btn.png'
 import { PlanetImgs } from '../../constants'
@@ -26,7 +31,7 @@ class Footer extends Component {
         canvasEl.push(tar)
         ctx.push(tar.getContext('2d'))
       })
-      console.log(parent[0].clientHeight)
+      console.log(parent[0])
     }
 
     const numberOfParticules = 80
@@ -55,9 +60,8 @@ class Footer extends Component {
 
     function removeImg() {
       parent.map((doc) => {
-        console.log(doc.firstElementChild.firstElementChild)
-        let child = doc.firstElementChild.firstElementChild
-        doc.firstElementChild.removeChild(child)
+        const child = doc.children[1]
+        doc.removeChild(child)
       })
     }
 
@@ -206,6 +210,7 @@ class Footer extends Component {
   }
 }
 
-export default connect(({selectedAssignments}) => ({selectedAssignments}),
-  { nullifySelectedAssignment }
+export default connect(
+  ({selectedAssignments, modalIsOpen}) => ({selectedAssignments, modalIsOpen}),
+  { nullifySelectedAssignment, setModalStatus, resetModalStatus }
 )(Footer)

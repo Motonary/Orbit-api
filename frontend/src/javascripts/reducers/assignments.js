@@ -28,7 +28,7 @@ export function selectedProjects(state = null, action) {
   }
 }
 
-export function selectedAssignments(state = null, action) {
+export function selectedAssignments(state = [], action) {
   switch(action.type) {
     case actionTypes.SELECT_ASSIGNMENT:
       return [...state, action.assignmentId]
@@ -37,7 +37,7 @@ export function selectedAssignments(state = null, action) {
       return _.remove([...state.selectedAssignments], eachState => eachState.id !== action.assignmentId)
 
     case actionTypes.NULLIFY_SELECTED_ASSIGNMENT:
-      return [...state]
+      return [...state] = null
 
     default:
       return state

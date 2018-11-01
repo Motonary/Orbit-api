@@ -61,6 +61,10 @@ export const JWT = sessionStorage.getItem('jwt')
 export const ROOT_URL = 'http://localhost:3000'
 
 export const actionTypes = keyMirror({
+  // Common
+  OPEN_MODAL: null,
+  CLOSE_MODAL: null,
+
   // User
   SET_CURRENT_USER: null,
 
