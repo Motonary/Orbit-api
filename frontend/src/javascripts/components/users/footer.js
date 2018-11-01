@@ -21,8 +21,8 @@ class Footer extends Component {
     this.props.setModalStatus(true)
   }
 
-  onClickDestroyPlanets(e) {
-    const target_ids = this.props.selectedAssignments
+  onClickDestroyPlanets(selectedAssignments) {
+    const target_ids = selectedAssignments
 
     var parent = []
     var canvasEl = []
@@ -35,7 +35,6 @@ class Footer extends Component {
         canvasEl.push(tar)
         ctx.push(tar.getContext('2d'))
       })
-      console.log(parent[0])
     }
 
     const numberOfParticules = 80
@@ -45,21 +44,24 @@ class Footer extends Component {
     var pointerX = 0
     var pointerY = 0
 
+    //console.log(parent, canvasEl, ctx)
+
     function setCanvasSize() {
-      var i = 0
+      let i = 0
       canvasEl.map((target) => {
-        target.style.display = ''
-        target.width = parent[i].clientWidth
-        target.height = parent[i].clientHeight
+        target.style.width = parent[i].parentNode.clientWidth + 'px'
+        target.style.height = parent[i].parentNode.clientHeight + 'px'
+        target.width = parent[i].parentNode.clientWidth
+        target.height = parent[i].parentNode.clientHeight
         target.style.zIndex = 500
         target.getContext('2d').scale(2, 2)
         i++
       })
     }
 
-    function updateCoords(e) {
-      pointerX = 50
-      pointerY = 50
+    function updateCoords() {
+      pointerX = 0
+      pointerY = 0
     }
 
     function removeImg() {
@@ -136,7 +138,7 @@ class Footer extends Component {
     updateCoords()
     removeImg()
     animateParticules(pointerX, pointerY)
-    this.props.nullifySelectedAssignment()
+    //this.props.nullifySelectedAssignment()
   }
 
   motionControll() {
@@ -209,7 +211,7 @@ class Footer extends Component {
             }) }
           </ul>
         </div>
-        <ConfirmModal parentMethod={this.onClickDestroyPlanets}/>
+        <ConfirmModal parentMethod={this.onClickDestroyPlanets} />
       </div>
     )
   }

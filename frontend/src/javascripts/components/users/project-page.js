@@ -5,11 +5,9 @@ import { fetchRevolvingAssignments,
          createAssignment,
          destroyAssignment } from '../../actions/assignments'
 import { selectAssignment, disselectAssignment } from '../../actions/assignments'
-import anime from 'animejs'
 
 import { PlanetImgs } from '../../constants'
 import CircleOrbit from '../molecules/circle-orbit'
-import Planet from '../molecules/planet'
 
 class ProjectPage extends Component {
   constructor(props) {

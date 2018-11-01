@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 
 import ConfirmBtn from '../atoms/confirm-btn'
 
+import { nullifySelectedAssignment } from '../../actions/assignments'
 import { setModalStatus, resetModalStatus } from '../../actions/common'
 
 import '../../../stylesheets/modal.scss'
@@ -43,8 +44,12 @@ class ConfirmModal extends Component {
     }
   }
 
-  closeModal() {
+  closeModal(isDestroy) {
     this.props.resetModalStatus(false)
+    if(isDestroy) {
+      this.props.parentMethod(this.props.selectedAssignments)
+      this.props.nullifySelectedAssignment()
+    }
   }
 
   render(){
@@ -56,8 +61,8 @@ class ConfirmModal extends Component {
         >
         <div className="modal-warning">{this.state.destroy}</div>
         <div className="modal-confirm-buttons">
-          <div onClick={this.closeModal.bind(this)}><ConfirmBtn message="いいえ" /></div>
-          <div onClick={this.props.parentMethod.bind(this), this.closeModal.bind(this)}><ConfirmBtn message="はい" /></div>
+          <div onClick={this.closeModal.bind(this, false)}><ConfirmBtn message="いいえ" /></div>
+          <div onClick={this.closeModal.bind(this, true)}><ConfirmBtn message="はい" /></div>
         </div>
       </Modal>
     )
@@ -66,5 +71,5 @@ class ConfirmModal extends Component {
 
 export default connect(
   ({modalIsOpen, selectedAssignments}) => ({modalIsOpen, selectedAssignments}),
-  { setModalStatus, resetModalStatus }
+  { nullifySelectedAssignment, setModalStatus, resetModalStatus }
 )(ConfirmModal)
