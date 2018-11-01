@@ -6,16 +6,32 @@ import ConfirmBtn from '../atoms/confirm-btn'
 
 import { setModalStatus, resetModalStatus } from '../../actions/common'
 
+import '../../../stylesheets/modal.scss'
+
 const customStyles = {
+  overlay : {
+    zIndex                : '1000',
+    backgroundColor       : 'rgba(13, 25, 36, 0)'
+  },
   content : {
+    display               : 'flex',
+    justifyContent        : 'center',
+    flexWrap              : 'wrap',
+    width                 : '400px',
+    height                : '100px',
+    backgroundColor       : 'rgba(13, 25, 36, 0.7)',
     top                   : '50%',
     left                  : '50%',
     right                 : 'auto',
     bottom                : 'auto',
+    padding               : '10px',
     marginRight           : '-50%',
+    color                 : '#fff',
     transform             : 'translate(-50%, -50%)'
   }
 }
+
+Modal.setAppElement('#app')
 
 class ConfirmModal extends Component {
   constructor(props) {
@@ -27,10 +43,6 @@ class ConfirmModal extends Component {
     }
   }
 
-  afterOpenModal() {
-    //this.subtitle.style.color = '#f00';
-  }
-
   closeModal() {
     this.props.resetModalStatus(false)
   }
@@ -38,16 +50,14 @@ class ConfirmModal extends Component {
   render(){
     return(
       <Modal
-          isOpen={this.props.modalIsOpen}
-          onAfterOpen={this.afterOpenModal.bind(this)}
-          onRequestClose={this.props.modalIsOpen}
-          style={customStyles}
-          contentLabel="Example Modal"
+        isOpen={this.props.modalIsOpen}
+        style={customStyles}
+        contentLabel="Example Modal"
         >
-        <div>{}</div>
-        <div>
-          <ConfirmBtn message="いいえ"/>
-          <ConfirmBtn message="はい"/>
+        <div className="modal-warning">{this.state.destroy}</div>
+        <div className="modal-confirm-buttons">
+          <div onClick={this.closeModal.bind(this)}><ConfirmBtn message="いいえ" /></div>
+          <div onClick={this.props.parentMethod.bind(this), this.closeModal.bind(this)}><ConfirmBtn message="はい" /></div>
         </div>
       </Modal>
     )
@@ -55,6 +65,6 @@ class ConfirmModal extends Component {
 }
 
 export default connect(
-  ({modalIsOpen}) => ({modalIsOpen}),
+  ({modalIsOpen, selectedAssignments}) => ({modalIsOpen, selectedAssignments}),
   { setModalStatus, resetModalStatus }
 )(ConfirmModal)

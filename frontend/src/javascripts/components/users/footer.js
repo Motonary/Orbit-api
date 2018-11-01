@@ -209,7 +209,7 @@ class Footer extends Component {
             }) }
           </ul>
         </div>
-        <ConfirmModal />
+        <ConfirmModal parentMethod={this.onClickDestroyPlanets}/>
       </div>
     )
   }

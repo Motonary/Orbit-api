@@ -37,7 +37,7 @@ export function selectedAssignments(state = [], action) {
       return _.remove([...state.selectedAssignments], eachState => eachState.id !== action.assignmentId)
 
     case actionTypes.NULLIFY_SELECTED_ASSIGNMENT:
-      return [...state] = null
+      return [...state] = []
 
     default:
       return state

@@ -4,7 +4,7 @@ import '../../../stylesheets/confirm_btn.scss'
 
 const ConfirmBtn = (message) => {
   return(
-    <button className="confirm-btn">{ message }</button>
+    <button className="confirm-btn">{ message.message }</button>
   )
 }
 
