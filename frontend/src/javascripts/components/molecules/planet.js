@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectAssignment, disselectAssignment } from '../../actions/assignments'
@@ -27,8 +26,8 @@ class Planet extends Component {
     const target_img = e.target
     const selectedPlanetId = target.id
 
-    console.log(e.target, planet_type)
-    console.log(this.props)
+    //console.log(e.target, planet_type)
+    //console.log(this.props)
 
     if(selectedPlanetId) {
       target_img.src = PlanetCheckedImgs[planet_type]
@@ -40,7 +39,7 @@ class Planet extends Component {
     const pos = ['top', 'right', 'left', 'bottom']
     let i=-1
 
-    console.log(this.props, "planet")
+    //console.log(this.props, "planet")
 
     if(!this.props.revolvingAssignments) { return(<div>Loading...</div>) }
 
