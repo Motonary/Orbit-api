@@ -12,6 +12,14 @@ export function fetchRevolvingProjects() {
   }).catch(() => alert('Sorry, something went wrong...'))
 }
 
+export function setCurrentProject(currentProject, callback) {
+  callback()
+  return {
+    type: actionTypes.SET_CURRENT_PROJECT,
+    currentProject
+  }
+}
+
 export function createProject(title, starType, callback) {
   return axios({
     method: 'post',

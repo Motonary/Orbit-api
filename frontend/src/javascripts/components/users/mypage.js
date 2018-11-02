@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { JWT } from '../../constants'
-import { fetchRevolvingProjects, createProject, destroyProject } from '../../actions/projects'
+import { fetchRevolvingProjects, setCurrentProject,  createProject, destroyProject } from '../../actions/projects'
 import ImgUser from '../../../images/main/user_default_icon.png'
 
 class MyPage extends Component {
@@ -13,7 +13,9 @@ class MyPage extends Component {
 
   onClickFixedStar(projectId) {
     // TODO: プロジェクトページへ遷移する前になんらかのアニメーション追加(Fadeoutとか)
-      this.props.history.push(`${this.props.match.url}/projects/${projectId}`)
+    this.props.setCurrentProject(this.props.revolvingProjects[projectId], () => {
+      this.props.history.push(`${this.props.match.url}/projects`)
+    })
   }
 
   onDropFixedStar(starType, e) {
@@ -36,7 +38,6 @@ class MyPage extends Component {
     if (currentUser.id != this.props.match.params.userId) {
       return <Redirect to={`/users/${currentUser.id}`} />
     }
-    console.log(this.props.revolvingProjects)
     //TODO: 歪みが子要素まで反映されているので親要素のみに留められないか
     return(
       <div id="project-list">
@@ -58,12 +59,11 @@ class MyPage extends Component {
           </div>
         </div>
       </div>
-
-  )
+    )
   }
 }
 
 export default connect(
   ({ currentUser, revolvingProjects }) => ({ currentUser, revolvingProjects }),
-  { fetchRevolvingProjects, createProject, destroyProject }
+  { fetchRevolvingProjects, setCurrentProject, createProject, destroyProject }
 )(MyPage)

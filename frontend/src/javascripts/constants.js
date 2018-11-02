@@ -58,8 +58,8 @@ import BlackHoleImg from '../images/main/blackhole.png'
 export const JWT = sessionStorage.getItem('jwt')
 
 // TODO: developmentとproductionで場合分け
-// export const ROOT_URL = 'http://localhost:3000'
-export const ROOT_URL = 'https://orbit7.herokuapp.com'
+export const ROOT_URL = 'http://localhost:3000'
+// export const ROOT_URL = 'https://orbit7.herokuapp.com'
 
 export const actionTypes = keyMirror({
   // Common
@@ -71,6 +71,7 @@ export const actionTypes = keyMirror({
 
   // Projects
   FETCH_ALL_PROJECTS: null,
+  SET_CURRENT_PROJECT: null,
   CREATE_PROJECT: null,
   DESTROY_PROJECT: null,
 

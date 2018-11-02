@@ -17,6 +17,16 @@ export function revolvingProjects(state = null, action) {
   }
 }
 
+export function currentProject(state = null, action) {
+  switch(action.type) {
+    case actionTypes.SET_CURRENT_PROJECT:
+      return action.currentProject
+
+    default:
+      return state
+  }
+}
+
 export function selectedProjects(state = null, action) {
   switch(action.type) {
     default:
