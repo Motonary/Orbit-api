@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import currentUser from './current-user'
-import { revolvingProjects, projectsOnBar } from './projects'
+import { revolvingProjects } from './projects'
 import { revolvingAssignments, destroyedAssignments } from './assignments'
 
 const rootReducer = combineReducers({
@@ -13,7 +13,6 @@ const rootReducer = combineReducers({
 
   // Projects
   revolvingProjects,
-  projectsOnBar,
 
   // Assignments
   revolvingAssignments,

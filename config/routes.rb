@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     post 'user_token' => 'user_token#create'
 
     resources :projects, only: [:index, :create, :destroy]
-    get 'projects/bar' => 'projects#fetch_on_bar'
 
     resources :assignments, only: :create
     get 'assignments/revolving' => 'assignments#fetch_revolving'

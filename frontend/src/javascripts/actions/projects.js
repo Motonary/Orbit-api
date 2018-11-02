@@ -12,18 +12,6 @@ export function fetchAllProjects() {
   }).catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function fetchProjectsOnBar(currentProjectId) {
-  return axios.get(`${ROOT_URL}/api/projects/bar`, {
-    headers: { 'Authorization': `Bearer ${JWT}` },
-    params: { current_project_id: currentProjectId }
-  }).then(res => {
-    return {
-      type: actionTypes.FETCH_PROJECTS_ON_BAR,
-      projectsOnBar: res.data
-    }
-  }).catch(() => alert('Sorry, something went wrong...'))
-}
-
 export function createProject(title, starType, callback) {
   return axios({
     method: 'post',

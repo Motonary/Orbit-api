@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { fetchRevolvingAssignments,
          createAssignment,
          destroyAssignment } from '../../actions/assignments'
-import { fetchProjectsOnBar } from '../../actions/projects'
 import { PlanetImgs } from '../../constants'
 
 class ProjectPage extends Component {
@@ -18,7 +18,6 @@ class ProjectPage extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchProjectsOnBar(this.state.projectId)
     this.props.fetchRevolvingAssignments(this.state.projectId)
   }
 
@@ -79,7 +78,7 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
-    console.log(this.props.projectsOnBar)
+    console.log(this.props)
     // this.props.projectsOnBarに、バーに表示されるべき恒星一覧が格納されてるのでmapとかでrenderして下さい
     // nextProjectIdを渡してthis.onClickFixedStarOnBarを発火すると動的にreducerが変化します
 
@@ -122,8 +121,12 @@ class ProjectPage extends Component {
 }
 
 export default connect(
-  ({ currentUser, revolvingAssignments, projectsOnBar }) => (
-    { currentUser, revolvingAssignments, projectsOnBar }
+  ({ currentUser, revolvingAssignments, revolvingProjects }, ownprops) => (
+    { currentUser,
+      revolvingAssignments,
+      currentProject: revolvingProjects[ownprops.match.params.projectId],
+      projectsOnBar: _.without(revolvingProjects, revolvingProjects[ownprops.match.params.projectId])
+    }
   ),
-  { fetchRevolvingAssignments, fetchProjectsOnBar, createAssignment, destroyAssignment }
+  { fetchRevolvingAssignments, createAssignment, destroyAssignment }
 )(ProjectPage)

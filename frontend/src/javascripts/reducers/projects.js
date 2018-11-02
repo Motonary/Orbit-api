@@ -16,13 +16,3 @@ export function revolvingProjects(state = null, action) {
       return state
   }
 }
-
-export function projectsOnBar(state = [], action) {
-  switch(action.type) {
-    case actionTypes.FETCH_PROJECTS_ON_BAR:
-      return action.projectsOnBar
-
-    default:
-      return state
-  }
-}
