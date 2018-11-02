@@ -7,10 +7,8 @@ import { fetchRevolvingAssignments,
          destroyAssignment,
          selectAssignment,
          disselectAssignment } from '../../actions/assignments'
-import anime from 'animejs'
 import { PlanetImgs } from '../../constants'
 import CircleOrbit from '../molecules/circle-orbit'
-import Planet from '../molecules/planet'
 
 class ProjectPage extends Component {
   constructor(props) {
@@ -18,8 +16,7 @@ class ProjectPage extends Component {
     // DRYにするためstateで定義
     this.state = {
       userId: props.match.params.userId,
-      projectId: props.match.params.projectId,
-      selectedPlanet: []
+      projectId: props.match.params.projectId
     }
   }
 
@@ -31,9 +28,10 @@ class ProjectPage extends Component {
     // TODO: タスク詳細のポップアップ実装,
   }
 
-  onClickFixedStarOnBar() {
+  /*onClickFixedStarOnBar() {
     this.props.changeCurrentProject(nextProjectId)
   }
+  */
 
   onDropPlanet(title, detail, deadline, planet_type, planet_size, orbit_pos) {
     this.props.createAssignment(
@@ -84,7 +82,8 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
-    console.log(this.props)
+    console.log(this.props.revolvingProjects)
+    console.log(this.props.currentProject)
     // this.props.projectsOnBarに、バーに表示されるべき恒星一覧が格納されてるのでmapとかでrenderして下さい
     // nextProjectIdを渡してthis.onClickFixedStarOnBarを発火すると動的にreducerが変化します
 
@@ -104,6 +103,7 @@ export default connect(
   ({ currentUser, revolvingAssignments, revolvingProjects, selectedAssignments }, ownprops) => (
     { currentUser,
       revolvingAssignments,
+      revolvingProjects,
       currentProject: revolvingProjects[ownprops.match.params.projectId],
       projectsOnBar: _.without(revolvingProjects, revolvingProjects[ownprops.match.params.projectId]),
       selectedAssignments

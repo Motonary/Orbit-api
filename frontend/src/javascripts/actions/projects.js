@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { actionTypes, ROOT_URL, JWT } from '../constants'
 
-export function fetchAllProjects() {
+export function fetchRevolvingProjects() {
   return axios.get(`${ROOT_URL}/api/projects`, { headers: {
     'Authorization': `Bearer ${JWT}`
   } }).then(res => {
@@ -10,10 +10,6 @@ export function fetchAllProjects() {
       currentUserAllProjects: res.data
     }
   }).catch(() => alert('Sorry, something went wrong...'))
-}
-
-export function setCurrentProject(projectId) {
-  
 }
 
 export function createProject(title, starType, callback) {

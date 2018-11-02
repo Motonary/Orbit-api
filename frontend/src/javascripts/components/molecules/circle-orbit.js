@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectAssignment, disselectAssignment } from '../../actions/assignments'
-import { PlanetImgs } from '../../constants'
 import Planet from './planet'
 
 class CircleOrbit extends Component {

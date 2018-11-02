@@ -186,10 +186,9 @@
 
 //canvas destroy animation
   .canvas {
-    display: none;
+    position: absolute;
     width: 0;
     height: 0;
-    position: absolute;
     top: 0;
     left: 0;
   }
