@@ -13,9 +13,9 @@ class MyPage extends Component {
 
   onClickFixedStar(projectId) {
     // TODO: プロジェクトページへ遷移する前になんらかのアニメーション追加(Fadeoutとか)
-    this.props.setCurrentProject(projectId, projectId => {
+    // this.props.setCurrentProject(projectId, projectId => {
       this.props.history.push(`${this.props.match.url}/projects/${projectId}`)
-    })
+    // })
   }
 
   onDropFixedStar(starType, e) {
@@ -55,7 +55,7 @@ class MyPage extends Component {
           <div className="common top mypage-orbit-motion">
             <div
               className="planet-large-2 bg-color"
-              onClick={this.onClickFixedStar.bind(this, 2 /* 仮デフォルト引数 */)}
+              onClick={this.onClickFixedStar.bind(this, 1 /* 仮デフォルト引数 */)}
             ></div>
           </div>
         </div>

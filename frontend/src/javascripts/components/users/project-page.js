@@ -7,7 +7,6 @@ import { fetchRevolvingAssignments,
          destroyAssignment,
          selectAssignment,
          disselectAssignment } from '../../actions/assignments'
-import { fetchProjectsOnBar } from '../../actions/projects'
 import anime from 'animejs'
 import { PlanetImgs } from '../../constants'
 import CircleOrbit from '../molecules/circle-orbit'
@@ -102,20 +101,15 @@ class ProjectPage extends Component {
 }
 
 export default connect(
-<<<<<<< HEAD
-  ({ currentUser, revolvingAssignments, revolvingProjects }, ownprops) => (
+  ({ currentUser, revolvingAssignments, revolvingProjects, selectedAssignments }, ownprops) => (
     { currentUser,
       revolvingAssignments,
       currentProject: revolvingProjects[ownprops.match.params.projectId],
-      projectsOnBar: _.without(revolvingProjects, revolvingProjects[ownprops.match.params.projectId])
+      projectsOnBar: _.without(revolvingProjects, revolvingProjects[ownprops.match.params.projectId]),
+      selectedAssignments
     }
   ),
-  { fetchRevolvingAssignments, createAssignment, destroyAssignment }
-=======
-  ({ currentUser, revolvingAssignments, projectsOnBar, selectedAssignments }) => (
-    { currentUser, revolvingAssignments, projectsOnBar, selectedAssignments }
-  ),
-  { fetchRevolvingAssignments, fetchProjectsOnBar, createAssignment,
+  { fetchRevolvingAssignments, createAssignment,
     destroyAssignment, selectAssignment, disselectAssignment }
->>>>>>> master
+
 )(ProjectPage)
