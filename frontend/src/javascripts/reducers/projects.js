@@ -16,3 +16,10 @@ export function revolvingProjects(state = null, action) {
       return state
   }
 }
+
+export function currentProject(state = null, action) {
+  switch(action.type) {
+    default:
+      return state
+  }
+}

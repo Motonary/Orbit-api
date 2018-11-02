@@ -9,7 +9,8 @@
     "release": "webpack --mode production --config webpack.config.js",
     "watch": "npm run lint && webpack-dev-server --mode development --history-api-fallback",
     "lint": "eslint src/javascripts",
-    "fix": "eslint --fix src/javascripts"
+    "fix": "eslint --fix src/javascripts",
+    "heroku-postbuild": "cd frontend; npm install; npm run release; cd ../"
   },
   "description": "== README",
   "dependencies": {

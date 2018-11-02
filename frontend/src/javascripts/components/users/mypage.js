@@ -13,7 +13,9 @@ class MyPage extends Component {
 
   onClickFixedStar(projectId) {
     // TODO: プロジェクトページへ遷移する前になんらかのアニメーション追加(Fadeoutとか)
-    this.props.history.push(`${this.props.match.url}/projects/${projectId}`)
+    this.props.setCurrentProject(projectId, projectId => {
+      this.props.history.push(`${this.props.match.url}/projects/${projectId}`)
+    })
   }
 
   onDropFixedStar(starType, e) {
@@ -36,6 +38,7 @@ class MyPage extends Component {
     if (currentUser.id != this.props.match.params.userId) {
       return <Redirect to={`/users/${currentUser.id}`} />
     }
+    console.log(this.props.revolvingProjects)
     //TODO: 歪みが子要素まで反映されているので親要素のみに留められないか
     return(
       <div id="project-list">
@@ -52,7 +55,7 @@ class MyPage extends Component {
           <div className="common top mypage-orbit-motion">
             <div
               className="planet-large-2 bg-color"
-              onClick={this.onClickFixedStar.bind(this, 1 /* 仮デフォルト引数 */)}
+              onClick={this.onClickFixedStar.bind(this, 2 /* 仮デフォルト引数 */)}
             ></div>
           </div>
         </div>
@@ -63,6 +66,6 @@ class MyPage extends Component {
 }
 
 export default connect(
-  ({ currentUser, projects }) => ({ currentUser, projects }),
+  ({ currentUser, revolvingProjects }) => ({ currentUser, revolvingProjects }),
   { fetchAllProjects, createProject, destroyProject }
 )(MyPage)

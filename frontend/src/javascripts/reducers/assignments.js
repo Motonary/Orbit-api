@@ -1,7 +1,7 @@
 import { actionTypes } from '../constants'
 import _ from 'lodash'
 
-export function revolvingAssignments(state = {}, action) {
+export function revolvingAssignments(state = null, action) {
   let newState = Object.assign({}, state)
   switch(action.type) {
     case actionTypes.FETCH_REVOLVING_ASSIGNMENTS:
@@ -9,7 +9,7 @@ export function revolvingAssignments(state = {}, action) {
 
     case actionTypes.CREATE_ASSIGNMENT:
       const newAssignmentOrbit = action.newAssignment.orbit_pos
-      newState.newAssignmentOrbit.push(action.newAssignment)
+      newState[newAssignmentOrbit].push(action.newAssignment)
       return newState
 
     case actionTypes.DESTROY_ASSIGNMENT:
@@ -28,12 +28,16 @@ export function selectedProjects(state = null, action) {
   }
 }
 
-export function selectedAssignments(state = null, action) {
+export function selectedAssignments(state = [], action) {
   switch(action.type) {
-    case actionTypes.SELET_ASSIGNMENT:
+    case actionTypes.SELECT_ASSIGNMENT:
       return [...state, action.assignmentId]
 
-    // TODO(Yuki): 選択解除の処理書く
+    case actionTypes.DISSELECT_ASSIGNMENT:
+      return _.remove([...state.selectedAssignments], eachState => eachState.id !== action.assignmentId)
+
+    case actionTypes.NULLIFY_SELECTED_ASSIGNMENT:
+      return [...state] = null
 
     default:
       return state

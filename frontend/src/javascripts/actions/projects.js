@@ -12,6 +12,10 @@ export function fetchAllProjects() {
   }).catch(() => alert('Sorry, something went wrong...'))
 }
 
+export function setCurrentProject(projectId) {
+  
+}
+
 export function createProject(title, starType, callback) {
   return axios({
     method: 'post',
