@@ -208,7 +208,7 @@ class Footer extends Component {
 
     const planetHolderClasses = classNames({
       'open-planet-holder': true,
-      'holder-show': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects\/[1-9]\d*$/.test(pathname)
+      'holder-show': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname)
     })
     const revivalButtonClasses = classNames({
       'disapperance': true,
@@ -216,7 +216,7 @@ class Footer extends Component {
     })
     const deleteButtonsclasses = classNames({
       'disapperance': true,
-      'delete-buttons-show': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects\/[1-9]\d*$/.test(pathname) || pathname === `${rootPath}/history`
+      'delete-buttons-show': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/history`
     })
 
     return(

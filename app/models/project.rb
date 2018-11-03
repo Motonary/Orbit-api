@@ -16,8 +16,6 @@ class Project < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   validates :fixed_star_type, presence: true
 
-  enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
+  enum fixed_star_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
                      :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
-
-  scope :without_id, -> project_id { where.not(id: project_id) }
 end

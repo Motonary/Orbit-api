@@ -19,7 +19,7 @@ class Header extends Component {
     // mypage以外で表示(show: true), 例外判定('hidden': pathname !== rootpathなど)すると404notfound等を拾えない
     const headerleftClasses = classNames({
       'user-info': true,
-      'show-left': /^\/users\/[1-9]\d*\/projects\/[1-9]\d*$/.test(pathname) || pathname === `${rootPath}/history` || pathname === `${rootPath}/edit`
+      'show-left': /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/history` || pathname === `${rootPath}/edit`
     })
 
     return (
@@ -39,13 +39,13 @@ class Header extends Component {
     // mypage, project-page, setting-pageのみで表示(show-right: true)
     const historyButtonClasses = classNames({
       'icon-container': true,
-      'show-right': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects\/[1-9]\d*$/.test(pathname) || pathname === `${rootPath}/edit`
+      'show-right': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/edit`
     })
 
     // mypage, project-page, history-pageのみで表示(show-right: true)
     const settingButtonClasses = classNames({
       'icon-container': true,
-      'show-right': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects\/[1-9]\d*$/.test(pathname) || pathname === `${rootPath}/history`
+      'show-right': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/history`
     })
 
     // setting-page, history-pageのみで表示(show-right: true)

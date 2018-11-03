@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { fetchRevolvingAssignments,
@@ -6,39 +7,39 @@ import { fetchRevolvingAssignments,
          destroyAssignment,
          selectAssignment,
          disselectAssignment } from '../../actions/assignments'
-import { fetchProjectsOnBar } from '../../actions/projects'
-
+import { fetchRevolvingProjects, setDefaultProject } from '../../actions/projects'
 import { PlanetImgs } from '../../constants'
 import CircleOrbit from '../molecules/circle-orbit'
 
 class ProjectPage extends Component {
-  constructor(props) {
-    super(props)
-    // DRYにするためstateで定義
-    this.state = {
-      userId: props.match.params.userId,
-      projectId: props.match.params.projectId,
-      selectedPlanet: []
-    }
-  }
-
   componentDidMount() {
-    this.props.fetchProjectsOnBar(this.state.projectId)
-    this.props.fetchRevolvingAssignments(this.state.projectId)
+    const { currentProject, revolvingProjects } = this.props
+    // TODO: リファクタリング
+    if (currentProject) {
+      this.props.fetchRevolvingAssignments(currentProject.id)
+    } else if (revolvingProjects) {
+      this.props.setDefaultProject(_.toArray(revolvingProjects)[0])
+    } else {
+      this.props.fetchRevolvingProjects()
+       .then(() => {
+         if (this.props.revolvingProjects) this.props.setDefaultProject(_.toArray(this.props.revolvingProjects)[0])
+       })
+    }
   }
 
   onClickPlanet() {
     // TODO: タスク詳細のポップアップ実装,
   }
 
-  /*onClickFixedStarOnBar() {
-    this.props.changeCurrentProject(nextProjectId)
+  onClickFixedStarOnBar(nextProjectId) {
+    this.props.changeCurrentProject(this.props.revolvingProjects[nextProjectId], () => {
+      this.props.fetchRevolvingAssignments(nextProjectId)
+    })
   }
-  */
 
   onDropPlanet(title, detail, deadline, planet_type, planet_size, orbit_pos) {
     this.props.createAssignment(
-      title, detail, deadline, planet_type, planet_size, orbit_pos, this.state.projectId
+      title, detail, deadline, planet_type, planet_size, orbit_pos, this.props.match.params.projectId
     )
   }
 
@@ -80,13 +81,14 @@ class ProjectPage extends Component {
       return <div>Loading....</div>
     }
 
-    if (currentUser.id != this.state.userId) {
+    if (currentUser.id != this.props.match.params.userId) {
       const correctPath = `/users/${currentUser.id}`
       return <Redirect to={correctPath} />
     }
 
-    //console.log(this.props.projectsOnBar)
-    // this.props.projectsOnBarに、バーに表示されるべき恒星一覧が格納されてるのでmapとかでrenderして下さい
+    // console.log(this.props.currentProject)
+    // console.log(this.props.projectsOnBar)
+    // this.props.projectsOnBarに、バーに表示されるべき恒星一覧が配列に格納されてるのでmapとかでrenderして下さい
     // nextProjectIdを渡してthis.onClickFixedStarOnBarを発火すると動的にreducerが変化します
 
     return(
@@ -102,9 +104,16 @@ class ProjectPage extends Component {
 }
 
 export default connect(
-  ({ currentUser, revolvingAssignments, projectsOnBar, selectedAssignments }) => (
-    { currentUser, revolvingAssignments, projectsOnBar, selectedAssignments }
+  ({ currentUser, revolvingAssignments, revolvingProjects, selectedAssignments, currentProject }) => (
+    { currentUser,
+      revolvingAssignments,
+      revolvingProjects,
+      currentProject,
+      projectsOnBar: _.reject(revolvingProjects, currentProject),
+      selectedAssignments
+    }
   ),
-  { fetchRevolvingAssignments, fetchProjectsOnBar, createAssignment,
+  { fetchRevolvingAssignments, fetchRevolvingProjects, setDefaultProject, createAssignment,
     destroyAssignment, selectAssignment, disselectAssignment }
+
 )(ProjectPage)

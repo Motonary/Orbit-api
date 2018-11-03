@@ -2,18 +2,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { JWT } from '../../constants'
-import { fetchAllProjects, createProject, destroyProject } from '../../actions/projects'
+import { fetchRevolvingProjects, setCurrentProject,  createProject, destroyProject } from '../../actions/projects'
 import ImgUser from '../../../images/main/user_default_icon.png'
 
 class MyPage extends Component {
   componentDidMount() {
     // TODO: 最初ログインした時Projectが設定されないバグ修正
-    if (JWT) this.props.fetchAllProjects()
+    if (JWT) this.props.fetchRevolvingProjects()
   }
 
   onClickFixedStar(projectId) {
     // TODO: プロジェクトページへ遷移する前になんらかのアニメーション追加(Fadeoutとか)
-    this.props.history.push(`${this.props.match.url}/projects/${projectId}`)
+    this.props.setCurrentProject(this.props.revolvingProjects[projectId], () => {
+      this.props.history.push(`${this.props.match.url}/projects`)
+    })
   }
 
   onDropFixedStar(starType, e) {
@@ -57,12 +59,11 @@ class MyPage extends Component {
           </div>
         </div>
       </div>
-
-  )
+    )
   }
 }
 
 export default connect(
-  ({ currentUser, projects }) => ({ currentUser, projects }),
-  { fetchAllProjects, createProject, destroyProject }
+  ({ currentUser, revolvingProjects }) => ({ currentUser, revolvingProjects }),
+  { fetchRevolvingProjects, setCurrentProject, createProject, destroyProject }
 )(MyPage)

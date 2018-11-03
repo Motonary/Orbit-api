@@ -1,27 +1,38 @@
 import axios from 'axios'
 import { actionTypes, ROOT_URL, JWT } from '../constants'
 
-export function fetchAllProjects() {
+export function fetchRevolvingProjects() {
   return axios.get(`${ROOT_URL}/api/projects`, { headers: {
     'Authorization': `Bearer ${JWT}`
   } }).then(res => {
     return {
-      type: actionTypes.FETCH_ALL_PROJECTS,
+      type: actionTypes.FETCH_REVOLVING_PROJECTS,
       currentUserAllProjects: res.data
     }
   }).catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function fetchProjectsOnBar(currentProjectId) {
-  return axios.get(`${ROOT_URL}/api/projects/bar`, {
-    headers: { 'Authorization': `Bearer ${JWT}` },
-    params: { current_project_id: currentProjectId }
-  }).then(res => {
-    return {
-      type: actionTypes.FETCH_PROJECTS_ON_BAR,
-      projectsOnBar: res.data
-    }
-  }).catch(() => alert('Sorry, something went wrong...'))
+export function setCurrentProject(currentProject, callback) {
+  callback()
+  return {
+    type: actionTypes.SET_CURRENT_PROJECT,
+    currentProject
+  }
+}
+
+export function setDefaultProject(defaultProject) {
+  return {
+    type: actionTypes.SET_CURRENT_PROJECT,
+    currentProject: defaultProject
+  }
+}
+
+export function changeCurrentProject(newProject, callback) {
+  callback()
+  return {
+    type: actionTypes.SET_CURRENT_PROJECT,
+    currentProject: newProject
+  }
 }
 
 export function createProject(title, starType, callback) {

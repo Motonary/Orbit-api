@@ -21,13 +21,6 @@ export function revolvingAssignments(state = null, action) {
   }
 }
 
-export function selectedProjects(state = null, action) {
-  switch(action.type) {
-    default:
-      return state
-  }
-}
-
 export function selectedAssignments(state = [], action) {
   switch(action.type) {
     case actionTypes.SELECT_ASSIGNMENT:

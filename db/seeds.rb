@@ -3,6 +3,7 @@ Project.destroy_all
 Assignment.destroy_all
 SubAssignment.destroy_all
 
+fixed_star_keys = Project.fixed_star_types.keys
 planet_keys = Assignment.planet_types.keys
 size_keys = Assignment.planet_sizes.keys
 pos_keys = Assignment.orbit_pos.keys
@@ -18,10 +19,12 @@ User.create!({
 # A project
 ririco = User.first
 
-ririco.projects.create!({
-  title: 'Create kanojo',
-  fixed_star_type: 'Earth'
-})
+4.times do |i|
+  ririco.projects.create!({
+    title: Faker::Lorem.word,
+    fixed_star_type: fixed_star_keys[rand(0...14)]
+  })
+end
 
 # Four assignments
 kanojo_project = Project.first
