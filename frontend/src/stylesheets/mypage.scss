@@ -1,6 +1,6 @@
 @import "orbit_size_initializer";
 
-$mypage-orbit: 500px;
+$mypage-orbit: 550px;
 
 #project-list {
   width: 100%;
@@ -50,7 +50,7 @@ $mypage-orbit: 500px;
     border: 1px #fff;
     border-style: solid;
     border-radius: 50%;
-    transform: skewX(-30deg);
+    transform: skewX(-20deg) skewY(-10deg);
 
     .common {
       width: 50%;
@@ -59,12 +59,12 @@ $mypage-orbit: 500px;
       left: 25%;
       top: 25%;
       text-align: center;
-      transform: skewX(30deg);
+      z-index: 50;
     }
 
-    .planet-large-2 {
-      width: percentage($primo-orbit-large-planet);
-      height: percentage($primo-orbit-large-planet);
+    .planet-large-secundus {
+      width: percentage($primo-orbit-large-planet * 1.5);
+      height: percentage($primo-orbit-large-planet * 1.5);
       border-radius: 50%;
       position: absolute;
       top: 0;
@@ -72,9 +72,9 @@ $mypage-orbit: 500px;
       bottom: 0;
       left: 0;
       margin: auto;
-      animation: rotate $primo-orbit-speed linear reverse infinite;
-      word-wrap: break-word;
       transform: skewX(30deg);
+      animation: rotate $tertius-orbit-speed linear reverse infinite;
+      word-wrap: break-word;
     }
 
     .top {
@@ -82,7 +82,6 @@ $mypage-orbit: 500px;
       left: 25%;
       top: -25%;
       transform-origin: center 150%;
-      transform: skewX(30deg);
     }
     .right {
       position: absolute;
@@ -94,7 +93,7 @@ $mypage-orbit: 500px;
       position: absolute;
       left: -25%;
       top: 25%;
-      transform-origin: -50% center;
+      transform-origin: 150% center;
     }
     .bottom {
       position: absolute;
@@ -102,19 +101,21 @@ $mypage-orbit: 500px;
       top: 75%;
       transform-origin: center -50%;
     }
+    img {
+      width: 100%;
+      height: 100%;
+      transform: skewX(20deg) skewY(10deg);
+    }
 
     .mypage-orbit-motion {
-      animation: rotate $primo-orbit-speed linear infinite;
+      animation: rotate $tertius-orbit-speed linear infinite;
     }
     .pause-animation {
       animation-play-state: paused;
     }
-    .restart-animation {
+    .start-animation {
       animation-play-state: running;
     }
-  }
-  .bg-color {
-    background: linear-gradient(#FFB3E7,#FF54C9);
   }
   @keyframes rotate {
     0% {
