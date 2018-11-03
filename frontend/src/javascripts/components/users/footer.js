@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import anime from 'animejs'
+import Draggable, { DraggableCore } from 'react-draggable';
 
 import ConfirmModal from '../molecules/modal'
 
@@ -183,11 +184,29 @@ class Footer extends Component {
     }
   }
 
+  dragHandleStart() {
+    this.motionControll()
+  }
+  handleDrag() {
+
+  }
+  draghandleStop() {
+
+  }
+
   renderPlanetList() {
     //FIXME: もっといい方法ないか
     let list = []
     for(let key in PlanetImgs) {
-      list.push(<li key={key} className="planet" draggable="true"><img src={PlanetImgs[key]} className="planet-img"/></li>)
+      list.push(
+        <Draggable
+          offsetParent={document.getElementById('page-container')}
+          onStart={this.dragHandleStart()}
+          onDrag={this.handleDrag()}
+          onStop={this.draghandleStop()}>
+          <li key={key} className="planet" draggable="true"><img src={PlanetImgs[key]} className="planet-img"/></li>
+        </Draggable>
+      )
     }
     return list
   }
