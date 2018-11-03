@@ -70,7 +70,7 @@ export const actionTypes = keyMirror({
   SET_CURRENT_USER: null,
 
   // Projects
-  FETCH_ALL_PROJECTS: null,
+  FETCH_REVOLVING_PROJECTS: null,
   SET_CURRENT_PROJECT: null,
   CREATE_PROJECT: null,
   DESTROY_PROJECT: null,
