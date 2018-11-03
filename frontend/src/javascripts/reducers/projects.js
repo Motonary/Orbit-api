@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 export function revolvingProjects(state = null, action) {
   switch(action.type) {
-    case actionTypes.FETCH_ALL_PROJECTS:
+    case actionTypes.FETCH_REVOLVING_PROJECTS:
       return _.mapKeys(action.currentUserAllProjects, 'id')
 
     case actionTypes.CREATE_PROJECT:
