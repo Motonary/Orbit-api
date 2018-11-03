@@ -39,3 +39,19 @@ export function fetchCurrentUser() {
       }
     }).catch(() => alert('Sorry, something went wrong...'))
 }
+
+export function updateAvatar(newAvatar) {
+  let avatarFile = new FormData()
+  avatarFile.append('avatar', newAvatar, newAvatar.name)
+  return axios({
+    method: 'patch',
+    url: `${ROOT_URL}/api/users/update_avatar`,
+    data: avatarFile,
+    headers: {'Content-Type': 'multipart/form-data' }
+  }).then(res => {
+      return {
+        type: actionTypes.UPDATE_AVATAR,
+        newMessageData: res.data
+      }
+    }).catch(error => alert(error))
+}

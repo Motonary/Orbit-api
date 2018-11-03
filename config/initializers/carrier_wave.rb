@@ -1,5 +1,6 @@
-if Rails.env.production?
-  CarrierWave.configure do |config|
+CarrierWave.configure do |config|
+  # config.root = Rails.root
+  if Rails.env.production?
     config.fog_credentials = {
       # TODO: デプロイ時Amazon S3用の設定
       :provider              => 'AWS',

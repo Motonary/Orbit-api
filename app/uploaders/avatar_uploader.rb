@@ -9,11 +9,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    '../frontend/src/images/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}'
+    '/src/images/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}'
   end
 
   def default_url(*args)
-    '../frontend/src/images/main/user_default_icon.png'
+    '/src/images/main/user_default_icon.png'
   end
 
   # Process files as they are uploaded:

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { JWT } from '../../constants'
 import { fetchAllProjects, createProject, destroyProject } from '../../actions/projects'
-import ImgUser from '../../../images/main/user_default_icon.png'
 
 class MyPage extends Component {
   componentDidMount() {
@@ -41,7 +40,7 @@ class MyPage extends Component {
       <div id="project-list">
         <div id="user-info">
           <div className="user-img-container">
-            <img src={ImgUser} className="user-img" />
+            <img src={currentUser.avatar.url} className="user-img" />
           </div>
           <div className="user-name">
             <span>WELCOME</span><br />

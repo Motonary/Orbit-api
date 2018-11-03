@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { HeaderIcons } from '../../constants'
-import { ImgDefaultUser } from '../../constants'
 
 class Header extends Component {
   onClickBackButton() {
@@ -24,7 +23,7 @@ class Header extends Component {
         return (
           <a className="user-info" onClick={this.onClickHeaderLeft.bind(this)}>
             <div className="user-img-container">
-              <img src={ImgDefaultUser} className="user-img" />
+              <img src={currentUser.avatar.url} className="user-img" />
             </div>
             <div className="user-name">
               {currentUser.name}

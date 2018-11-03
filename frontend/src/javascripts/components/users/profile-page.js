@@ -19,8 +19,11 @@ class ProfileUpdateForm extends Component {
     )
   }
 
-  onSubmit({ username, email, password, confirmation }, e) {
-    console.log(e)
+  onSelectAvatar(e) {
+    this.props.updateImage(e.target.files[0])
+  }
+
+  onSubmit({ username, email, password, confirmation }) {
     this.props.createUser(username, email, password, confirmation, (newUserId) => {
       this.props.history.push(`/users/${newUserId}`)
     })
@@ -29,12 +32,12 @@ class ProfileUpdateForm extends Component {
   render() {
     return(
       <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))} className="signup-form">
-        <Field name="avatar" type="file" component={this.renderField} />
+        <input name="avatar" accept='image/*' type="file" onChange={this.onSelectAvatar.bind(this)} />
         <Field placeholder="NAME" name="username" type="text" component={this.renderField} />
         <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
         <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
         <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderField} />
-        <button type="submit" className="submit-btn">SIGN UP</button>
+        <button type="submit" className="submit-btn">UPDATE</button>
       </form>
     )
   }
@@ -43,7 +46,6 @@ class ProfileUpdateForm extends Component {
 function validate(values) {
   const errors = {}
 
-  console.log(values)
   if (values.username && values.username.length > 50) {
     errors.username = "Too long username"
   }
