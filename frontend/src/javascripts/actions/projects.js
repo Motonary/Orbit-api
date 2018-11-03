@@ -6,7 +6,7 @@ export function fetchRevolvingProjects() {
     'Authorization': `Bearer ${JWT}`
   } }).then(res => {
     return {
-      type: actionTypes.FETCH_ALL_PROJECTS,
+      type: actionTypes.FETCH_REVOLVING_PROJECTS,
       currentUserAllProjects: res.data
     }
   }).catch(() => alert('Sorry, something went wrong...'))
