@@ -20,6 +20,21 @@ export function setCurrentProject(currentProject, callback) {
   }
 }
 
+export function setDefaultProject(defaultProject) {
+  return {
+    type: actionTypes.SET_CURRENT_PROJECT,
+    currentProject: defaultProject
+  }
+}
+
+export function changeCurrentProject(newProject, callback) {
+  callback()
+  return {
+    type: actionTypes.SET_CURRENT_PROJECT,
+    currentProject: newProject
+  }
+}
+
 export function createProject(title, starType, callback) {
   return axios({
     method: 'post',

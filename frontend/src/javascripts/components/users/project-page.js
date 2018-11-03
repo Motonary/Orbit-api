@@ -7,20 +7,34 @@ import { fetchRevolvingAssignments,
          destroyAssignment,
          selectAssignment,
          disselectAssignment } from '../../actions/assignments'
+import { fetchRevolvingProjects, setDefaultProject } from '../../actions/projects'
 import { PlanetImgs } from '../../constants'
 import CircleOrbit from '../molecules/circle-orbit'
 
 class ProjectPage extends Component {
   componentDidMount() {
-    this.props.fetchRevolvingAssignments(this.props.match.params.projectId)
+    const { currentProject, revolvingProjects } = this.props
+    // TODO: リファクタリング
+    if (currentProject) {
+      this.props.fetchRevolvingAssignments(currentProject.id)
+    } else if (revolvingProjects) {
+      this.props.setDefaultProject(_.toArray(revolvingProjects)[0])
+    } else {
+      this.props.fetchRevolvingProjects()
+       .then(() => {
+         if (this.props.revolvingProjects) this.props.setDefaultProject(_.toArray(this.props.revolvingProjects)[0])
+       })
+    }
   }
 
   onClickPlanet() {
     // TODO: タスク詳細のポップアップ実装,
   }
 
-  onClickFixedStarOnBar() {
-    this.props.changeCurrentProject(nextProjectId)
+  onClickFixedStarOnBar(nextProjectId) {
+    this.props.changeCurrentProject(this.props.revolvingProjects[nextProjectId], () => {
+      this.props.fetchRevolvingAssignments(nextProjectId)
+    })
   }
 
   onDropPlanet(title, detail, deadline, planet_type, planet_size, orbit_pos) {
@@ -72,9 +86,9 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
-    console.log(this.props.revolvingProjects)
-    console.log(this.props.currentProject)
-    // this.props.projectsOnBarに、バーに表示されるべき恒星一覧が格納されてるのでmapとかでrenderして下さい
+    // console.log(this.props.currentProject)
+    // console.log(this.props.projectsOnBar)
+    // this.props.projectsOnBarに、バーに表示されるべき恒星一覧が配列に格納されてるのでmapとかでrenderして下さい
     // nextProjectIdを渡してthis.onClickFixedStarOnBarを発火すると動的にreducerが変化します
 
     return(
@@ -95,11 +109,11 @@ export default connect(
       revolvingAssignments,
       revolvingProjects,
       currentProject,
-      projectsOnBar: _.without(revolvingProjects, currentProject),
+      projectsOnBar: _.reject(revolvingProjects, currentProject),
       selectedAssignments
     }
   ),
-  { fetchRevolvingAssignments, createAssignment,
+  { fetchRevolvingAssignments, fetchRevolvingProjects, setDefaultProject, createAssignment,
     destroyAssignment, selectAssignment, disselectAssignment }
 
 )(ProjectPage)
