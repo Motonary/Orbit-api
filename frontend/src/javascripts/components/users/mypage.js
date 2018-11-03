@@ -1,21 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import _ from 'lodash'
 import { JWT } from '../../constants'
+
+import MypageOrbit from '../molecules/mypage-orbit'
 import { fetchRevolvingProjects, setCurrentProject,  createProject, destroyProject } from '../../actions/projects'
+
 import ImgUser from '../../../images/main/user_default_icon.png'
 
 class MyPage extends Component {
   componentDidMount() {
     // TODO: 最初ログインした時Projectが設定されないバグ修正
+    console.log(JWT)
     if (JWT) this.props.fetchRevolvingProjects()
-  }
-
-  onClickFixedStar(projectId) {
-    // TODO: プロジェクトページへ遷移する前になんらかのアニメーション追加(Fadeoutとか)
-    this.props.setCurrentProject(this.props.revolvingProjects[projectId], () => {
-      this.props.history.push(`${this.props.match.url}/projects`)
-    })
   }
 
   onDropFixedStar(starType, e) {
@@ -38,6 +36,8 @@ class MyPage extends Component {
     if (currentUser.id != this.props.match.params.userId) {
       return <Redirect to={`/users/${currentUser.id}`} />
     }
+    console.log(this.props)
+
     //TODO: 歪みが子要素まで反映されているので親要素のみに留められないか
     return(
       <div id="project-list">
@@ -50,14 +50,7 @@ class MyPage extends Component {
             {currentUser.name}
           </div>
         </div>
-        <div className="orbit-circle">
-          <div className="common top mypage-orbit-motion">
-            <div
-              className="planet-large-2 bg-color"
-              onClick={this.onClickFixedStar.bind(this, 1 /* 仮デフォルト引数 */)}
-            ></div>
-          </div>
-        </div>
+        <MypageOrbit />
       </div>
     )
   }
