@@ -16,7 +16,6 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-/node_modules
 
 # Ignore uploaded files in development
 /storage/*
@@ -25,6 +24,8 @@
 .byebug_history
 /frontend/node_modules
 /frontend/dist/bundle.js
+/node_modules
+/public/uploads
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

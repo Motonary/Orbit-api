@@ -44,10 +44,10 @@ export function updateAvatar(newAvatar) {
   let avatarFile = new FormData()
   avatarFile.append('avatar', newAvatar, newAvatar.name)
   return axios({
-    method: 'patch',
+    method: 'post',
     url: `${ROOT_URL}/api/users/update_avatar`,
     data: avatarFile,
-    headers: {'Content-Type': 'multipart/form-data' }
+    headers: {'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${JWT}` }
   }).then(res => {
       return {
         type: actionTypes.UPDATE_AVATAR,

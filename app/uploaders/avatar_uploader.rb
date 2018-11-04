@@ -9,7 +9,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    '/src/images/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}'
+    # アップロードされた画像の保存先はfrontend配下ではなくpublic配下に置く
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
   def default_url(*args)

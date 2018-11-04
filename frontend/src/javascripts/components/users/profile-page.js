@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+import { updateAvatar } from '../../actions/users'
 
 class ProfileUpdateForm extends Component {
   renderField({ placeholder, type, input, meta: { touched, error } }) {
@@ -20,7 +21,7 @@ class ProfileUpdateForm extends Component {
   }
 
   onSelectAvatar(e) {
-    this.props.updateImage(e.target.files[0])
+    this.props.updateAvatar(e.target.files[0])
   }
 
   onSubmit({ username, email, password, confirmation }) {
@@ -31,14 +32,21 @@ class ProfileUpdateForm extends Component {
 
   render() {
     return(
-      <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))} className="signup-form">
+      <div id="project-list">
+        <div id="user-info">
+          <div className="user-img-container">
+            <img src={this.props.currentUser.avatar.url} className="user-img" />
+          </div>
+        </div>
         <input name="avatar" accept='image/*' type="file" onChange={this.onSelectAvatar.bind(this)} />
-        <Field placeholder="NAME" name="username" type="text" component={this.renderField} />
-        <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
-        <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
-        <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderField} />
-        <button type="submit" className="submit-btn">UPDATE</button>
-      </form>
+        <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))} className="signup-form">
+          <Field placeholder="NAME" name="username" type="text" component={this.renderField} />
+          <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
+          <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
+          <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderField} />
+          <button type="submit" className="submit-btn">UPDATE</button>
+        </form>
+      </div>
     )
   }
 }
@@ -73,4 +81,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: 'ProfileUpdateForm'
-})(connect()(ProfileUpdateForm))
+})(connect(({ currentUser }) => ({ currentUser }), { updateAvatar })(ProfileUpdateForm))
