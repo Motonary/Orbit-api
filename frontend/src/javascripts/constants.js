@@ -65,6 +65,8 @@ export const actionTypes = keyMirror({
   // Common
   OPEN_MODAL: null,
   CLOSE_MODAL: null,
+  SELECT_PLANET: null,
+  DISSELECT_PLANET: null,
 
   // User
   SET_CURRENT_USER: null,

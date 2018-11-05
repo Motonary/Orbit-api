@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import _ from 'lodash'
 import anime from 'animejs'
 
 import ConfirmModal from '../molecules/modal'
+import AssignmentForm from '../molecules/assignment-form'
 
 import { nullifySelectedAssignment } from '../../actions/assignments'
-import { setModalStatus, resetModalStatus } from '../../actions/common'
+import { setSelectedPlanet, resetSelectedPlanet, setModalStatus, resetModalStatus } from '../../actions/common'
 
 import ImgHolderOpen from '../../../images/footer/planet_holder_btn.png'
 import { PlanetImgs } from '../../constants'
@@ -183,25 +185,23 @@ class Footer extends Component {
     }
   }
 
-  dragHandleStart() {
-    this.motionControll()
-  }
-  handleDrag() {
-
-  }
-  draghandleStop() {
-
+  onClickSelectPlanet(planet_type) {
+    this.props.setSelectedPlanet(planet_type)
   }
 
   renderPlanetList() {
-    //FIXME: もっといい方法ないか
-    let list = []
-    for(let key in PlanetImgs) {
-      list.push(
-        <li key={key} className="planet" draggable="true"><img src={PlanetImgs[key]} className="planet-img"/></li>
-      )
-    }
-    return list
+    return(
+      _.map(PlanetImgs, (src_path, key) => {
+        return(
+          <li
+            key={key}
+            className="planet"
+            onClick={this.onClickSelectPlanet.bind(this, key)}>
+              <img src={src_path} className="planet-img"/>
+          </li>
+        )
+      })
+    )
   }
 
   renderDeleteIcons(deleteButtonsclasses) {
@@ -237,6 +237,7 @@ class Footer extends Component {
           <div className={planetHolderClasses} onClick={this.onClickOpenPlanetHolder.bind(this)}>
             <img src={ImgHolderOpen} className="planet-holder-img"/>
           </div>
+          <AssignmentForm />
           <ul id="planet-list">
             {this.renderPlanetList()}
           </ul>
@@ -254,6 +255,6 @@ class Footer extends Component {
 }
 
 export default connect(
-  ({ currentUser, selectedAssignments, modalIsOpen }) => ({ currentUser, selectedAssignments, modalIsOpen }),
-  { nullifySelectedAssignment, setModalStatus, resetModalStatus }
+  ({ currentUser, selectedAssignments, selectedPlanet, modalIsOpen }) => ({ currentUser, selectedAssignments, selectedPlanet, modalIsOpen }),
+  { nullifySelectedAssignment, setSelectedPlanet, resetSelectedPlanet, setModalStatus, resetModalStatus }
 )(Footer)
