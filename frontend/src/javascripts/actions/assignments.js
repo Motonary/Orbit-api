@@ -25,14 +25,14 @@ export function fetchDestroyedAssignments() {
 }
 
 export function createAssignment(
-  title, detail, deadline, planet_type, planet_size, orbit_pos, projectId
+  title, description, deadline, planet_type, planet_size, orbit_pos, projectId
 ) {
     return axios({
       method: 'post',
       url: `${ROOT_URL}/api/assignments`,
       headers: { 'Authorization': `Bearer ${JWT}` },
       data: {
-        assignment: { title, detail, deadline, planet_type, planet_size, orbit_pos },
+        assignment: { title, description, deadline, planet_type, planet_size, orbit_pos },
         project_id: projectId
       }
     }).then(res => {
@@ -67,4 +67,24 @@ export function restoreAssignment(assignmentId) {
       assignmentId
     }
   }).catch(() => alert('Sorry, something went wrong...'))
+}
+
+export function selectAssignment(assignmentId) {
+  return {
+    type: actionTypes.SELECT_ASSIGNMENT,
+    assignmentId
+  }
+}
+
+export function disselectAssignment(assignmentId) {
+  return {
+    type: actionTypes.DISSELECT_ASSIGNMENT,
+    assignmentId
+  }
+}
+
+export function nullifySelectedAssignment() {
+  return {
+    type: actionTypes.NULLIFY_SELECTED_ASSIGNMENT
+  }
 }

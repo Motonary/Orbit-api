@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { HeaderIcons } from '../../constants'
@@ -13,67 +14,58 @@ class Header extends Component {
   }
 
   renderHeaderLeft(pathname, currentUser) {
-    switch(true) {
-      case pathname === `/users/${currentUser.id}`:
-        return (
-          <div></div>
-        )
+    const rootPath = `/users/${currentUser.id}`
+    // mypage以外で表示(show: true), 例外判定('hidden': pathname !== rootpathなど)すると404notfound等を拾えない
+    const headerleftClasses = classNames({
+      'user-info': true,
+      'show-left': /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/history` || pathname === `${rootPath}/edit`
+    })
 
-      default:
-        return (
-          <a className="user-info" onClick={this.onClickHeaderLeft.bind(this)}>
-            <div className="user-img-container">
-              <img src={`http://localhost:3000${this.props.currentUser.avatar.url}`} className="user-img" />
-            </div>
-            <div className="user-name">
-              {currentUser.name}
-            </div>
-          </a>
-        )
-    }
+    return (
+      <a className={headerleftClasses} onClick={this.onClickHeaderLeft.bind(this)}>
+        <div className="user-img-container">
+          <img src={`http://localhost:3000${this.props.currentUser.avatar.url}`} className="user-img" />
+        </div>
+        <div className="user-name">
+          {currentUser.name}
+        </div>
+      </a>
+    )
   }
 
   renderHeaderRight(pathname, currentUser) {
-    switch(true) {
-      case /\/users\/[1-9]\d*\/edit/.test(pathname):
-        return (
-          <div className="links-container">
-            <Link to={`/users/${currentUser.id}/history`} className="icon-container">HISTORY
-              <img src={HeaderIcons[0]} className="icon" />
-            </Link>
-            <a onClick={this.onClickBackButton.bind(this)} className="back-icon-container">BACK
-              <img src={HeaderIcons[2]} className="icon" />
-            </a>
-          </div>
-        )
+    const rootPath = `/users/${currentUser.id}`
+    // mypage, project-page, setting-pageのみで表示(show-right: true)
+    const historyButtonClasses = classNames({
+      'icon-container': true,
+      'show-right': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/edit`
+    })
 
-      case /\/users\/[1-9]\d*\/history/.test(pathname):
-        return (
-          <div className="links-container">
-            <Link to={`/users/${currentUser.id}/edit`} className="icon-container">SETTING
-              <img src={HeaderIcons[1]} className="icon" />
-            </Link>
-            <a onClick={this.onClickBackButton.bind(this)} className="back-icon-container">BACK
-              <img src={HeaderIcons[2]} className="icon" />
-            </a>
-          </div>
-        )
+    // mypage, project-page, history-pageのみで表示(show-right: true)
+    const settingButtonClasses = classNames({
+      'icon-container': true,
+      'show-right': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/history`
+    })
 
-      case /(\/users\/[1-9]\d*)|(\/users\/[1-9]\d*\/projects\/[1-9]\d*)/.test(pathname):
-        return (
-          <div className="links-container">
-            <Link to={`/users/${currentUser.id}/history`} className="icon-container">HISTORY
-              <img src={HeaderIcons[0]} className="icon" />
-            </Link>
-            <Link to={`/users/${currentUser.id}/edit`} className="icon-container">SETTING
-              <img src={HeaderIcons[1]} className="icon" />
-            </Link>
-          </div>
-        )
+    // setting-page, history-pageのみで表示(show-right: true)
+    const backButtonClasses = classNames({
+      'back-icon-container': true,
+      'show-right': pathname === `${rootPath}/history` || pathname === `${rootPath}/edit`
+    })
 
-      default:
-        return <div>Something wrong...</div>
-    }
+    return(
+      <div className="links-container">
+        <Link to={`/users/${currentUser.id}/history`} className={historyButtonClasses}>HISTORY
+          <img src={HeaderIcons[0]} className="icon" />
+        </Link>
+        <Link to={`/users/${currentUser.id}/edit`} className={settingButtonClasses}>SETTING
+          <img src={HeaderIcons[1]} className="icon" />
+        </Link>
+        <a onClick={this.onClickBackButton.bind(this)} className={backButtonClasses}>BACK
+          <img src={HeaderIcons[2]} className="icon" />
+        </a>
+      </div>
+    )
   }
 
   render() {

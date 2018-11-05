@@ -16,10 +16,12 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/node_modules
 
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
+/node_modules
 
 .byebug_history
 /frontend/node_modules

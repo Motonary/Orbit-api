@@ -17,5 +17,6 @@ class Project < ApplicationRecord
   validates :fixed_star_type, presence: true
 
   enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
-                     :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
+  enum fixed_star_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
+                         :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
 end

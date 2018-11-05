@@ -3,6 +3,11 @@ Project.destroy_all
 Assignment.destroy_all
 SubAssignment.destroy_all
 
+fixed_star_keys = Project.fixed_star_types.keys
+planet_keys = Assignment.planet_types.keys
+size_keys = Assignment.planet_sizes.keys
+pos_keys = Assignment.orbit_pos.keys
+
 # A user
 User.create!({
   name: 'ririco722',
@@ -14,68 +19,67 @@ User.create!({
 # A project
 ririco = User.first
 
-ririco.projects.create!({
-  title: 'Create kanojo',
-  fixed_star_type: 'Earth'
-})
+4.times do |i|
+  ririco.projects.create!({
+    title: Faker::Lorem.word,
+    fixed_star_type: fixed_star_keys[rand(0...14)]
+  })
+end
 
 # Four assignments
 kanojo_project = Project.first
+4.times do |i|
+  kanojo_project.assignments.create!({
+    title: Faker::Lorem.word,
+    detail: Faker::Lorem.sentence,
+    deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
+    planet_type: planet_keys[rand(0...14)],
+    planet_size: size_keys[rand(0...2)],
+    orbit_pos: pos_keys[rand(0...2)],
+    destroyed_flag: false,
+    destroyed_at: nil
+  })
+end
 
-kanojo_project.assignments.create!({
-  title: 'Prepare much water',
-  detail: '35L is required',
-  deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
-  planet_type: 'Mars',
-  planet_size: 'large',
-  orbit_pos: 'inside',
-  destroyed_flag: true,
-  destroyed_at: 1.day.ago
-})
-
-kanojo_project.assignments.create!({
-  title: 'Prepare much carbon',
-  detail: '20kg is required',
-  deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
-  planet_type: 'Jupiter',
-  planet_size: 'medium',
-  orbit_pos: 'center',
-  done_flag: true
-})
-
-kanojo_project.assignments.create!({
-  title: 'Prepare a bit ammonia and so on',
-  detail: '4L ammonia and a little lime, rin, fluorine is required',
-  deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
-  planet_type: 'Saturn',
-  planet_size: 'small',
-  orbit_pos: 'inside',
-  destroyed_flag: true,
-  destroyed_at: Time.current.prev_month
-})
-
-kanojo_project.assignments.create!({
-  title: 'Synthesize them!',
-  detail: 'I\'ll get ideal kanojo and avoid lonely Christmas:)',
-  deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
-  planet_type: 'Venus',
-  planet_size: 'large',
-  orbit_pos: 'outside'
-})
+6.times do |i|
+  kanojo_project.assignments.create!({
+    title: Faker::Lorem.word,
+    detail: Faker::Lorem.sentence,
+    deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
+    planet_type: planet_keys[rand(0...14)],
+    planet_size: size_keys[rand(0...2)],
+    orbit_pos: pos_keys[rand(0...2)],
+    destroyed_flag: true,
+    destroyed_at: 1.days.ago
+  })
+end
+2.times do |i|
+  kanojo_project.assignments.create!({
+    title: Faker::Lorem.word,
+    detail: Faker::Lorem.sentence,
+    deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
+    planet_type: planet_keys[rand(0...14)],
+    planet_size: size_keys[rand(0...2)],
+    orbit_pos: pos_keys[rand(0...2)],
+    destroyed_flag: true,
+    destroyed_at: Time.current.last_year
+  })
+end
 
 # A sub_assignment
-create_kanojo_assignment = Assignment.find(4)
+create_kanojo_assignment1 = Assignment.find_by(id: 2)
+create_kanojo_assignment2 = Assignment.find_by(id: 8)
 
-create_kanojo_assignment.sub_assignments.create!({
-  title: 'Say goodbye to your virginity',
-  detail: 'Happy Christmas',
-  satellite_type: 'Earth',
+create_kanojo_assignment1.sub_assignments.create!({
+  title: Faker::Lorem.word,
+  detail: Faker::Lorem.sentence,
+  satellite_type: planet_keys[rand(0...14)],
 })
 
-create_kanojo_assignment.sub_assignments.create!({
-  title: 'Hogehoge',
-  detail: 'fugafuga',
-  satellite_type: 'Takoyaki',
+create_kanojo_assignment2.sub_assignments.create!({
+  title: Faker::Lorem.word,
+  detail: Faker::Lorem.sentence,
+  satellite_type: planet_keys[rand(0...14)],
   destroyed_flag: true,
-  destroyed_at: Time.current.next_year
+  destroyed_at: Time.current
 })

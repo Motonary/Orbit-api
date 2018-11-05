@@ -1,0 +1,34 @@
+$available-planet-size: 40px;
+
+#project-bar {
+  position: fixed;
+  top: 150px;
+  right: 40px;
+  border: solid 3px rgb(231, 72, 122);
+  border-radius: 50px;
+  z-index: 500px;
+
+  ul.projects-list {
+    width: 60px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0 5px;
+
+    li.revolving-project {
+      list-style: none;
+      width: $available-planet-size;
+      height: $available-planet-size;
+      margin: 5px auto;
+    }
+
+    img {
+      width: $available-planet-size;
+      height: $available-planet-size;
+    }
+  }
+}

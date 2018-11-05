@@ -28,11 +28,13 @@ class Assignment < ApplicationRecord
   validates :orbit_pos,   presence: true
   validates :project_id,  presence: true
 
-  enum planet_type: [:Uranus, :Mercury, :Pluto, :Saturn, :Earth, :Moon, :Love, :Mars,
-                     :Neptune, :Jupiter, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
+  enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Love, :Mars, :Neputune, :Sirius, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
   enum planet_size: [:small, :medium, :large]
-  enum orbit_pos:   [:inside, :center, :outside]
+  enum orbit_pos:   [:primo, :secundus, :tertius]
 
-  scope :search_with_user, -> user { joins(project: :users).merge(User.id_is user.id) }
-  scope :search_destroyed, -> { where(destroyed_flag: true) }
+  scope :fetch_with_user, -> user { joins(project: :users).merge(User.id_is user.id) }
+  scope :fetch_destroyed, -> { where(destroyed_flag: true) }
+  scope :fetch_revolving_on_orbit, -> (project_id, orbit_pos) {
+    where(project_id: project_id).where(orbit_pos: orbit_pos).where(destroyed_flag: false)
+  }
 end

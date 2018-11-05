@@ -17,13 +17,13 @@ class UserOnly extends Component {
         <div className="page-container">
           <Header {...this.props} />
           <Switch>
-            <Route exact path={`${url}/:userId/projects/:projectId`} component={ProjectPage} />
+            <Route exact path={`${url}/:userId/projects`} component={ProjectPage} />
             <Route exact path={`${url}/:userId/history`} component={HistoryPage} />
             <Route exact path={`${url}/:userId/edit`} component={ProfilePage} />
             <Route exact path={`${url}/:userId`} component={Mypage} />
             <Route render={() => <h2>404 Not Found</h2>} />
           </Switch>
-          <Footer />
+          <Footer {...this.props}/>
         </div>
       ) : <Redirect to="/guests/signin" />
     )
