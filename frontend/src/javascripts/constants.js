@@ -40,6 +40,7 @@ export const actionTypes = keyMirror({
   // User
   SET_CURRENT_USER: null,
   UPDATE_AVATAR: null,
+  UPDATE_PROFILE: null,
 
   // Projects
   FETCH_ALL_PROJECTS: null,

@@ -45,7 +45,7 @@ export function updateAvatar(newAvatar) {
     method: 'post',
     url: `${ROOT_URL}/api/users/update_avatar`,
     data: avatarFile,
-    headers: {'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${JWT}` }
+    headers: { 'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${JWT}` }
   }).then(res => {
       return {
         type: actionTypes.UPDATE_AVATAR,
@@ -54,6 +54,16 @@ export function updateAvatar(newAvatar) {
     }).catch(error => alert(error))
 }
 
-export function updateProfile() {
-  
+export function updateProfile(username, email, password) {
+  return axios({
+    method: 'patch',
+    url: `${ROOT_URL}/api/users/update_profile`,
+    data: { user: { name, email, password } },
+    headers: { 'Authorization': `Bearer ${JWT}` }
+  }).then(res => {
+      return {
+        type: actionTypes.UPDATE_PROFILE,
+        updatedUser: res.data
+      }
+    }).catch(() => alert('Sorry, something went wrong...'))
 }

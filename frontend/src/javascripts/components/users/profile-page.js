@@ -25,9 +25,7 @@ class ProfileUpdateForm extends Component {
   }
 
   onSubmit({ username, email, password, confirmation }) {
-    this.props.createUser(username, email, password, confirmation, (newUserId) => {
-      this.props.history.push(`/users/${newUserId}`)
-    })
+    this.props.createUser(username, email, password, confirmation)
   }
 
   render() {
@@ -55,6 +53,7 @@ class ProfileUpdateForm extends Component {
   }
 }
 
+// TODO: バリデーション厳格に
 function validate(values) {
   const errors = {}
 

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     post '/signup' => 'users#create'
     get '/current_user' => 'users#current'
     post 'users/update_avatar' => 'users#update_avatar'
+    patch 'users/update_profile' => 'users#update_profile'
 
     post 'user_token' => 'user_token#create'
 

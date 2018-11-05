@@ -16,7 +16,6 @@ class Project < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   validates :fixed_star_type, presence: true
 
-  # TODO: たこ焼きとかサッカーボール追加
   enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
                      :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
 end
