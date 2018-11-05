@@ -16,6 +16,14 @@ import { RevivalImg } from '../../constants'
 import { DeleteIcons } from '../../constants'
 
 class Footer extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      clickedStar: null
+    }
+  }
+
   componentDidMount() {
     let planet_list = document.getElementById("planet-list")
     planet_list.style.display = 'none'
@@ -186,11 +194,20 @@ class Footer extends Component {
     target.style.display = 'none'
   }
 
-  onClickSelectStar(star_type) {
-    const target = document.getElementById('form-balloon')
+  onClickSelectStar(star_type, e) {
+    const form_balloon = document.getElementById('form-balloon')
+    const prev_target = this.state.clickedStar
+    const target = e.target.parentNode
+
+    if(prev_target){
+      prev_target.classList.remove('current-clicked')
+    }
+    target.classList.add('current-clicked')
+
+    this.setState({clickedStar: target})
 
     this.props.setSelectedStar(star_type)
-    target.style.display = 'block'
+    form_balloon.style.display = 'block'
   }
 
   renderPlanetList() {
@@ -199,6 +216,7 @@ class Footer extends Component {
         return(
           <li
             key={key}
+            name={key}
             className="planet"
             onClick={this.onClickSelectStar.bind(this, key)}>
               <img src={src_path} className="planet-img"/>

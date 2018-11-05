@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm} from 'redux-form'
 import { connect } from 'react-redux'
+import classNames from 'classnames'
 
 import { setSelectedStar, resetSelectedStar } from '../../actions/common'
 import { createAssignment } from '../../actions/assignments'
@@ -13,10 +14,17 @@ class AssignmentForm extends Component {
   }
 
   renderField({ placeholder, type, input, value, meta: { touched, error } }) {
-    const classNames =
-      `form-group ${touched && error ? 'has-danger' : ''} assignment-fieled-style assignment-fieled-text ${placeholder === 'deadline' ? 'deadline' : ''} ${placeholder === 'planet type' ? 'planet_type' : ''}`
+    const fieldClasses = classNames({
+      'form-group': true,
+      'has-danger': touched && error,
+      'assignment-fieled-style': true,
+      'assignment-fieled-text': true,
+      'deadline': placeholder === 'deadline',
+      'planet_type': placeholder === 'planet type'
+    })
+
     return(
-      <div className={classNames}>
+      <div className={fieldClasses}>
         <input
           className={`text-style ${placeholder === 'description' ? 'description' : ''} ${placeholder === 'deadline' ? 'deadline' : ''}`}
           placeholder={placeholder}
@@ -77,6 +85,8 @@ class AssignmentForm extends Component {
 
 function validate(values) {
   const errors = {}
+
+  //TODO: 現状validatが適当　→　rails側と絡めて後々実装
 
   if (!values.orbit_pos) {
     errors.orbit_pos = "Orbit Position required"
