@@ -59,6 +59,6 @@ class Api::AssignmentsController < ApplicationController
   private
 
     def assignment_params
-      params.require(:assignment).permit(:title, :detail, :deadline, :planet_type, :planet_size, :orbit_pos)
+      params.require(:assignment).permit(:title, :description, :deadline, :planet_type, :planet_size, :orbit_pos)
     end
 end

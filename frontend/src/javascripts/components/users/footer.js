@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import _ from 'lodash'
 import anime from 'animejs'
 
 import ConfirmModal from '../molecules/modal'
+import AssignmentForm from '../molecules/assignment-form'
 
 import { nullifySelectedAssignment } from '../../actions/assignments'
-import { setModalStatus, resetModalStatus } from '../../actions/common'
+import { setSelectedStar, resetSelectedStar, setModalStatus, resetModalStatus } from '../../actions/common'
 
 import ImgHolderOpen from '../../../images/footer/planet_holder_btn.png'
 import { PlanetImgs } from '../../constants'
@@ -14,6 +16,14 @@ import { RevivalImg } from '../../constants'
 import { DeleteIcons } from '../../constants'
 
 class Footer extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      clickedStar: null
+    }
+  }
+
   componentDidMount() {
     let planet_list = document.getElementById("planet-list")
     planet_list.style.display = 'none'
@@ -166,8 +176,6 @@ class Footer extends Component {
     const planet_list = document.getElementById("planet-list")
     //const planet_holder = document.getElementById("planet-holder")
 
-    this.motionControll()
-
     // メニュー表示/非表示
     if(target_class[0].classList.contains("click-rotate")) {
       target_class[0].classList.remove("click-rotate")
@@ -181,27 +189,41 @@ class Footer extends Component {
       planet_list.style.width = '400px'
       //planet_holder.classList.add('holder-border');
     }
+
+    const target = document.getElementById('form-balloon')
+    target.style.display = 'none'
   }
 
-  dragHandleStart() {
-    this.motionControll()
-  }
-  handleDrag() {
+  onClickSelectStar(star_type, e) {
+    const form_balloon = document.getElementById('form-balloon')
+    const prev_target = this.state.clickedStar
+    const target = e.target.parentNode
 
-  }
-  draghandleStop() {
+    if(prev_target){
+      prev_target.classList.remove('current-clicked')
+    }
+    target.classList.add('current-clicked')
 
+    this.setState({clickedStar: target})
+
+    this.props.setSelectedStar(star_type)
+    form_balloon.style.display = 'block'
   }
 
   renderPlanetList() {
-    //FIXME: もっといい方法ないか
-    let list = []
-    for(let key in PlanetImgs) {
-      list.push(
-        <li key={key} className="planet" draggable="true"><img src={PlanetImgs[key]} className="planet-img"/></li>
-      )
-    }
-    return list
+    return(
+      _.map(PlanetImgs, (src_path, key) => {
+        return(
+          <li
+            key={key}
+            name={key}
+            className="planet"
+            onClick={this.onClickSelectStar.bind(this, key)}>
+              <img src={src_path} className="planet-img"/>
+          </li>
+        )
+      })
+    )
   }
 
   renderDeleteIcons(deleteButtonsclasses) {
@@ -237,6 +259,7 @@ class Footer extends Component {
           <div className={planetHolderClasses} onClick={this.onClickOpenPlanetHolder.bind(this)}>
             <img src={ImgHolderOpen} className="planet-holder-img"/>
           </div>
+          <AssignmentForm />
           <ul id="planet-list">
             {this.renderPlanetList()}
           </ul>
@@ -254,6 +277,6 @@ class Footer extends Component {
 }
 
 export default connect(
-  ({ currentUser, selectedAssignments, modalIsOpen }) => ({ currentUser, selectedAssignments, modalIsOpen }),
-  { nullifySelectedAssignment, setModalStatus, resetModalStatus }
+  ({ currentUser, selectedAssignments, selectedStar, modalIsOpen }) => ({ currentUser, selectedAssignments, selectedStar, modalIsOpen }),
+  { nullifySelectedAssignment, setSelectedStar, resetSelectedStar, setModalStatus, resetModalStatus }
 )(Footer)
