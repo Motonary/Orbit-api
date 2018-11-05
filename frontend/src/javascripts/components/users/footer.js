@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import anime from 'animejs'
-import Draggable, { DraggableCore } from 'react-draggable';
 
 import ConfirmModal from '../molecules/modal'
 
@@ -199,13 +198,7 @@ class Footer extends Component {
     let list = []
     for(let key in PlanetImgs) {
       list.push(
-        <Draggable
-          offsetParent={document.getElementById('page-container')}
-          onStart={this.dragHandleStart()}
-          onDrag={this.handleDrag()}
-          onStop={this.draghandleStop()}>
-          <li key={key} className="planet" draggable="true"><img src={PlanetImgs[key]} className="planet-img"/></li>
-        </Draggable>
+        <li key={key} className="planet" draggable="true"><img src={PlanetImgs[key]} className="planet-img"/></li>
       )
     }
     return list
