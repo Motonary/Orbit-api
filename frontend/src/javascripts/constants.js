@@ -39,6 +39,7 @@ export const ROOT_URL = 'http://localhost:3000'
 export const actionTypes = keyMirror({
   // User
   SET_CURRENT_USER: null,
+  UPDATE_AVATAR: null,
 
   // Projects
   FETCH_ALL_PROJECTS: null,

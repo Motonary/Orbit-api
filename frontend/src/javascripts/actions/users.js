@@ -49,7 +49,7 @@ export function updateAvatar(newAvatar) {
   }).then(res => {
       return {
         type: actionTypes.UPDATE_AVATAR,
-        newMessageData: res.data
+        newAvatarUrl: res.data
       }
     }).catch(error => alert(error))
 }

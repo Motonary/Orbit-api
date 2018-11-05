@@ -12,7 +12,7 @@ class Api::UsersController < ApplicationController
 
   def update_avatar
     current_user.avatar = params[:avatar]
-    current_user.save! and head :ok
+    current_user.save! and render json: current_user.avatar
   end
 
   private
