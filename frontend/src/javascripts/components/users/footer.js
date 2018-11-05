@@ -23,6 +23,7 @@ class Footer extends Component {
 
   onClickOpenModal() {
     this.props.setModalStatus(true)
+    this.motionControll()
   }
 
   onClickDestroyPlanets(selectedAssignments) {
@@ -144,7 +145,7 @@ class Footer extends Component {
     updateCoords()
     removeImg()
     animateParticules(pointerX, pointerY)
-    //this.props.nullifySelectedAssignment()
+    this.props.nullifySelectedAssignment()
   }
 
   motionControll() {
@@ -183,7 +184,7 @@ class Footer extends Component {
       planet_list.style.width = '400px'
       //planet_holder.classList.add('holder-border');
     }
-    
+
     const target = document.getElementById('form-balloon')
     target.style.display = 'none'
   }
