@@ -67,14 +67,22 @@ class Footer extends Component {
     }
 
     function updateCoords() {
-      pointerX = 100
-      pointerY = 100
+      pointerX = 60
+      pointerY = 60
     }
-
     function removeImg() {
       parent.map((doc) => {
         const child = doc.children[1]
         doc.removeChild(child)
+      })
+    }
+
+    function removePlanet() {
+      parent.map((doc) => {
+        let parent = doc.parentNode.parentNode
+        let child = doc.parentNode
+        console.log(parent,child)
+        parent.removeChild(child)
       })
     }
 
@@ -146,6 +154,7 @@ class Footer extends Component {
     removeImg()
     animateParticules(pointerX, pointerY)
     this.props.nullifySelectedAssignment()
+    removePlanet()
   }
 
   motionControll() {
