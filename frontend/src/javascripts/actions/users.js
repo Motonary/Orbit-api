@@ -53,3 +53,7 @@ export function updateAvatar(newAvatar) {
       }
     }).catch(error => alert(error))
 }
+
+export function updateProfile() {
+  
+}

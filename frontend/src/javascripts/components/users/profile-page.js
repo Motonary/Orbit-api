@@ -35,7 +35,7 @@ class ProfileUpdateForm extends Component {
       <div id="setting-page">
         <div className="avatar-wrapper">
           <div className="avatar-container">
-            {/* Production環境ではURL変える*/}
+            {/* Production環境ではURL変える */}
             <img src={`http://localhost:3000${this.props.currentUser.avatar.url}`} className="avatar" />
           </div>
         </div>
