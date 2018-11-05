@@ -45,9 +45,6 @@ class ConfirmModal extends Component {
 
   closeModal(isDestroy) {
     this.props.resetModalStatus(false)
-    if(isDestroy) {
-      this.props.igniteDestroyPlanets(true)
-    }
   }
 
   render(){

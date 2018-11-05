@@ -14,6 +14,9 @@ import ImgHolderOpen from '../../../images/footer/planet_holder_btn.png'
 import { PlanetImgs } from '../../constants'
 import { RevivalImg } from '../../constants'
 import { DeleteIcons } from '../../constants'
+import { DeleteActions } from '../../constants'
+
+import '../../../stylesheets/destroy_animate.scss'
 
 class Footer extends Component {
   constructor(props) {
@@ -31,17 +34,69 @@ class Footer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if(this.props.isDestroyIgnited && !prevProps.isDestroyIgnited) {
+    if(this.props.isDestroyIgnited && !this.props.modalIsOpen) {
       if(this.props.selectedAssignments) {
-          console.log("didupdate")
-          this.onClickDestroyPlanets(this.props.selectedAssignments)
+        console.log("didupdate")
+        this.onIgniteDestroyAnimation()
       }
     }
   }
 
-  onClickOpenModal() {
+  onClickOpenModal(actionKey) {
     this.props.setModalStatus(true)
+    this.props.igniteDestroyPlanets(actionKey)
     this.motionControll()
+  }
+
+  waitFunc(sec) {
+    return function() {
+      return new Promise(function(resolve) {
+        setTimeout(resolve, sec*1000)
+      })
+    }
+  }
+
+  onIgniteDestroyAnimation() {
+    const targetDom = document.getElementById('project-orbit')
+    const insertDom = document.getElementById('fixed-star')
+    const actionKey = this.props.isDestroyIgnited
+    let newDiv = document.createElement('div')
+    let newImg = document.createElement('img')
+    newDiv.classList.add('destroy-action')
+    newImg.src = DeleteActions[actionKey]
+    newDiv.appendChild(newImg)
+    targetDom.insertBefore(newDiv, insertDom)
+    this.makeMovement()
+  }
+  makeMovement() {
+    const movDom = document.getElementsByClassName('destroy-action')[0]
+    let targetDom
+    if(this.props.selectedAssignments) {
+      console.log(movDom)
+      targetDom = document.getElementById(this.props.selectedAssignments[0])
+      console.log(targetDom)
+    }
+
+    // 要素の位置座標を取得
+    const clientRectMov = movDom.getBoundingClientRect()
+    const clientRectTarget = targetDom.getBoundingClientRect()
+
+    // 画面の左端から、要素の左端までの距離
+    const xM = clientRectMov.left
+    const xT = clientRectTarget.left
+    // 画面の上端から、要素の上端までの距離
+    const yM = clientRectMov.top
+    const yT = clientRectTarget.top
+
+    const disX = xT - xM
+    const disY = yT - yM
+
+    movDom.classList.add('move-animation')
+    movDom.style.transform = `translateX(${disX}px) translateY(${disY}px)`
+
+    Promise.resolve()
+      .then(this.waitFunc(2.5))
+      .then(() => {this.onClickDestroyPlanets(this.props.selectedAssignments)})
   }
 
   removePlanet(parent) {
@@ -114,6 +169,13 @@ class Footer extends Component {
       })
     }
 
+    function removeDestroyImg() {
+      const targetDom = document.getElementById('project-orbit')
+      const movDom = document.getElementsByClassName('destroy-action')[0]
+
+      targetDom.removeChild(movDom)
+    }
+
     function setParticuleDirection(p) {
       var angle = anime.random(0, 360) * Math.PI / 180
       var value = anime.random(50, 180)
@@ -180,8 +242,9 @@ class Footer extends Component {
     render.play()
     updateCoords()
     removeImg()
+    removeDestroyImg()
     animateParticules(pointerX, pointerY)
-    this.props.resetDestroyPlanets(false)
+    this.props.resetDestroyPlanets(null)
     this.removeAssignmentData(parent)
     this.removePlanet(parent)
     this.props.nullifySelectedAssignment()
@@ -260,13 +323,15 @@ class Footer extends Component {
   }
 
   renderDeleteIcons(deleteButtonsclasses) {
-    return DeleteIcons.map(deleteIcon => {
-      return (
-        <li key={deleteIcon} className={deleteButtonsclasses} onClick={this.onClickOpenModal.bind(this)}>
-          <img src={deleteIcon} className="delete-btn"/>
-        </li>
-      )
-    })
+    return (
+      _.map(DeleteIcons, (deleteIcon, key) => {
+        return (
+          <li key={key} className={deleteButtonsclasses} onClick={this.onClickOpenModal.bind(this, key)}>
+            <img src={deleteIcon} className="delete-btn"/>
+          </li>
+        )
+      })
+    )
   }
 
   render() {
