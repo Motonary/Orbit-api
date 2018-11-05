@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import _ from 'lodash'
+//import _ from 'lodash'
 import { JWT } from '../../constants'
 
 import MypageOrbit from '../molecules/mypage-orbit'
@@ -12,7 +12,6 @@ import ImgUser from '../../../images/main/user_default_icon.png'
 class MyPage extends Component {
   componentDidMount() {
     // TODO: 最初ログインした時Projectが設定されないバグ修正
-    console.log(JWT)
     if (JWT) this.props.fetchRevolvingProjects()
   }
 
@@ -36,7 +35,6 @@ class MyPage extends Component {
     if (currentUser.id != this.props.match.params.userId) {
       return <Redirect to={`/users/${currentUser.id}`} />
     }
-    console.log(this.props)
 
     //TODO: 歪みが子要素まで反映されているので親要素のみに留められないか
     return(

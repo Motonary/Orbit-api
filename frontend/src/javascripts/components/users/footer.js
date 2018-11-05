@@ -183,11 +183,23 @@ class Footer extends Component {
     }
   }
 
+  dragHandleStart() {
+    this.motionControll()
+  }
+  handleDrag() {
+
+  }
+  draghandleStop() {
+
+  }
+
   renderPlanetList() {
     //FIXME: もっといい方法ないか
     let list = []
     for(let key in PlanetImgs) {
-      list.push(<li key={key} className="planet" draggable="true"><img src={PlanetImgs[key]} className="planet-img"/></li>)
+      list.push(
+        <li key={key} className="planet" draggable="true"><img src={PlanetImgs[key]} className="planet-img"/></li>
+      )
     }
     return list
   }

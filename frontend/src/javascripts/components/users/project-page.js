@@ -8,8 +8,10 @@ import { fetchRevolvingAssignments,
          selectAssignment,
          disselectAssignment } from '../../actions/assignments'
 import { fetchRevolvingProjects, setDefaultProject } from '../../actions/projects'
+
 import { PlanetImgs } from '../../constants'
 import CircleOrbit from '../molecules/circle-orbit'
+import ProjectBar from '../molecules/project-bar'
 
 class ProjectPage extends Component {
   componentDidMount() {
@@ -29,12 +31,6 @@ class ProjectPage extends Component {
 
   onClickPlanet() {
     // TODO: タスク詳細のポップアップ実装,
-  }
-
-  onClickFixedStarOnBar(nextProjectId) {
-    this.props.changeCurrentProject(this.props.revolvingProjects[nextProjectId], () => {
-      this.props.fetchRevolvingAssignments(nextProjectId)
-    })
   }
 
   onDropPlanet(title, detail, deadline, planet_type, planet_size, orbit_pos) {
@@ -86,18 +82,22 @@ class ProjectPage extends Component {
       return <Redirect to={correctPath} />
     }
 
-    // console.log(this.props.currentProject)
+    if (!this.props.currentProject) { return(<div>Loading....</div>) }
+
     // console.log(this.props.projectsOnBar)
     // this.props.projectsOnBarに、バーに表示されるべき恒星一覧が配列に格納されてるのでmapとかでrenderして下さい
     // nextProjectIdを渡してthis.onClickFixedStarOnBarを発火すると動的にreducerが変化します
 
     return(
-      <div id="project-orbit">
-        <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs.Uranus} /></div>
-        <CircleOrbit orbit="primo"/>
-        <CircleOrbit orbit="secundus"/>
-        <CircleOrbit orbit="tertius"/>
-        {/*<div onClick={this.onClickDestroyPlanets.bind(this)}>YOOOO</div>*/}
+      <div>
+        <div id="project-orbit">
+          <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs[this.props.currentProject.fixed_star_type]} /></div>
+          <CircleOrbit orbit="primo"/>
+          <CircleOrbit orbit="secundus"/>
+          <CircleOrbit orbit="tertius"/>
+          {/*<div onClick={this.onClickDestroyPlanets.bind(this)}>YOOOO</div>*/}
+        </div>
+        <ProjectBar />
       </div>
     )
   }

@@ -23,7 +23,7 @@ class MypageOrbit extends Component {
 
     if (!this.props.revolvingProjects) { return <div>Loading</div> }
     return (
-      _.map(this.props.revolvingProjects, (project, key) => {
+      _.map(this.props.revolvingProjects, (project) => {
         ++i
         return(
           <div key={project.id} className={`common ${pos[i]} mypage-orbit-motion start-animation`}>
