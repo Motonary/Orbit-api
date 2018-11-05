@@ -21,7 +21,7 @@ class ProfileUpdateForm extends Component {
   }
 
   onSelectAvatar(e) {
-    this.props.updateAvatar(e.target.files[0])
+    if (window.confirm('アイコンを本当に変更しますか？')) this.props.updateAvatar(e.target.files[0])
   }
 
   onSubmit({ username, email, password, confirmation }) {
@@ -32,14 +32,18 @@ class ProfileUpdateForm extends Component {
 
   render() {
     return(
-      <div id="project-list">
-        <div id="user-info">
-          <div className="user-img-container">
-            <img src={this.props.currentUser.avatar.url} className="user-img" />
+      <div id="setting-page">
+        <div className="avatar-wrapper">
+          <div className="avatar-container">
+            {/* Production環境ではURL変える*/}
+            <img src={`http://localhost:3000${this.props.currentUser.avatar.url}`} className="avatar" />
           </div>
         </div>
-        <input name="avatar" accept='image/*' type="file" onChange={this.onSelectAvatar.bind(this)} />
-        <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))} className="signup-form">
+        <label className="submit-btn for-avatar">
+          SELECT AVATAR
+          <input className="display-none" name="avatar" accept='image/*' type="file" onChange={this.onSelectAvatar.bind(this)} />
+        </label>
+        <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))} className="update-form">
           <Field placeholder="NAME" name="username" type="text" component={this.renderField} />
           <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
           <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />

@@ -23,7 +23,7 @@ class Header extends Component {
         return (
           <a className="user-info" onClick={this.onClickHeaderLeft.bind(this)}>
             <div className="user-img-container">
-              <img src={currentUser.avatar.url} className="user-img" />
+              <img src={`http://localhost:3000${this.props.currentUser.avatar.url}`} className="user-img" />
             </div>
             <div className="user-name">
               {currentUser.name}
