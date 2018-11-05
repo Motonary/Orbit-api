@@ -16,9 +16,25 @@ import { RevivalImg } from '../../constants'
 import { DeleteIcons } from '../../constants'
 
 class Footer extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      canDestroy: false
+    }
+  }
+
   componentDidMount() {
     let planet_list = document.getElementById("planet-list")
     planet_list.style.display = 'none'
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if(this.state.canDestroy && !prevState.canDestroy) {
+      if(this.props.selectedAssignments) {
+          this.onClickDestroyPlanets.bind(this, this.props.selectedAssignments)
+      }
+    }
   }
 
   onClickOpenModal() {
@@ -81,7 +97,7 @@ class Footer extends Component {
       parent.map((doc) => {
         let parent = doc.parentNode.parentNode
         let child = doc.parentNode
-        console.log(parent,child)
+        //console.log(parent,child)
         parent.removeChild(child)
       })
     }
@@ -155,6 +171,10 @@ class Footer extends Component {
     animateParticules(pointerX, pointerY)
     this.props.nullifySelectedAssignment()
     removePlanet()
+  }
+
+  igniteDestroyPlanets() {
+    this.setState({canDestroy: true})
   }
 
   motionControll() {
@@ -264,7 +284,7 @@ class Footer extends Component {
             {this.renderDeleteIcons(deleteButtonsclasses)}
           </ul>
         </div>
-        <ConfirmModal parentMethod={this.onClickDestroyPlanets} />
+        <ConfirmModal igniteDestroyPlanets={this.igniteDestroyPlanets.bind(this)} />
       </div>
     )
   }

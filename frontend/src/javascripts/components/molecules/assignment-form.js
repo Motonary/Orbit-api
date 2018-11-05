@@ -30,16 +30,14 @@ class AssignmentForm extends Component {
     )
   }
 
-  onSubmit({ title, description, deadline, planet_type, planet_size, orbit_pos, projectId }) {
+  onSubmit({ title, description, deadline, planet_size, orbit_pos }) {
     const target = document.getElementById('form-balloon')
-    //const planet_type = this.props.selectedStar
+    const planet_type = this.props.selectedStar
+    const project_id = this.props.currentProject.id
 
-    this.props.createAssignment(title, detail, deadline, planet_type, planet_size, orbit_pos, projectId)
+    this.props.createAssignment(title, description, deadline, planet_type, planet_size, orbit_pos, project_id)
     this.props.resetSelectedStar()
     target.style.display = 'none'
-
-    console.log(target)
-    console.log(planet_type)
   }
 
   render(){
@@ -112,4 +110,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: 'AssignmentForm'
-})(connect(({selectedStar}) => ({selectedStar}), { createAssignment, setSelectedStar, resetSelectedStar })(AssignmentForm))
+})(connect(({selectedStar, currentProject}) => ({selectedStar, currentProject}), { createAssignment, setSelectedStar, resetSelectedStar })(AssignmentForm))
