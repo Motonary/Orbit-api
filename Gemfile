@@ -14,6 +14,8 @@ gem 'rack-cors'
 gem 'knock'
 gem 'faker'
 gem 'annotate'
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -34,7 +36,7 @@ end
 
 group :production do
   gem 'pg', '0.20.0'
-  # gem 'fog'
+  gem 'fog'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

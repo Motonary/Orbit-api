@@ -26,6 +26,8 @@
 .byebug_history
 /frontend/node_modules
 /frontend/dist/bundle.js
+/node_modules
+/public/uploads
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

@@ -8,6 +8,7 @@
 #  password_digest :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  avatar          :string
 #
 
 class User < ApplicationRecord
@@ -20,7 +21,10 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i },
                     uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }
+  # passwordのvalidationがあるとアバター変える時エラーが起きる
+  # validates :password, presence: true, length: { minimum: 6 }
+
+  mount_uploader :avatar, AvatarUploader
 
   scope :id_is, -> user_id { where(id: user_id) }
 
