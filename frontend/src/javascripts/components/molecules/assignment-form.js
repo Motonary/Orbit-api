@@ -30,16 +30,14 @@ class AssignmentForm extends Component {
     )
   }
 
-  onSubmit({ title, description, deadline, planet_type, planet_size, orbit_pos, projectId }) {
+  onSubmit({ title, description, deadline, planet_size, orbit_pos}) {
     const target = document.getElementById('form-balloon')
-    //const planet_type = this.props.selectedStar
+    const planet_type = this.props.selectedStar
+    const project_id = this.props.currentProject.id
 
-    this.props.createAssignment(title, detail, deadline, planet_type, planet_size, orbit_pos, projectId)
+    this.props.createAssignment(title, description, deadline, planet_type, planet_size, orbit_pos, project_id)
     this.props.resetSelectedStar()
     target.style.display = 'none'
-
-    console.log(target)
-    console.log(planet_type)
   }
 
   render(){
@@ -63,7 +61,6 @@ class AssignmentForm extends Component {
             <Field placeholder="description" name="description" type="textarea" component={this.renderField} />
           </div>
           <div className="form-line-4">
-            <Field placeholder="planet type" name="planet_type" type="hidden" value={this.props.selectedStar} component={this.renderField} />
             <Field name="planet_size" component="select" className="assignment-select-fieled-style">
               <option value="" className=" assignment-fieled-text">SIZE</option>
               <option value="large" className="assignment-fieled-text">large</option>
@@ -83,8 +80,6 @@ function validate(values) {
 
   if (!values.orbit_pos) {
     errors.orbit_pos = "Orbit Position required"
-  } else if(values.orbit_pos > 4 || values.orbit_pos < 1) {
-    errors.orbit_pos = "Set Orbit Position between 1..3"
   }
 
   if (!values.title) {
@@ -102,8 +97,8 @@ function validate(values) {
   } else if (values.description.length > 140) {
     errors.description = "Too long description"
   }
-  if (!values.planet_type) {
-    errors.orbit_pos = "Orbit Position required"
+  if (!values.planet_size) {
+    errors.planet_size = "Orbit Position required"
   }
 
   return errors
@@ -112,4 +107,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: 'AssignmentForm'
-})(connect(({selectedStar}) => ({selectedStar}), { createAssignment, setSelectedStar, resetSelectedStar })(AssignmentForm))
+})(connect(({selectedStar, currentProject}) => ({selectedStar, currentProject}), { createAssignment, setSelectedStar, resetSelectedStar })(AssignmentForm))

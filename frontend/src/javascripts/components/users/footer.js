@@ -168,8 +168,6 @@ class Footer extends Component {
     const planet_list = document.getElementById("planet-list")
     //const planet_holder = document.getElementById("planet-holder")
 
-    this.motionControll()
-
     // メニュー表示/非表示
     if(target_class[0].classList.contains("click-rotate")) {
       target_class[0].classList.remove("click-rotate")
@@ -183,7 +181,7 @@ class Footer extends Component {
       planet_list.style.width = '400px'
       //planet_holder.classList.add('holder-border');
     }
-    
+
     const target = document.getElementById('form-balloon')
     target.style.display = 'none'
   }
