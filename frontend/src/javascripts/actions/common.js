@@ -3,7 +3,7 @@ import { actionTypes } from '../constants'
 export function setSelectedStar(star_type) {
   return {
     type: actionTypes.SELECT_STAR,
-    planet_type
+    star_type
   }
 }
 

@@ -183,10 +183,16 @@ class Footer extends Component {
       planet_list.style.width = '400px'
       //planet_holder.classList.add('holder-border');
     }
+    
+    const target = document.getElementById('form-balloon')
+    target.style.display = 'none'
   }
 
   onClickSelectStar(star_type) {
+    const target = document.getElementById('form-balloon')
+
     this.props.setSelectedStar(star_type)
+    target.style.display = 'block'
   }
 
   renderPlanetList() {
