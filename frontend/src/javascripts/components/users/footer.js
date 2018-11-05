@@ -8,7 +8,7 @@ import ConfirmModal from '../molecules/modal'
 import AssignmentForm from '../molecules/assignment-form'
 
 import { nullifySelectedAssignment } from '../../actions/assignments'
-import { setSelectedPlanet, resetSelectedPlanet, setModalStatus, resetModalStatus } from '../../actions/common'
+import { setSelectedStar, resetSelectedStar, setModalStatus, resetModalStatus } from '../../actions/common'
 
 import ImgHolderOpen from '../../../images/footer/planet_holder_btn.png'
 import { PlanetImgs } from '../../constants'
@@ -185,8 +185,8 @@ class Footer extends Component {
     }
   }
 
-  onClickSelectPlanet(planet_type) {
-    this.props.setSelectedPlanet(planet_type)
+  onClickSelectStar(star_type) {
+    this.props.setSelectedStar(star_type)
   }
 
   renderPlanetList() {
@@ -196,7 +196,7 @@ class Footer extends Component {
           <li
             key={key}
             className="planet"
-            onClick={this.onClickSelectPlanet.bind(this, key)}>
+            onClick={this.onClickSelectStar.bind(this, key)}>
               <img src={src_path} className="planet-img"/>
           </li>
         )
@@ -255,6 +255,6 @@ class Footer extends Component {
 }
 
 export default connect(
-  ({ currentUser, selectedAssignments, selectedPlanet, modalIsOpen }) => ({ currentUser, selectedAssignments, selectedPlanet, modalIsOpen }),
-  { nullifySelectedAssignment, setSelectedPlanet, resetSelectedPlanet, setModalStatus, resetModalStatus }
+  ({ currentUser, selectedAssignments, selectedStar, modalIsOpen }) => ({ currentUser, selectedAssignments, selectedStar, modalIsOpen }),
+  { nullifySelectedAssignment, setSelectedStar, resetSelectedStar, setModalStatus, resetModalStatus }
 )(Footer)

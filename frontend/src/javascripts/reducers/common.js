@@ -1,11 +1,11 @@
 import { actionTypes } from '../constants'
 
-export function selectedPlanet(state = null, action) {
+export function selectedStar(state = null, action) {
   switch (action.type) {
-    case actionTypes.SELECT_PLANET:
-      return action.planet
+    case actionTypes.SELECT_STAR:
+      return action.star_type
 
-    case actionTypes.DISSELECT_PLANET:
+    case actionTypes.DISSELECT_STAR:
       return null
 
     default:

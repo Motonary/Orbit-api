@@ -1,16 +1,15 @@
 import { actionTypes } from '../constants'
 
-export function setSelectedPlanet(planet) {
+export function setSelectedStar(star_type) {
   return {
-    type: actionTypes.SELECT_PLANET,
-    planet
+    type: actionTypes.SELECT_STAR,
+    planet_type
   }
 }
 
-export function resetSelectedPlanet(planet) {
+export function resetSelectedStar() {
   return {
-    type: actionTypes.DISSELECT_PLANET,
-    planet
+    type: actionTypes.DISSELECT_STAR
   }
 }
 

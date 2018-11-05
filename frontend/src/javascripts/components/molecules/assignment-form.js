@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm} from 'redux-form'
 import { connect } from 'react-redux'
 
-import { setSelectedPlanet, resetSelectedPlanet } from '../../actions/common'
+import { setSelectedStar, resetSelectedStar } from '../../actions/common'
 import { createAssignment } from '../../actions/assignments'
 
 class AssignmentForm extends Component {
@@ -32,7 +32,7 @@ class AssignmentForm extends Component {
 
   render(){
     return(
-      <div className="detail-balloon">
+      <div className="form-balloon">
         <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
           <Field placeholder="Target Orbit" name="orbit_pos" type="number" component={this.renderField} />
           <Field placeholder="Assignment title" name="title" type="text" component={this.renderField} />
@@ -50,10 +50,22 @@ class AssignmentForm extends Component {
 function validate(values) {
   const errors = {}
 
+  if (!values.orbit_pos) {
+    errors.orbit_pos = "Orbit Position required"
+  } else if(values.orbit_pos > 4 || values.orbit_pos < 1) {
+    errors.orbit_pos = "Set Orbit Position between 1..3"
+  }
+
   if (!values.title) {
     errors.title = "Title required"
   } else if(values.email.length > 50) {
     errors.title = "Too long title"
+  }
+
+  if (!values.deadline) {
+    errors.deadline = "deadline required"
+  } else if(values.email.length > 50) {
+    errors.deadline = "Too long title"
   }
 
   if (!values.description) {
@@ -61,10 +73,16 @@ function validate(values) {
   } else if (values.description.length > 140) {
     errors.description = "Too long description"
   }
+  if (!values.title) {
+    errors.title = "Title required"
+  } else if(values.email.length > 50) {
+    errors.title = "Too long title"
+  }
+
   return errors
 }
 
 export default reduxForm({
   validate,
   form: 'AssignmentForm'
-})(connect(({selectedPlanet}) => {(selectedPlanet)}, { createAssignment, setSelectedPlanet, resetSelectedPlanet })(AssignmentForm))
+})(connect(({selectedStar}) => ({selectedStar}), { createAssignment, setSelectedStar, resetSelectedStar })(AssignmentForm))
