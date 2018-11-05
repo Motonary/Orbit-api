@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm} from 'redux-form'
 import { connect } from 'react-redux'
+import classNames from 'classnames'
 
 import { setSelectedStar, resetSelectedStar } from '../../actions/common'
 import { createAssignment } from '../../actions/assignments'
@@ -13,10 +14,17 @@ class AssignmentForm extends Component {
   }
 
   renderField({ placeholder, type, input, value, meta: { touched, error } }) {
-    const classNames =
-      `form-group ${touched && error ? 'has-danger' : ''} assignment-fieled-style assignment-fieled-text ${placeholder === 'deadline' ? 'deadline' : ''} ${placeholder === 'planet type' ? 'planet_type' : ''}`
+    const fieldClasses = classNames({
+      'form-group': true,
+      'has-danger': touched && error,
+      'assignment-fieled-style': true,
+      'assignment-fieled-text': true,
+      'deadline': placeholder === 'deadline',
+      'planet_type': placeholder === 'planet type'
+    })
+
     return(
-      <div className={classNames}>
+      <div className={fieldClasses}>
         <input
           className={`text-style ${placeholder === 'description' ? 'description' : ''} ${placeholder === 'deadline' ? 'deadline' : ''}`}
           placeholder={placeholder}
@@ -61,7 +69,6 @@ class AssignmentForm extends Component {
             <Field placeholder="description" name="description" type="textarea" component={this.renderField} />
           </div>
           <div className="form-line-4">
-            <Field placeholder="planet type" name="planet_type" type="hidden" value={this.props.selectedStar} component={this.renderField} />
             <Field name="planet_size" component="select" className="assignment-select-fieled-style">
               <option value="" className=" assignment-fieled-text">SIZE</option>
               <option value="large" className="assignment-fieled-text">large</option>
@@ -78,11 +85,9 @@ class AssignmentForm extends Component {
 
 function validate(values) {
   const errors = {}
-
+  //TODO: 現状validatが適当 → rails側と絡めて後々実装
   if (!values.orbit_pos) {
     errors.orbit_pos = "Orbit Position required"
-  } else if(values.orbit_pos > 4 || values.orbit_pos < 1) {
-    errors.orbit_pos = "Set Orbit Position between 1..3"
   }
 
   if (!values.title) {
@@ -100,8 +105,8 @@ function validate(values) {
   } else if (values.description.length > 140) {
     errors.description = "Too long description"
   }
-  if (!values.planet_type) {
-    errors.orbit_pos = "Orbit Position required"
+  if (!values.planet_size) {
+    errors.planet_size = "Orbit Position required"
   }
 
   return errors

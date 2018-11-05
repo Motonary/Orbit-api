@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
-import PropTypes from 'prop-types'
 
 import ConfirmBtn from '../atoms/confirm-btn'
 
-import { setModalStatus, resetModalStatus } from '../../actions/common'
+import { igniteDestroyPlanets, resetDestroyPlanets, setModalStatus, resetModalStatus } from '../../actions/common'
 
 import '../../../stylesheets/modal.scss'
-
-const propTypes = {
-  igniteDestroyPlanets: PropTypes.func,
-}
 
 const customStyles = {
   overlay : {
@@ -51,7 +46,7 @@ class ConfirmModal extends Component {
   closeModal(isDestroy) {
     this.props.resetModalStatus(false)
     if(isDestroy) {
-      return this.props.igniteDestroyPlanets
+      this.props.igniteDestroyPlanets(true)
     }
   }
 
@@ -72,8 +67,6 @@ class ConfirmModal extends Component {
   }
 }
 
-ConfirmModal.propTypes = propTypes
-
 export default connect(
-  ({modalIsOpen}) => ({modalIsOpen}), { setModalStatus, resetModalStatus }
+  ({isDestroyIgnited, modalIsOpen}) => ({isDestroyIgnited, modalIsOpen}), { igniteDestroyPlanets, resetDestroyPlanets, setModalStatus, resetModalStatus }
 )(ConfirmModal)

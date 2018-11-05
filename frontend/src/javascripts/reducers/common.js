@@ -14,6 +14,19 @@ export function selectedStar(state = null, action) {
   }
 }
 
+export function isDestroyIgnited(state = false, action) {
+  switch (action.type) {
+    case actionTypes.IGNITE_DESTROY_ACTION:
+      return action.status
+
+    case actionTypes.RESET_DESTROY_ACTION:
+      return action.status
+
+    default:
+      return state
+  }
+}
+
 export function modalIsOpen(state = false, action) {
   switch (action.type) {
     case actionTypes.OPEN_MODAL:

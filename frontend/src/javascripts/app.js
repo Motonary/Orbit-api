@@ -18,6 +18,7 @@ import '../stylesheets/footer.scss'
 import '../stylesheets/mypage.scss'
 import '../stylesheets/project_page.scss'
 import '../stylesheets/history_page.scss'
+import '../stylesheets/setting_page.scss'
 
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)

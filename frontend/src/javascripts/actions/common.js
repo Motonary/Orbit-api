@@ -13,6 +13,20 @@ export function resetSelectedStar() {
   }
 }
 
+export function igniteDestroyPlanets(status) {
+  return {
+    type: actionTypes.IGNITE_DESTROY_ACTION,
+    status
+  }
+}
+
+export function resetDestroyPlanets(status) {
+  return {
+    type: actionTypes.RESET_DESTROY_ACTION,
+    status
+  }
+}
+
 export function setModalStatus(status) {
   return {
     type: actionTypes.OPEN_MODAL,

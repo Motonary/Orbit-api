@@ -7,8 +7,6 @@ import { JWT } from '../../constants'
 import MypageOrbit from '../molecules/mypage-orbit'
 import { fetchRevolvingProjects, setCurrentProject,  createProject, destroyProject } from '../../actions/projects'
 
-import ImgUser from '../../../images/main/user_default_icon.png'
-
 class MyPage extends Component {
   componentDidMount() {
     // TODO: 最初ログインした時Projectが設定されないバグ修正
@@ -39,16 +37,16 @@ class MyPage extends Component {
     //TODO: 歪みが子要素まで反映されているので親要素のみに留められないか
     return(
       <div id="project-list">
-        <div id="user-info">
+        <div className="user-info">
           <div className="user-img-container">
-            <img src={ImgUser} className="user-img" />
+            <img src={`http://localhost:3000${this.props.currentUser.avatar.url}`} className="user-img" />
           </div>
           <div className="user-name">
             <span>WELCOME</span><br />
             {currentUser.name}
           </div>
         </div>
-        <MypageOrbit />
+        <MypageOrbit history={this.props.history} match={this.props.match}/>
       </div>
     )
   }

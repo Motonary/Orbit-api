@@ -7,8 +7,8 @@ import anime from 'animejs'
 import ConfirmModal from '../molecules/modal'
 import AssignmentForm from '../molecules/assignment-form'
 
-import { nullifySelectedAssignment } from '../../actions/assignments'
-import { setSelectedStar, resetSelectedStar, setModalStatus, resetModalStatus } from '../../actions/common'
+import { destroyAssignment, nullifySelectedAssignment } from '../../actions/assignments'
+import { setSelectedStar, resetSelectedStar, igniteDestroyPlanets, resetDestroyPlanets, setModalStatus, resetModalStatus } from '../../actions/common'
 
 import ImgHolderOpen from '../../../images/footer/planet_holder_btn.png'
 import { PlanetImgs } from '../../constants'
@@ -20,7 +20,8 @@ class Footer extends Component {
     super(props)
 
     this.state = {
-      canDestroy: false
+      selectAssignments: [],
+      clickedStar: null
     }
   }
 
@@ -30,9 +31,10 @@ class Footer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if(this.state.canDestroy && !prevState.canDestroy) {
+    if(this.props.isDestroyIgnited && !prevProps.isDestroyIgnited) {
       if(this.props.selectedAssignments) {
-          this.onClickDestroyPlanets.bind(this, this.props.selectedAssignments)
+          console.log("didupdate")
+          this.onClickDestroyPlanets(this.props.selectedAssignments)
       }
     }
   }
@@ -40,6 +42,24 @@ class Footer extends Component {
   onClickOpenModal() {
     this.props.setModalStatus(true)
     this.motionControll()
+  }
+
+  removePlanet(parent) {
+    //FIXME: 一旦canvas以外のImgとballoonを削除・DOM上にはPlanetを表示する親要素は残る。
+    parent.map((doc) => {
+      let parent = doc
+      let child = doc.firstChild
+      console.log(parent,child)
+      parent.removeChild(child)
+    })
+  }
+
+  removeAssignmentData(parent) {
+    parent.map((doc) => {
+      let cvs = doc.children[1]
+      let cvs_info = cvs.id.split('-')
+      this.props.destroyAssignment(cvs_info[0])
+    })
   }
 
   onClickDestroyPlanets(selectedAssignments) {
@@ -86,19 +106,11 @@ class Footer extends Component {
       pointerX = 60
       pointerY = 60
     }
+
     function removeImg() {
       parent.map((doc) => {
         const child = doc.children[1]
         doc.removeChild(child)
-      })
-    }
-
-    function removePlanet() {
-      parent.map((doc) => {
-        let parent = doc.parentNode.parentNode
-        let child = doc.parentNode
-        //console.log(parent,child)
-        parent.removeChild(child)
       })
     }
 
@@ -169,12 +181,11 @@ class Footer extends Component {
     updateCoords()
     removeImg()
     animateParticules(pointerX, pointerY)
+    this.props.resetDestroyPlanets(false)
+    this.removeAssignmentData(parent)
+    this.removePlanet(parent)
     this.props.nullifySelectedAssignment()
-    removePlanet()
-  }
-
-  igniteDestroyPlanets() {
-    this.setState({canDestroy: true})
+    this.motionControll()
   }
 
   motionControll() {
@@ -198,8 +209,6 @@ class Footer extends Component {
     const planet_list = document.getElementById("planet-list")
     //const planet_holder = document.getElementById("planet-holder")
 
-    this.motionControll()
-
     // メニュー表示/非表示
     if(target_class[0].classList.contains("click-rotate")) {
       target_class[0].classList.remove("click-rotate")
@@ -218,11 +227,20 @@ class Footer extends Component {
     target.style.display = 'none'
   }
 
-  onClickSelectStar(star_type) {
-    const target = document.getElementById('form-balloon')
+  onClickSelectStar(star_type, e) {
+    const form_balloon = document.getElementById('form-balloon')
+    const prev_target = this.state.clickedStar
+    const target = e.target.parentNode
+
+    if(prev_target){
+      prev_target.classList.remove('current-clicked')
+    }
+    target.classList.add('current-clicked')
+
+    this.setState({clickedStar: target})
 
     this.props.setSelectedStar(star_type)
-    target.style.display = 'block'
+    form_balloon.style.display = 'block'
   }
 
   renderPlanetList() {
@@ -231,6 +249,7 @@ class Footer extends Component {
         return(
           <li
             key={key}
+            name={key}
             className="planet"
             onClick={this.onClickSelectStar.bind(this, key)}>
               <img src={src_path} className="planet-img"/>
@@ -284,13 +303,13 @@ class Footer extends Component {
             {this.renderDeleteIcons(deleteButtonsclasses)}
           </ul>
         </div>
-        <ConfirmModal igniteDestroyPlanets={this.igniteDestroyPlanets.bind(this)} />
+        <ConfirmModal />
       </div>
     )
   }
 }
 
 export default connect(
-  ({ currentUser, selectedAssignments, selectedStar, modalIsOpen }) => ({ currentUser, selectedAssignments, selectedStar, modalIsOpen }),
-  { nullifySelectedAssignment, setSelectedStar, resetSelectedStar, setModalStatus, resetModalStatus }
+  ({ currentUser, selectedAssignments, selectedStar, isDestroyIgnited, modalIsOpen }) => ({ currentUser, selectedAssignments, isDestroyIgnited, selectedStar, modalIsOpen }),
+  { destroyAssignment, nullifySelectedAssignment, setSelectedStar, resetSelectedStar, igniteDestroyPlanets, resetDestroyPlanets, setModalStatus, resetModalStatus }
 )(Footer)
