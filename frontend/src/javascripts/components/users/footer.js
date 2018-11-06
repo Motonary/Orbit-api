@@ -7,8 +7,8 @@ import anime from 'animejs'
 import ConfirmModal from '../molecules/modal'
 import AssignmentForm from '../molecules/assignment-form'
 
-import { nullifySelectedAssignment } from '../../actions/assignments'
-import { setSelectedStar, resetSelectedStar, setModalStatus, resetModalStatus } from '../../actions/common'
+import { destroyAssignment, nullifySelectedAssignment } from '../../actions/assignments'
+import { setSelectedStar, resetSelectedStar, igniteDestroyPlanets, resetDestroyPlanets, setModalStatus, resetModalStatus } from '../../actions/common'
 
 import ImgHolderOpen from '../../../images/footer/planet_holder_btn.png'
 import { PlanetImgs } from '../../constants'
@@ -20,6 +20,7 @@ class Footer extends Component {
     super(props)
 
     this.state = {
+      selectAssignments: [],
       clickedStar: null
     }
   }
@@ -29,8 +30,36 @@ class Footer extends Component {
     planet_list.style.display = 'none'
   }
 
+  componentDidUpdate(prevProps, prevState){
+    if(this.props.isDestroyIgnited && !prevProps.isDestroyIgnited) {
+      if(this.props.selectedAssignments) {
+          console.log("didupdate")
+          this.onClickDestroyPlanets(this.props.selectedAssignments)
+      }
+    }
+  }
+
   onClickOpenModal() {
     this.props.setModalStatus(true)
+    this.motionControll()
+  }
+
+  removePlanet(parent) {
+    //FIXME: 一旦canvas以外のImgとballoonを削除・DOM上にはPlanetを表示する親要素は残る。
+    parent.map((doc) => {
+      let parent = doc
+      let child = doc.firstChild
+      console.log(parent,child)
+      parent.removeChild(child)
+    })
+  }
+
+  removeAssignmentData(parent) {
+    parent.map((doc) => {
+      let cvs = doc.children[1]
+      let cvs_info = cvs.id.split('-')
+      this.props.destroyAssignment(cvs_info[0])
+    })
   }
 
   onClickDestroyPlanets(selectedAssignments) {
@@ -74,8 +103,8 @@ class Footer extends Component {
     }
 
     function updateCoords() {
-      pointerX = 100
-      pointerY = 100
+      pointerX = 60
+      pointerY = 60
     }
 
     function removeImg() {
@@ -152,7 +181,11 @@ class Footer extends Component {
     updateCoords()
     removeImg()
     animateParticules(pointerX, pointerY)
-    //this.props.nullifySelectedAssignment()
+    this.props.resetDestroyPlanets(false)
+    this.removeAssignmentData(parent)
+    this.removePlanet(parent)
+    this.props.nullifySelectedAssignment()
+    this.motionControll()
   }
 
   motionControll() {
@@ -270,13 +303,13 @@ class Footer extends Component {
             {this.renderDeleteIcons(deleteButtonsclasses)}
           </ul>
         </div>
-        <ConfirmModal parentMethod={this.onClickDestroyPlanets} />
+        <ConfirmModal />
       </div>
     )
   }
 }
 
 export default connect(
-  ({ currentUser, selectedAssignments, selectedStar, modalIsOpen }) => ({ currentUser, selectedAssignments, selectedStar, modalIsOpen }),
-  { nullifySelectedAssignment, setSelectedStar, resetSelectedStar, setModalStatus, resetModalStatus }
+  ({ currentUser, selectedAssignments, selectedStar, isDestroyIgnited, modalIsOpen }) => ({ currentUser, selectedAssignments, isDestroyIgnited, selectedStar, modalIsOpen }),
+  { destroyAssignment, nullifySelectedAssignment, setSelectedStar, resetSelectedStar, igniteDestroyPlanets, resetDestroyPlanets, setModalStatus, resetModalStatus }
 )(Footer)

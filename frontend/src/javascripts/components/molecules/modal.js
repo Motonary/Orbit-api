@@ -4,8 +4,7 @@ import Modal from 'react-modal'
 
 import ConfirmBtn from '../atoms/confirm-btn'
 
-import { nullifySelectedAssignment } from '../../actions/assignments'
-import { setModalStatus, resetModalStatus } from '../../actions/common'
+import { igniteDestroyPlanets, resetDestroyPlanets, setModalStatus, resetModalStatus } from '../../actions/common'
 
 import '../../../stylesheets/modal.scss'
 
@@ -47,8 +46,7 @@ class ConfirmModal extends Component {
   closeModal(isDestroy) {
     this.props.resetModalStatus(false)
     if(isDestroy) {
-      this.props.parentMethod(this.props.selectedAssignments)
-      this.props.nullifySelectedAssignment()
+      this.props.igniteDestroyPlanets(true)
     }
   }
 
@@ -70,6 +68,5 @@ class ConfirmModal extends Component {
 }
 
 export default connect(
-  ({modalIsOpen, selectedAssignments}) => ({modalIsOpen, selectedAssignments}),
-  { nullifySelectedAssignment, setModalStatus, resetModalStatus }
+  ({isDestroyIgnited, modalIsOpen}) => ({isDestroyIgnited, modalIsOpen}), { igniteDestroyPlanets, resetDestroyPlanets, setModalStatus, resetModalStatus }
 )(ConfirmModal)

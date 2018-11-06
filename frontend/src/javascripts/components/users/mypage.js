@@ -7,8 +7,6 @@ import { JWT } from '../../constants'
 import MypageOrbit from '../molecules/mypage-orbit'
 import { fetchRevolvingProjects, setCurrentProject,  createProject, destroyProject } from '../../actions/projects'
 
-import ImgUser from '../../../images/main/user_default_icon.png'
-
 class MyPage extends Component {
   componentDidMount() {
     // TODO: 最初ログインした時Projectが設定されないバグ修正
@@ -48,7 +46,7 @@ class MyPage extends Component {
             {currentUser.name}
           </div>
         </div>
-        <MypageOrbit />
+        <MypageOrbit history={this.props.history} match={this.props.match}/>
       </div>
     )
   }
