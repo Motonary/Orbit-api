@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import { JWT } from '../../constants'
 
 import MypageOrbit from '../molecules/mypage-orbit'
-import { fetchRevolvingProjects, setCurrentProject,  createProject, destroyProject } from '../../actions/projects'
+import { fetchRevolvingProjects, createProject } from '../../actions/projects'
 
 class MyPage extends Component {
   componentDidMount() {
@@ -53,6 +53,6 @@ class MyPage extends Component {
 }
 
 export default connect(
-  ({ currentUser, revolvingProjects }) => ({ currentUser, revolvingProjects }),
-  { fetchRevolvingProjects, setCurrentProject, createProject, destroyProject }
+  ({ currentUser }) => ({ currentUser }),
+  { fetchRevolvingProjects, createProject }
 )(MyPage)
