@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { PlanetImgs } from '../../constants'
 import { setCurrentProject } from '../../actions/projects'
+
+import { PlanetImgs } from '../../constants'
 
 class MypageOrbit extends Component {
 
@@ -46,4 +47,6 @@ class MypageOrbit extends Component {
   }
 }
 
-export default connect(({revolvingProjects}) => ({revolvingProjects}), { setCurrentProject })(MypageOrbit)
+export default connect(({revolvingProjects}) => ({revolvingProjects}),
+  { setCurrentProject }
+)(MypageOrbit)

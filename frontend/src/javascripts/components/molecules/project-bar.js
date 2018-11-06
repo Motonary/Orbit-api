@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import { fetchRevolvingAssignments } from '../../actions/assignments'
-import { changeCurrentProject　} from '../../actions/projects'
+import { changeCurrentProject } from '../../actions/projects'
 import { PlanetImgs } from '../../constants'
 
 import '../../../stylesheets/project_bar.scss'

@@ -38,7 +38,7 @@ class AssignmentForm extends Component {
     )
   }
 
-  onSubmit({ title, description, deadline, planet_size, orbit_pos}) {
+  onSubmit({ title, description, deadline, planet_size, orbit_pos }) {
     const target = document.getElementById('form-balloon')
     const planet_type = this.props.selectedStar
     const project_id = this.props.currentProject.id
@@ -85,9 +85,7 @@ class AssignmentForm extends Component {
 
 function validate(values) {
   const errors = {}
-
-  //TODO: 現状validatが適当　→　rails側と絡めて後々実装
-
+  //TODO: 現状validatが適当 → rails側と絡めて後々実装
   if (!values.orbit_pos) {
     errors.orbit_pos = "Orbit Position required"
   }

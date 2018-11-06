@@ -67,6 +67,8 @@ export const actionTypes = keyMirror({
   CLOSE_MODAL: null,
   SELECT_STAR: null,
   DISSELECT_STAR: null,
+  IGNITE_DESTROY_ACTION: null,
+  RESET_DESTROY_ACTION: null,
 
   // User
   SET_CURRENT_USER: null,
@@ -106,7 +108,7 @@ export const PlanetCheckedImgs = {
   Sun: ImgStarChecked11, Venus: ImgStarChecked12, Takoyaki: ImgStarChecked13, Ball: ImgStarChecked14, Egg: ImgStarChecked15
 }
 
-export const DeleteIcons = [ DeleteIcon1, DeleteIcon2, DeleteIcon3 ]
+export const DeleteIcons = { Meteorite: DeleteIcon1, Missile: DeleteIcon2, BlackHole: DeleteIcon3 }
 
 export const RevivalImg = RevivalIcon
 

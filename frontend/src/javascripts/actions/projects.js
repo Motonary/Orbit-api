@@ -3,8 +3,8 @@ import { actionTypes, ROOT_URL, JWT } from '../constants'
 
 
 export function fetchRevolvingProjects() {
-  return axios.get(`${ROOT_URL}/api/projects/`, { 
-    headers: {　'Authorization': `Bearer ${JWT}`　}
+  return axios.get(`${ROOT_URL}/api/projects/`, {
+    headers: { 'Authorization': `Bearer ${JWT}` }
   }).then(res => {
     return {
       type: actionTypes.FETCH_REVOLVING_PROJECTS,

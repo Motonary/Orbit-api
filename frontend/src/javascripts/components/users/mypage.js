@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import { JWT } from '../../constants'
 
 import MypageOrbit from '../molecules/mypage-orbit'
-import { fetchRevolvingProjects, setCurrentProject,  createProject, destroyProject } from '../../actions/projects'
+import { fetchRevolvingProjects, createProject } from '../../actions/projects'
 
 class MyPage extends Component {
   componentDidMount() {
@@ -46,7 +46,7 @@ class MyPage extends Component {
             {currentUser.name}
           </div>
         </div>
-        <MypageOrbit {...this.props}/>
+        <MypageOrbit history={this.props.history} match={this.props.match}/>
       </div>
     )
   }

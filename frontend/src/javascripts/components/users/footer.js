@@ -7,19 +7,23 @@ import anime from 'animejs'
 import ConfirmModal from '../molecules/modal'
 import AssignmentForm from '../molecules/assignment-form'
 
-import { nullifySelectedAssignment } from '../../actions/assignments'
-import { setSelectedStar, resetSelectedStar, setModalStatus, resetModalStatus } from '../../actions/common'
+import { destroyAssignment, nullifySelectedAssignment } from '../../actions/assignments'
+import { setSelectedStar, resetSelectedStar, igniteDestroyPlanets, resetDestroyPlanets, setModalStatus, resetModalStatus } from '../../actions/common'
 
 import ImgHolderOpen from '../../../images/footer/planet_holder_btn.png'
 import { PlanetImgs } from '../../constants'
 import { RevivalImg } from '../../constants'
 import { DeleteIcons } from '../../constants'
+import { DeleteActions } from '../../constants'
+
+import '../../../stylesheets/destroy_animate.scss'
 
 class Footer extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      selectAssignments: [],
       clickedStar: null
     }
   }
@@ -29,8 +33,88 @@ class Footer extends Component {
     planet_list.style.display = 'none'
   }
 
-  onClickOpenModal() {
+  componentDidUpdate(prevProps, prevState){
+    if(this.props.isDestroyIgnited && !this.props.modalIsOpen) {
+      if(this.props.selectedAssignments) {
+        console.log("didupdate")
+        this.onIgniteDestroyAnimation()
+      }
+    }
+  }
+
+  onClickOpenModal(actionKey) {
     this.props.setModalStatus(true)
+    this.props.igniteDestroyPlanets(actionKey)
+    this.motionControll()
+  }
+
+  waitFunc(sec) {
+    return function() {
+      return new Promise(function(resolve) {
+        setTimeout(resolve, sec*1000)
+      })
+    }
+  }
+
+  onIgniteDestroyAnimation() {
+    const targetDom = document.getElementById('project-orbit')
+    const insertDom = document.getElementById('fixed-star')
+    const actionKey = this.props.isDestroyIgnited
+    let newDiv = document.createElement('div')
+    let newImg = document.createElement('img')
+    newDiv.classList.add('destroy-action')
+    newImg.src = DeleteActions[actionKey]
+    newDiv.appendChild(newImg)
+    targetDom.insertBefore(newDiv, insertDom)
+    this.makeMovement()
+  }
+  makeMovement() {
+    const movDom = document.getElementsByClassName('destroy-action')[0]
+    let targetDom
+    if(this.props.selectedAssignments) {
+      console.log(movDom)
+      targetDom = document.getElementById(this.props.selectedAssignments[0])
+      console.log(targetDom)
+    }
+
+    // 要素の位置座標を取得
+    const clientRectMov = movDom.getBoundingClientRect()
+    const clientRectTarget = targetDom.getBoundingClientRect()
+
+    // 画面の左端から、要素の左端までの距離
+    const xM = clientRectMov.left
+    const xT = clientRectTarget.left
+    // 画面の上端から、要素の上端までの距離
+    const yM = clientRectMov.top
+    const yT = clientRectTarget.top
+
+    const disX = xT - xM
+    const disY = yT - yM
+
+    movDom.classList.add('move-animation')
+    movDom.style.transform = `translateX(${disX}px) translateY(${disY}px)`
+
+    Promise.resolve()
+      .then(this.waitFunc(2.5))
+      .then(() => {this.onClickDestroyPlanets(this.props.selectedAssignments)})
+  }
+
+  removePlanet(parent) {
+    //FIXME: 一旦canvas以外のImgとballoonを削除・DOM上にはPlanetを表示する親要素は残る。
+    parent.map((doc) => {
+      let parent = doc
+      let child = doc.firstChild
+      console.log(parent,child)
+      parent.removeChild(child)
+    })
+  }
+
+  removeAssignmentData(parent) {
+    parent.map((doc) => {
+      let cvs = doc.children[1]
+      let cvs_info = cvs.id.split('-')
+      this.props.destroyAssignment(cvs_info[0])
+    })
   }
 
   onClickDestroyPlanets(selectedAssignments) {
@@ -74,8 +158,8 @@ class Footer extends Component {
     }
 
     function updateCoords() {
-      pointerX = 100
-      pointerY = 100
+      pointerX = 60
+      pointerY = 60
     }
 
     function removeImg() {
@@ -83,6 +167,13 @@ class Footer extends Component {
         const child = doc.children[1]
         doc.removeChild(child)
       })
+    }
+
+    function removeDestroyImg() {
+      const targetDom = document.getElementById('project-orbit')
+      const movDom = document.getElementsByClassName('destroy-action')[0]
+
+      targetDom.removeChild(movDom)
     }
 
     function setParticuleDirection(p) {
@@ -151,8 +242,13 @@ class Footer extends Component {
     render.play()
     updateCoords()
     removeImg()
+    removeDestroyImg()
     animateParticules(pointerX, pointerY)
-    //this.props.nullifySelectedAssignment()
+    this.props.resetDestroyPlanets(null)
+    this.removeAssignmentData(parent)
+    this.removePlanet(parent)
+    this.props.nullifySelectedAssignment()
+    this.motionControll()
   }
 
   motionControll() {
@@ -227,13 +323,15 @@ class Footer extends Component {
   }
 
   renderDeleteIcons(deleteButtonsclasses) {
-    return DeleteIcons.map(deleteIcon => {
-      return (
-        <li key={deleteIcon} className={deleteButtonsclasses} onClick={this.onClickOpenModal.bind(this)}>
-          <img src={deleteIcon} className="delete-btn"/>
-        </li>
-      )
-    })
+    return (
+      _.map(DeleteIcons, (deleteIcon, key) => {
+        return (
+          <li key={key} className={deleteButtonsclasses} onClick={this.onClickOpenModal.bind(this, key)}>
+            <img src={deleteIcon} className="delete-btn"/>
+          </li>
+        )
+      })
+    )
   }
 
   render() {
@@ -270,13 +368,13 @@ class Footer extends Component {
             {this.renderDeleteIcons(deleteButtonsclasses)}
           </ul>
         </div>
-        <ConfirmModal parentMethod={this.onClickDestroyPlanets} />
+        <ConfirmModal />
       </div>
     )
   }
 }
 
 export default connect(
-  ({ currentUser, selectedAssignments, selectedStar, modalIsOpen }) => ({ currentUser, selectedAssignments, selectedStar, modalIsOpen }),
-  { nullifySelectedAssignment, setSelectedStar, resetSelectedStar, setModalStatus, resetModalStatus }
+  ({ currentUser, selectedAssignments, selectedStar, isDestroyIgnited, modalIsOpen }) => ({ currentUser, selectedAssignments, isDestroyIgnited, selectedStar, modalIsOpen }),
+  { destroyAssignment, nullifySelectedAssignment, setSelectedStar, resetSelectedStar, igniteDestroyPlanets, resetDestroyPlanets, setModalStatus, resetModalStatus }
 )(Footer)
