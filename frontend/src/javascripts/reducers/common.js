@@ -14,7 +14,7 @@ export function selectedStar(state = null, action) {
   }
 }
 
-export function isDestroyIgnited(state = false, action) {
+export function isDestroyIgnited(state = null, action) {
   switch (action.type) {
     case actionTypes.IGNITE_DESTROY_ACTION:
       return action.status
