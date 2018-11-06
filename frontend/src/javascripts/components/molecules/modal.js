@@ -43,7 +43,7 @@ class ConfirmModal extends Component {
     }
   }
 
-  closeModal(isDestroy) {
+  closeModal() {
     this.props.resetModalStatus(false)
   }
 
@@ -56,8 +56,8 @@ class ConfirmModal extends Component {
         >
         <div className="modal-warning">{this.state.destroy}</div>
         <div className="modal-confirm-buttons">
-          <div onClick={this.closeModal.bind(this, false)}><ConfirmBtn message="いいえ" /></div>
-          <div onClick={this.closeModal.bind(this, true)}><ConfirmBtn message="はい" /></div>
+          <div onClick={this.closeModal.bind(this)}><ConfirmBtn message="いいえ" /></div>
+          <div onClick={this.closeModal.bind(this)}><ConfirmBtn message="はい" /></div>
         </div>
       </Modal>
     )

@@ -85,7 +85,7 @@ class AssignmentForm extends Component {
 
 function validate(values) {
   const errors = {}
-  //TODO: 現状validatが適当 → rails側と絡めて後々実装
+  //TODO: 現状validatが適当→rails側と絡めて後々実装
   if (!values.orbit_pos) {
     errors.orbit_pos = "Orbit Position required"
   }
