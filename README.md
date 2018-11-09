@@ -9,7 +9,7 @@ A modern todo web application.
 - Rails 5.2+
 - React 16.3+
 ## Set up
-```
+```sh
 # clone
 $ git clone git@github.com:BuddiX/orbit-app.git
 $ cd orbit-app
