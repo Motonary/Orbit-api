@@ -38,6 +38,11 @@ export function fetchCurrentUser() {
     }).catch(() => alert('Sorry, something went wrong...'))
 }
 
+export function expireCurrentUser(callback) {
+  callback()
+  return { type: actionTypes.EXPIRE_CURRENT_USER }
+}
+
 export function updateAvatar(newAvatar) {
   let avatarFile = new FormData()
   avatarFile.append('avatar', newAvatar, newAvatar.name)

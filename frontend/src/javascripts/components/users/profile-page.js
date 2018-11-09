@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { updateAvatar } from '../../actions/users'
+import { updateAvatar, expireCurrentUser } from '../../actions/users'
 
 class ProfileUpdateForm extends Component {
   renderField({ placeholder, type, input, meta: { touched, error } }) {
@@ -29,8 +29,9 @@ class ProfileUpdateForm extends Component {
   }
 
   onClickSignOutButton() {
+    // TODO: ログアウト時何かFlashメッセージあるといいよね
     sessionStorage.removeItem('jwt')
-    this.props.history.push("/")
+    this.props.expireCurrentUser(() => this.props.history.push('/'))
   }
 
   render() {
@@ -90,4 +91,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: 'ProfileUpdateForm'
-})(connect(({ currentUser }) => ({ currentUser }), { updateAvatar })(ProfileUpdateForm))
+})(connect(({ currentUser }) => ({ currentUser }), { updateAvatar, expireCurrentUser })(ProfileUpdateForm))
