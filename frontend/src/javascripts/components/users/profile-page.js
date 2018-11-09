@@ -28,6 +28,11 @@ class ProfileUpdateForm extends Component {
     this.props.createUser(username, email, password, confirmation)
   }
 
+  onClickSignOutButton() {
+    sessionStorage.removeItem('jwt')
+    this.props.history.push("/")
+  }
+
   render() {
     return(
       <div id="setting-page">
@@ -47,7 +52,7 @@ class ProfileUpdateForm extends Component {
           <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
           <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderField} />
           <button type="submit" className="submit-btn">UPDATE</button>
-          <button className="submit-btn">UPDATE</button>
+          <button className="signout-btn" onClick={this.onClickSignOutButton.bind(this)}>SIGN OUT</button>
         </form>
       </div>
     )
