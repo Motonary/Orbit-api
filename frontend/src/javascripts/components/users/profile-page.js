@@ -33,7 +33,7 @@ class ProfileUpdateForm extends Component {
       <div id="setting-page">
         <div className="avatar-wrapper">
           <div className="avatar-container">
-            {/* Production環境ではURL変える */}
+            {/* TODO: Production環境ではURL変える */}
             <img src={`http://localhost:3000${this.props.currentUser.avatar.url}`} className="avatar" />
           </div>
         </div>
@@ -47,6 +47,7 @@ class ProfileUpdateForm extends Component {
           <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
           <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderField} />
           <button type="submit" className="submit-btn">UPDATE</button>
+          <button className="submit-btn">UPDATE</button>
         </form>
       </div>
     )
