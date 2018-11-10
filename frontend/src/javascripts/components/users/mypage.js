@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-//import _ from 'lodash'
-import { JWT } from '../../constants'
 
 import MypageOrbit from '../molecules/mypage-orbit'
 import { fetchRevolvingProjects, createProject } from '../../actions/projects'
@@ -10,7 +8,7 @@ import { fetchRevolvingProjects, createProject } from '../../actions/projects'
 class MyPage extends Component {
   componentDidMount() {
     // TODO: 最初ログインした時Projectが設定されないバグ修正
-    if (JWT) this.props.fetchRevolvingProjects()
+    if (sessionStorage.getItem('jwt')) this.props.fetchRevolvingProjects()
   }
 
   onDropFixedStar(starType, e) {

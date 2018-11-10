@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { actionTypes, ROOT_URL, JWT } from '../constants'
+import { actionTypes, ROOT_URL } from '../constants'
 
 export function createUser(name, email, password, password_confirmation, callback) {
   return axios.post(`${ROOT_URL}/api/signup`, {
@@ -29,13 +29,18 @@ export function createSession(email, password, callback) {
 
 export function fetchCurrentUser() {
   return axios.get(`${ROOT_URL}/api/current_user`, {
-    headers: { 'Authorization': `Bearer ${JWT}` }
+    headers: { 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}` }
   }).then(res => {
       return {
         type: actionTypes.SET_CURRENT_USER,
         currentUser: res.data
       }
     }).catch(() => alert('Sorry, something went wrong...'))
+}
+
+export function expireCurrentUser(callback) {
+  callback()
+  return { type: actionTypes.EXPIRE_CURRENT_USER }
 }
 
 export function updateAvatar(newAvatar) {
@@ -45,7 +50,7 @@ export function updateAvatar(newAvatar) {
     method: 'post',
     url: `${ROOT_URL}/api/users/update_avatar`,
     data: avatarFile,
-    headers: { 'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${JWT}` }
+    headers: { 'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}` }
   }).then(res => {
       return {
         type: actionTypes.UPDATE_AVATAR,
@@ -59,7 +64,7 @@ export function updateProfile(username, email, password) {
     method: 'patch',
     url: `${ROOT_URL}/api/users/update_profile`,
     data: { user: { name, email, password } },
-    headers: { 'Authorization': `Bearer ${JWT}` }
+    headers: { 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}` }
   }).then(res => {
       return {
         type: actionTypes.UPDATE_PROFILE,

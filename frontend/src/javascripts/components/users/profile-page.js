@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { updateAvatar } from '../../actions/users'
+import { updateAvatar, expireCurrentUser } from '../../actions/users'
 
 class ProfileUpdateForm extends Component {
   renderField({ placeholder, type, input, meta: { touched, error } }) {
@@ -28,12 +28,18 @@ class ProfileUpdateForm extends Component {
     this.props.createUser(username, email, password, confirmation)
   }
 
+  onClickSignOutButton() {
+    // TODO: ログアウト時何かFlashメッセージあるといいよね
+    sessionStorage.removeItem('jwt')
+    this.props.expireCurrentUser(() => this.props.history.push('/'))
+  }
+
   render() {
     return(
       <div id="setting-page">
         <div className="avatar-wrapper">
           <div className="avatar-container">
-            {/* Production環境ではURL変える */}
+            {/* TODO: Production環境ではURL変える */}
             <img src={`http://localhost:3000${this.props.currentUser.avatar.url}`} className="avatar" />
           </div>
         </div>
@@ -47,6 +53,7 @@ class ProfileUpdateForm extends Component {
           <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
           <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderField} />
           <button type="submit" className="submit-btn">UPDATE</button>
+          <button className="signout-btn" onClick={this.onClickSignOutButton.bind(this)}>SIGN OUT</button>
         </form>
       </div>
     )
@@ -84,4 +91,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: 'ProfileUpdateForm'
-})(connect(({ currentUser }) => ({ currentUser }), { updateAvatar })(ProfileUpdateForm))
+})(connect(({ currentUser }) => ({ currentUser }), { updateAvatar, expireCurrentUser })(ProfileUpdateForm))
