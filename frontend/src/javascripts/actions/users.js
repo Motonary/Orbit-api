@@ -59,11 +59,11 @@ export function updateAvatar(newAvatar) {
     }).catch(error => alert(error))
 }
 
-export function updateProfile(name = null, email = null, password) {
+export function updateProfile(name = null, email = null, password, password_confirmation) {
   return axios({
     method: 'patch',
     url: `${ROOT_URL}/api/users/update_profile`,
-    data: { user: { name, email, password } },
+    data: { user: { name, email, password, password_confirmation } },
     headers: { 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}` }
   }).then(res => {
       return {

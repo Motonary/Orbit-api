@@ -25,7 +25,11 @@ class ProfileUpdateForm extends Component {
   }
 
   onSubmit({ username, email, password, confirmation }) {
-    this.props.updateProfile(username, email, password, confirmation)
+    // TODO: Flashメッセージの実装
+    if (window.confirm('プロフィール情報を更新していいですか？')) {
+      this.props.updateProfile(username, email, password, confirmation)
+        .then(() => this.props.history.push('/'))
+    }
   }
 
   onClickSignOutButton() {
