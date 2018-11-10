@@ -20,13 +20,14 @@ class ProjectPage extends Component {
     if (currentProject) {
       this.props.fetchRevolvingAssignments(currentProject.id)
     } else if (revolvingProjects) {
-      this.props.setDefaultProject(_.toArray(revolvingProjects)[0])
+      this.props.setDefaultProject(revolvingProjects[Object.keys(revolvingProjects)[0]])
     } else {
       this.props.fetchRevolvingProjects()
        .then(() => {
-         if (this.props.revolvingProjects) {
+         const { revolvingProjects } = this.props
+         if (revolvingProjects) {
            this.props.setDefaultProject(
-             _.toArray(this.props.revolvingProjects)[0],
+             revolvingProjects[Object.keys(revolvingProjects)[0]],
              defaultProjectId => this.props.fetchRevolvingAssignments(defaultProjectId)
            )
          }
