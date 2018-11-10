@@ -59,7 +59,7 @@ export function updateAvatar(newAvatar) {
     }).catch(error => alert(error))
 }
 
-export function updateProfile(username, email, password) {
+export function updateProfile(name = null, email = null, password) {
   return axios({
     method: 'patch',
     url: `${ROOT_URL}/api/users/update_profile`,

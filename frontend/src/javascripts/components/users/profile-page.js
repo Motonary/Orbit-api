@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { updateAvatar, expireCurrentUser } from '../../actions/users'
+import { updateAvatar, updateProfile, expireCurrentUser } from '../../actions/users'
 
 class ProfileUpdateForm extends Component {
   renderField({ placeholder, type, input, meta: { touched, error } }) {
@@ -25,7 +25,7 @@ class ProfileUpdateForm extends Component {
   }
 
   onSubmit({ username, email, password, confirmation }) {
-    this.props.createUser(username, email, password, confirmation)
+    this.props.updateProfile(username, email, password, confirmation)
   }
 
   onClickSignOutButton() {
@@ -74,7 +74,7 @@ function validate(values) {
   }
 
   if (!values.password) {
-    errors.password = "Password required"
+    errors.password = "Password required to update profile"
   } else if (values.password.length < 6) {
     errors.password = "Password must contain at least 6 characters"
   }
@@ -90,4 +90,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: 'ProfileUpdateForm'
-})(connect(({ currentUser }) => ({ currentUser }), { updateAvatar, expireCurrentUser })(ProfileUpdateForm))
+})(connect(({ currentUser }) => ({ currentUser }), { updateAvatar, updateProfile, expireCurrentUser })(ProfileUpdateForm))
