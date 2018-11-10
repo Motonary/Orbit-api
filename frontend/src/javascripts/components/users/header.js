@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { HeaderIcons } from '../../constants'
+import { HeaderIcons } from '../../constants/images'
 
 class Header extends Component {
   onClickBackButton() {

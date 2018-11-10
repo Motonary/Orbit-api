@@ -8,13 +8,16 @@ import ConfirmModal from '../molecules/modal'
 import AssignmentForm from '../molecules/assignment-form'
 
 import { destroyAssignment, nullifySelectedAssignment } from '../../actions/assignments'
-import { setSelectedStar, resetSelectedStar, igniteDestroyPlanets, resetDestroyPlanets, setModalStatus, resetModalStatus } from '../../actions/common'
+import {
+  setSelectedStar,
+  resetSelectedStar,
+  igniteDestroyPlanets,
+  resetDestroyPlanets,
+  setModalStatus,
+  resetModalStatus
+} from '../../actions/common'
 
-import ImgHolderOpen from '../../../images/footer/planet_holder_btn.png'
-import { PlanetImgs } from '../../constants'
-import { RevivalImg } from '../../constants'
-import { DeleteIcons } from '../../constants'
-import { DeleteActions } from '../../constants'
+import { PlanetImgs, RevivalImg, DeleteIcons, DeleteActions, ImgHolderOpen } from '../../constants/images'
 
 import '../../../stylesheets/destroy_animate.scss'
 

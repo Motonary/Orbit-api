@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectAssignment, disselectAssignment } from '../../actions/assignments'
 import PopupBox from './popup-box'
-import { PlanetImgs } from '../../constants'
-import { PlanetCheckedImgs } from '../../constants'
+import { PlanetImgs, PlanetCheckedImgs } from '../../constants/images'
 
 class Planet extends Component {
   constructor(props) {

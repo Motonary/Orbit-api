@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { actionTypes, ROOT_URL } from '../constants'
+import { actionTypes } from '../constants/actiontypes'
+import { ROOT_URL } from '../constants/url'
 
 export function fetchRevolvingProjects() {
   return axios.get(`${ROOT_URL}/api/projects/`, {
