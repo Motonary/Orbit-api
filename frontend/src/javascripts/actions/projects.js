@@ -20,7 +20,8 @@ export function setCurrentProject(currentProject, callback) {
   }
 }
 
-export function setDefaultProject(defaultProject) {
+export function setDefaultProject(defaultProject, callback) {
+  callback(defaultProject.id)
   return {
     type: actionTypes.SET_CURRENT_PROJECT,
     currentProject: defaultProject
