@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import _ from 'lodash'
 import anime from 'animejs'
 
 import ConfirmModal from '../molecules/modal'
+import ProjectForm from '../molecules/project-form'
 import AssignmentForm from '../molecules/assignment-form'
 
 import { destroyAssignment, nullifySelectedAssignment } from '../../actions/assignments'
@@ -337,6 +339,7 @@ class Footer extends Component {
   render() {
     const { currentUser, location: { pathname } } = this.props
     const rootPath = `/users/${currentUser.id}`
+    const { url } = this.props.match
 
     const planetHolderClasses = classNames({
       'open-planet-holder': true,
@@ -357,7 +360,11 @@ class Footer extends Component {
           <div className={planetHolderClasses} onClick={this.onClickOpenPlanetHolder.bind(this)}>
             <img src={ImgHolderOpen} className="planet-holder-img"/>
           </div>
-          <AssignmentForm />
+          <Switch>
+            <Route exact path={`${url}/:userId`} component={ProjectForm} />
+            <Route exact path={`${url}/:userId/projects`} component={AssignmentForm} />
+            <Route render={() => <h2>404 Not Found</h2>} />
+          </Switch>
           <ul id="planet-list">
             {this.renderPlanetList()}
           </ul>

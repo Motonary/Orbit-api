@@ -2,12 +2,13 @@ import { actionTypes } from '../constants'
 import _ from 'lodash'
 
 export function revolvingProjects(state = null, action) {
+  console.log(action)
   switch(action.type) {
     case actionTypes.FETCH_REVOLVING_PROJECTS:
       return _.mapKeys(action.currentUserAllProjects, 'id')
 
     case actionTypes.CREATE_PROJECT:
-      return [...state, action.newProject]
+      return _.defaults(state, _.mapKeys(action.newProject, 'id'))//[...state, action.newProject]
 
     case actionTypes.DESTROY_PROJECT:
       return _.remove([...state], eachState => eachState.id !== action.projectId)

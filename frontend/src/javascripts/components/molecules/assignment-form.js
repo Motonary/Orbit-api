@@ -23,10 +23,16 @@ class AssignmentForm extends Component {
       'planet_type': placeholder === 'planet type'
     })
 
+    const inInputClasses = classNames({
+      'text-style': true,
+      'description': placeholder === 'description',
+      'deadline': placeholder === 'deadline'
+    })
+
     return(
       <div className={fieldClasses}>
         <input
-          className={`text-style ${placeholder === 'description' ? 'description' : ''} ${placeholder === 'deadline' ? 'deadline' : ''}`}
+          className={inInputClasses}
           placeholder={placeholder}
           type={type}
           value={value}

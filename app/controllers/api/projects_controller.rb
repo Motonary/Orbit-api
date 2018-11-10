@@ -6,7 +6,9 @@ class Api::ProjectsController < ApplicationController
   end
 
   def create
+    logger.debug(project_params)
     new_project = current_user.projects.new(project_params)
+    logger.debug(new_project)
     new_project.save! and render json: new_project
   end
 
