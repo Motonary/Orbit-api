@@ -9,7 +9,7 @@ import { fetchRevolvingAssignments,
          disselectAssignment } from '../../actions/assignments'
 import { fetchRevolvingProjects, setDefaultProject } from '../../actions/projects'
 
-import { PlanetImgs } from '../../constants'
+import { PlanetImgs } from '../../constants/images'
 import CircleOrbit from '../molecules/circle-orbit'
 import ProjectBar from '../molecules/project-bar'
 

@@ -1,4 +1,4 @@
-import { actionTypes } from '../constants'
+import { actionTypes } from '../constants/actiontypes'
 import _ from 'lodash'
 
 export function revolvingAssignments(state = null, action) {

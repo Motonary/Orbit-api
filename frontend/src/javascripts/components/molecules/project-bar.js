@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 import { fetchRevolvingAssignments } from '../../actions/assignments'
 import { changeCurrentProject } from '../../actions/projects'
-import { PlanetImgs } from '../../constants'
+import { PlanetImgs } from '../../constants/images'
 
 import '../../../stylesheets/project_bar.scss'
 
