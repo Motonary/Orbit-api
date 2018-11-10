@@ -17,8 +17,7 @@ import {
   resetModalStatus
 } from '../../actions/common'
 
-import ImgHolderOpen from '../../../images/footer/planet_holder_btn.png'
-import { PlanetImgs, RevivalImg, DeleteIcons, DeleteActions } from '../../constants/images'
+import { PlanetImgs, RevivalImg, DeleteIcons, DeleteActions, ImgHolderOpen } from '../../constants/images'
 
 import '../../../stylesheets/destroy_animate.scss'
 

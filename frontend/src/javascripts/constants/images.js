@@ -1,3 +1,7 @@
+// -----------------------------------------------------------------------------
+// import
+// -----------------------------------------------------------------------------
+
 //default user image
 import ImgUser from '../../images/main/user_default_icon.png'
 
@@ -53,6 +57,13 @@ import MeteoriteImg from '../../images/main/metor.png'
 import MissileImg from '../../images/main/missile.png'
 import BlackHoleImg from '../../images/main/blackhole.png'
 
+// Starholder
+import ImgHolderOpenImg from '../../images/footer/planet_holder_btn.png'
+
+// -----------------------------------------------------------------------------
+// export
+// -----------------------------------------------------------------------------
+
 export const HeaderIcons = [ImgHistoryIcon, ImgSettingIcon, ImgBackIcon]
 
 export const ImgDefaultUser = ImgUser
@@ -98,3 +109,5 @@ export const DeleteIcons = { Meteorite: DeleteIcon1, Missile: DeleteIcon2, Black
 export const RevivalImg = RevivalIcon
 
 export const DeleteActions = { Meteorite: MeteoriteImg, Missile: MissileImg, BlackHole: BlackHoleImg }
+
+export const ImgHolderOpen = ImgHolderOpenImg
