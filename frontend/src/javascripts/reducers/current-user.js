@@ -5,6 +5,9 @@ export default (state = null, action) => {
     case actionTypes.SET_CURRENT_USER:
       return action.currentUser
 
+    case actionTypes.EXPIRE_CURRENT_USER:
+      return null
+
     case actionTypes.UPDATE_AVATAR: {
       let newUser = Object.assign({}, state)
       newUser.avatar = action.newAvatarUrl
