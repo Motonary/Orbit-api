@@ -55,8 +55,6 @@ import MeteoriteImg from '../images/main/metor.png'
 import MissileImg from '../images/main/missile.png'
 import BlackHoleImg from '../images/main/blackhole.png'
 
-export const JWT = sessionStorage.getItem('jwt')
-
 // TODO: developmentとproductionで場合分け
 export const ROOT_URL = 'http://localhost:3000'
 // export const ROOT_URL = 'https://orbit7.herokuapp.com'
