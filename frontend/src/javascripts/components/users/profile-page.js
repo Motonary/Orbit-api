@@ -60,7 +60,6 @@ class ProfileUpdateForm extends Component {
   }
 }
 
-// TODO: バリデーション厳格に
 function validate(values) {
   const errors = {}
 
@@ -70,7 +69,7 @@ function validate(values) {
 
   if (values.email && values.email.length > 255) {
     errors.email = "Too long email address"
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  } else if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address'
   }
 
