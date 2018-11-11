@@ -40,6 +40,7 @@ export function fetchCurrentUser() {
 }
 
 export function expireCurrentUser(callback) {
+  sessionStorage.removeItem('jwt')
   callback()
   return { type: actionTypes.EXPIRE_CURRENT_USER }
 }
