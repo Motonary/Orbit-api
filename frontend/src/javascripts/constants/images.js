@@ -2,9 +2,6 @@
 // import
 // -----------------------------------------------------------------------------
 
-//default user image
-import ImgUser from '../../images/main/user_default_icon.png'
-
 //HeaderIcons
 import ImgHistoryIcon from '../../images/header/history_icon.png'
 import ImgSettingIcon from '../../images/header/setting_icon.png'
@@ -65,8 +62,6 @@ import ImgHolderOpenImg from '../../images/footer/planet_holder_btn.png'
 // -----------------------------------------------------------------------------
 
 export const HeaderIcons = [ImgHistoryIcon, ImgSettingIcon, ImgBackIcon]
-
-export const ImgDefaultUser = ImgUser
 
 export const PlanetImgs = {
   Uranus: ImgStar1,
