@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+import { createSession, createUser } from '../../actions/users'
 import ImgLogo from '../../../images/index/logo.png'
 import ImgPlanet from '../../../images/index/top_earth.png'
 
@@ -29,11 +30,16 @@ class TopPage extends Component {
     )
   }
 
-  onSubmit({ username, email, password, confirmation }) {
-    // this.props.createUser(username, email, password, confirmation, (newUserId) => {
-    //   this.props.history.push(`/users/${newUserId}`)
-    // })
-    console.log('Success!')
+  onSubmitSignInData({ email, password }) {
+    this.props.createSession(email, password, userId => {
+      this.props.history.push(`/users/${userId}`)
+    })
+  }
+
+  onSubmitSignUpData({ username, email, password, confirmation }) {
+    this.props.createUser(username, email, password, confirmation, newUserId => {
+      this.props.history.push(`/users/${newUserId}`)
+    })
   }
 
   render() {
@@ -45,13 +51,13 @@ class TopPage extends Component {
         </div>
         <div className="sign-form">
           {(isSignIn && !isSignUp) ? (
-            <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
+            <form onSubmit={this.props.handleSubmit(this.onSubmitSignInData.bind(this))}>
               <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
               <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
               <button type="submit" className="submit-btn">SIGN IN</button>
             </form>
           ) : (
-            <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))} className="signup-form">
+            <form onSubmit={this.props.handleSubmit(this.onSubmitSignUpData.bind(this))} className="signup-form">
               <Field placeholder="NAME" name="username" type="text" component={this.renderField} />
               <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
               <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
@@ -70,7 +76,6 @@ class TopPage extends Component {
 
 function validate(values) {
   const errors = {}
-  // const { isSignIn, isSignUp } = this.state
 
   if (!values.email) {
     errors.email = "Email required"
@@ -103,4 +108,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: 'TopPageForm'
-})(connect()(TopPage))
+})(connect(null, { createSession, createUser })(TopPage))
