@@ -14,7 +14,7 @@ class ProfileUpdateForm extends Component {
           type={type}
           {...input} />
         <div className="text-help">
-          {touched ? error: ''}
+          {touched? error : ''}
         </div>
       </div>
     )
@@ -29,8 +29,6 @@ class ProfileUpdateForm extends Component {
   }
 
   onClickSignOutButton() {
-    // TODO: ログアウト時何かFlashメッセージあるといいよね
-    sessionStorage.removeItem('jwt')
     this.props.expireCurrentUser(() => this.props.history.push('/'))
   }
 
@@ -53,8 +51,8 @@ class ProfileUpdateForm extends Component {
           <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
           <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderField} />
           <button type="submit" className="submit-btn">UPDATE</button>
-          <button className="signout-btn" onClick={this.onClickSignOutButton.bind(this)}>SIGN OUT</button>
         </form>
+        <button className="signout-btn" onClick={this.onClickSignOutButton.bind(this)}>SIGN OUT</button>
       </div>
     )
   }
