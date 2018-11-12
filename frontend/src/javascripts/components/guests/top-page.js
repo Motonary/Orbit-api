@@ -30,6 +30,21 @@ class TopPage extends Component {
     )
   }
 
+  onClickHeaderRightButton() {
+    const { isSignIn, isSignUp } = this.state
+    if (isSignIn && !isSignUp) {
+      this.setState({
+        isSignIn: false,
+        isSignUp: true
+      })
+    } else if (!isSignIn && isSignUp) {
+      this.setState({
+        isSignIn: true,
+        isSignUp: false
+      })
+    }
+  }
+
   onSubmitSignInData({ email, password }) {
     this.props.createSession(email, password, userId => {
       this.props.history.push(`/users/${userId}`)
@@ -46,6 +61,7 @@ class TopPage extends Component {
     const { isSignIn, isSignUp } = this.state
     return (
       <div className="top-page-container">
+        <a onClick={this.onClickHeaderRightButton.bind(this)}>CHANGE</a>
         <div className="logo-container">
           <img src={ImgLogo} className="top-page-logo" />
         </div>
