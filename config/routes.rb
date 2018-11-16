@@ -15,8 +15,4 @@ Rails.application.routes.draw do
     patch 'assignments/:id/destroy' => 'assignments#destroy'
     patch 'assignments/:id/restore' => 'assignments#restore'
   end
-
-  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
-    !request.xhr? && request.format.html?
-  end
 end

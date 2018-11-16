@@ -8,7 +8,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # TODO: Production環境では訂正
-    origins 'localhost:4000', 'https://orbit7.herokuapp.com/'
+    origins 'localhost:4000''
 
     resource '*',
       headers: :any,
