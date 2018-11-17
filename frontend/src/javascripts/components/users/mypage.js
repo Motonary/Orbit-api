@@ -31,12 +31,9 @@ class MyPage extends Component {
     Alert.success('Successfully signed in!', {
       position: 'top-right',
       effect: 'jelly',
-      onShow: function () {
-          console.log('aye!')
-      },
       timeout: 3000,
       offset: 80
-    });
+    })
   }
 
   render() {

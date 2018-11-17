@@ -11,6 +11,7 @@ import Footer from './footer'
 class UserOnly extends Component {
   render() {
     const { url } = this.props.match
+    console.log(this.props.prevPath)
 
     return(
       this.props.currentUser ? (
