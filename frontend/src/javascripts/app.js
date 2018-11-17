@@ -19,6 +19,7 @@ import '../stylesheets/mypage.scss'
 import '../stylesheets/project_page.scss'
 import '../stylesheets/history_page.scss'
 import '../stylesheets/setting_page.scss'
+import '../stylesheets/flash.scss'
 
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)

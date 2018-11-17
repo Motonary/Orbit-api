@@ -5,10 +5,13 @@ import { Redirect } from 'react-router-dom'
 import MypageOrbit from '../molecules/mypage-orbit'
 import { fetchRevolvingProjects, createProject } from '../../actions/projects'
 
+import Alert from 'react-s-alert'
+
+
 class MyPage extends Component {
   componentDidMount() {
-    // TODO: 最初ログインした時Projectが設定されないバグ修正
     if (sessionStorage.getItem('jwt')) this.props.fetchRevolvingProjects()
+    this.showFlash()
   }
 
   onDropFixedStar(starType, e) {
@@ -22,6 +25,18 @@ class MyPage extends Component {
 
   onDestroyFixedStar(projectId = 1 /* 仮デフォルト引数 */) {
     this.props.destroyProject(projectId)
+  }
+
+  showFlash() {
+    Alert.success('Successfully signed in!', {
+      position: 'top-right',
+      effect: 'jelly',
+      onShow: function () {
+          console.log('aye!')
+      },
+      timeout: 3000,
+      offset: 80
+    });
   }
 
   render() {
@@ -45,6 +60,7 @@ class MyPage extends Component {
           </div>
         </div>
         <MypageOrbit history={this.props.history} match={this.props.match}/>
+        <Alert />
       </div>
     )
   }
