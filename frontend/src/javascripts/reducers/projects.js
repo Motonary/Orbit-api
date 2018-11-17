@@ -2,7 +2,7 @@ import { actionTypes } from '../constants'
 import _ from 'lodash'
 
 export function revolvingProjects(state = null, action) {
-  console.log(action)
+  //console.log(action)
   switch(action.type) {
     case actionTypes.FETCH_REVOLVING_PROJECTS:
       return _.mapKeys(action.currentUserAllProjects, 'id')

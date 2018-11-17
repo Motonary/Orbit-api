@@ -35,10 +35,10 @@ class Footer extends Component {
     planet_list.style.display = 'none'
   }
 
-  componentDidUpdate(prevProps, prevState){
+  componentDidUpdate(){
     if(this.props.isDestroyIgnited && !this.props.modalIsOpen) {
       if(this.props.selectedAssignments) {
-        console.log("didupdate")
+        // console.log("didupdate")
         this.onIgniteDestroyAnimation()
       }
     }
@@ -74,9 +74,9 @@ class Footer extends Component {
     const movDom = document.getElementsByClassName('destroy-action')[0]
     let targetDom
     if(this.props.selectedAssignments) {
-      console.log(movDom)
+      //console.log(movDom)
       targetDom = document.getElementById(this.props.selectedAssignments[0])
-      console.log(targetDom)
+      //console.log(targetDom)
     }
 
     // 要素の位置座標を取得
@@ -106,7 +106,7 @@ class Footer extends Component {
     parent.map((doc) => {
       let parent = doc
       let child = doc.firstChild
-      console.log(parent,child)
+      //console.log(parent,child)
       parent.removeChild(child)
     })
   }
