@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { actionTypes, ROOT_URL, JWT } from '../constants'
-
+import { actionTypes } from '../constants/actiontypes'
+import { ROOT_URL } from '../constants/url'
 
 export function fetchRevolvingProjects() {
   return axios.get(`${ROOT_URL}/api/projects/`, {
-    headers: { 'Authorization': `Bearer ${JWT}` }
+    headers: { 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}` }
   }).then(res => {
     return {
       type: actionTypes.FETCH_REVOLVING_PROJECTS,
@@ -21,7 +21,8 @@ export function setCurrentProject(currentProject, callback) {
   }
 }
 
-export function setDefaultProject(defaultProject) {
+export function setDefaultProject(defaultProject, callback) {
+  callback(defaultProject.id)
   return {
     type: actionTypes.SET_CURRENT_PROJECT,
     currentProject: defaultProject
@@ -40,8 +41,8 @@ export function createProject(title, fixed_star_type, callback) {
   return axios({
     method: 'post',
     url: `${ROOT_URL}/api/projects`,
-    headers: { 'Authorization': `Bearer ${JWT}` },
-    data: { project: { title, fixed_star_type } }
+    headers: { 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}` },
+    data: { project: { title, star_type: starType } }
   }).then(res => {
       callback(res.data.id)
       return {
@@ -55,7 +56,7 @@ export function destroyProject(projectId) {
   return axios({
     method: 'delete',
     url: `${ROOT_URL}/api/projects/${projectId}`,
-    headers: { 'Authorization': `Bearer ${JWT}` }
+    headers: { 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}` }
   }).then(() => {
       return {
         type: actionTypes.DESTROY_PROJECT,

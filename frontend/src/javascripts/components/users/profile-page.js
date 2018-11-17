@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { updateAvatar } from '../../actions/users'
+import { updateAvatar, updateProfile, expireCurrentUser } from '../../actions/users'
 
 class ProfileUpdateForm extends Component {
   renderField({ placeholder, type, input, meta: { touched, error } }) {
@@ -14,7 +14,7 @@ class ProfileUpdateForm extends Component {
           type={type}
           {...input} />
         <div className="text-help">
-          {touched ? error: ''}
+          {touched? error : ''}
         </div>
       </div>
     )
@@ -25,7 +25,15 @@ class ProfileUpdateForm extends Component {
   }
 
   onSubmit({ username, email, password, confirmation }) {
-    this.props.createUser(username, email, password, confirmation)
+    // TODO: Flashメッセージの実装
+    if (window.confirm('プロフィール情報を更新していいですか？')) {
+      this.props.updateProfile(username, email, password, confirmation)
+        .then(() => this.props.history.push('/'))
+    }
+  }
+
+  onClickSignOutButton() {
+    this.props.expireCurrentUser(() => this.props.history.push('/'))
   }
 
   render() {
@@ -33,7 +41,7 @@ class ProfileUpdateForm extends Component {
       <div id="setting-page">
         <div className="avatar-wrapper">
           <div className="avatar-container">
-            {/* Production環境ではURL変える */}
+            {/* TODO: Production環境ではURL変える */}
             <img src={`http://localhost:3000${this.props.currentUser.avatar.url}`} className="avatar" />
           </div>
         </div>
@@ -48,12 +56,12 @@ class ProfileUpdateForm extends Component {
           <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderField} />
           <button type="submit" className="submit-btn">UPDATE</button>
         </form>
+        <button className="signout-btn" onClick={this.onClickSignOutButton.bind(this)}>SIGN OUT</button>
       </div>
     )
   }
 }
 
-// TODO: バリデーション厳格に
 function validate(values) {
   const errors = {}
 
@@ -63,12 +71,12 @@ function validate(values) {
 
   if (values.email && values.email.length > 255) {
     errors.email = "Too long email address"
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  } else if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address'
   }
 
   if (!values.password) {
-    errors.password = "Password required"
+    errors.password = "Password required to update profile"
   } else if (values.password.length < 6) {
     errors.password = "Password must contain at least 6 characters"
   }
@@ -84,4 +92,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: 'ProfileUpdateForm'
-})(connect(({ currentUser }) => ({ currentUser }), { updateAvatar })(ProfileUpdateForm))
+})(connect(({ currentUser }) => ({ currentUser }), { updateAvatar, updateProfile, expireCurrentUser })(ProfileUpdateForm))

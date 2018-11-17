@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 import { setCurrentProject } from '../../actions/projects'
 
-import { PlanetImgs } from '../../constants'
+import { PlanetImgs } from '../../constants/images'
 
 class MypageOrbit extends Component {
 

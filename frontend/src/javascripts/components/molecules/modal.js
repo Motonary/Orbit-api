@@ -43,7 +43,7 @@ class ConfirmModal extends Component {
     }
   }
 
-  closeModal() {
+  closeModal(/*isDestroy*/) {
     this.props.resetModalStatus(false)
   }
 

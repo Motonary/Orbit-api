@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { actionTypes, ROOT_URL, JWT } from '../constants'
+import { actionTypes } from '../constants/actiontypes'
+import { ROOT_URL } from '../constants/url'
 
 export function createUser(name, email, password, password_confirmation, callback) {
   return axios.post(`${ROOT_URL}/api/signup`, {
@@ -29,13 +30,19 @@ export function createSession(email, password, callback) {
 
 export function fetchCurrentUser() {
   return axios.get(`${ROOT_URL}/api/current_user`, {
-    headers: { 'Authorization': `Bearer ${JWT}` }
+    headers: { 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}` }
   }).then(res => {
       return {
         type: actionTypes.SET_CURRENT_USER,
         currentUser: res.data
       }
     }).catch(() => alert('Sorry, something went wrong...'))
+}
+
+export function expireCurrentUser(callback) {
+  sessionStorage.removeItem('jwt')
+  callback()
+  return { type: actionTypes.EXPIRE_CURRENT_USER }
 }
 
 export function updateAvatar(newAvatar) {
@@ -45,7 +52,7 @@ export function updateAvatar(newAvatar) {
     method: 'post',
     url: `${ROOT_URL}/api/users/update_avatar`,
     data: avatarFile,
-    headers: { 'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${JWT}` }
+    headers: { 'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}` }
   }).then(res => {
       return {
         type: actionTypes.UPDATE_AVATAR,
@@ -54,12 +61,12 @@ export function updateAvatar(newAvatar) {
     }).catch(error => alert(error))
 }
 
-export function updateProfile(username, email, password) {
+export function updateProfile(name = null, email = null, password, password_confirmation) {
   return axios({
     method: 'patch',
     url: `${ROOT_URL}/api/users/update_profile`,
-    data: { user: { name, email, password } },
-    headers: { 'Authorization': `Bearer ${JWT}` }
+    data: { user: { name, email, password, password_confirmation } },
+    headers: { 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}` }
   }).then(res => {
       return {
         type: actionTypes.UPDATE_PROFILE,

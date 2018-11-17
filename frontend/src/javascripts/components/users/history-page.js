@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchDestroyedAssignments, restoreAssignment } from '../../actions/assignments'
-import { PlanetImgs } from '../../constants'
+import { PlanetImgs } from '../../constants/images'
 
 class HistoryPage extends Component {
   componentDidMount() {

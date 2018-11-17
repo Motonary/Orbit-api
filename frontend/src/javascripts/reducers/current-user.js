@@ -1,9 +1,12 @@
-import { actionTypes } from '../constants'
+import { actionTypes } from '../constants/actiontypes'
 
 export default (state = null, action) => {
   switch(action.type) {
     case actionTypes.SET_CURRENT_USER:
       return action.currentUser
+
+    case actionTypes.EXPIRE_CURRENT_USER:
+      return null
 
     case actionTypes.UPDATE_AVATAR: {
       let newUser = Object.assign({}, state)
