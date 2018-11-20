@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { fetchRevolvingAssignments,
-         createAssignment,
-         destroyAssignment,
-         selectAssignment,
-         disselectAssignment } from '../../actions/assignments'
-import { fetchRevolvingProjects, setDefaultProject } from '../../actions/projects'
+import {
+  fetchRevolvingAssignments,
+  createAssignment,
+  destroyAssignment,
+  selectAssignment,
+  disselectAssignment,
+} from '../../actions/assignments'
+import {
+  fetchRevolvingProjects,
+  setDefaultProject,
+} from '../../actions/projects'
 
 import { PlanetImgs } from '../../constants/images'
 import CircleOrbit from '../molecules/circle-orbit'
@@ -20,24 +25,32 @@ class ProjectPage extends Component {
     if (currentProject) {
       this.props.fetchRevolvingAssignments(currentProject.id)
     } else if (revolvingProjects) {
-      this.props.setDefaultProject(revolvingProjects[Object.keys(revolvingProjects)[0]])
+      this.props.setDefaultProject(
+        revolvingProjects[Object.keys(revolvingProjects)[0]]
+      )
     } else {
-      this.props.fetchRevolvingProjects()
-       .then(() => {
-         const { revolvingProjects } = this.props
-         if (revolvingProjects) {
-           this.props.setDefaultProject(
-             revolvingProjects[Object.keys(revolvingProjects)[0]],
-             defaultProjectId => this.props.fetchRevolvingAssignments(defaultProjectId)
-           )
-         }
-       })
+      this.props.fetchRevolvingProjects().then(() => {
+        const { revolvingProjects } = this.props
+        if (revolvingProjects) {
+          this.props.setDefaultProject(
+            revolvingProjects[Object.keys(revolvingProjects)[0]],
+            defaultProjectId =>
+              this.props.fetchRevolvingAssignments(defaultProjectId)
+          )
+        }
+      })
     }
   }
 
   onDropPlanet(title, detail, deadline, planet_type, planet_size, orbit_pos) {
     this.props.createAssignment(
-      title, detail, deadline, planet_type, planet_size, orbit_pos, this.props.match.params.projectId
+      title,
+      detail,
+      deadline,
+      planet_type,
+      planet_size,
+      orbit_pos,
+      this.props.match.params.projectId
     )
   }
 
@@ -50,8 +63,9 @@ class ProjectPage extends Component {
     let common_planet_tag = document.createElement('div')
     let planet_tag = document.createElement('div')
     let img_tag = document.createElement('img')
-    common_planet_tag.className = "common top secundus-orbit-motion start-animation"
-    planet_tag.className = "planet-medium-secundus"
+    common_planet_tag.className =
+      'common top secundus-orbit-motion start-animation'
+    planet_tag.className = 'planet-medium-secundus'
     img_tag.src = PlanetImgs.Uranus
 
     planet_tag.appendChild(img_tag)
@@ -60,16 +74,22 @@ class ProjectPage extends Component {
   }
 
   addSatelitePlanet() {
-    const conditional_class1 = document.getElementsByClassName("secundus-orbit-motion")
-    const conditional_class2 = document.getElementsByClassName("tertius-orbit-motion")
-    const target_class = document.getElementsByClassName("planet-large-primo")
+    const conditional_class1 = document.getElementsByClassName(
+      'secundus-orbit-motion'
+    )
+    const conditional_class2 = document.getElementsByClassName(
+      'tertius-orbit-motion'
+    )
+    const target_class = document.getElementsByClassName('planet-large-primo')
     const target_width = 1.5 * target_class[0].getBoundingClientRect().width
 
-    if(conditional_class1[0].children[1].classList.contains("satelite-orbit")){
-      conditional_class1[0].children[1].style.width = target_width + "px"
-      conditional_class1[0].children[1].style.height = target_width + "px"
-      conditional_class2[0].children[1].style.width = target_width + "px"
-      conditional_class2[0].children[1].style.height = target_width + "px"
+    if (
+      conditional_class1[0].children[1].classList.contains('satelite-orbit')
+    ) {
+      conditional_class1[0].children[1].style.width = target_width + 'px'
+      conditional_class1[0].children[1].style.height = target_width + 'px'
+      conditional_class2[0].children[1].style.width = target_width + 'px'
+      conditional_class2[0].children[1].style.height = target_width + 'px'
     }
   }
 
@@ -84,13 +104,15 @@ class ProjectPage extends Component {
 
     if (!this.props.currentProject) return <div>Loading....</div>
 
-    return(
+    return (
       <div>
         <div id="project-orbit">
-          <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}><img src={PlanetImgs[this.props.currentProject.fixed_star_type]} /></div>
-          <CircleOrbit orbit="primo"/>
-          <CircleOrbit orbit="secundus"/>
-          <CircleOrbit orbit="tertius"/>
+          <div id="fixed-star" onClick={this.addSatelitePlanet.bind(this)}>
+            <img src={PlanetImgs[this.props.currentProject.fixed_star_type]} />
+          </div>
+          <CircleOrbit orbit="primo" />
+          <CircleOrbit orbit="secundus" />
+          <CircleOrbit orbit="tertius" />
         </div>
         <ProjectBar />
       </div>
@@ -99,15 +121,27 @@ class ProjectPage extends Component {
 }
 
 export default connect(
-  ({ currentUser, revolvingAssignments, revolvingProjects, selectedAssignments, currentProject }) => (
-    { currentUser,
-      revolvingAssignments,
-      revolvingProjects,
-      currentProject,
-      projectsOnBar: _.reject(revolvingProjects, currentProject),
-      selectedAssignments
-    }
-  ),
-  { fetchRevolvingAssignments, fetchRevolvingProjects, setDefaultProject, createAssignment,
-    destroyAssignment, selectAssignment, disselectAssignment }
+  ({
+    currentUser,
+    revolvingAssignments,
+    revolvingProjects,
+    selectedAssignments,
+    currentProject,
+  }) => ({
+    currentUser,
+    revolvingAssignments,
+    revolvingProjects,
+    currentProject,
+    projectsOnBar: _.reject(revolvingProjects, currentProject),
+    selectedAssignments,
+  }),
+  {
+    fetchRevolvingAssignments,
+    fetchRevolvingProjects,
+    setDefaultProject,
+    createAssignment,
+    destroyAssignment,
+    selectAssignment,
+    disselectAssignment,
+  }
 )(ProjectPage)

@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { selectAssignment, disselectAssignment } from '../../actions/assignments'
+import {
+  selectAssignment,
+  disselectAssignment,
+} from '../../actions/assignments'
 import Planet from './planet'
 
 class CircleOrbit extends Component {
@@ -9,14 +12,15 @@ class CircleOrbit extends Component {
   }
 
   render() {
-    return(
-      <div className={`circle-${this.props.orbit} common-circle`} >
+    return (
+      <div className={`circle-${this.props.orbit} common-circle`}>
         <Planet orbit={this.props.orbit} />
       </div>
     )
   }
 }
 
-export default connect(({selectedAssignments}) => ({selectedAssignments}),
-  {selectAssignment, disselectAssignment}
+export default connect(
+  ({ selectedAssignments }) => ({ selectedAssignments }),
+  { selectAssignment, disselectAssignment }
 )(CircleOrbit)

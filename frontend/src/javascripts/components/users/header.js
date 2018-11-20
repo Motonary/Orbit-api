@@ -18,17 +18,24 @@ class Header extends Component {
     // mypage以外で表示(show: true), 例外判定('hidden': pathname !== rootpathなど)すると404notfound等を拾えない
     const headerleftClasses = classNames({
       'user-info': true,
-      'show-left': /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/history` || pathname === `${rootPath}/edit`
+      'show-left':
+        /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
+        pathname === `${rootPath}/history` ||
+        pathname === `${rootPath}/edit`,
     })
 
     return (
-      <a className={headerleftClasses} onClick={this.onClickHeaderLeft.bind(this)}>
+      <a
+        className={headerleftClasses}
+        onClick={this.onClickHeaderLeft.bind(this)}
+      >
         <div className="user-img-container">
-          <img src={`http://localhost:3000${this.props.currentUser.avatar.url}`} className="user-img" />
+          <img
+            src={`http://localhost:3000${this.props.currentUser.avatar.url}`}
+            className="user-img"
+          />
         </div>
-        <div className="user-name">
-          {currentUser.name}
-        </div>
+        <div className="user-name">{currentUser.name}</div>
       </a>
     )
   }
@@ -38,30 +45,49 @@ class Header extends Component {
     // mypage, project-page, setting-pageのみで表示(show-right: true)
     const historyButtonClasses = classNames({
       'icon-container': true,
-      'show-right': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/edit`
+      'show-right':
+        pathname === `${rootPath}` ||
+        /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
+        pathname === `${rootPath}/edit`,
     })
 
     // mypage, project-page, history-pageのみで表示(show-right: true)
     const settingButtonClasses = classNames({
       'icon-container': true,
-      'show-right': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/history`
+      'show-right':
+        pathname === `${rootPath}` ||
+        /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
+        pathname === `${rootPath}/history`,
     })
 
     // setting-page, history-pageのみで表示(show-right: true)
     const backButtonClasses = classNames({
       'back-icon-container': true,
-      'show-right': pathname === `${rootPath}/history` || pathname === `${rootPath}/edit`
+      'show-right':
+        pathname === `${rootPath}/history` || pathname === `${rootPath}/edit`,
     })
 
-    return(
+    return (
       <div className="links-container">
-        <Link to={`/users/${currentUser.id}/history`} className={historyButtonClasses}>HISTORY
+        <Link
+          to={`/users/${currentUser.id}/history`}
+          className={historyButtonClasses}
+        >
+          HISTORY
           <img src={HeaderIcons[0]} className="icon" />
         </Link>
-        <Link to={`/users/${currentUser.id}/edit`} className={settingButtonClasses}>SETTING
+        <Link
+          to={`/users/${currentUser.id}/edit`}
+          className={settingButtonClasses}
+        >
+          SETTING
           <img src={HeaderIcons[1]} className="icon" />
         </Link>
-        <a onClick={this.onClickBackButton.bind(this)} className={backButtonClasses}>BACK
+        <a
+          onClick={this.onClickBackButton.bind(this)}
+          className={backButtonClasses}
+        >
+          BACK
           <img src={HeaderIcons[2]} className="icon" />
         </a>
       </div>
@@ -69,16 +95,17 @@ class Header extends Component {
   }
 
   render() {
-    const { currentUser, location: { pathname } } = this.props
+    const {
+      currentUser,
+      location: { pathname },
+    } = this.props
     return (
       <div id="header">
-        { this.renderHeaderLeft(pathname, currentUser) }
-        { this.renderHeaderRight(pathname, currentUser) }
+        {this.renderHeaderLeft(pathname, currentUser)}
+        {this.renderHeaderRight(pathname, currentUser)}
       </div>
     )
   }
 }
 
-export default connect(
-  ({ currentUser }) => ({ currentUser })
-)(Header)
+export default connect(({ currentUser }) => ({ currentUser }))(Header)
