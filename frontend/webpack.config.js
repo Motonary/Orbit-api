@@ -16,16 +16,16 @@ module.exports = {
     historyApiFallback: true,
     inline: true
   },
+  resolve: {
+    extensions:['.ts','.js']
+  },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"]
-          }
+          loader: 'ts-loader'
         }
       },
       {
