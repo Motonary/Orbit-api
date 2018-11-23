@@ -23,6 +23,7 @@
 !/storage/.keep
 /node_modules
 
+/.vscode
 .byebug_history
 /frontend/node_modules
 /frontend/dist/bundle.js
