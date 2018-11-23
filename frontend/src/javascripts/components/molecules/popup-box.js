@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 const PopupBox = (assignmentInfo) => {
   const data = assignmentInfo.assignmentInfo

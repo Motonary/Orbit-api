@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import { Field, reduxForm} from 'redux-form'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
@@ -8,7 +8,7 @@ import { createAssignment } from '../../actions/assignments'
 
 import '../../../stylesheets/form_balloon.scss'
 
-class AssignmentForm extends Component {
+class AssignmentForm extends React.Component {
   constructor(props) {
     super(props)
   }

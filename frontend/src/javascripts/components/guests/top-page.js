@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import { Route, Switch } from 'react-router-dom'
 import SigninForm from './signin-form'
 import SignupForm from './signup-form'
 import ImgLogo from '../../../images/index/logo.png'
 import ImgPlanet from '../../../images/index/top_earth.png'
 
-export default class TopPage extends Component {
+export default class TopPage extends React.Component {
   render() {
     return (
       <div className="top-page-container">

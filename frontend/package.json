@@ -7,7 +7,7 @@
   "license": "ISC",
   "scripts": {
     "release": "webpack --mode production --config webpack.config.js",
-    "watch": "npm run lint && webpack-dev-server --mode development --history-api-fallback",
+    "watch": "webpack-dev-server --mode development --history-api-fallback",
     "lint": "eslint src/javascripts",
     "fix": "eslint --fix src/javascripts"
   },
@@ -32,6 +32,9 @@
     "@babel/core": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "@types/react": "^16.7.7",
+    "@types/react-dom": "^16.0.10",
+    "@types/react-redux": "^6.0.10",
     "babel-loader": "^8.0.2",
     "css-loader": "^1.0.0",
     "eslint": "^5.7.0",

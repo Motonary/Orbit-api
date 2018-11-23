@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import MypageOrbit from '../molecules/mypage-orbit'
 import { fetchRevolvingProjects, createProject } from '../../actions/projects'
 
-class MyPage extends Component {
+class MyPage extends React.Component {
   componentDidMount() {
     // TODO: 最初ログインした時Projectが設定されないバグ修正
     if (sessionStorage.getItem('jwt')) this.props.fetchRevolvingProjects()

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Header from './header'
@@ -8,7 +8,7 @@ import HistoryPage from './history-page'
 import ProfilePage from './profile-page'
 import Footer from './footer'
 
-class UserOnly extends Component {
+class UserOnly extends React.Component {
   render() {
     const { url } = this.props.match
 

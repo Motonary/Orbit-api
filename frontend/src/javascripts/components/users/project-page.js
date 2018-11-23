@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
@@ -13,7 +13,7 @@ import { PlanetImgs } from '../../constants/images'
 import CircleOrbit from '../molecules/circle-orbit'
 import ProjectBar from '../molecules/project-bar'
 
-class ProjectPage extends Component {
+class ProjectPage extends React.Component {
   componentDidMount() {
     const { currentProject, revolvingProjects } = this.props
     // TODO: リファクタリング

@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import { Field, reduxForm} from 'redux-form'
 import { connect } from 'react-redux'
 import { createSession } from '../../actions/users'
 
-class SigninForm extends Component {
+class SigninForm extends React.Component {
   renderField({ placeholder, type, input, meta: { touched, error } }) {
     const classNames = `form-group ${touched && error ? 'has-danger' : ''} field-style fieled-text`
     return(

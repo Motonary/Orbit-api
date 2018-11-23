@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { fetchCurrentUser } from '../../actions/users'
 
-class Main extends Component {
+class Main extends React.Component {
   componentDidMount() {
     if (sessionStorage.getItem('jwt')) this.props.fetchCurrentUser()
   }

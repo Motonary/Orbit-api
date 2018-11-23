@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import { connect } from 'react-redux'
 import { selectAssignment, disselectAssignment } from '../../actions/assignments'
 import Planet from './planet'
 
-class CircleOrbit extends Component {
+class CircleOrbit extends React.Component {
   constructor(props) {
     super(props)
   }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 
@@ -33,7 +33,7 @@ const customStyles = {
 
 Modal.setAppElement('#app')
 
-class ConfirmModal extends Component {
+class ConfirmModal extends React.Component {
   constructor(props) {
     super(props)
 

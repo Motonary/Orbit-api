@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import { connect } from 'react-redux'
 import { fetchDestroyedAssignments, restoreAssignment } from '../../actions/assignments'
 import { PlanetImgs } from '../../constants/images'
 
-class HistoryPage extends Component {
+class HistoryPage extends React.Component {
   componentDidMount() {
     this.props.fetchDestroyedAssignments()
   }

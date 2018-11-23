@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { HeaderIcons } from '../../constants/images'
 
-class Header extends Component {
+class Header extends React.Component {
   onClickBackButton() {
     this.props.history.goBack()
   }

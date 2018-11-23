@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import { connect } from 'react-redux'
 import { selectAssignment, disselectAssignment } from '../../actions/assignments'
 import PopupBox from './popup-box'
 import { PlanetImgs, PlanetCheckedImgs } from '../../constants/images'
 
-class Planet extends Component {
+class Planet extends React.Component {
   constructor(props) {
     super(props)
   }

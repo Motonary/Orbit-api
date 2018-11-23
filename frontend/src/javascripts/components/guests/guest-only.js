@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import TopPage from './top-page'
 
-class GuestOnly extends Component {
+class GuestOnly extends React.Component {
   render() {
     const { url } = this.props.match
     const { currentUser } = this.props

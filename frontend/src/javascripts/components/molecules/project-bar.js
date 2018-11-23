@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
@@ -8,7 +8,7 @@ import { PlanetImgs } from '../../constants/images'
 
 import '../../../stylesheets/project_bar.scss'
 
-class ProjectBar extends Component {
+class ProjectBar extends React.Component {
 
   onClickFixedStarOnBar(nextProjectId) {
     this.props.changeCurrentProject(this.props.revolvingProjects[nextProjectId], () => {

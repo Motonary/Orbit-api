@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import _ from 'lodash'
@@ -21,7 +21,7 @@ import { PlanetImgs, RevivalImg, DeleteIcons, DeleteActions, ImgHolderOpen } fro
 
 import '../../../stylesheets/destroy_animate.scss'
 
-class Footer extends Component {
+class Footer extends React.Component {
   constructor(props) {
     super(props)
 
