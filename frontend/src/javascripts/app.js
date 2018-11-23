@@ -36,4 +36,5 @@ ReactDOM.render(
       </Main>
     </Router>
   </Provider>
-  , document.getElementById('app'))
+  , document.getElementById('app')
+)
