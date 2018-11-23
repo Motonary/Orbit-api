@@ -2,7 +2,7 @@ import { actionTypes } from '../constants/actiontypes'
 import _ from 'lodash'
 
 export function revolvingProjects(state = null, action) {
-  switch(action.type) {
+  switch (action.type) {
     case actionTypes.FETCH_REVOLVING_PROJECTS:
       return _.mapKeys(action.currentUserAllProjects, 'id')
 
@@ -10,7 +10,10 @@ export function revolvingProjects(state = null, action) {
       return [...state, action.newProject]
 
     case actionTypes.DESTROY_PROJECT:
-      return _.remove([...state], eachState => eachState.id !== action.projectId)
+      return _.remove(
+        [...state],
+        eachState => eachState.id !== action.projectId
+      )
 
     default:
       return state
@@ -18,7 +21,7 @@ export function revolvingProjects(state = null, action) {
 }
 
 export function currentProject(state = null, action) {
-  switch(action.type) {
+  switch (action.type) {
     case actionTypes.SET_CURRENT_PROJECT:
       return action.currentProject
 
@@ -28,7 +31,7 @@ export function currentProject(state = null, action) {
 }
 
 export function selectedProjects(state = null, action) {
-  switch(action.type) {
+  switch (action.type) {
     default:
       return state
   }

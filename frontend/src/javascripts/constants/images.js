@@ -78,7 +78,7 @@ export const PlanetImgs = {
   Venus: ImgStar12,
   Takoyaki: ImgStar13,
   Ball: ImgStar14,
-  Egg: ImgStar15
+  Egg: ImgStar15,
 }
 
 export const PlanetCheckedImgs = {
@@ -96,13 +96,21 @@ export const PlanetCheckedImgs = {
   Venus: ImgStarChecked12,
   Takoyaki: ImgStarChecked13,
   Ball: ImgStarChecked14,
-  Egg: ImgStarChecked15
+  Egg: ImgStarChecked15,
 }
 
-export const DeleteIcons = { Meteorite: DeleteIcon1, Missile: DeleteIcon2, BlackHole: DeleteIcon3 }
+export const DeleteIcons = {
+  Meteorite: DeleteIcon1,
+  Missile: DeleteIcon2,
+  BlackHole: DeleteIcon3,
+}
 
 export const RevivalImg = RevivalIcon
 
-export const DeleteActions = { Meteorite: MeteoriteImg, Missile: MissileImg, BlackHole: BlackHoleImg }
+export const DeleteActions = {
+  Meteorite: MeteoriteImg,
+  Missile: MissileImg,
+  BlackHole: BlackHoleImg,
+}
 
 export const ImgHolderOpen = ImgHolderOpenImg

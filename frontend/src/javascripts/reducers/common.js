@@ -10,7 +10,6 @@ export function selectedStar(state = null, action) {
 
     default:
       return state
-
   }
 }
 
