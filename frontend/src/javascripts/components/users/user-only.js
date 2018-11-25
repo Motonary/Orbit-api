@@ -33,7 +33,7 @@ class UserOnly extends Component {
         <Footer {...this.props} />
       </div>
     ) : (
-      <Redirect to="/guests/signin" />
+      <Redirect to="/guests" />
     )
   }
 }
