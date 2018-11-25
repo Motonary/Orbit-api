@@ -5,7 +5,7 @@ import _ from 'lodash'
 import anime from 'animejs'
 
 import ConfirmModal from '../molecules/modal'
-import AssignmentForm from '../molecules/assignment-form'
+import AssignmentForm from '../molecules/forms/assignment-form'
 
 import {
   destroyAssignment,

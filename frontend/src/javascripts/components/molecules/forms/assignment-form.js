@@ -3,10 +3,10 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
-import { setSelectedStar, resetSelectedStar } from '../../actions/common'
-import { createAssignment } from '../../actions/assignments'
+import { setSelectedStar, resetSelectedStar } from '../../../actions/common'
+import { createAssignment } from '../../../actions/assignments'
 
-import '../../../stylesheets/form_balloon.scss'
+import '../../../../stylesheets/form_balloon.scss'
 
 class AssignmentForm extends Component {
   renderField({ placeholder, type, input, value, meta: { touched, error } }) {
