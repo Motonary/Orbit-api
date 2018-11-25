@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import TopPageBtn from '../../atoms/buttons/toppage-btn'
 import TopPageLogo from '../../atoms/toppage-logo'
-import TopPagePlanet from '../../atoms/top-page-planet.js'
+import TopPagePlanet from '../../atoms/toppage-planet-img.js'
 import TopPageForm from '../../molecules/forms/toppage-form'
 
 export default class TopPage extends Component {

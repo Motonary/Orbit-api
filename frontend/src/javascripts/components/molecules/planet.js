@@ -4,7 +4,7 @@ import {
   selectAssignment,
   disselectAssignment,
 } from '../../actions/assignments'
-import PopupBox from './popup-box'
+import PopupBox from '../atoms/popup-box'
 import { PlanetImgs, PlanetCheckedImgs } from '../../constants/images'
 
 class Planet extends Component {

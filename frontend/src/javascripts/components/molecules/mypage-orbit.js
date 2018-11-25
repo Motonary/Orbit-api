@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import FixedStar from '../atoms/fixed-star'
+import FixedStarInList from '../atoms/fixed-star-in-list'
 import { setCurrentProject } from '../../actions/projects'
 
 class MypageOrbit extends Component {
@@ -22,16 +22,23 @@ class MypageOrbit extends Component {
     const pos = ['top', 'right', 'left', 'bottom']
     const projectList = _.map(revolvingProjects, (project, index) => {
       return (
-        <FixedStar
+        <div
           key={project.id}
-          project={project}
-          pos={pos[index - 1]}
-          onClick={this.onClickFixedStar.bind(this, project.id)}
-        />
+          className={`common ${
+            pos[index - 1]
+          } mypage-orbit-motion start-animation`}
+        >
+          <FixedStarInList
+            key={project.id}
+            project={project}
+            className="planet-large-secundus"
+            onClick={this.onClickFixedStar.bind(this, project.id)}
+          />
+        </div>
       )
     })
 
-    return <div className="orbit-circle">{projectList}</div>
+    return <ul className="orbit-circle">{projectList}</ul>
   }
 }
 

@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
+import FixedStarInList from '../atoms/fixed-star-in-list'
 import { fetchRevolvingAssignments } from '../../actions/assignments'
 import { changeCurrentProject } from '../../actions/projects'
-import { PlanetImgs } from '../../constants/images'
 
 import '../../../stylesheets/project_bar.scss'
 
@@ -18,33 +18,27 @@ class ProjectBar extends Component {
     )
   }
 
-  renderProjectList() {
-    return _.map(this.props.revolvingProjects, (project, key) => {
+  render() {
+    const ProjectList = _.map(this.props.revolvingProjects, project => {
       return (
-        <li
-          key={key}
+        <FixedStarInList
+          key={project.id}
+          project={project}
           className="revolving-project"
           onClick={this.onClickFixedStarOnBar.bind(this, project.id)}
-        >
-          <img src={PlanetImgs[project.fixed_star_type]} />
-        </li>
+        />
       )
     })
-  }
 
-  render() {
     return (
       <div id="project-bar">
-        <ul className="projects-list">{this.renderProjectList()}</ul>
+        <ul className="projects-list">{ProjectList}</ul>
       </div>
     )
   }
 }
 
 export default connect(
-  ({ revolvingProjects, revolvingAssignments }) => ({
-    revolvingProjects,
-    revolvingAssignments,
-  }),
+  ({ revolvingProjects }) => ({ revolvingProjects }),
   { changeCurrentProject, fetchRevolvingAssignments }
 )(ProjectBar)
