@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Header from '../users/header'
+import Header from '../organisms/header'
 import Mypage from '../users/mypage'
 import ProjectPage from '../users/project-page'
 import HistoryPage from '../users/history-page'
 import ProfilePage from '../users/profile-page'
-import Footer from '../users/footer'
+import Footer from '../organisms/footer'
 
 class UserOnly extends Component {
   render() {
