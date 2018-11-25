@@ -11,22 +11,23 @@ class TopPage extends Component {
     super(props)
     this.state = {
       isSignIn: true,
-      isSignUp: false
+      isSignUp: false,
     }
   }
 
   renderField({ placeholder, type, input, meta: { touched, error } }) {
-    const classNames = `form-group ${touched && error ? 'has-danger' : ''} field-style fieled-text`
-    return(
+    const classNames = `form-group ${
+      touched && error ? 'has-danger' : ''
+    } field-style fieled-text`
+    return (
       <div className={classNames}>
         <input
           className="text-style"
           placeholder={placeholder}
           type={type}
-          {...input} />
-        <div className="text-help">
-          {touched ? error: ''}
-        </div>
+          {...input}
+        />
+        <div className="text-help">{touched ? error : ''}</div>
       </div>
     )
   }
@@ -36,12 +37,12 @@ class TopPage extends Component {
     if (isSignIn && !isSignUp) {
       this.setState({
         isSignIn: false,
-        isSignUp: true
+        isSignUp: true,
       })
     } else if (!isSignIn && isSignUp) {
       this.setState({
         isSignIn: true,
-        isSignUp: false
+        isSignUp: false,
       })
     }
   }
@@ -53,41 +54,96 @@ class TopPage extends Component {
   }
 
   onSubmitSignUpData({ username, email, password, confirmation }) {
-    this.props.createUser(username, email, password, confirmation, newUserId => {
-      this.props.history.push(`/users/${newUserId}`)
-    })
+    this.props.createUser(
+      username,
+      email,
+      password,
+      confirmation,
+      newUserId => {
+        this.props.history.push(`/users/${newUserId}`)
+      }
+    )
   }
 
   render() {
     const { isSignIn, isSignUp } = this.state
     return (
       <div className="top-page-container">
-        { 
-          isSignIn
-          ? <a className="toppage-btn" onClick={this.onClickHeaderRightButton.bind(this)} >
-              <img className="toppage-btn-img" src={TopPageImgs['signUp']} />
-            </a>
-          : <a className="toppage-btn" onClick={this.onClickHeaderRightButton.bind(this)}>
-              <img className="toppage-btn-img" src={TopPageImgs['signIn']} />
-            </a>
-        }
+        {isSignIn ? (
+          <a
+            className="toppage-btn"
+            onClick={this.onClickHeaderRightButton.bind(this)}
+          >
+            <img className="toppage-btn-img" src={TopPageImgs['signUp']} />
+          </a>
+        ) : (
+          <a
+            className="toppage-btn"
+            onClick={this.onClickHeaderRightButton.bind(this)}
+          >
+            <img className="toppage-btn-img" src={TopPageImgs['signIn']} />
+          </a>
+        )}
         <div className="logo-container">
           <img src={ImgLogo} className="top-page-logo" />
         </div>
         <div className="sign-form">
-          {(isSignIn && !isSignUp) ? (
-            <form onSubmit={this.props.handleSubmit(this.onSubmitSignInData.bind(this))}>
-              <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
-              <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
-              <button type="submit" className="submit-btn">SIGN IN</button>
+          {isSignIn && !isSignUp ? (
+            <form
+              onSubmit={this.props.handleSubmit(
+                this.onSubmitSignInData.bind(this)
+              )}
+            >
+              <Field
+                placeholder="EMAIL ADRESS"
+                name="email"
+                type="text"
+                component={this.renderField}
+              />
+              <Field
+                placeholder="PASSWORD"
+                name="password"
+                type="password"
+                component={this.renderField}
+              />
+              <button type="submit" className="submit-btn">
+                SIGN IN
+              </button>
             </form>
           ) : (
-            <form onSubmit={this.props.handleSubmit(this.onSubmitSignUpData.bind(this))} className="signup-form">
-              <Field placeholder="NAME" name="username" type="text" component={this.renderField} />
-              <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
-              <Field placeholder="PASSWORD" name="password" type="password" component={this.renderField} />
-              <Field placeholder="CONFIRM PASSWORD" name="confirmation" type="password" component={this.renderField} />
-              <button type="submit" className="submit-btn">SIGN UP</button>
+            <form
+              onSubmit={this.props.handleSubmit(
+                this.onSubmitSignUpData.bind(this)
+              )}
+              className="signup-form"
+            >
+              <Field
+                placeholder="NAME"
+                name="username"
+                type="text"
+                component={this.renderField}
+              />
+              <Field
+                placeholder="EMAIL ADRESS"
+                name="email"
+                type="text"
+                component={this.renderField}
+              />
+              <Field
+                placeholder="PASSWORD"
+                name="password"
+                type="password"
+                component={this.renderField}
+              />
+              <Field
+                placeholder="CONFIRM PASSWORD"
+                name="confirmation"
+                type="password"
+                component={this.renderField}
+              />
+              <button type="submit" className="submit-btn">
+                SIGN UP
+              </button>
             </form>
           )}
         </div>
@@ -103,34 +159,39 @@ function validate(values) {
   const errors = {}
 
   if (!values.email) {
-    errors.email = "Email required"
-  } else if(values.email.length > 255) {
-    errors.email = "Too long email address"
+    errors.email = 'Email required'
+  } else if (values.email.length > 255) {
+    errors.email = 'Too long email address'
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address'
   }
 
   if (!values.password) {
-    errors.password = "Password required"
+    errors.password = 'Password required'
   } else if (values.password.length < 6) {
-    errors.password = "Password must contain at least 6 characters"
+    errors.password = 'Password must contain at least 6 characters'
   }
 
   if (!values.username) {
-    errors.username = "Username required"
+    errors.username = 'Username required'
   } else if (values.username.length > 50) {
-    errors.username = "Too long username"
+    errors.username = 'Too long username'
   }
 
   if (!values.confirmation) {
-    errors.confirmation = "Password confirmation required"
+    errors.confirmation = 'Password confirmation required'
   } else if (values.password !== values.confirmation) {
-    errors.confirmation = "Not match password"
+    errors.confirmation = 'Not match password'
   }
   return errors
 }
 
 export default reduxForm({
   validate,
-  form: 'TopPageForm'
-})(connect(null, { createSession, createUser })(TopPage))
+  form: 'TopPageForm',
+})(
+  connect(
+    null,
+    { createSession, createUser }
+  )(TopPage)
+)
