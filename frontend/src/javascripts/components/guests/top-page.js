@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import TopPageButton from '../atoms/toppage-btn'
 import TopPageLogo from '../atoms/toppage-logo'
+import TopPagePlanet from '../atoms/top-page-planet.js'
 import TopPageForm from '../molecules/forms/toppage-form'
-import ImgPlanet from '../../../images/index/top_earth.png'
 
 export default class TopPage extends Component {
   constructor(props) {
@@ -43,9 +43,7 @@ export default class TopPage extends Component {
           isSignUp={isSignUp}
           history={history}
         />
-        <div className="planet-img-container">
-          <img src={ImgPlanet} className="top-page-planet" />
-        </div>
+        <TopPagePlanet />
       </div>
     )
   }
