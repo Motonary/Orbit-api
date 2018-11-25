@@ -86,7 +86,7 @@ class Footer extends Component {
       targetDom = document.getElementById(this.props.selectedAssignments[0])
     }
 
-    // 要素の位置座標を取得
+    // 要素の位置座標を取得.
     const clientRectMov = movDom.getBoundingClientRect()
     const clientRectTarget = targetDom.getBoundingClientRect()
 
