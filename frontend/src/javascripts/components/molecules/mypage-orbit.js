@@ -1,16 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-
+import FixedStar from '../atoms/fixed-star'
 import { setCurrentProject } from '../../actions/projects'
 
-import { PlanetImgs } from '../../constants/images'
-
 class MypageOrbit extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   onClickFixedStar(projectId) {
     // TODO: プロジェクトページへ遷移する前になんらかのアニメーション追加(Fadeoutとか)
     this.props.setCurrentProject(
@@ -21,33 +15,23 @@ class MypageOrbit extends Component {
     )
   }
 
-  renderProjectList() {
-    const pos = ['top', 'right', 'left', 'bottom']
-    let i = -1
+  render() {
+    const { revolvingProjects } = this.props
+    if (!revolvingProjects) return <div>Loading...</div>
 
-    if (!this.props.revolvingProjects) {
-      return <div>Loading</div>
-    }
-    return _.map(this.props.revolvingProjects, project => {
-      ++i
+    const pos = ['top', 'right', 'left', 'bottom']
+    const projectList = _.map(revolvingProjects, (project, index) => {
       return (
-        <div
+        <FixedStar
           key={project.id}
-          className={`common ${pos[i]} mypage-orbit-motion start-animation`}
-        >
-          <div
-            className="planet-large-secundus"
-            onClick={this.onClickFixedStar.bind(this, project.id)}
-          >
-            <img src={PlanetImgs[project.fixed_star_type]} />
-          </div>
-        </div>
+          project={project}
+          pos={pos[index - 1]}
+          onClick={this.onClickFixedStar.bind(this, project.id)}
+        />
       )
     })
-  }
 
-  render() {
-    return <div className="orbit-circle">{this.renderProjectList()}</div>
+    return <div className="orbit-circle">{projectList}</div>
   }
 }
 
