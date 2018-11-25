@@ -2,9 +2,6 @@
 // import
 // -----------------------------------------------------------------------------
 
-//default user image
-import ImgUser from '../../images/main/user_default_icon.png'
-
 //HeaderIcons
 import ImgHistoryIcon from '../../images/header/history_icon.png'
 import ImgSettingIcon from '../../images/header/setting_icon.png'
@@ -73,8 +70,6 @@ export const TopPageImgs = {
   signUp: SignUpButton,
 }
 
-export const ImgDefaultUser = ImgUser
-
 export const PlanetImgs = {
   Uranus: ImgStar1,
   Mercury: ImgStar2,
@@ -90,7 +85,7 @@ export const PlanetImgs = {
   Venus: ImgStar12,
   Takoyaki: ImgStar13,
   Ball: ImgStar14,
-  Egg: ImgStar15
+  Egg: ImgStar15,
 }
 
 export const PlanetCheckedImgs = {
@@ -108,13 +103,21 @@ export const PlanetCheckedImgs = {
   Venus: ImgStarChecked12,
   Takoyaki: ImgStarChecked13,
   Ball: ImgStarChecked14,
-  Egg: ImgStarChecked15
+  Egg: ImgStarChecked15,
 }
 
-export const DeleteIcons = { Meteorite: DeleteIcon1, Missile: DeleteIcon2, BlackHole: DeleteIcon3 }
+export const DeleteIcons = {
+  Meteorite: DeleteIcon1,
+  Missile: DeleteIcon2,
+  BlackHole: DeleteIcon3,
+}
 
 export const RevivalImg = RevivalIcon
 
-export const DeleteActions = { Meteorite: MeteoriteImg, Missile: MissileImg, BlackHole: BlackHoleImg }
+export const DeleteActions = {
+  Meteorite: MeteoriteImg,
+  Missile: MissileImg,
+  BlackHole: BlackHoleImg,
+}
 
 export const ImgHolderOpen = ImgHolderOpenImg

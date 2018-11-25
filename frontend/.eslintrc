@@ -2,14 +2,24 @@
   "root": true,
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
   ],
   "plugins": ["react"],
   "rules": {
     "semi": [2, "never"],
     "space-before-function-paren" : [2, "never"],
     "react/prop-types": 0,
-    "no-case-declarations": 0
+    "no-case-declarations": 0,
+    "comma-dangle": ["error", "always-multiline"],
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "semi": false
+      }
+    ]
   },
   "env": {
     "browser": true,
@@ -22,5 +32,5 @@
       "jsx": true
     },
     "sourceType": "module"
-  },
+  }
 }

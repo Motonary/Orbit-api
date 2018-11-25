@@ -1,7 +1,7 @@
 import { actionTypes } from '../constants/actiontypes'
 
 export default (state = null, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case actionTypes.SET_CURRENT_USER:
       return action.currentUser
 

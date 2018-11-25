@@ -29,5 +29,5 @@ export const actionTypes = keyMirror({
   RESTORE_ASSIGNMENT: null,
   SELECT_ASSIGNMENT: null,
   DISSELECT_ASSIGNMENT: null,
-  NULLIFY_SELECTED_ASSIGNMENT: null
+  NULLIFY_SELECTED_ASSIGNMENT: null,
 })

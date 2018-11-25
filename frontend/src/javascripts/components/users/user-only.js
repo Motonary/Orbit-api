@@ -12,24 +12,30 @@ class UserOnly extends Component {
   render() {
     const { url } = this.props.match
 
-    return(
-      this.props.currentUser ? (
-        <div className="page-container">
-          <Header {...this.props} />
-          <Switch>
-            <Route exact path={`${url}/:userId/projects`} component={ProjectPage} />
-            <Route exact path={`${url}/:userId/history`} component={HistoryPage} />
-            <Route exact path={`${url}/:userId/edit`} component={ProfilePage} />
-            <Route exact path={`${url}/:userId`} component={Mypage} />
-            <Route render={() => <h2>404 Not Found</h2>} />
-          </Switch>
-          <Footer {...this.props}/>
-        </div>
-      ) : <Redirect to="/guests" />
+    return this.props.currentUser ? (
+      <div className="page-container">
+        <Header {...this.props} />
+        <Switch>
+          <Route
+            exact
+            path={`${url}/:userId/projects`}
+            component={ProjectPage}
+          />
+          <Route
+            exact
+            path={`${url}/:userId/history`}
+            component={HistoryPage}
+          />
+          <Route exact path={`${url}/:userId/edit`} component={ProfilePage} />
+          <Route exact path={`${url}/:userId`} component={Mypage} />
+          <Route render={() => <h2>404 Not Found</h2>} />
+        </Switch>
+        <Footer {...this.props} />
+      </div>
+    ) : (
+      <Redirect to="/guests/signin" />
     )
   }
 }
 
-export default connect(
-  ({ currentUser }) => ({ currentUser })
-)(UserOnly)
+export default connect(({ currentUser }) => ({ currentUser }))(UserOnly)
