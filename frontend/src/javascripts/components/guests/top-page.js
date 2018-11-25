@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { createSession, createUser } from '../../actions/users'
 import TopPageButton from '../atoms/toppage-btn'
+import Field from '../atoms/field'
 import ImgLogo from '../../../images/index/logo.png'
 import ImgPlanet from '../../../images/index/top_earth.png'
 
@@ -13,23 +14,6 @@ class TopPage extends Component {
       isSignIn: true,
       isSignUp: false,
     }
-  }
-
-  renderField({ placeholder, type, input, meta: { touched, error } }) {
-    const classNames = `form-group ${
-      touched && error ? 'has-danger' : ''
-    } field-style fieled-text`
-    return (
-      <div className={classNames}>
-        <input
-          className="text-style"
-          placeholder={placeholder}
-          type={type}
-          {...input}
-        />
-        <div className="text-help">{touched ? error : ''}</div>
-      </div>
-    )
   }
 
   onClickTopPageButton() {
@@ -82,18 +66,8 @@ class TopPage extends Component {
                 this.onSubmitSignInData.bind(this)
               )}
             >
-              <Field
-                placeholder="EMAIL ADRESS"
-                name="email"
-                type="text"
-                component={this.renderField}
-              />
-              <Field
-                placeholder="PASSWORD"
-                name="password"
-                type="password"
-                component={this.renderField}
-              />
+              <Field placeholder="EMAIL ADRESS" name="email" type="text" />
+              <Field placeholder="PASSWORD" name="password" type="password" />
               <button type="submit" className="submit-btn">
                 SIGN IN
               </button>
@@ -105,29 +79,13 @@ class TopPage extends Component {
               )}
               className="signup-form"
             >
-              <Field
-                placeholder="NAME"
-                name="username"
-                type="text"
-                component={this.renderField}
-              />
-              <Field
-                placeholder="EMAIL ADRESS"
-                name="email"
-                type="text"
-                component={this.renderField}
-              />
-              <Field
-                placeholder="PASSWORD"
-                name="password"
-                type="password"
-                component={this.renderField}
-              />
+              <Field placeholder="NAME" name="username" type="text" />
+              <Field placeholder="EMAIL ADRESS" name="email" type="text" />
+              <Field placeholder="PASSWORD" name="password" type="password" />
               <Field
                 placeholder="CONFIRM PASSWORD"
                 name="confirmation"
                 type="password"
-                component={this.renderField}
               />
               <button type="submit" className="submit-btn">
                 SIGN UP

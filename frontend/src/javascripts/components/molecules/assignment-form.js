@@ -9,10 +9,6 @@ import { createAssignment } from '../../actions/assignments'
 import '../../../stylesheets/form_balloon.scss'
 
 class AssignmentForm extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   renderField({ placeholder, type, input, value, meta: { touched, error } }) {
     const fieldClasses = classNames({
       'form-group': true,
