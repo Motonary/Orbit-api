@@ -2,8 +2,10 @@ import React from 'react'
 
 import '../../../../stylesheets/confirm_btn.scss'
 
-const ConfirmBtn = ({ message }) => (
-  <button className="confirm-btn">{message}</button>
+const ConfirmBtn = ({ message, onClick }) => (
+  <button className="confirm-btn" onClick={onClick}>
+    {message}
+  </button>
 )
 
 export default ConfirmBtn
