@@ -9,6 +9,8 @@ import ImgUser from '../../images/main/user_default_icon.png'
 import ImgHistoryIcon from '../../images/header/history_icon.png'
 import ImgSettingIcon from '../../images/header/setting_icon.png'
 import ImgBackIcon from '../../images/header/back_icon.png'
+import SignInButton from '../../images/header/sign_in_button.png'
+import SignUpButton from '../../images/header/sign_up_button.png'
 
 //planet images
 import ImgStar1 from '../../images/planets/star_1.png'
@@ -65,6 +67,11 @@ import ImgHolderOpenImg from '../../images/footer/planet_holder_btn.png'
 // -----------------------------------------------------------------------------
 
 export const HeaderIcons = [ImgHistoryIcon, ImgSettingIcon, ImgBackIcon]
+
+export const TopPageImgs = {
+  signIn: SignInButton,
+  signUp: SignUpButton,
+}
 
 export const ImgDefaultUser = ImgUser
 

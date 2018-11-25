@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { createSession, createUser } from '../../actions/users'
+import { TopPageImgs } from '../../constants/images'
 import ImgLogo from '../../../images/index/logo.png'
 import ImgPlanet from '../../../images/index/top_earth.png'
 
@@ -61,7 +62,15 @@ class TopPage extends Component {
     const { isSignIn, isSignUp } = this.state
     return (
       <div className="top-page-container">
-        <a onClick={this.onClickHeaderRightButton.bind(this)}>CHANGE</a>
+        { 
+          isSignIn
+          ? <a className="toppage-btn" onClick={this.onClickHeaderRightButton.bind(this)} >
+              <img className="toppage-btn-img" src={TopPageImgs['signUp']} />
+            </a>
+          : <a className="toppage-btn" onClick={this.onClickHeaderRightButton.bind(this)}>
+              <img className="toppage-btn-img" src={TopPageImgs['signIn']} />
+            </a>
+        }
         <div className="logo-container">
           <img src={ImgLogo} className="top-page-logo" />
         </div>
