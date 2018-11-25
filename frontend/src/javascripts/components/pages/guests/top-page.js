@@ -34,9 +34,10 @@ export default class TopPage extends Component {
 
     return (
       <div className="top-page-container">
-        <div onClick={this.onClickTopPageButton.bind(this)}>
-          <TopPageBtn isSignIn={isSignIn} />
-        </div>
+        <TopPageBtn
+          isSignIn={isSignIn}
+          onClick={this.onClickTopPageButton.bind(this)}
+        />
         <TopPageLogo />
         <TopPageForm
           isSignIn={isSignIn}
