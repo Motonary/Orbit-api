@@ -25,6 +25,8 @@ export default class TopPage extends Component {
         isSignIn: true,
         isSignUp: false,
       })
+    } else {
+      throw new Error('Sorry, something went wrong...') // 暫定の例外処理
     }
   }
 
