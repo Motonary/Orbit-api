@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { HeaderIcons } from '../../constants/images'
+import HeaderLinkList from '../molecules/header-link-list'
 
 class Header extends Component {
-  onClickBackButton() {
-    this.props.history.goBack()
-  }
-
   onClickHeaderLeft() {
     this.props.history.push(`/users/${this.props.currentUser.id}`)
   }
@@ -40,69 +35,20 @@ class Header extends Component {
     )
   }
 
-  renderHeaderRight(pathname, currentUser) {
-    const rootPath = `/users/${currentUser.id}`
-    // mypage, project-page, setting-pageのみで表示(show-right: true)
-    const historyButtonClasses = classNames({
-      'icon-container': true,
-      'show-right':
-        pathname === `${rootPath}` ||
-        /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
-        pathname === `${rootPath}/edit`,
-    })
-
-    // mypage, project-page, history-pageのみで表示(show-right: true)
-    const settingButtonClasses = classNames({
-      'icon-container': true,
-      'show-right':
-        pathname === `${rootPath}` ||
-        /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
-        pathname === `${rootPath}/history`,
-    })
-
-    // setting-page, history-pageのみで表示(show-right: true)
-    const backButtonClasses = classNames({
-      'back-icon-container': true,
-      'show-right':
-        pathname === `${rootPath}/history` || pathname === `${rootPath}/edit`,
-    })
-
-    return (
-      <div className="links-container">
-        <Link
-          to={`/users/${currentUser.id}/history`}
-          className={historyButtonClasses}
-        >
-          HISTORY
-          <img src={HeaderIcons[0]} className="icon" />
-        </Link>
-        <Link
-          to={`/users/${currentUser.id}/edit`}
-          className={settingButtonClasses}
-        >
-          SETTING
-          <img src={HeaderIcons[1]} className="icon" />
-        </Link>
-        <a
-          onClick={this.onClickBackButton.bind(this)}
-          className={backButtonClasses}
-        >
-          BACK
-          <img src={HeaderIcons[2]} className="icon" />
-        </a>
-      </div>
-    )
-  }
-
   render() {
     const {
       currentUser,
+      history,
       location: { pathname },
     } = this.props
     return (
       <div id="header">
         {this.renderHeaderLeft(pathname, currentUser)}
-        {this.renderHeaderRight(pathname, currentUser)}
+        <HeaderLinkList
+          pathname={pathname}
+          currentUser={currentUser}
+          history={history}
+        />
       </div>
     )
   }
