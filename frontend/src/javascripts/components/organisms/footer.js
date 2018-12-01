@@ -4,8 +4,8 @@ import classNames from 'classnames'
 import _ from 'lodash'
 import anime from 'animejs'
 
+import PlanetHolder from '../molecules/planet-holder'
 import ConfirmModal from '../molecules/modal'
-import AssignmentForm from '../molecules/forms/assignment-form'
 
 import {
   destroyAssignment,
@@ -20,13 +20,7 @@ import {
   resetModalStatus,
 } from '../../actions/common'
 
-import {
-  PlanetImgs,
-  RevivalImg,
-  DeleteIcons,
-  DeleteActions,
-  ImgHolderOpen,
-} from '../../constants/images'
+import { RevivalImg, DeleteIcons, DeleteActions } from '../../constants/images'
 
 import '../../../stylesheets/destroy_animate.scss'
 
@@ -281,60 +275,6 @@ class Footer extends Component {
     })
   }
 
-  onClickOpenPlanetHolder() {
-    const target_class = document.getElementsByClassName('open-planet-holder')
-    const planet_list = document.getElementById('planet-list')
-    //const planet_holder = document.getElementById("planet-holder")
-
-    // メニュー表示/非表示
-    if (target_class[0].classList.contains('click-rotate')) {
-      target_class[0].classList.remove('click-rotate')
-      planet_list.classList.remove('is-show')
-      planet_list.style.display = 'none'
-      //planet_holder.classList.remove('holder-border');
-    } else {
-      target_class[0].classList.add('click-rotate')
-      planet_list.classList.add('is-show')
-      planet_list.style.display = ''
-      planet_list.style.width = '400px'
-      //planet_holder.classList.add('holder-border');
-    }
-
-    const target = document.getElementById('form-balloon')
-    target.style.display = 'none'
-  }
-
-  onClickSelectStar(star_type, e) {
-    const form_balloon = document.getElementById('form-balloon')
-    const prev_target = this.state.clickedStar
-    const target = e.target.parentNode
-
-    if (prev_target) {
-      prev_target.classList.remove('current-clicked')
-    }
-    target.classList.add('current-clicked')
-
-    this.setState({ clickedStar: target })
-
-    this.props.setSelectedStar(star_type)
-    form_balloon.style.display = 'block'
-  }
-
-  renderPlanetList() {
-    return _.map(PlanetImgs, (src_path, key) => {
-      return (
-        <li
-          key={key}
-          name={key}
-          className="planet"
-          onClick={this.onClickSelectStar.bind(this, key)}
-        >
-          <img src={src_path} className="planet-img" />
-        </li>
-      )
-    })
-  }
-
   renderDeleteIcons(deleteButtonsclasses) {
     return _.map(DeleteIcons, (deleteIcon, key) => {
       return (
@@ -356,12 +296,6 @@ class Footer extends Component {
     } = this.props
     const rootPath = `/users/${currentUser.id}`
 
-    const planetHolderClasses = classNames({
-      'open-planet-holder': true,
-      'holder-show':
-        pathname === `${rootPath}` ||
-        /^\/users\/[1-9]\d*\/projects$/.test(pathname),
-    })
     const revivalButtonClasses = classNames({
       disapperance: true,
       'revival-button-show': pathname === `${rootPath}/history`,
@@ -376,16 +310,7 @@ class Footer extends Component {
 
     return (
       <div id="footer">
-        <div id="planet-holder">
-          <div
-            className={planetHolderClasses}
-            onClick={this.onClickOpenPlanetHolder.bind(this)}
-          >
-            <img src={ImgHolderOpen} className="planet-holder-img" />
-          </div>
-          <AssignmentForm />
-          <ul id="planet-list">{this.renderPlanetList()}</ul>
-        </div>
+        <PlanetHolder pathname={pathname} currentUser={currentUser} />
         <div id="disapperance-holder">
           <ul className="disapperance-list">
             <li className={revivalButtonClasses}>
