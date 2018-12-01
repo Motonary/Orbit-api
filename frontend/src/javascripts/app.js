@@ -11,8 +11,8 @@ import {
 import promise from 'redux-promise'
 import reducers from './reducers'
 import Main from './components/index/main'
-import UserOnly from './components/users/user-only'
-import GuestOnly from './components/guests/guest-only'
+import UserOnly from './components/index/user-only'
+import GuestOnly from './components/index/guest-only'
 
 import '../stylesheets/common.scss'
 import '../stylesheets/form_field.scss'

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import TopPageButton from '../atoms/toppage-btn'
-import TopPageLogo from '../atoms/toppage-logo'
-import TopPagePlanet from '../atoms/top-page-planet.js'
-import TopPageForm from '../molecules/forms/toppage-form'
+import TopPageBtn from '../../atoms/buttons/toppage-btn'
+import TopPageLogo from '../../atoms/toppage-logo'
+import TopPagePlanet from '../../atoms/toppage-planet-img.js'
+import TopPageForm from '../../molecules/forms/toppage-form'
 
 export default class TopPage extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ export default class TopPage extends Component {
 
     return (
       <div className="top-page-container">
-        <TopPageButton
+        <TopPageBtn
           isSignIn={isSignIn}
           onClick={this.onClickTopPageButton.bind(this)}
         />

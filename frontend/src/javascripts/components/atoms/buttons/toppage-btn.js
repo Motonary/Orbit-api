@@ -1,7 +1,7 @@
 import React from 'react'
-import { TopPageImgs } from '../../constants/images'
+import { TopPageImgs } from '../../../constants/images'
 
-const TopPageButton = ({ isSignIn, onClick }) => (
+const TopPageBtn = ({ isSignIn, onClick }) => (
   <a className="toppage-btn" onClick={onClick}>
     {isSignIn ? (
       <img className="toppage-btn-img" src={TopPageImgs['signUp']} />
@@ -11,4 +11,4 @@ const TopPageButton = ({ isSignIn, onClick }) => (
   </a>
 )
 
-export default TopPageButton
+export default TopPageBtn

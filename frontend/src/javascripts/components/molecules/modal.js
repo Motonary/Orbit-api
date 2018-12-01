@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 
-import ConfirmBtn from '../atoms/confirm-btn'
+import ConfirmBtn from '../atoms/buttons/confirm-btn'
 
 import {
   igniteDestroyPlanets,
@@ -61,12 +61,14 @@ class ConfirmModal extends Component {
       >
         <div className="modal-warning">{this.state.destroy}</div>
         <div className="modal-confirm-buttons">
-          <div onClick={this.closeModal.bind(this, false)}>
-            <ConfirmBtn message="いいえ" />
-          </div>
-          <div onClick={this.closeModal.bind(this, true)}>
-            <ConfirmBtn message="はい" />
-          </div>
+          <ConfirmBtn
+            message="いいえ"
+            onClick={this.closeModal.bind(this, false)}
+          />
+          <ConfirmBtn
+            message="はい"
+            onClick={this.closeModal.bind(this, true)}
+          />
         </div>
       </Modal>
     )
