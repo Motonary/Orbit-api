@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import classNames from 'classnames'
-import HeaderLink from '../atoms/buttons/header-link'
+import HeaderRightLink from '../atoms/buttons/header-right-link'
 import HeaderBackLink from '../atoms/buttons/header-back-link'
 
-// const HeaderLinkList = ({pathname, currentUser}) => {
-class HeaderLinkList extends React.Component {
+class HeaderRightLinkList extends Component {
   onClickBackButton() {
     this.props.history.goBack()
   }
@@ -39,12 +38,12 @@ class HeaderLinkList extends React.Component {
 
     return (
       <div className="links-container">
-        <HeaderLink
+        <HeaderRightLink
           className={historyButtonClasses}
           toPath={`/users/${currentUser.id}/history`}
           label="HISTORY"
         />
-        <HeaderLink
+        <HeaderRightLink
           className={settingButtonClasses}
           toPath={`/users/${currentUser.id}/edit`}
           label="SETTING"
@@ -59,4 +58,4 @@ class HeaderLinkList extends React.Component {
   }
 }
 
-export default HeaderLinkList
+export default HeaderRightLinkList
