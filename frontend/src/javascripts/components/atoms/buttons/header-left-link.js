@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
+import UserImg from '../user-img'
+import UserName from '../user-name'
 
 class HeaderLeftLink extends Component {
   onClickHeaderLeft() {
@@ -24,13 +26,8 @@ class HeaderLeftLink extends Component {
         className={headerleftClasses}
         onClick={this.onClickHeaderLeft.bind(this)}
       >
-        <div className="user-img-container">
-          <img
-            src={`http://localhost:3000${currentUser.avatar.url}`}
-            className="user-img"
-          />
-        </div>
-        <div className="user-name">{currentUser.name}</div>
+        <UserImg user={currentUser} />
+        <UserName user={currentUser} />
       </a>
     )
   }

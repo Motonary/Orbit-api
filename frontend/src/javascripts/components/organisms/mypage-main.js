@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
+import MypageUserInfo from '../molecules/mypage-user-info'
 import MypageOrbit from '../molecules/mypage-orbit'
 import { fetchRevolvingProjects, createProject } from '../../actions/projects'
 
@@ -25,30 +26,18 @@ class MyPage extends Component {
   }
 
   render() {
-    const { currentUser } = this.props
+    const { currentUser, match, history } = this.props
     if (!currentUser) return <div>Loading....</div>
 
-    if (currentUser.id != this.props.match.params.userId) {
+    if (currentUser.id != match.params.userId) {
       return <Redirect to={`/users/${currentUser.id}`} />
     }
 
     //TODO: 歪みが子要素まで反映されているので親要素のみに留められないか
     return (
       <div id="project-list">
-        <div className="user-info">
-          <div className="user-img-container">
-            <img
-              src={`http://localhost:3000${this.props.currentUser.avatar.url}`}
-              className="user-img"
-            />
-          </div>
-          <div className="user-name">
-            <span>WELCOME</span>
-            <br />
-            {currentUser.name}
-          </div>
-        </div>
-        <MypageOrbit history={this.props.history} match={this.props.match} />
+        <MypageUserInfo currentUser={currentUser} />
+        <MypageOrbit history={history} match={match} />
       </div>
     )
   }
