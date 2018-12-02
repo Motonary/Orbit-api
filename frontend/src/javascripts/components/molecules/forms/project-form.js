@@ -51,6 +51,7 @@ class ProjectForm extends Component {
 
   render() {
     return (
+      //ballon系は後ほど別issueでまとめて調整
       <div id="form-balloon">
         <div className="form-balloon-title">New Project</div>
         <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>

@@ -354,9 +354,9 @@ class Footer extends Component {
     const {
       currentUser,
       location: { pathname },
+      match: { url } = this.props.match,
     } = this.props
     const rootPath = `/users/${currentUser.id}`
-    const { url } = this.props.match
 
     const planetHolderClasses = classNames({
       'open-planet-holder': true,
