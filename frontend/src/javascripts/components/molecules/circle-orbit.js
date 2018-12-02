@@ -64,7 +64,8 @@ class CircleOrbit extends Component {
             >
               <PopupBox assignmentInfo={assignmentInfo} />
               <Planet
-                assignmentInfo={assignmentInfo}
+                className="planet"
+                planetType={assignmentInfo.planet_type}
                 onCLick={this.onSelected.bind(this, assignmentInfo.planet_type)}
               />
               <canvas
