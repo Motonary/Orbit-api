@@ -9,6 +9,7 @@ export function revolvingProjects(state = null, action) {
     case actionTypes.CREATE_PROJECT:
       return { ...state, [action.newProject.id]: action.newProject }
 
+    //Project削除のanimationを実装ごにテスト
     case actionTypes.DESTROY_PROJECT:
       return _.omit(state, action.projectId)
 
