@@ -1,4 +1,4 @@
-import { actionTypes } from '../constants'
+import { actionTypes } from '../constants/actiontypes'
 
 export function selectedStar(state = null, action) {
   switch (action.type) {
@@ -10,7 +10,6 @@ export function selectedStar(state = null, action) {
 
     default:
       return state
-
   }
 }
 

@@ -28,6 +28,7 @@
 /frontend/dist/bundle.js
 /node_modules
 /public/uploads
+/.vscode
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

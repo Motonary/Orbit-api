@@ -1,0 +1,21 @@
+import React from 'react'
+import { Redirect } from 'react-router-dom'
+import MypageUserInfo from '../molecules/mypage-user-info'
+import MypageOrbit from '../molecules/mypage-orbit'
+
+const MyPageMain = ({ currentUser, match, history }) => {
+  if (!currentUser) return <div>Loading....</div>
+
+  if (currentUser.id != match.params.userId) {
+    return <Redirect to={`/users/${currentUser.id}`} />
+  }
+
+  return (
+    <div id="project-list">
+      <MypageUserInfo currentUser={currentUser} />
+      <MypageOrbit history={history} match={match} />
+    </div>
+  )
+}
+
+export default MyPageMain

@@ -1,9 +1,9 @@
-import { actionTypes } from '../constants'
+import { actionTypes } from '../constants/actiontypes'
 import _ from 'lodash'
 
 export function revolvingAssignments(state = null, action) {
   let newState = Object.assign({}, state)
-  switch(action.type) {
+  switch (action.type) {
     case actionTypes.FETCH_REVOLVING_ASSIGNMENTS:
       return action.revolvingAssignments
 
@@ -14,7 +14,10 @@ export function revolvingAssignments(state = null, action) {
 
     case actionTypes.DESTROY_ASSIGNMENT:
       // TODO: あとでやる
-      return _.remove([...state], eachState => eachState.id !== action.assignmentId)
+      return _.remove(
+        [...state],
+        eachState => eachState.id !== action.assignmentId
+      )
 
     default:
       return state
@@ -22,12 +25,15 @@ export function revolvingAssignments(state = null, action) {
 }
 
 export function selectedAssignments(state = [], action) {
-  switch(action.type) {
+  switch (action.type) {
     case actionTypes.SELECT_ASSIGNMENT:
       return [...state, action.assignmentId]
 
     case actionTypes.DISSELECT_ASSIGNMENT:
-      return _.remove([...state.selectedAssignments], eachState => eachState.id !== action.assignmentId)
+      return _.remove(
+        [...state.selectedAssignments],
+        eachState => eachState.id !== action.assignmentId
+      )
 
     case actionTypes.NULLIFY_SELECTED_ASSIGNMENT:
       return []
@@ -38,12 +44,15 @@ export function selectedAssignments(state = [], action) {
 }
 
 export function destroyedAssignments(state = null, action) {
-  switch(action.type) {
+  switch (action.type) {
     case actionTypes.FETCH_DESTROYED_ASSIGNMENTS:
       return action.destroyedAssignments
 
     case actionTypes.RESTORE_ASSIGNMENT:
-      return  _.remove([...state], eachState => eachState.id !== action.assignmentId)
+      return _.remove(
+        [...state],
+        eachState => eachState.id !== action.assignmentId
+      )
 
     default:
       return state
