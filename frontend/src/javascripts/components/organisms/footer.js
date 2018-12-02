@@ -83,7 +83,7 @@ class Footer extends Component {
   makeMovement() {
     const movDom = document.getElementsByClassName('destroy-action')[0]
     let targetDom
-    if (this.props.selectedAssignments) {:frontend/src/javascripts/components/organisms/footer.js
+    if (this.props.selectedAssignments) {
       targetDom = document.getElementById(this.props.selectedAssignments[0])
     }
 
@@ -387,12 +387,14 @@ class Footer extends Component {
           </div>
           <Switch>
             <Route exact path={`${url}/:userId`} component={ProjectForm} />
-            <Route exact path={`${url}/:userId/projects`} component={AssignmentForm} />
+            <Route
+              exact
+              path={`${url}/:userId/projects`}
+              component={AssignmentForm}
+            />
             <Route render={() => <h2>404 Not Found</h2>} />
           </Switch>
-          <ul id="planet-list">
-            {this.renderPlanetList()}
-          </ul>frontend/src/javascripts/components/organisms/footer.js
+          <ul id="planet-list">{this.renderPlanetList()}</ul>
         </div>
         <div id="disapperance-holder">
           <ul className="disapperance-list">

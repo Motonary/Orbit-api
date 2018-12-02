@@ -40,12 +40,12 @@ export function changeCurrentProject(newProject, callback) {
   }
 }
 
-export function createProject(title, fixed_star_type, callback) {
+export function createProject(title, fixed_star_type) {
   return axios({
     method: 'post',
     url: `${ROOT_URL}/api/projects`,
     headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
-    data: { project: { title, star_type: starType } },
+    data: { project: { title, star_type: fixed_star_type } },
   })
     .then(res => {
       //callback(res.data.id)

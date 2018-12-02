@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Field, reduxForm} from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
@@ -19,26 +19,25 @@ class ProjectForm extends Component {
       'has-danger': touched && error,
       'assignment-fieled-style': true,
       'assignment-fieled-text': true,
-      'planet_type': placeholder === 'planet type'
+      planet_type: placeholder === 'planet type',
     })
 
     const inInputClasses = classNames({
       'text-style': true,
-      'description': placeholder === 'description',
-      'deadline': placeholder === 'deadline'
+      description: placeholder === 'description',
+      deadline: placeholder === 'deadline',
     })
 
-    return(
+    return (
       <div className={fieldClasses}>
         <input
           className={inInputClasses}
           placeholder={placeholder}
           type={type}
           value={value}
-          {...input} />
-        <div className="text-help">
-          {touched ? error: ''}
-        </div>
+          {...input}
+        />
+        <div className="text-help">{touched ? error : ''}</div>
       </div>
     )
   }
@@ -52,16 +51,23 @@ class ProjectForm extends Component {
     target.style.display = 'none'
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div id="form-balloon">
         <div className="form-balloon-title">New Project</div>
         <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
           <div className="form-line-2">
-            <Field placeholder="title" name="title" type="text" component={this.renderField} />
+            <Field
+              placeholder="title"
+              name="title"
+              type="text"
+              component={this.renderField}
+            />
           </div>
           <div className="form-line-4">
-            <button type="submit" className="submit-btn assignment-fieled-text">決定</button>
+            <button type="submit" className="submit-btn assignment-fieled-text">
+              決定
+            </button>
           </div>
         </form>
       </div>
@@ -73,9 +79,9 @@ function validate(values) {
   const errors = {}
   //TODO: 現状validatが適当 → rails側と絡めて後々実装
   if (!values.title) {
-    errors.title = "Title required"
-  } else if(values.title.length > 50) {
-    errors.title = "Too long title"
+    errors.title = 'Title required'
+  } else if (values.title.length > 50) {
+    errors.title = 'Too long title'
   }
 
   return errors
@@ -83,5 +89,10 @@ function validate(values) {
 
 export default reduxForm({
   validate,
-  form: 'ProjectForm'
-})(connect(({selectedStar}) => ({selectedStar}), { createProject, setSelectedStar, resetSelectedStar })(ProjectForm))
+  form: 'ProjectForm',
+})(
+  connect(
+    ({ selectedStar }) => ({ selectedStar }),
+    { createProject, setSelectedStar, resetSelectedStar }
+  )(ProjectForm)
+)
