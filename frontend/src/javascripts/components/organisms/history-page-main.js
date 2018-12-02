@@ -18,9 +18,7 @@ class HistoryPageMain extends Component {
   onRestoreAssignment(assignmentId) {
     this.props.restoreAssignment(assignmentId)
   }
-  renderTest() {
-    return {}
-  }
+
   renderStoredPlanetList() {
     return PlanetImgs.map((key, planetImg) => {
       return (

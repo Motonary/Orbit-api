@@ -17,6 +17,7 @@ class MyPage extends Component {
       location: { pathname },
       match,
     } = this.props
+
     return (
       <div className="page-container">
         <Header
