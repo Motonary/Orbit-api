@@ -76,13 +76,8 @@ class Footer extends Component {
     const movDom = document.getElementsByClassName('destroy-action')[0]
     let targetDom
     if(this.props.selectedAssignments) {
-<<<<<<< HEAD
-      //console.log(movDom)
-      targetDom = document.getElementById(this.props.selectedAssignments[0])
       //console.log(targetDom)
-=======
       targetDom = document.getElementById(this.props.selectedAssignments[0])
->>>>>>> fd8f010a8bdff29dd0c1151f644bdd5ff124fbf5
     }
 
     // 要素の位置座標を取得
@@ -112,10 +107,6 @@ class Footer extends Component {
     parent.map((doc) => {
       let parent = doc
       let child = doc.firstChild
-<<<<<<< HEAD
-      //console.log(parent,child)
-=======
->>>>>>> fd8f010a8bdff29dd0c1151f644bdd5ff124fbf5
       parent.removeChild(child)
     })
   }

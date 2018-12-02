@@ -44,7 +44,7 @@ export function createProject(title, fixed_star_type, callback) {
     headers: { 'Authorization': `Bearer ${sessionStorage.getItem('jwt')}` },
     data: { project: { title, star_type: starType } }
   }).then(res => {
-      callback(res.data.id)
+      //callback(res.data.id)
       return {
         type: actionTypes.CREATE_PROJECT,
         newProject: res.data
