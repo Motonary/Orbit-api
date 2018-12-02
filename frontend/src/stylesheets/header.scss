@@ -1,4 +1,5 @@
 $container-width: 130px;
+$container-height: 60px;
 
 #header {
   margin-top: 20px;
@@ -58,9 +59,9 @@ $container-width: 130px;
   .links-container {
     cursor: pointer;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     flex-wrap: wrap;
-    align-items: center;
+    height: $container-height;
 
     position: fixed;
     top: 20px;
@@ -70,8 +71,7 @@ $container-width: 130px;
       display: none;
       width: $container-width;
       color: #fff;
-      cursor: pointer;
-      align-items: center;
+
       .icon {
         width: 50px;
         height: 50px;
@@ -84,8 +84,7 @@ $container-width: 130px;
       display: none;
       width: $container-width;
       color: #fff;
-      cursor: pointer;
-      align-items: center;
+
       .icon {
         width: 50px;
         height: 50px;
@@ -95,7 +94,8 @@ $container-width: 130px;
       }
     }
     .show-right {
-      display: block;
+      display: table-cell;
+      vertical-align: middle;
     }
   }
 }
