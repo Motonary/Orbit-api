@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Mypage from '../pages/users/mypage'
-import ProjectPage from '../pages/users/project.page'
+import ProjectPage from '../pages/users/project-page'
 import HistoryPage from '../pages/users/history-page'
 import ProfilePage from '../pages/users/profile-page'
 
@@ -14,7 +14,7 @@ class UserOnly extends Component {
     } = this.props
 
     return currentUser ? (
-      <div className="page-container">
+      <div id="page-container">
         <Switch>
           <Route
             exact

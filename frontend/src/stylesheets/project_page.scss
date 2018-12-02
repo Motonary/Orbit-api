@@ -1,282 +1,289 @@
 @import "orbit_size_initializer";
 @import "popup_balloon";
 
-#project-orbit {
+#project-container {
   width: 100%;
-  height: 90%;
-  overflow: scroll;
-  margin: 20px auto;
+  height: 100%;
+  margin: 10px auto;
 
-  #fixed-star {
-    width: $fixed-star-scale;
-    height: $fixed-star-scale;
-    margin: 0 auto;
-    position: absolute;
-    top: $fixed-star-position;
-    left: $fixed-star-position;
-    z-index: 100;
+  #project-orbit {
+    width: 65%;
+    height: 100%;
+    position: relative;
+    overflow: scroll;
+    margin: 30px auto;
 
-    img {
+    #fixed-star {
       width: $fixed-star-scale;
       height: $fixed-star-scale;
+      margin: 0 auto;
+      position: absolute;
+      top: $fixed-star-position;
+      left: $fixed-star-position;
+      z-index: 100;
+
+      img {
+        width: $fixed-star-scale;
+        height: $fixed-star-scale;
+      }
     }
-  }
-  .circle-primo {
-    width: $primo-orbit;
-    height: $primo-orbit;
-    position: absolute;
-    top: $primo-orbit-position;
-    left: $primo-orbit-position;
-    z-index: 90;
-  }
-  .circle-secundus {
-    width: $secundus-orbit;
-    height: $secundus-orbit;
-    position: absolute;
-    top: $secundus-orbit-position;
-    left: $secundus-orbit-position;
-    z-index: 80;
-  }
-  .circle-tertius {
-    width: $tertius-orbit;
-    height: $tertius-orbit;
-    position: absolute;
-    top: $tertius-orbit-position;
-    left: $tertius-orbit-position;
-    z-index: 70;
-  }
-  .common-circle {
-    margin: 0 auto;
-    border: 1px #fff;
-    border-style: solid;
-    border-radius: 50%;
-  }
-
-  .common {
-    width: 50%;
-    height: 50%;
-    position: absolute;
-    left: 25%;
-    top: 25%;
-    text-align: center;
-    z-index: -100;
-  }
-  .planet-large-primo {
-    width: percentage($primo-orbit-large-planet);
-    height: percentage($primo-orbit-large-planet);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    animation: rotate $primo-orbit-speed linear reverse infinite;
-    word-wrap: break-word;
-  }
-  .planet-medium-primo {
-    width: percentage($primo-orbit-medium-planet);
-    height: percentage($primo-orbit-medium-planet);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    animation: rotate $primo-orbit-speed linear reverse infinite;
-    word-wrap: break-word;
-  }
-  .planet-small-primo {
-    width: percentage($primo-orbit-small-planet);
-    height: percentage($primo-orbit-small-planet);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    animation: rotate $primo-orbit-speed linear reverse infinite;
-    word-wrap: break-word;
-  }
-  .planet-large-secundus {
-    width: percentage($secundus-orbit-large-planet);
-    height: percentage($secundus-orbit-large-planet);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    animation: rotate $secundus-orbit-speed linear reverse infinite;
-    word-wrap: break-word;
-  }
-  .planet-medium-secundus {
-    width: percentage($secundus-orbit-medium-planet);
-    height: percentage($secundus-orbit-medium-planet);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    animation: rotate $secundus-orbit-speed linear reverse infinite;
-    word-wrap: break-word;
-  }
-  .planet-small-secundus {
-    width: percentage($secundus-orbit-small-planet);
-    height: percentage($secundus-orbit-small-planet);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    animation: rotate $secundus-orbit-speed linear reverse infinite;
-    word-wrap: break-word;
-  }
-  .planet-large-tertius {
-    width: percentage($tertius-orbit-large-planet);
-    height: percentage($tertius-orbit-large-planet);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    animation: rotate $tertius-orbit-speed linear reverse infinite;
-    word-wrap: break-word;
-  }
-  .planet-medium-tertius {
-    width: percentage($tertius-orbit-medium-planet);
-    height: percentage($tertius-orbit-medium-planet);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    animation: rotate $tertius-orbit-speed linear reverse infinite;
-    word-wrap: break-word;
-  }
-  .planet-small-tertius {
-    width: percentage($tertius-orbit-small-planet);
-    height: percentage($tertius-orbit-small-planet);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    animation: rotate $tertius-orbit-speed linear reverse infinite;
-    word-wrap: break-word;
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-  }
-
-//canvas destroy animation
-  .canvas {
-    position: absolute;
-    width: 0;
-    height: 0;
-    top: 0;
-    left: 0;
-  }
-
-  .top {
-    position: absolute;
-    left: 25%;
-    top: -25%;
-    transform-origin: center 150%;
-  }
-  .right {
-    position: absolute;
-    left: 75%;
-    top: 25%;
-    transform-origin: -50% center;
-  }
-  .left {
-    position: absolute;
-    left: -25%;
-    top: 25%;
-    transform-origin: 150% center;
-  }
-  .bottom {
-    position: absolute;
-    left: 25%;
-    top: 75%;
-    transform-origin: center -50%;
-  }
-
-  .primo-orbit-motion {
-    animation: rotate $primo-orbit-speed linear infinite;
-  }
-  .secundus-orbit-motion {
-    animation: rotate $secundus-orbit-speed linear infinite;
-  }
-  .tertius-orbit-motion {
-    animation: rotate $tertius-orbit-speed linear infinite;
-  }
-  .satelite-orbit-motion {
-    animation: rotate $satelite-orbit-speed linear infinite;
-  }
-  .pause-animation {
-    animation-play-state: paused;
-  }
-  .start-animation {
-    animation-play-state: running;
-  }
-
-  .content {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    animation: rotate 60s linear reverse infinite;
-    word-wrap: break-word;
-  }
-  .satelite-orbit {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    border: 1px #fff;
-    border-style: solid;
-    border-radius: 50%;
-    z-index: 100;
-  }
-  .satelite {
-    width: percentage($satelite-scale);
-    height: percentage($satelite-scale);
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    border-radius: 50%;
-    animation: rotate $satelite-orbit-speed linear reverse infinite;
-    word-wrap: break-word;
-    z-index: 200;
-  }
-
-  @keyframes rotate {
-    0% {
-     transform: rotate(0deg);
+    .circle-primo {
+      width: $primo-orbit;
+      height: $primo-orbit;
+      position: absolute;
+      top: $primo-orbit-position;
+      left: $primo-orbit-position;
+      z-index: 90;
     }
-      100% {
-      transform: rotate(360deg);
+    .circle-secundus {
+      width: $secundus-orbit;
+      height: $secundus-orbit;
+      position: absolute;
+      top: $secundus-orbit-position;
+      left: $secundus-orbit-position;
+      z-index: 80;
+    }
+    .circle-tertius {
+      width: $tertius-orbit;
+      height: $tertius-orbit;
+      position: absolute;
+      top: $tertius-orbit-position;
+      left: $tertius-orbit-position;
+      z-index: 70;
+    }
+    .common-circle {
+      margin: 0 auto;
+      border: 1px #fff;
+      border-style: solid;
+      border-radius: 50%;
+    }
+
+    .common {
+      width: 50%;
+      height: 50%;
+      position: absolute;
+      left: 25%;
+      top: 25%;
+      text-align: center;
+      z-index: -100;
+    }
+    .planet-large-primo {
+      width: percentage($primo-orbit-large-planet);
+      height: percentage($primo-orbit-large-planet);
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      animation: rotate $primo-orbit-speed linear reverse infinite;
+      word-wrap: break-word;
+    }
+    .planet-medium-primo {
+      width: percentage($primo-orbit-medium-planet);
+      height: percentage($primo-orbit-medium-planet);
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      animation: rotate $primo-orbit-speed linear reverse infinite;
+      word-wrap: break-word;
+    }
+    .planet-small-primo {
+      width: percentage($primo-orbit-small-planet);
+      height: percentage($primo-orbit-small-planet);
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      animation: rotate $primo-orbit-speed linear reverse infinite;
+      word-wrap: break-word;
+    }
+    .planet-large-secundus {
+      width: percentage($secundus-orbit-large-planet);
+      height: percentage($secundus-orbit-large-planet);
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      animation: rotate $secundus-orbit-speed linear reverse infinite;
+      word-wrap: break-word;
+    }
+    .planet-medium-secundus {
+      width: percentage($secundus-orbit-medium-planet);
+      height: percentage($secundus-orbit-medium-planet);
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      animation: rotate $secundus-orbit-speed linear reverse infinite;
+      word-wrap: break-word;
+    }
+    .planet-small-secundus {
+      width: percentage($secundus-orbit-small-planet);
+      height: percentage($secundus-orbit-small-planet);
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      animation: rotate $secundus-orbit-speed linear reverse infinite;
+      word-wrap: break-word;
+    }
+    .planet-large-tertius {
+      width: percentage($tertius-orbit-large-planet);
+      height: percentage($tertius-orbit-large-planet);
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      animation: rotate $tertius-orbit-speed linear reverse infinite;
+      word-wrap: break-word;
+    }
+    .planet-medium-tertius {
+      width: percentage($tertius-orbit-medium-planet);
+      height: percentage($tertius-orbit-medium-planet);
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      animation: rotate $tertius-orbit-speed linear reverse infinite;
+      word-wrap: break-word;
+    }
+    .planet-small-tertius {
+      width: percentage($tertius-orbit-small-planet);
+      height: percentage($tertius-orbit-small-planet);
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      animation: rotate $tertius-orbit-speed linear reverse infinite;
+      word-wrap: break-word;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+  //canvas destroy animation
+    .canvas {
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 0;
+      left: 0;
+    }
+
+    .top {
+      position: absolute;
+      left: 25%;
+      top: -25%;
+      transform-origin: center 150%;
+    }
+    .right {
+      position: absolute;
+      left: 75%;
+      top: 25%;
+      transform-origin: -50% center;
+    }
+    .left {
+      position: absolute;
+      left: -25%;
+      top: 25%;
+      transform-origin: 150% center;
+    }
+    .bottom {
+      position: absolute;
+      left: 25%;
+      top: 75%;
+      transform-origin: center -50%;
+    }
+
+    .primo-orbit-motion {
+      animation: rotate $primo-orbit-speed linear infinite;
+    }
+    .secundus-orbit-motion {
+      animation: rotate $secundus-orbit-speed linear infinite;
+    }
+    .tertius-orbit-motion {
+      animation: rotate $tertius-orbit-speed linear infinite;
+    }
+    .satelite-orbit-motion {
+      animation: rotate $satelite-orbit-speed linear infinite;
+    }
+    .pause-animation {
+      animation-play-state: paused;
+    }
+    .start-animation {
+      animation-play-state: running;
+    }
+
+    .content {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      animation: rotate 60s linear reverse infinite;
+      word-wrap: break-word;
+    }
+    .satelite-orbit {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      border: 1px #fff;
+      border-style: solid;
+      border-radius: 50%;
+      z-index: 100;
+    }
+    .satelite {
+      width: percentage($satelite-scale);
+      height: percentage($satelite-scale);
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      border-radius: 50%;
+      animation: rotate $satelite-orbit-speed linear reverse infinite;
+      word-wrap: break-word;
+      z-index: 200;
+    }
+
+    @keyframes rotate {
+      0% {
+      transform: rotate(0deg);
+      }
+        100% {
+        transform: rotate(360deg);
+      }
     }
   }
 }
