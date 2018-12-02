@@ -1,47 +1,9 @@
 import React, { Component } from 'react'
-import _ from 'lodash'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import {
-  fetchRevolvingAssignments,
-  createAssignment,
-  destroyAssignment,
-  selectAssignment,
-  disselectAssignment,
-} from '../../actions/assignments'
-import {
-  fetchRevolvingProjects,
-  setDefaultProject,
-} from '../../actions/projects'
-
 import FixedStar from '../atoms/fixed-star'
 import CircleOrbit from '../molecules/circle-orbit'
 import ProjectBar from '../molecules/project-bar'
 
 class ProjectPageMain extends Component {
-  componentDidMount() {
-    const { currentProject, revolvingProjects } = this.props
-    // TODO: リファクタリング
-    if (currentProject) {
-      this.props.fetchRevolvingAssignments(currentProject.id)
-    } else if (revolvingProjects) {
-      this.props.setDefaultProject(
-        revolvingProjects[Object.keys(revolvingProjects)[0]]
-      )
-    } else {
-      this.props.fetchRevolvingProjects().then(() => {
-        const { revolvingProjects } = this.props
-        if (revolvingProjects) {
-          this.props.setDefaultProject(
-            revolvingProjects[Object.keys(revolvingProjects)[0]],
-            defaultProjectId =>
-              this.props.fetchRevolvingAssignments(defaultProjectId)
-          )
-        }
-      })
-    }
-  }
-
   // onDropPlanet(title, detail, deadline, planet_type, planet_size, orbit_pos) {
   //   this.props.createAssignment(
   //     title,
@@ -74,21 +36,12 @@ class ProjectPageMain extends Component {
   // }
 
   render() {
-    const { currentUser, match, currentProject } = this.props
-
-    if (!currentUser) return <div>Loading....</div>
-
-    if (currentUser.id != match.params.userId) {
-      const correctPath = `/users/${currentUser.id}`
-      return <Redirect to={correctPath} />
-    }
-
-    if (!currentProject) return <div>Loading....</div>
-
     return (
       <div>
         <div id="project-orbit">
-          <FixedStar fixedStarType={currentProject.fixed_star_type} />
+          <FixedStar
+            fixedStarType={this.props.currentProject.fixed_star_type}
+          />
           <CircleOrbit orbit="primo" />
           <CircleOrbit orbit="secundus" />
           <CircleOrbit orbit="tertius" />
@@ -99,28 +52,4 @@ class ProjectPageMain extends Component {
   }
 }
 
-export default connect(
-  ({
-    currentUser,
-    revolvingAssignments,
-    revolvingProjects,
-    selectedAssignments,
-    currentProject,
-  }) => ({
-    currentUser,
-    revolvingAssignments,
-    revolvingProjects,
-    currentProject,
-    projectsOnBar: _.reject(revolvingProjects, currentProject),
-    selectedAssignments,
-  }),
-  {
-    fetchRevolvingAssignments,
-    fetchRevolvingProjects,
-    setDefaultProject,
-    createAssignment,
-    destroyAssignment,
-    selectAssignment,
-    disselectAssignment,
-  }
-)(ProjectPageMain)
+export default ProjectPageMain

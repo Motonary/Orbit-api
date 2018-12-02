@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Mypage from '../pages/users/mypage'
-import ProjectPage from '../organisms/project-page-main'
+import ProjectPage from '../pages/users/project.page'
 import HistoryPage from '../pages/users/history-page'
-import ProfilePageMain from '../pages/users/profile-page'
+import ProfilePage from '../pages/users/profile-page'
 
 class UserOnly extends Component {
   render() {
@@ -26,11 +26,7 @@ class UserOnly extends Component {
             path={`${url}/:userId/history`}
             component={HistoryPage}
           />
-          <Route
-            exact
-            path={`${url}/:userId/edit`}
-            component={ProfilePageMain}
-          />
+          <Route exact path={`${url}/:userId/edit`} component={ProfilePage} />
           <Route exact path={`${url}/:userId`} component={Mypage} />
           <Route render={() => <h2>404 Not Found</h2>} />
         </Switch>
