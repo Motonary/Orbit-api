@@ -63,7 +63,11 @@ import ImgHolderOpenImg from '../../images/footer/planet_holder_btn.png'
 // export
 // -----------------------------------------------------------------------------
 
-export const HeaderIcons = [ImgHistoryIcon, ImgSettingIcon, ImgBackIcon]
+export const HeaderIcons = {
+  HISTORY: ImgHistoryIcon,
+  SETTING: ImgSettingIcon,
+  BACK: ImgBackIcon,
+}
 
 export const TopPageImgs = {
   signIn: SignInButton,
