@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Header from '../organisms/header'
-import Mypage from '../organisms/mypage-main'
-import ProjectPage from '../organisms/project-page-main'
-import HistoryPage from '../organisms/history-page-main'
-import ProfilePage from '../organisms/profile-page-main'
-import Footer from '../organisms/footer'
+import Mypage from '../pages/users/mypage'
+import ProjectPage from '../pages/users/project-page'
+import HistoryPage from '../pages/users/history-page'
+import ProfilePage from '../pages/users/profile-page'
 
 class UserOnly extends Component {
   render() {
-    const { url } = this.props.match
+    const {
+      currentUser,
+      match: { url },
+    } = this.props
 
-    return this.props.currentUser ? (
+    return currentUser ? (
       <div className="page-container">
-        <Header {...this.props} />
         <Switch>
           <Route
             exact
@@ -30,7 +30,6 @@ class UserOnly extends Component {
           <Route exact path={`${url}/:userId`} component={Mypage} />
           <Route render={() => <h2>404 Not Found</h2>} />
         </Switch>
-        <Footer {...this.props} />
       </div>
     ) : (
       <Redirect to="/guests" />

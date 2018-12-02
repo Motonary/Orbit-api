@@ -6,7 +6,7 @@ import {
 } from '../../actions/assignments'
 import { PlanetImgs } from '../../constants/images'
 
-class HistoryPage extends Component {
+class HistoryPageMain extends Component {
   componentDidMount() {
     this.props.fetchDestroyedAssignments()
   }
@@ -18,9 +18,7 @@ class HistoryPage extends Component {
   onRestoreAssignment(assignmentId) {
     this.props.restoreAssignment(assignmentId)
   }
-  renderTest() {
-    return {}
-  }
+
   renderStoredPlanetList() {
     return PlanetImgs.map((key, planetImg) => {
       return (
@@ -48,4 +46,4 @@ class HistoryPage extends Component {
 export default connect(
   ({ destroyedAssignments }) => ({ destroyedAssignments }),
   { fetchDestroyedAssignments, restoreAssignment }
-)(HistoryPage)
+)(HistoryPageMain)
