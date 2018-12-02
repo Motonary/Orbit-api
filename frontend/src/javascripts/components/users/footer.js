@@ -7,8 +7,18 @@ import anime from 'animejs'
 import ConfirmModal from '../molecules/modal'
 import AssignmentForm from '../molecules/assignment-form'
 
-import { destroyAssignment, nullifySelectedAssignment } from '../../actions/assignments'
-import { setSelectedStar, resetSelectedStar, igniteDestroyPlanets, resetDestroyPlanets, setModalStatus, resetModalStatus } from '../../actions/common'
+import {
+  destroyAssignment,
+  nullifySelectedAssignment,
+} from '../../actions/assignments'
+import {
+  setSelectedStar,
+  resetSelectedStar,
+  igniteDestroyPlanets,
+  resetDestroyPlanets,
+  setModalStatus,
+  resetModalStatus,
+} from '../../actions/common'
 
 import ImgHolderOpen from '../../../images/footer/planet_holder_btn.png'
 import { PlanetImgs } from '../../constants'
@@ -23,18 +33,18 @@ class Footer extends Component {
     super(props)
 
     this.state = {
-      clickedStar: null
+      clickedStar: null,
     }
   }
 
   componentDidMount() {
-    let planet_list = document.getElementById("planet-list")
+    let planet_list = document.getElementById('planet-list')
     planet_list.style.display = 'none'
   }
 
-  componentDidUpdate(/*prevProps, prevState*/){
-    if(this.props.isDestroyIgnited && !this.props.modalIsOpen) {
-      if(this.props.selectedAssignments) {
+  componentDidUpdate(/*prevProps, prevState*/) {
+    if (this.props.isDestroyIgnited && !this.props.modalIsOpen) {
+      if (this.props.selectedAssignments) {
         //console.log("didupdate")
         switch (this.props.isDestroyIgnited) {
           case 'Meteorite':
@@ -62,7 +72,7 @@ class Footer extends Component {
   waitFunc(sec) {
     return function() {
       return new Promise(function(resolve) {
-        setTimeout(resolve, sec*1000)
+        setTimeout(resolve, sec * 1000)
       })
     }
   }
@@ -74,12 +84,12 @@ class Footer extends Component {
     const insertDom = document.getElementById('fixed-star')
     const displayDoms = []
 
-    _.map(targetIds, (id) => {
+    _.map(targetIds, id => {
       displayDoms.push(document.getElementById(id).parentNode)
     })
 
     function withFadeOut() {
-      _.map(displayDoms, (displayDom) => {
+      _.map(displayDoms, displayDom => {
         let removeTarget = displayDom.children[1]
         let blackholeDom = document.getElementById(displayDom.children[2].id)
 
@@ -93,7 +103,7 @@ class Footer extends Component {
     }
 
     function removeDoms() {
-      _.map(displayDoms, (displayDom) => {
+      _.map(displayDoms, displayDom => {
         let removeTarget = displayDom
         displayDom.parentNode.removeChild(removeTarget)
 
@@ -102,7 +112,7 @@ class Footer extends Component {
       })
     }
 
-    _.map(displayDoms, (displayDom) => {
+    _.map(displayDoms, displayDom => {
       // 要素の位置座標を取得
       let clientRectTarget = displayDom.getBoundingClientRect()
       // 画面の左端から、要素の左端までの距離
@@ -144,7 +154,7 @@ class Footer extends Component {
   makeMovement() {
     const movDom = document.getElementsByClassName('destroy-action')[0]
     let targetDom
-    if(this.props.selectedAssignments) {
+    if (this.props.selectedAssignments) {
       targetDom = document.getElementById(this.props.selectedAssignments[0])
     }
 
@@ -167,12 +177,14 @@ class Footer extends Component {
 
     Promise.resolve()
       .then(this.waitFunc(2.5))
-      .then(() => {this.onClickDestroyPlanets(this.props.selectedAssignments)})
+      .then(() => {
+        this.onClickDestroyPlanets(this.props.selectedAssignments)
+      })
   }
 
   removePlanet(parent) {
     //FIXME: 一旦canvas以外のImgとballoonを削除・DOM上にはPlanetを表示する親要素は残る。
-    parent.map((doc) => {
+    parent.map(doc => {
       let parent = doc
       let child = doc.firstChild
       //console.log(parent,child)
@@ -181,7 +193,7 @@ class Footer extends Component {
   }
 
   removeAssignmentData(parent) {
-    parent.map((doc) => {
+    parent.map(doc => {
       let cvs = doc.children[1]
       let cvs_info = cvs.id.split('-')
       this.props.destroyAssignment(cvs_info[0])
@@ -195,8 +207,8 @@ class Footer extends Component {
     var canvasEl = []
     var ctx = []
 
-    if(target_ids.length > 0) {
-      target_ids.map((id) => {
+    if (target_ids.length > 0) {
+      target_ids.map(id => {
         let tar = document.getElementById(id)
         parent.push(tar.parentNode)
         canvasEl.push(tar)
@@ -215,11 +227,11 @@ class Footer extends Component {
 
     function setCanvasSize() {
       let i = 0
-      canvasEl.map((target) => {
+      canvasEl.map(target => {
         target.style.width = parent[i].parentNode.clientWidth + 'px'
         target.style.height = parent[i].parentNode.clientHeight + 'px'
-        target.style.top = `-${parent[i].parentNode.clientWidth/2}px`
-        target.style.left = `-${parent[i].parentNode.clientHeight/2}px`
+        target.style.top = `-${parent[i].parentNode.clientWidth / 2}px`
+        target.style.left = `-${parent[i].parentNode.clientHeight / 2}px`
         target.width = parent[i].parentNode.clientWidth
         target.height = parent[i].parentNode.clientHeight
         target.style.zIndex = 500
@@ -234,7 +246,7 @@ class Footer extends Component {
     }
 
     function removeImg() {
-      parent.map((doc) => {
+      parent.map(doc => {
         const child = doc.children[1]
         doc.removeChild(child)
       })
@@ -248,16 +260,16 @@ class Footer extends Component {
     }
 
     function setParticuleDirection(p) {
-      var angle = anime.random(0, 360) * Math.PI / 180
+      var angle = (anime.random(0, 360) * Math.PI) / 180
       var value = anime.random(50, 180)
       var radius = [-1, 1][anime.random(0, 1)] * value
       return {
         x: p.x + radius * Math.cos(angle),
-        y: p.y + radius * Math.sin(angle)
+        y: p.y + radius * Math.sin(angle),
       }
     }
 
-    function createParticule(x,y) {
+    function createParticule(x, y) {
       let p = {}
       p.x = x
       p.y = y
@@ -265,7 +277,7 @@ class Footer extends Component {
       p.radius = anime.random(10, 20)
       p.endPos = setParticuleDirection(p)
       p.draw = function() {
-        ctx.map((tar) => {
+        ctx.map(tar => {
           tar.beginPath()
           tar.arc(p.x, p.y, p.radius, 0, 2 * Math.PI, true)
           tar.fillStyle = p.color
@@ -288,12 +300,16 @@ class Footer extends Component {
       }
       anime.timeline().add({
         targets: particules,
-        x: function(p) { return p.endPos.x },
-        y: function(p) { return p.endPos.y },
+        x: function(p) {
+          return p.endPos.x
+        },
+        y: function(p) {
+          return p.endPos.y
+        },
         radius: 0.1,
         duration: anime.random(1200, 1800),
         easing: 'easeOutExpo',
-        update: renderParticule
+        update: renderParticule,
       })
     }
 
@@ -301,11 +317,11 @@ class Footer extends Component {
       duration: Infinity,
       update: function() {
         let i = 0
-        ctx.map((val) => {
+        ctx.map(val => {
           val.clearRect(0, 0, canvasEl[i].width, canvasEl[i].height)
           i++
         })
-      }
+      },
     })
 
     setCanvasSize()
@@ -324,34 +340,34 @@ class Footer extends Component {
 
   motionControll() {
     const target_classes = [
-      document.getElementsByClassName("primo-orbit-motion"),
-      document.getElementsByClassName("secundus-orbit-motion"),
-      document.getElementsByClassName("tertius-orbit-motion"),
-      document.getElementsByClassName("satelite-orbit-motion")
+      document.getElementsByClassName('primo-orbit-motion'),
+      document.getElementsByClassName('secundus-orbit-motion'),
+      document.getElementsByClassName('tertius-orbit-motion'),
+      document.getElementsByClassName('satelite-orbit-motion'),
     ]
 
-    target_classes.map((target) => {
-      for(let i=0; i<target.length; i++){
-        target[i].classList.toggle("pause-animation")
-        target[i].classList.toggle("start-animation")
+    target_classes.map(target => {
+      for (let i = 0; i < target.length; i++) {
+        target[i].classList.toggle('pause-animation')
+        target[i].classList.toggle('start-animation')
       }
     })
   }
 
   onClickOpenPlanetHolder() {
-    const target_class = document.getElementsByClassName("open-planet-holder")
-    const planet_list = document.getElementById("planet-list")
+    const target_class = document.getElementsByClassName('open-planet-holder')
+    const planet_list = document.getElementById('planet-list')
     //const planet_holder = document.getElementById("planet-holder")
 
     // メニュー表示/非表示
-    if(target_class[0].classList.contains("click-rotate")) {
-      target_class[0].classList.remove("click-rotate")
-      planet_list.classList.remove("is-show")
+    if (target_class[0].classList.contains('click-rotate')) {
+      target_class[0].classList.remove('click-rotate')
+      planet_list.classList.remove('is-show')
       planet_list.style.display = 'none'
       //planet_holder.classList.remove('holder-border');
     } else {
-      target_class[0].classList.add("click-rotate")
-      planet_list.classList.add("is-show")
+      target_class[0].classList.add('click-rotate')
+      planet_list.classList.add('is-show')
       planet_list.style.display = ''
       planet_list.style.width = '400px'
       //planet_holder.classList.add('holder-border');
@@ -366,76 +382,88 @@ class Footer extends Component {
     const prev_target = this.state.clickedStar
     const target = e.target.parentNode
 
-    if(prev_target){
+    if (prev_target) {
       prev_target.classList.remove('current-clicked')
     }
     target.classList.add('current-clicked')
 
-    this.setState({clickedStar: target})
+    this.setState({ clickedStar: target })
 
     this.props.setSelectedStar(star_type)
     form_balloon.style.display = 'block'
   }
 
   renderPlanetList() {
-    return(
-      _.map(PlanetImgs, (src_path, key) => {
-        return(
-          <li
-            key={key}
-            name={key}
-            className="planet"
-            onClick={this.onClickSelectStar.bind(this, key)}>
-              <img src={src_path} className="planet-img"/>
-          </li>
-        )
-      })
-    )
+    return _.map(PlanetImgs, (src_path, key) => {
+      return (
+        <li
+          key={key}
+          name={key}
+          className="planet"
+          onClick={this.onClickSelectStar.bind(this, key)}
+        >
+          <img src={src_path} className="planet-img" />
+        </li>
+      )
+    })
   }
 
   renderDeleteIcons(deleteButtonsclasses) {
-    return (
-      _.map(DeleteIcons, (deleteIcon, key) => {
-        return (
-          <li key={key} className={deleteButtonsclasses} onClick={this.onClickOpenModal.bind(this, key)}>
-            <img src={deleteIcon} className="delete-btn"/>
-          </li>
-        )
-      })
-    )
+    return _.map(DeleteIcons, (deleteIcon, key) => {
+      return (
+        <li
+          key={key}
+          className={deleteButtonsclasses}
+          onClick={this.onClickOpenModal.bind(this, key)}
+        >
+          <img src={deleteIcon} className="delete-btn" />
+        </li>
+      )
+    })
   }
 
   render() {
-    const { currentUser, location: { pathname } } = this.props
+    const {
+      currentUser,
+      location: { pathname },
+    } = this.props
     const rootPath = `/users/${currentUser.id}`
 
     const planetHolderClasses = classNames({
       'open-planet-holder': true,
-      'holder-show': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname)
+      'holder-show':
+        pathname === `${rootPath}` ||
+        /^\/users\/[1-9]\d*\/projects$/.test(pathname),
     })
     const revivalButtonClasses = classNames({
-      'disapperance': true,
-      'revival-button-show': pathname === `${rootPath}/history`
+      disapperance: true,
+      'revival-button-show': pathname === `${rootPath}/history`,
     })
     const deleteButtonsclasses = classNames({
-      'disapperance': true,
-      'delete-buttons-show': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/history`
+      disapperance: true,
+      'delete-buttons-show':
+        pathname === `${rootPath}` ||
+        /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
+        pathname === `${rootPath}/history`,
     })
 
-    return(
+    return (
       <div id="footer">
         <div id="planet-holder">
-          <div className={planetHolderClasses} onClick={this.onClickOpenPlanetHolder.bind(this)}>
-            <img src={ImgHolderOpen} className="planet-holder-img"/>
+          <div
+            className={planetHolderClasses}
+            onClick={this.onClickOpenPlanetHolder.bind(this)}
+          >
+            <img src={ImgHolderOpen} className="planet-holder-img" />
           </div>
           <AssignmentForm />
-          <ul id="planet-list">
-            {this.renderPlanetList()}
-          </ul>
+          <ul id="planet-list">{this.renderPlanetList()}</ul>
         </div>
         <div id="disapperance-holder">
           <ul className="disapperance-list">
-            <li className={revivalButtonClasses}><img src={RevivalImg} className="delete-btn"/></li>
+            <li className={revivalButtonClasses}>
+              <img src={RevivalImg} className="delete-btn" />
+            </li>
             {this.renderDeleteIcons(deleteButtonsclasses)}
           </ul>
         </div>
@@ -446,6 +474,27 @@ class Footer extends Component {
 }
 
 export default connect(
-  ({ currentUser, selectedAssignments, selectedStar, isDestroyIgnited, modalIsOpen }) => ({ currentUser, selectedAssignments, isDestroyIgnited, selectedStar, modalIsOpen }),
-  { destroyAssignment, nullifySelectedAssignment, setSelectedStar, resetSelectedStar, igniteDestroyPlanets, resetDestroyPlanets, setModalStatus, resetModalStatus }
+  ({
+    currentUser,
+    selectedAssignments,
+    selectedStar,
+    isDestroyIgnited,
+    modalIsOpen,
+  }) => ({
+    currentUser,
+    selectedAssignments,
+    isDestroyIgnited,
+    selectedStar,
+    modalIsOpen,
+  }),
+  {
+    destroyAssignment,
+    nullifySelectedAssignment,
+    setSelectedStar,
+    resetSelectedStar,
+    igniteDestroyPlanets,
+    resetDestroyPlanets,
+    setModalStatus,
+    resetModalStatus,
+  }
 )(Footer)
