@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Mypage from '../pages/users/mypage'
 import ProjectPage from '../organisms/project-page-main'
 import HistoryPage from '../pages/users/history-page'
-import ProfilePageMain from '../organisms/profile-page-main'
+import ProfilePageMain from '../pages/users/profile-page'
 
 class UserOnly extends Component {
   render() {
