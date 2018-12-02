@@ -14,7 +14,7 @@ class MyPage extends Component {
   onDropFixedStar(starType, e) {
     //TODO: こいつの設定
     if (e.keyCode === 13) {
-      this.props.createProject(e.target.value, starType , projectId => {
+      this.props.createProject(e.target.value, starType, projectId => {
         this.props.history.push(`${this.props.match.url}/projects/${projectId}`)
       })
     }
@@ -33,18 +33,22 @@ class MyPage extends Component {
     }
 
     //TODO: 歪みが子要素まで反映されているので親要素のみに留められないか
-    return(
+    return (
       <div id="project-list">
         <div className="user-info">
           <div className="user-img-container">
-            <img src={`http://localhost:3000${this.props.currentUser.avatar.url}`} className="user-img" />
+            <img
+              src={`http://localhost:3000${this.props.currentUser.avatar.url}`}
+              className="user-img"
+            />
           </div>
           <div className="user-name">
-            <span>WELCOME</span><br />
+            <span>WELCOME</span>
+            <br />
             {currentUser.name}
           </div>
         </div>
-        <MypageOrbit history={this.props.history} match={this.props.match}/>
+        <MypageOrbit history={this.props.history} match={this.props.match} />
       </div>
     )
   }

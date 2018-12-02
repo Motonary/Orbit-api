@@ -11,7 +11,10 @@ export function revolvingProjects(state = null, action) {
       return _.defaults(state, _.mapKeys(action.newProject, 'id'))//[...state, action.newProject]
 
     case actionTypes.DESTROY_PROJECT:
-      return _.remove([...state], eachState => eachState.id !== action.projectId)
+      return _.remove(
+        [...state],
+        eachState => eachState.id !== action.projectId
+      )
 
     default:
       return state
@@ -19,7 +22,7 @@ export function revolvingProjects(state = null, action) {
 }
 
 export function currentProject(state = null, action) {
-  switch(action.type) {
+  switch (action.type) {
     case actionTypes.SET_CURRENT_PROJECT:
       return action.currentProject
 
@@ -29,7 +32,7 @@ export function currentProject(state = null, action) {
 }
 
 export function selectedProjects(state = null, action) {
-  switch(action.type) {
+  switch (action.type) {
     default:
       return state
   }

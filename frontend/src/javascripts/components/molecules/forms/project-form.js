@@ -3,10 +3,10 @@ import { Field, reduxForm} from 'redux-form'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
-import { setSelectedStar, resetSelectedStar } from '../../actions/common'
-import { createProject } from '../../actions/projects'
+import { setSelectedStar, resetSelectedStar } from '../../../actions/common'
+import { createProject } from '../../../actions/projects'
 
-import '../../../stylesheets/form_balloon.scss'
+import '../../../../stylesheets/form_balloon.scss'
 
 class ProjectForm extends Component {
   constructor(props) {
