@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import classNames from 'classnames'
-import _ from 'lodash'
 import anime from 'animejs'
 
 import PlanetHolder from '../molecules/planet-holder'
+import FooterButtonsList from '../molecules/footer-buttons-list'
 import ConfirmModal from '../molecules/modal'
 
 import {
@@ -14,43 +13,26 @@ import {
 import {
   setSelectedStar,
   resetSelectedStar,
-  igniteDestroyPlanets,
   resetDestroyPlanets,
-  setModalStatus,
-  resetModalStatus,
 } from '../../actions/common'
 
-import { RevivalImg, DeleteIcons, DeleteActions } from '../../constants/images'
+import { DeleteActions } from '../../constants/images'
 
 import '../../../stylesheets/destroy_animate.scss'
 
 class Footer extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      selectAssignments: [],
-      clickedStar: null,
-    }
-  }
-
   componentDidMount() {
     let planet_list = document.getElementById('planet-list')
     planet_list.style.display = 'none'
   }
 
   componentDidUpdate(/*prevProps, prevState*/) {
+    // TODO: 星破壊時の諸関数も最適化ししかるべきコンポーネントに移動する
     if (this.props.isDestroyIgnited && !this.props.modalIsOpen) {
       if (this.props.selectedAssignments) {
         this.onIgniteDestroyAnimation()
       }
     }
-  }
-
-  onClickOpenModal(actionKey) {
-    this.props.setModalStatus(true)
-    this.props.igniteDestroyPlanets(actionKey)
-    this.motionControll()
   }
 
   waitFunc(sec) {
@@ -275,20 +257,6 @@ class Footer extends Component {
     })
   }
 
-  renderDeleteIcons(deleteButtonsclasses) {
-    return _.map(DeleteIcons, (deleteIcon, key) => {
-      return (
-        <li
-          key={key}
-          className={deleteButtonsclasses}
-          onClick={this.onClickOpenModal.bind(this, key)}
-        >
-          <img src={deleteIcon} className="delete-btn" />
-        </li>
-      )
-    })
-  }
-
   render() {
     const {
       currentUser,
@@ -296,29 +264,10 @@ class Footer extends Component {
     } = this.props
     const rootPath = `/users/${currentUser.id}`
 
-    const revivalButtonClasses = classNames({
-      disapperance: true,
-      'revival-button-show': pathname === `${rootPath}/history`,
-    })
-    const deleteButtonsclasses = classNames({
-      disapperance: true,
-      'delete-buttons-show':
-        pathname === `${rootPath}` ||
-        /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
-        pathname === `${rootPath}/history`,
-    })
-
     return (
       <div id="footer">
         <PlanetHolder pathname={pathname} currentUser={currentUser} />
-        <div id="disapperance-holder">
-          <ul className="disapperance-list">
-            <li className={revivalButtonClasses}>
-              <img src={RevivalImg} className="delete-btn" />
-            </li>
-            {this.renderDeleteIcons(deleteButtonsclasses)}
-          </ul>
-        </div>
+        <FooterButtonsList pathname={pathname} rootPath={rootPath} />
         <ConfirmModal />
       </div>
     )
@@ -344,9 +293,6 @@ export default connect(
     nullifySelectedAssignment,
     setSelectedStar,
     resetSelectedStar,
-    igniteDestroyPlanets,
     resetDestroyPlanets,
-    setModalStatus,
-    resetModalStatus,
   }
 )(Footer)
