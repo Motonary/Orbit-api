@@ -8,22 +8,21 @@ import { fetchRevolvingProjects, createProject } from '../../actions/projects'
 
 class MyPage extends Component {
   componentDidMount() {
-    // TODO: 最初ログインした時Projectが設定されないバグ修正
     if (sessionStorage.getItem('jwt')) this.props.fetchRevolvingProjects()
   }
 
-  onDropFixedStar(starType, e) {
-    //TODO: こいつの設定
-    if (e.keyCode === 13) {
-      this.props.createProject(e.target.value, starType, projectId => {
-        this.props.history.push(`${this.props.match.url}/projects/${projectId}`)
-      })
-    }
-  }
+  // onDropFixedStar(starType, e) {
+  //   //TODO: こいつの設定
+  //   if (e.keyCode === 13) {
+  //     this.props.createProject(e.target.value, starType, projectId => {
+  //       this.props.history.push(`${this.props.match.url}/projects/${projectId}`)
+  //     })
+  //   }
+  // }
 
-  onDestroyFixedStar(projectId = 1 /* 仮デフォルト引数 */) {
-    this.props.destroyProject(projectId)
-  }
+  // onDestroyFixedStar(projectId = 1 /* 仮デフォルト引数 */) {
+  //   this.props.destroyProject(projectId)
+  // }
 
   render() {
     const { currentUser, match, history } = this.props

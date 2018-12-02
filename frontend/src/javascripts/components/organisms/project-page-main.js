@@ -74,15 +74,11 @@ class ProjectPage extends Component {
   // }
 
   render() {
-    const {
-      currentUser,
-      match: { params },
-      currentProject,
-    } = this.props
+    const { currentUser, match, currentProject } = this.props
 
     if (!currentUser) return <div>Loading....</div>
 
-    if (currentUser.id != params.userId) {
+    if (currentUser.id != match.params.userId) {
       const correctPath = `/users/${currentUser.id}`
       return <Redirect to={correctPath} />
     }

@@ -10,9 +10,12 @@ import Footer from '../organisms/footer'
 
 class UserOnly extends Component {
   render() {
-    const { url } = this.props.match
+    const {
+      currentUser,
+      match: { url },
+    } = this.props
 
-    return this.props.currentUser ? (
+    return currentUser ? (
       <div className="page-container">
         <Header {...this.props} />
         <Switch>
