@@ -3,9 +3,7 @@ import { Field as ReduxFormField } from 'redux-form' // Fieldの命名被り防�
 
 export default class Field extends Component {
   renderField({ placeholder, type, input, meta: { touched, error } }) {
-    const classNames = `form-group ${
-      touched && error ? 'has-danger' : ''
-    } field-style fieled-text`
+    const classNames = `${touched && error ? 'has-danger' : ''} field-style`
     return (
       <div className={classNames}>
         <input

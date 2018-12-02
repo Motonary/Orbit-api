@@ -60,7 +60,7 @@ export function expireCurrentUser(callback) {
   return { type: actionTypes.EXPIRE_CURRENT_USER }
 }
 
-export function updateAvatar(newAvatar) {
+export function updateUserImg(newAvatar) {
   let avatarFile = new FormData()
   avatarFile.append('avatar', newAvatar, newAvatar.name)
   return axios({

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Mypage from '../pages/users/mypage'
 import ProjectPage from '../pages/users/project-page'
 import HistoryPage from '../pages/users/history-page'
-import ProfilePage from '../pages/users/profile-page'
+import SettingPage from '../pages/users/setting-page'
 
 class UserOnly extends Component {
   render() {
@@ -26,7 +26,7 @@ class UserOnly extends Component {
             path={`${url}/:userId/history`}
             component={HistoryPage}
           />
-          <Route exact path={`${url}/:userId/edit`} component={ProfilePage} />
+          <Route exact path={`${url}/:userId/edit`} component={SettingPage} />
           <Route exact path={`${url}/:userId`} component={Mypage} />
           <Route render={() => <h2>404 Not Found</h2>} />
         </Switch>
