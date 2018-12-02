@@ -9,10 +9,6 @@ import { createProject } from '../../../actions/projects'
 import '../../../../stylesheets/form_balloon.scss'
 
 class ProjectForm extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   renderField({ placeholder, type, input, value, meta: { touched, error } }) {
     const fieldClasses = classNames({
       'form-group': true,
@@ -44,10 +40,12 @@ class ProjectForm extends Component {
 
   onSubmit({ title }) {
     const target = document.getElementById('form-balloon')
+    const target_star = document.getElementsByClassName('current-clicked')[0]
     const fixed_star_type = this.props.selectedStar
 
     this.props.createProject(title, fixed_star_type)
     this.props.resetSelectedStar()
+    target_star.classList.remove('current-clicked')
     target.style.display = 'none'
   }
 

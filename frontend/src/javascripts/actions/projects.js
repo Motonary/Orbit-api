@@ -45,10 +45,9 @@ export function createProject(title, fixed_star_type) {
     method: 'post',
     url: `${ROOT_URL}/api/projects`,
     headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
-    data: { project: { title, star_type: fixed_star_type } },
+    data: { project: { title, fixed_star_type } },
   })
     .then(res => {
-      //callback(res.data.id)
       return {
         type: actionTypes.CREATE_PROJECT,
         newProject: res.data,

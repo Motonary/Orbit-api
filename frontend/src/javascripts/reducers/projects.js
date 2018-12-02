@@ -7,13 +7,10 @@ export function revolvingProjects(state = null, action) {
       return _.mapKeys(action.currentUserAllProjects, 'id')
 
     case actionTypes.CREATE_PROJECT:
-      return _.defaults(state, _.mapKeys(action.newProject, 'id')) //[...state, action.newProject]
+      return { ...state, [action.newProject.id]: action.newProject }
 
     case actionTypes.DESTROY_PROJECT:
-      return _.remove(
-        [...state],
-        eachState => eachState.id !== action.projectId
-      )
+      return _.omit(state, action.projectId)
 
     default:
       return state

@@ -6,10 +6,9 @@ class Api::ProjectsController < ApplicationController
   end
 
   def create
+    logger.debug("{'user_id' : #{current_user.id}, 'user_name' : '#{current_user.name}'}")
     logger.debug(project_params)
-    new_project = current_user.projects.new(project_params)
-    logger.debug(new_project)
-    new_project.save! and render json: new_project
+    new_project = current_user.projects.create!(project_params) and render json: new_project
   end
 
   def destroy
