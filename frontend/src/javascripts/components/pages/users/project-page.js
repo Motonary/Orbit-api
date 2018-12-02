@@ -55,7 +55,7 @@ class ProjectPage extends Component {
     if (!currentProject) return <div>Loading....</div>
 
     return (
-      <div className="page-container">
+      <div id="project-page-container">
         <Header
           currentUser={currentUser}
           history={history}

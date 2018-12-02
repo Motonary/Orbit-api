@@ -25,7 +25,7 @@ class MypageOrbit extends Component {
         <div
           key={project.id}
           className={`common ${
-            pos[index - 1]
+            pos[index % 4]
           } mypage-orbit-motion start-animation`}
         >
           <FixedStarInList

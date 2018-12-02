@@ -23,6 +23,7 @@ const rootReducer = combineReducers({
   // Projects
   revolvingProjects,
   currentProject,
+  //selectedProjects,
 
   // Assignments
   revolvingAssignments,

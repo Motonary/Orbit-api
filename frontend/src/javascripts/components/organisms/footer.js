@@ -5,7 +5,6 @@ import anime from 'animejs'
 import PlanetHolder from '../molecules/planet-holder'
 import FooterButtonsList from '../molecules/footer-buttons-list'
 import ConfirmModal from '../molecules/modal'
-
 import {
   destroyAssignment,
   nullifySelectedAssignment,
