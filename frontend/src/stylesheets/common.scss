@@ -6,13 +6,16 @@
 html {
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 body {
   width: 100%;
   height: 100%;
   margin: 0;
-  background: #0D171F url("../images/universe.png") repeat center center;
-  background-size:cover;
+  padding: 0;
+  background: #0D1935 url("../images/universe.png") no-repeat center center;
+  background-size: cover;
 }
 .container {
   width: 100%;
