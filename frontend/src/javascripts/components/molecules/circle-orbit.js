@@ -12,21 +12,16 @@ class CircleOrbit extends Component {
   onMouseOver(e) {
     const target_planet = e.target.parentNode.firstChild
     target_planet.style.display = 'inline-block'
-    //console.log(target_planet)
   }
   onMouseOut(e) {
     const target_planet = e.target.parentNode.firstChild
     target_planet.style.display = 'none'
-    //console.log(target_planet)
   }
 
   onSelected(planet_type, e) {
     const target = e.target.nextElementSibling
     const target_img = e.target
     const selectedPlanetId = target.id
-
-    //console.log(e.target, planet_type)
-    //console.log(this.props)
 
     if (selectedPlanetId) {
       target_img.src = PlanetCheckedImgs[planet_type]
@@ -44,39 +39,42 @@ class CircleOrbit extends Component {
       return <div className={`circle-${this.props.orbit} common-circle`} />
     }
 
-    return revolvingAssignments[orbit].map((assignmentInfo, index) => {
-      return (
-        <div
-          className={`circle-${this.props.orbit} common-circle`}
-          key={assignmentInfo.id}
-        >
-          <div
-            className={`common ${pos[index]} ${
-              assignmentInfo.orbit_pos
-            }-orbit-motion start-animation`}
-          >
+    return (
+      <div className={`circle-${this.props.orbit} common-circle`}>
+        {revolvingAssignments[orbit].map((assignmentInfo, index) => {
+          return (
             <div
-              className={`planet-${assignmentInfo.planet_size}-${
+              className={`common ${pos[index % 4]} ${
                 assignmentInfo.orbit_pos
-              }`}
-              onMouseOver={this.onMouseOver.bind(this)}
-              onMouseOut={this.onMouseOut.bind(this)}
+              }-orbit-motion start-animation`}
+              key={assignmentInfo.id}
             >
-              <PopupBox assignmentInfo={assignmentInfo} />
-              <Planet
-                className="planet"
-                planetType={assignmentInfo.planet_type}
-                onCLick={this.onSelected.bind(this, assignmentInfo.planet_type)}
-              />
-              <canvas
-                id={`${assignmentInfo.id}-${assignmentInfo.planet_type}`}
-                className="canvas"
-              />
+              <div
+                className={`planet-${assignmentInfo.planet_size}-${
+                  assignmentInfo.orbit_pos
+                }`}
+                onMouseOver={this.onMouseOver.bind(this)}
+                onMouseOut={this.onMouseOut.bind(this)}
+              >
+                <PopupBox assignmentInfo={assignmentInfo} />
+                <Planet
+                  className="planet"
+                  planetType={assignmentInfo.planet_type}
+                  onCLick={this.onSelected.bind(
+                    this,
+                    assignmentInfo.planet_type
+                  )}
+                />
+                <canvas
+                  id={`${assignmentInfo.id}-${assignmentInfo.planet_type}`}
+                  className="canvas"
+                />
+              </div>
             </div>
-          </div>
-        </div>
-      )
-    })
+          )
+        })}
+      </div>
+    )
   }
 }
 
