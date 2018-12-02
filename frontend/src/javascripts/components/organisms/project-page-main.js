@@ -18,7 +18,7 @@ import FixedStar from '../atoms/fixed-star'
 import CircleOrbit from '../molecules/circle-orbit'
 import ProjectBar from '../molecules/project-bar'
 
-class ProjectPage extends Component {
+class ProjectPageMain extends Component {
   componentDidMount() {
     const { currentProject, revolvingProjects } = this.props
     // TODO: リファクタリング
@@ -123,4 +123,4 @@ export default connect(
     selectAssignment,
     disselectAssignment,
   }
-)(ProjectPage)
+)(ProjectPageMain)

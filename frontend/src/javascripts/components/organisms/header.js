@@ -1,9 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import HeaderLeftLink from '../atoms/buttons/header-left-link'
 import HeaderRightLinkList from '../molecules/header-link-list'
 
-const Header = ({ currentUser, history, location: { pathname } }) => (
+const Header = ({ currentUser, history, pathname }) => (
   <div id="header">
     <HeaderLeftLink
       pathname={pathname}
@@ -18,4 +17,4 @@ const Header = ({ currentUser, history, location: { pathname } }) => (
   </div>
 )
 
-export default connect(({ currentUser }) => ({ currentUser }))(Header)
+export default Header

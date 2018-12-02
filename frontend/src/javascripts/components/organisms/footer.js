@@ -258,10 +258,7 @@ class Footer extends Component {
   }
 
   render() {
-    const {
-      currentUser,
-      location: { pathname },
-    } = this.props
+    const { currentUser, pathname } = this.props
     const rootPath = `/users/${currentUser.id}`
 
     return (
