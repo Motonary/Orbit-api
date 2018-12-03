@@ -34,7 +34,7 @@ class PlanetHolderList extends Component {
       return (
         <li
           key={key}
-          className="planet"
+          className="planet draggable-element"
           draggable="true"
           onClick={this.onClickSelectStar.bind(this, key)}
         >
