@@ -1,4 +1,5 @@
 $container-width: 130px;
+$container-height: 60px;
 
 #header {
   margin-top: 20px;
@@ -12,13 +13,13 @@ $container-width: 130px;
   z-index: 200;
 
   .user-info {
-    width: 300px;
-    color: #fff;
-    cursor: pointer;
     display: none;
     justify-content: flex-start;
     flex-wrap: wrap;
     align-items: center;
+    width: 300px;
+    color: #fff;
+    cursor: pointer;
 
     position: fixed;
     top: 30px;
@@ -28,13 +29,13 @@ $container-width: 130px;
       width: 50px;
       height: 50px;
       margin: 0;
-      padding: 4px 3px;
       border: 1px solid #fff;
       border-radius: 50%;
 
       .user-img {
         width: 40px;
         height: 40px;
+        margin: 5px 0;
         border-radius: 50%;
       }
     }
@@ -56,11 +57,11 @@ $container-width: 130px;
     display: flex;
   }
   .links-container {
-    cursor: pointer;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     flex-wrap: wrap;
-    align-items: center;
+    height: $container-height;
+    cursor: pointer;
 
     position: fixed;
     top: 20px;
@@ -68,13 +69,17 @@ $container-width: 130px;
 
     .icon-container {
       display: none;
+      justify-content: flex-end;
+      align-content: center;
       width: $container-width;
       color: #fff;
-      cursor: pointer;
-      align-items: center;
+      line-height: $container-height;
+
       .icon {
+        display: block;
         width: 50px;
         height: 50px;
+        margin: 5px 0;
       }
       &:link {
         text-decoration: none;
@@ -82,20 +87,24 @@ $container-width: 130px;
     }
     .back-icon-container {
       display: none;
+      justify-content: flex-end;
+      align-content: center;
       width: $container-width;
       color: #fff;
-      cursor: pointer;
-      align-items: center;
+      line-height: $container-height;
+
       .icon {
+        display: block;
         width: 50px;
         height: 50px;
+        margin: 5px 0;
       }
       &:hover {
         text-decoration: none;
       }
     }
     .show-right {
-      display: block;
+      display: flex;
     }
   }
 }

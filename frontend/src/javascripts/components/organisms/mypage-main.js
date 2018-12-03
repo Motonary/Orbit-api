@@ -11,7 +11,7 @@ const MyPageMain = ({ currentUser, match, history }) => {
   }
 
   return (
-    <div id="project-list">
+    <div id="mypage-container">
       <MypageUserInfo currentUser={currentUser} />
       <MypageOrbit history={history} match={match} />
     </div>

@@ -2,10 +2,12 @@ body {
   background-color: #0D171F !important;
 }
 
-.page-container {
+#page-container {
   width: 100%;
   height: 100%;
-  //display: flex;
-  //flex-direction: column;
-  position: relative;
+}
+
+#project-page-container {
+  width: 100%;
+  height: 100%;
 }

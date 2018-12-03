@@ -37,7 +37,7 @@ class ProjectPageMain extends Component {
 
   render() {
     return (
-      <div>
+      <div id="project-container">
         <div id="project-orbit">
           <FixedStar
             fixedStarType={this.props.currentProject.fixed_star_type}

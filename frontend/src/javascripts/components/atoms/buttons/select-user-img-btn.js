@@ -1,24 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateAvatar } from '../../../actions/users'
+import { updateUserImg } from '../../../actions/users'
 
-class SelectAvatarBtn extends Component {
-  onSelectAvatar(e) {
+class SelectUserImgBtn extends Component {
+  onSelectUserImg(e) {
     if (window.confirm('アイコンを本当に変更しますか？')) {
-      this.props.updateAvatar(e.target.files[0])
+      this.props.updateUserImg(e.target.files[0])
     }
   }
 
   render() {
     return (
-      <label className="submit-btn for-avatar">
-        SELECT AVATAR
+      <label className="submit-btn for-user-img">
+        SELECT <br /> USER IMAGE
         <input
           className="display-none"
           name="avatar"
           accept="image/*"
           type="file"
-          onChange={this.onSelectAvatar.bind(this)}
+          onChange={this.onSelectUserImg.bind(this)}
         />
       </label>
     )
@@ -27,5 +27,5 @@ class SelectAvatarBtn extends Component {
 
 export default connect(
   null,
-  { updateAvatar }
-)(SelectAvatarBtn)
+  { updateUserImg }
+)(SelectUserImgBtn)

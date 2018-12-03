@@ -3,19 +3,18 @@
 }
 
 #setting-page {
-  width: 50%;
-  height: 70%;
-  margin: 0 auto;
-  text-align: center;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  border: 1px solid white;
-  margin-top: 120px;
 
-  .avatar-wrapper {
+  width: 50%;
+  height: 100%;
+  margin: 10px auto 0;
+  text-align: center;
+
+  .user-img-wrapper {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -29,15 +28,15 @@
       height: 100px;
       border: 1px solid #fff;
       border-radius: 50%;
-      padding: 15px 0;
 
       .user-img {
-        width: 70px;
-        height: 70px;
+        margin: 10px auto;
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
       }
     }
-    .for-avatar {
+    .for-user-img {
       display: block;
       margin-bottom: 30px;
       cursor: pointer;
