@@ -15,7 +15,21 @@
 .move-animation {
   transition: 3s;
   -webkit-transition: 3s;
-  //transform: translateX(300px) translateY(300px);
+}
+
+.blackhole {
+  width: 150px;
+  height: 150px;
+
+  img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.blackhole-action {
+  animation: spinOut 2s linear infinite;
+  -webkit-animation: spinOut 2s linear infinite;
 }
 
 @keyframes fadeIn {
@@ -26,4 +40,14 @@
 @-webkit-keyframes fadeIn {
     0% {opacity: 0}
     100% {opacity: 1}
+}
+
+@keyframes spinOut {
+	0% {transform: rotate(0deg) scale(1,1);}
+	100% {transform: rotate(1080deg) scale(0,0);}
+}
+
+@-webkit-keyframes spinOut {
+	0% {-webkit-transform: rotate(0deg) scale(1,1);}
+	100% {-webkit-transform: rotate(1080deg) scale(0,0);}
 }

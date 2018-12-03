@@ -26,23 +26,6 @@ import ImgStar13 from '../../images/planets/star_13.png'
 import ImgStar14 from '../../images/planets/star_14.png'
 import ImgStar15 from '../../images/planets/star_15.png'
 
-//planet checked images
-import ImgStarChecked1 from '../../images/planets_checked/star_1_check.png'
-import ImgStarChecked2 from '../../images/planets_checked/star_2_check.png'
-import ImgStarChecked3 from '../../images/planets_checked/star_3_check.png'
-import ImgStarChecked4 from '../../images/planets_checked/star_4_check.png'
-import ImgStarChecked5 from '../../images/planets_checked/star_5_check.png'
-import ImgStarChecked6 from '../../images/planets_checked/star_6_check.png'
-import ImgStarChecked7 from '../../images/planets_checked/star_7_check.png'
-import ImgStarChecked8 from '../../images/planets_checked/star_8_check.png'
-import ImgStarChecked9 from '../../images/planets_checked/star_9_check.png'
-import ImgStarChecked10 from '../../images/planets_checked/star_10_check.png'
-import ImgStarChecked11 from '../../images/planets_checked/star_11_check.png'
-import ImgStarChecked12 from '../../images/planets_checked/star_12_check.png'
-import ImgStarChecked13 from '../../images/planets_checked/star_13_check.png'
-import ImgStarChecked14 from '../../images/planets_checked/star_14_check.png'
-import ImgStarChecked15 from '../../images/planets_checked/star_15_check.png'
-
 //delete icons
 import DeleteIcon1 from '../../images/footer/delete_btn_1.png'
 import DeleteIcon2 from '../../images/footer/delete_btn_2.png'
@@ -90,24 +73,6 @@ export const PlanetImgs = {
   Takoyaki: ImgStar13,
   Ball: ImgStar14,
   Egg: ImgStar15,
-}
-
-export const PlanetCheckedImgs = {
-  Uranus: ImgStarChecked1,
-  Mercury: ImgStarChecked2,
-  Pluto: ImgStarChecked3,
-  Jupitar: ImgStarChecked4,
-  Earth: ImgStarChecked5,
-  Moon: ImgStarChecked6,
-  Love: ImgStarChecked7,
-  Mars: ImgStarChecked8,
-  Neputune: ImgStarChecked9,
-  Sirius: ImgStarChecked10,
-  Sun: ImgStarChecked11,
-  Venus: ImgStarChecked12,
-  Takoyaki: ImgStarChecked13,
-  Ball: ImgStarChecked14,
-  Egg: ImgStarChecked15,
 }
 
 export const DeleteIcons = {

@@ -30,10 +30,7 @@ export function selectedAssignments(state = [], action) {
       return [...state, action.assignmentId]
 
     case actionTypes.DISSELECT_ASSIGNMENT:
-      return _.remove(
-        [...state.selectedAssignments],
-        eachState => eachState.id !== action.assignmentId
-      )
+      return state.filter(item => item !== action.assignmentId)
 
     case actionTypes.NULLIFY_SELECTED_ASSIGNMENT:
       return []

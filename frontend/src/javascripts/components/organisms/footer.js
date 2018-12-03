@@ -20,6 +20,14 @@ import { DeleteActions } from '../../constants/images'
 import '../../../stylesheets/destroy_animate.scss'
 
 class Footer extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      clickedStar: null,
+    }
+  }
+
   componentDidMount() {
     let planet_list = document.getElementById('planet-list')
     planet_list.style.display = 'none'
@@ -27,9 +35,23 @@ class Footer extends Component {
 
   componentDidUpdate(/*prevProps, prevState*/) {
     // TODO: 星破壊時の諸関数も最適化ししかるべきコンポーネントに移動する
+    // 今後、発火のイベントとかも含めて再構築するので以下のネストのままで、一旦ペンディング
     if (this.props.isDestroyIgnited && !this.props.modalIsOpen) {
       if (this.props.selectedAssignments) {
-        this.onIgniteDestroyAnimation()
+        //console.log("didupdate")
+        switch (this.props.isDestroyIgnited) {
+          case 'Meteorite':
+            this.onIgniteDestroyAnimation()
+            break
+          case 'Missile':
+            this.onIgniteDestroyAnimation()
+            break
+          case 'BlackHole':
+            this.onIginiteBlackHoleAnimation()
+            break
+          default:
+            break
+        }
       }
     }
   }
@@ -40,6 +62,68 @@ class Footer extends Component {
         setTimeout(resolve, sec * 1000)
       })
     }
+  }
+
+  onIginiteBlackHoleAnimation() {
+    const targetIds = this.props.selectedAssignments
+    const actionKey = this.props.isDestroyIgnited
+    const targetDom = document.getElementById('project-orbit')
+    const insertDom = document.getElementById('fixed-star')
+    const displayDoms = []
+
+    targetIds.forEach(id => {
+      displayDoms.push(document.getElementById(id).parentNode)
+    })
+
+    function withFadeOut() {
+      displayDoms.forEach(displayDom => {
+        let removeTarget = displayDom.children[1]
+        let blackholeDom = document.getElementById(displayDom.children[2].id)
+
+        removeTarget.classList.add('blackhole-action')
+        Promise.resolve()
+          .then(this.waitFunc(2.5))
+          .then(() => {
+            blackholeDom.classList.add('blackhole-action')
+          })
+      })
+    }
+
+    function removeDoms() {
+      displayDoms.forEach(displayDom => {
+        let removeTarget = displayDom
+        displayDom.parentNode.removeChild(removeTarget)
+
+        let blackholeDom = document.getElementById(displayDom.children[2].id)
+        targetDom.removeChild(blackholeDom)
+      })
+    }
+
+    displayDoms.forEach(displayDom => {
+      // 要素の位置座標を取得
+      let clientRectTarget = displayDom.getBoundingClientRect()
+      // 画面の左端から、要素の左端までの距離
+      let xT = clientRectTarget.left
+      // 画面の上端から、要素の上端までの距離
+      let yT = clientRectTarget.top
+
+      let newDiv = document.createElement('div')
+      let newImg = document.createElement('img')
+      newDiv.id = displayDom.children[2].id
+      newDiv.classList.add('blackhole')
+      newDiv.style.position = 'fixed'
+      newDiv.style.left = `${xT}px`
+      newDiv.style.top = `${yT}px`
+      newDiv.style.zIndex = '-100'
+      newImg.src = DeleteActions[actionKey]
+      newDiv.appendChild(newImg)
+      targetDom.insertBefore(newDiv, insertDom)
+    })
+
+    Promise.resolve()
+      .then(withFadeOut())
+      .then(this.waitFunc(3))
+      .then(removeDoms())
   }
 
   onIgniteDestroyAnimation() {
@@ -54,6 +138,7 @@ class Footer extends Component {
     targetDom.insertBefore(newDiv, insertDom)
     this.makeMovement()
   }
+
   makeMovement() {
     const movDom = document.getElementsByClassName('destroy-action')[0]
     let targetDom
@@ -78,6 +163,7 @@ class Footer extends Component {
     movDom.classList.add('move-animation')
     movDom.style.transform = `translateX(${disX}px) translateY(${disY}px)`
 
+    //TODO: async/awaitで再実装
     Promise.resolve()
       .then(this.waitFunc(2.5))
       .then(() => {

@@ -12,9 +12,9 @@ $fixed-star-scale: 180px;
 $primo-orbit-ratio: 2.5;
 $secundus-orbit-ratio: 4;
 $tertius-orbit-ratio: 5.5;
-$large-planet-ratio: 0.55;
-$medium-planet-ratio: 0.35;
-$small-planet-ratio: 0.15;
+$large-planet-ratio: 0.75;
+$medium-planet-ratio: 0.65;
+$small-planet-ratio: 0.55;
 
 /* 各軌道の大きさ */
 $primo-orbit: $fixed-star-scale * $primo-orbit-ratio;
