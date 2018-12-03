@@ -61,6 +61,12 @@ $holder-height: 100px;
         .planet-img {
           width: $available-planet-size;
           height: $available-planet-size;
+          border-radius: 50%;
+          
+          img {
+            width: $available-planet-size;
+            height: $available-planet-size;
+          }
         }
       }
       .current-clicked {

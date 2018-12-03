@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 import anime from 'animejs'
 
 import PlanetHolder from '../molecules/planet-holder'
@@ -36,6 +35,7 @@ class Footer extends Component {
 
   componentDidUpdate(/*prevProps, prevState*/) {
     // TODO: 星破壊時の諸関数も最適化ししかるべきコンポーネントに移動する
+    // 今後、発火のイベントとかも含めて再構築するので以下のネストのままで、一旦ペンディング
     if (this.props.isDestroyIgnited && !this.props.modalIsOpen) {
       if (this.props.selectedAssignments) {
         //console.log("didupdate")
@@ -71,12 +71,12 @@ class Footer extends Component {
     const insertDom = document.getElementById('fixed-star')
     const displayDoms = []
 
-    _.map(targetIds, id => {
+    targetIds.forEach(id => {
       displayDoms.push(document.getElementById(id).parentNode)
     })
 
     function withFadeOut() {
-      _.map(displayDoms, displayDom => {
+      displayDoms.forEach(displayDom => {
         let removeTarget = displayDom.children[1]
         let blackholeDom = document.getElementById(displayDom.children[2].id)
 
@@ -90,7 +90,7 @@ class Footer extends Component {
     }
 
     function removeDoms() {
-      _.map(displayDoms, displayDom => {
+      displayDoms.forEach(displayDom => {
         let removeTarget = displayDom
         displayDom.parentNode.removeChild(removeTarget)
 
@@ -99,7 +99,7 @@ class Footer extends Component {
       })
     }
 
-    _.map(displayDoms, displayDom => {
+    displayDoms.forEach(displayDom => {
       // 要素の位置座標を取得
       let clientRectTarget = displayDom.getBoundingClientRect()
       // 画面の左端から、要素の左端までの距離
@@ -163,6 +163,7 @@ class Footer extends Component {
     movDom.classList.add('move-animation')
     movDom.style.transform = `translateX(${disX}px) translateY(${disY}px)`
 
+    //TODO: async/awaitで再実装
     Promise.resolve()
       .then(this.waitFunc(2.5))
       .then(() => {
