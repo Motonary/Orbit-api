@@ -2,8 +2,7 @@ import React from 'react'
 
 const PopupBox = ({ assignmentInfo }) => {
   const deadline = assignmentInfo.deadline.split('T')[0].split('-')
-  const title = assignmentInfo.title
-  const detail = assignmentInfo.detail
+  const { title, detail } = assignmentInfo
 
   return (
     <div className="detail-balloon">
