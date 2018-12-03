@@ -25,7 +25,10 @@ class CircleOrbit extends Component {
 
   onSelected(e) {
     const target = e.target.parentNode.children[1] //e.target = .planet-img-container -> div.mark-container
+    const targetPlanet = e.target.parentNode.parentNode.children[2] //canvas #2-Earth
+    const selectedPlanetId = targetPlanet.id.split('-')[0]
     try {
+      Number(selectedPlanetId)
       target.style
     } catch (e) {
       return
@@ -33,15 +36,11 @@ class CircleOrbit extends Component {
 
     if (target.style.display === 'block') {
       target.style.display = 'none'
+      this.props.disselectAssignment(selectedPlanetId)
     } else if (target.style.display === '' || target.style.display === 'none') {
       target.style.display = 'block'
+      this.props.selectAssignment(selectedPlanetId)
     }
-
-    //if (selectedPlanetId) {
-    //checkImg.classList.add('selected-planet')
-    //target.first.appendChild(checkImg)
-    //this.props.selectAssignment(selectedPlanetId)
-    //}
   }
 
   render() {
@@ -91,6 +90,9 @@ class CircleOrbit extends Component {
 }
 
 export default connect(
-  ({ revolvingAssignments }) => ({ revolvingAssignments }),
+  ({ revolvingAssignments, selectedAssignments }) => ({
+    revolvingAssignments,
+    selectedAssignments,
+  }),
   { selectAssignment, disselectAssignment }
 )(CircleOrbit)
