@@ -35,6 +35,7 @@ class PlanetHolderList extends Component {
         <li
           key={key}
           className="planet"
+          draggable="true"
           onClick={this.onClickSelectStar.bind(this, key)}
         >
           <Planet className="planet-img" planetType={key} />
