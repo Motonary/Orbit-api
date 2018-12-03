@@ -51,4 +51,4 @@ function DragDropFunc() {
   })
 }
 
-export default DragDropFunc
+export default DragDropFunc()
