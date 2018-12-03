@@ -4,15 +4,17 @@
   display: none;
   margin: 1.5em auto;
   padding: 7px 10px;
-  width: 250px;
-  height: 100px;
+  width: 300px;
+  height: 150px;
   color: #fff;
   font-size: 16px;
   border: solid 3px #fff;
   box-sizing: border-box;
-  opacity: 0.7;
+  opacity: 1;
   top: -200px;
-  z-index: 1;
+  right: -125px;
+  z-index: 1000;
+  background-color: rgba(23,34,49,0.8);
 
   &:before {
     content: "";
@@ -21,8 +23,8 @@
     left: 50%;
     margin-left: -15px;
     border: 12px solid transparent;
-    border-top: 12px solid #555;
-    z-index: 2;
+    border-top: 12px solid #000;
+    z-index: 1000;
     opacity: 1;
   }
   &:after {
@@ -34,11 +36,27 @@
     border: 14px solid transparent;
     border-top: 14px solid #fff;
   }
+  .assignment-data {
+    display: flex;
+    flex-wrap: wrap;
 
-  .description {
-    text-align: center;
-  }
-  .select-btn {
-
+    .assignment-title {
+      margin: 5px 0;
+      width: 80px;
+      height: 50px;
+      line-height: 50px;
+    }
+    .assignment-deadline {
+      margin: 5px 0;
+      width: 180px;
+      height: 50px;
+      line-height: 50px;
+    }
+    .assignment-description {
+      margin: 5px 0;
+      padding: 5px;
+      width: 300px;
+      height: 100px;
+    }
   }
 }

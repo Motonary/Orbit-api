@@ -29,6 +29,7 @@
       img {
         width: $fixed-star-scale;
         height: $fixed-star-scale;
+        z-index: 100;
       }
     }
     .circle-primo {
