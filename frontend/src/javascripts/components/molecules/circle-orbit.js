@@ -90,9 +90,6 @@ class CircleOrbit extends Component {
 }
 
 export default connect(
-  ({ revolvingAssignments, selectedAssignments }) => ({
-    revolvingAssignments,
-    selectedAssignments,
-  }),
+  ({ revolvingAssignments }) => ({ revolvingAssignments }),
   { selectAssignment, disselectAssignment }
 )(CircleOrbit)
