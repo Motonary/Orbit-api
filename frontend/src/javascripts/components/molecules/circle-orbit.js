@@ -5,28 +5,43 @@ import {
   disselectAssignment,
 } from '../../actions/assignments'
 import PopupBox from '../atoms/popup-box'
-import { PlanetCheckedImgs } from '../../constants/images'
 import Planet from '../atoms/planet'
 
 class CircleOrbit extends Component {
   onMouseOver(e) {
-    const target_planet = e.target.parentNode.firstChild
-    target_planet.style.display = 'inline-block'
+    const target_planet = e.target.parentNode.parentNode //e.g. div.planet-secundus-small
+
+    if (target_planet.firstChild.classList[0] === 'detail-balloon') {
+      target_planet.firstChild.style.display = 'inline-block'
+    }
   }
   onMouseOut(e) {
-    const target_planet = e.target.parentNode.firstChild
-    target_planet.style.display = 'none'
+    const target_planet = e.target.parentNode.parentNode
+
+    if (target_planet.firstChild.classList[0] === 'detail-balloon') {
+      target_planet.firstChild.style.display = 'none'
+    }
   }
 
-  onSelected(planet_type, e) {
-    const target = e.target.nextElementSibling
-    const target_img = e.target
-    const selectedPlanetId = target.id
-
-    if (selectedPlanetId) {
-      target_img.src = PlanetCheckedImgs[planet_type]
-      this.props.selectAssignment(selectedPlanetId)
+  onSelected(e) {
+    const target = e.target.parentNode.children[1] //e.target = .planet-img-container -> div.mark-container
+    try {
+      target.style
+    } catch (e) {
+      return
     }
+
+    if (target.style.display === 'block') {
+      target.style.display = 'none'
+    } else if (target.style.display === '' || target.style.display === 'none') {
+      target.style.display = 'block'
+    }
+
+    //if (selectedPlanetId) {
+    //checkImg.classList.add('selected-planet')
+    //target.first.appendChild(checkImg)
+    //this.props.selectAssignment(selectedPlanetId)
+    //}
   }
 
   render() {
@@ -53,17 +68,14 @@ class CircleOrbit extends Component {
                 className={`planet-${assignmentInfo.planet_size}-${
                   assignmentInfo.orbit_pos
                 }`}
-                onMouseOver={this.onMouseOver.bind(this)}
-                onMouseOut={this.onMouseOut.bind(this)}
               >
                 <PopupBox assignmentInfo={assignmentInfo} />
                 <Planet
-                  className="planet"
+                  className="planet-img-container"
                   planetType={assignmentInfo.planet_type}
-                  onCLick={this.onSelected.bind(
-                    this,
-                    assignmentInfo.planet_type
-                  )}
+                  onClick={this.onSelected.bind(this)}
+                  onMouseOver={this.onMouseOver.bind(this)}
+                  onMouseOut={this.onMouseOut.bind(this)}
                 />
                 <canvas
                   id={`${assignmentInfo.id}-${assignmentInfo.planet_type}`}

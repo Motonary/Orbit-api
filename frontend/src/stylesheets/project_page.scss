@@ -188,11 +188,33 @@
       animation: rotate $tertius-orbit-speed linear reverse infinite;
       word-wrap: break-word;
     }
-
-    img {
+    .planet-img-container {
       width: 100%;
       height: 100%;
-      z-index: 200;
+      position: relative;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        z-index: 200;
+      }
+      .mark-container {
+        display: none;
+        position: absolute;
+        top: 35%;
+        left: 30%;
+        width: 100%;
+        height: 100%;
+    
+        .check-mark {
+          width: 20px;
+          height: 30px;
+          border: solid 3px #000;
+          border-left: 0;
+          border-top: 0;
+          transform: translateY(-50%) rotate(45deg);
+        }
+      }
     }
 
   //canvas destroy animation
