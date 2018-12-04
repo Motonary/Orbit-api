@@ -13,10 +13,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
-      "npm run fix",
-      "git add"
-    ]
+    "*.js": []
   },
   "description": "== README",
   "dependencies": {

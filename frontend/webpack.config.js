@@ -10,6 +10,9 @@ module.exports = {
     filename: '[name].js',
     publicPath: '/'
   },
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx']
+  },
   devServer: {
     contentBase: 'dist',
     port: 4000,
@@ -45,6 +48,13 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'ts-loader'
+        }
       }
     ]
   },
