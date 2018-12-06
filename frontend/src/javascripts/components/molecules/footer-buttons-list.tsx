@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import RevivalBtn from '../atoms/buttons/revival-btn'
 import DeleteButtonsList from './delete-buttons-list'
 

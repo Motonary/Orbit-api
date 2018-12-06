@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { HeaderIcons } from '../../../constants/images'
 
 const HeaderBackLink = ({ className, onClick, label }: any) => (

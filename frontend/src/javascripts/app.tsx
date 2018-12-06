@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
@@ -25,10 +25,10 @@ import '../stylesheets/project_page.scss'
 import '../stylesheets/history_page.scss'
 import '../stylesheets/setting_page.scss'
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
+// const createStoreWithMiddleware: any = applyMiddleware(promise)(createStore)
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={createStore(reducers)}>
     <Router>
       <Main>
         <Switch>

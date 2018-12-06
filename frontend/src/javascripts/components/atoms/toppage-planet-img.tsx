@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import ImgPlanet from '../../../images/index/top_earth.png'
 
 const TopPagePlanet = () => (

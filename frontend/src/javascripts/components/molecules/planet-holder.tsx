@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import PlanetHolderOpener from '../atoms/buttons/planet-holder-opener'
 import AssignmentForm from './forms/assignment-form'
 import PlanetHolderList from './planet-holder-list'

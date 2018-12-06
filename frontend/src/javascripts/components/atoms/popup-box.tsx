@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 const PopupBox = ({ assignmentInfo }: any) => {
   const deadline: any = assignmentInfo.deadline.split('T')[0].split('-')

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import HeaderLeftLink from '../atoms/buttons/header-left-link'
 import HeaderRightLinkList from '../molecules/header-link-list'
 

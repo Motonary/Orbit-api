@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
 import UserImgUpdater from '../molecules/user-img-updater'
 import ProfileUpdateForm from '../molecules/forms/profile-update-form'

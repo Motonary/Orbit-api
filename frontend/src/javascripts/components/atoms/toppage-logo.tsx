@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import ImgLogo from '../../../images/index/logo.png'
 
 const TopPageLogo = () => (

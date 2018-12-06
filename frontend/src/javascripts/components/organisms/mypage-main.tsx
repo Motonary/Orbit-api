@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { Redirect } from 'react-router-dom'
 import MypageUserInfo from '../molecules/mypage-user-info'
 import MypageOrbit from '../molecules/mypage-orbit'

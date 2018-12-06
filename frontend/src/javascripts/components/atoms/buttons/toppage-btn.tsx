@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { TopPageImgs } from '../../../constants/images'
 
 const TopPageBtn = ({ isSignIn, onClick }: any) => (
