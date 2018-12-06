@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { DragDropContext } from 'react-dnd'
+import ReactDnDHTML5Backend from 'react-dnd-html5-backend'
 
 import { fetchRevolvingAssignments } from '../../../actions/assignments'
 import {
@@ -12,6 +14,7 @@ import Header from '../../organisms/header'
 import ProjectPageMain from '../../organisms/project-page-main'
 import Footer from '../../organisms/footer'
 
+@DragDropContext(ReactDnDHTML5Backend)
 class ProjectPage extends Component {
   componentDidMount() {
     const { currentProject, revolvingProjects } = this.props
