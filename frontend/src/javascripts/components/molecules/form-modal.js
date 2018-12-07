@@ -49,9 +49,7 @@ class FormModal extends Component {
 
   render() {
     const { pathname } = this.props
-    const orbit = this.props.modalOpen
-      ? this.props.modalOpen.split('-')[1]
-      : null
+    const orbit = this.props.modalOpen ? this.props.modalOpen.split('-')[1] : ''
 
     return (
       <Modal
