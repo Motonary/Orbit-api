@@ -55,7 +55,7 @@ class ConfirmModal extends Component {
   render() {
     return (
       <Modal
-        isOpen={this.props.modalOpen === 'confirm'}
+        isOpen={this.props.modalOpen === 'destroy'}
         style={customStyles}
         contentLabel="Example Modal"
       >

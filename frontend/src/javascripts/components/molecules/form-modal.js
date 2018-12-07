@@ -57,7 +57,7 @@ class FormModal extends Component {
         style={customStyles}
         contentLabel="Assignment From Modal"
       >
-        {pathname.includes('project') ? (
+        {pathname.match(/project/) ? (
           <AssignmentForm orbit={orbit} />
         ) : (
           <ProjectForm />

@@ -1,5 +1,9 @@
 import { actionTypes } from '../constants/actiontypes'
 
+/*
+ * selectedStarの利用用途
+ * stateには、Earth、Loveなどのユーザが選択した惑星の名称が格納される
+ */
 export function selectedStar(state = null, action) {
   switch (action.type) {
     case actionTypes.SELECT_STAR:
@@ -26,6 +30,12 @@ export function isDestroyIgnited(state = null, action) {
   }
 }
 
+/*
+ * modalOpenの利用用途
+ * stateには、form-${orbit} or destory or nullが格納される
+ * form-${orbit} は、ModalがProjectもしくはAssignmentを追加するFormを伴う時に用いられる
+ * destroyは、ModalがrojectもしくはAssignmentを削除する時の確認画面として開かれる時に用いられる
+ */
 export function modalOpen(state = null, action) {
   switch (action.type) {
     case actionTypes.OPEN_MODAL:
