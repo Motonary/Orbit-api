@@ -55,7 +55,7 @@ class ConfirmModal extends Component {
   render() {
     return (
       <Modal
-        isOpen={this.props.modalIsOpen}
+        isOpen={this.props.modalOpen === 'destroy'}
         style={customStyles}
         contentLabel="Example Modal"
       >
@@ -76,7 +76,7 @@ class ConfirmModal extends Component {
 }
 
 export default connect(
-  ({ isDestroyIgnited, modalIsOpen }) => ({ isDestroyIgnited, modalIsOpen }),
+  ({ isDestroyIgnited, modalOpen }) => ({ isDestroyIgnited, modalOpen }),
   {
     igniteDestroyPlanets,
     resetDestroyPlanets,

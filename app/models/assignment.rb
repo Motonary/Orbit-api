@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  title          :string
-#  detail         :text
+#  description    :text
 #  deadline       :datetime
 #  planet_type    :integer
 #  planet_size    :integer
@@ -22,7 +22,7 @@ class Assignment < ApplicationRecord
   has_many :sub_assignments, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 50 }
-  validates :detail, length: { maximum: 140 }
+  validates :description, length: { maximum: 140 }
   validates :planet_type, presence: true
   validates :planet_size, presence: true
   validates :orbit_pos,   presence: true

@@ -7,7 +7,7 @@ import {
   destroyedAssignments,
   selectedAssignments,
 } from './assignments'
-import { selectedStar, isDestroyIgnited, modalIsOpen } from './common'
+import { selectedStar, isDestroyIgnited, modalOpen } from './common'
 
 const rootReducer = combineReducers({
   // Form
@@ -29,7 +29,7 @@ const rootReducer = combineReducers({
   revolvingAssignments,
   destroyedAssignments,
   selectedAssignments,
-  modalIsOpen,
+  modalOpen,
 })
 
 export default rootReducer

@@ -3,8 +3,64 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import FixedStarInList from '../atoms/fixed-star-in-list'
 import { setCurrentProject } from '../../actions/projects'
+import { setModalStatus } from '../../actions/common'
 
 class MypageOrbit extends Component {
+  componentDidMount() {
+    this.setDrop()
+  }
+
+  setDrop() {
+    //Droppable area
+    const target = document.getElementById('mypage-orbit-circle')
+
+    //Entering into the droppable area
+    target.addEventListener(
+      'dragenter',
+      () => {
+        if (!target.classList.contains('circle-shadow')) {
+          target.classList.add('circle-shadow')
+        }
+      },
+      false
+    )
+
+    //Leaving from the droppable area
+    target.addEventListener(
+      'dragleave',
+      () => {
+        if (target.classList.contains('circle-shadow')) {
+          target.classList.remove('circle-shadow')
+        }
+      },
+      false
+    )
+
+    //Over the droppable area
+    target.addEventListener(
+      'dragover',
+      e => {
+        e.preventDefault()
+      },
+      false
+    )
+
+    //Drop
+    target.addEventListener(
+      'drop',
+      e => {
+        e.preventDefault()
+        if (target.classList.contains('circle-shadow')) {
+          target.classList.remove('circle-shadow')
+        }
+        if (!this.props.modalOpen) {
+          this.props.setModalStatus('form')
+        }
+      },
+      false
+    )
+  }
+
   onClickFixedStar(projectId) {
     // TODO: プロジェクトページへ遷移する前になんらかのアニメーション追加(Fadeoutとか)
     this.props.setCurrentProject(
@@ -17,7 +73,7 @@ class MypageOrbit extends Component {
 
   render() {
     const { revolvingProjects } = this.props
-    if (!revolvingProjects) return <div>Loading...</div>
+    if (!revolvingProjects) return <ul id="mypage-orbit-circle" />
 
     const pos = ['top', 'right', 'left', 'bottom']
     const projectList = _.map(revolvingProjects, (project, index) => {
@@ -38,11 +94,11 @@ class MypageOrbit extends Component {
       )
     })
 
-    return <ul className="orbit-circle">{projectList}</ul>
+    return <ul id="mypage-orbit-circle">{projectList}</ul>
   }
 }
 
 export default connect(
   ({ revolvingProjects }) => ({ revolvingProjects }),
-  { setCurrentProject }
+  { setCurrentProject, setModalStatus }
 )(MypageOrbit)

@@ -1,18 +1,32 @@
 import React, { Component } from 'react'
 import { Field as ReduxFormField } from 'redux-form' // Fieldの命名被り防止
+import classNames from 'classnames'
+
+import '../../../stylesheets/field.scss'
 
 export default class Field extends Component {
   renderField({ placeholder, type, input, meta: { touched, error } }) {
-    const classNames = `${touched && error ? 'has-danger' : ''} field-style`
+    const fieldClasses = classNames({
+      'has-danger': touched && error,
+      'field-style': true,
+      title: placeholder === 'title',
+      description: placeholder === 'description',
+      deadline: placeholder === 'deadline',
+    })
+    const inputClasses = classNames({
+      title: placeholder === 'title',
+      description: placeholder === 'description',
+      deadline: placeholder === 'deadline',
+    })
     return (
-      <div className={classNames}>
+      <div className={fieldClasses}>
         <input
-          className="text-style"
+          className={inputClasses}
           placeholder={placeholder}
           type={type}
           {...input}
         />
-        <div className="text-help">{touched ? error : ''}</div>
+        <div className="input-error">{touched ? error : ''}</div>
       </div>
     )
   }
