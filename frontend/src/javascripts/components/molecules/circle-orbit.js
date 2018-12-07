@@ -8,6 +8,53 @@ import PopupBox from '../atoms/popup-box'
 import Planet from '../atoms/planet'
 
 class CircleOrbit extends Component {
+  componentDidMount() {
+    this.setDrop()
+  }
+
+  setDrop() {
+    //Droppable area
+    const target = document.getElementById('circle-' + this.props.orbit)
+
+    //Entering into the droppable area
+    target.addEventListener('dragenter', () => {}, false)
+
+    //Leaving from the droppable area
+    target.addEventListener(
+      'dragleave',
+      () => {
+        if (target.classList.contains('circle-shadow')) {
+          target.classList.remove('circle-shadow')
+        }
+      },
+      false
+    )
+
+    //Over the droppable area
+    target.addEventListener(
+      'dragover',
+      event => {
+        event.preventDefault()
+        if (!target.classList.contains('circle-shadow')) {
+          target.classList.add('circle-shadow')
+        }
+      },
+      false
+    )
+
+    //Drop
+    target.addEventListener(
+      'drop',
+      event => {
+        event.preventDefault()
+        if (target.classList.contains('circle-shadow')) {
+          target.classList.remove('circle-shadow')
+        }
+      },
+      false
+    )
+  }
+
   onMouseOver(e) {
     const target_planet = e.target.parentNode.parentNode //e.g. div.planet-secundus-small
 
@@ -45,16 +92,17 @@ class CircleOrbit extends Component {
 
   render() {
     const { revolvingAssignments, orbit } = this.props
-    if (!revolvingAssignments) return <div>Loading...</div>
+    if (!revolvingAssignments)
+      return <div id={`circle-${this.props.orbit}`} className="common-circle" />
 
     const pos = ['top', 'right', 'left', 'bottom']
 
     if (revolvingAssignments[orbit].length === 0) {
-      return <div className={`circle-${this.props.orbit} common-circle`} />
+      return <div id={`circle-${this.props.orbit}`} className="common-circle" />
     }
 
     return (
-      <div className={`circle-${this.props.orbit} common-circle`}>
+      <div id={`circle-${this.props.orbit}`} className="common-circle">
         {revolvingAssignments[orbit].map((assignmentInfo, index) => {
           return (
             <div
