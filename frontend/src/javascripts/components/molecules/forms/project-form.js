@@ -3,7 +3,11 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
-import { setSelectedStar, resetSelectedStar } from '../../../actions/common'
+import {
+  setSelectedStar,
+  resetSelectedStar,
+  resetModalStatus,
+} from '../../../actions/common'
 import { createProject } from '../../../actions/projects'
 
 import '../../../../stylesheets/form_modal.scss'
@@ -39,19 +43,16 @@ class ProjectForm extends Component {
   }
 
   onSubmit({ title }) {
-    const target = document.getElementById('form-balloon')
-    const target_star = document.getElementsByClassName('current-clicked')[0]
     const fixed_star_type = this.props.selectedStar
 
     this.props.createProject(title, fixed_star_type)
     this.props.resetSelectedStar()
-    target_star.classList.remove('current-clicked')
-    target.style.display = 'none'
+    this.props.resetModalStatus()
   }
 
   render() {
     return (
-      <div id="form-balloon">
+      <div id="form-on-modal">
         <div className="form-balloon-title">New Project</div>
         <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
           <div className="form-line-2">
@@ -91,6 +92,6 @@ export default reduxForm({
 })(
   connect(
     ({ selectedStar }) => ({ selectedStar }),
-    { createProject, setSelectedStar, resetSelectedStar }
+    { createProject, setSelectedStar, resetSelectedStar, resetModalStatus }
   )(ProjectForm)
 )

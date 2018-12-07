@@ -48,7 +48,7 @@ $mypage-orbit: 550px;
     }
   }
 
-  .orbit-circle {
+  #mypage-orbit-circle {
     width: $mypage-orbit;
     height: $mypage-orbit;
     margin: 0 auto;
@@ -127,6 +127,11 @@ $mypage-orbit: 550px;
       animation-play-state: running;
     }
   }
+  .circle-shadow {
+    /* box-shadow */
+    box-shadow: 0px 0px 20px 5px #fff, 0px 0px 17px -2px #fff inset;
+  }
+  
   @keyframes rotate {
     0% {
      transform: rotate(0deg);

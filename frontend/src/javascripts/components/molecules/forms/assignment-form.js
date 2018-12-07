@@ -40,7 +40,6 @@ class AssignmentForm extends Component {
   }
 
   onSubmit({ title, description, deadline, planet_size, orbit_pos }) {
-    const target = document.getElementById('form-on-modal')
     const planet_type = this.props.selectedStar
     const project_id = this.props.currentProject.id
 
@@ -55,7 +54,6 @@ class AssignmentForm extends Component {
     )
     this.props.resetSelectedStar()
     this.props.resetModalStatus()
-    target.style.display = 'none'
   }
 
   render() {

@@ -25,8 +25,8 @@ class CircleOrbit extends Component {
     target.addEventListener(
       'dragenter',
       () => {
-        if (!this.props.selectedStar) {
-          return
+        if (!target.classList.contains('circle-shadow')) {
+          target.classList.add('circle-shadow')
         }
       },
       false
@@ -48,9 +48,6 @@ class CircleOrbit extends Component {
       'dragover',
       event => {
         event.preventDefault()
-        if (!target.classList.contains('circle-shadow')) {
-          target.classList.add('circle-shadow')
-        }
       },
       false
     )

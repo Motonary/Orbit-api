@@ -353,7 +353,7 @@ class Footer extends Component {
         <PlanetHolder pathname={pathname} currentUser={currentUser} />
         <FooterButtonsList pathname={pathname} rootPath={rootPath} />
         <ConfirmModal />
-        <FormModal />
+        <FormModal pathname={pathname} />
       </div>
     )
   }
