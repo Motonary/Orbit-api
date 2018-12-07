@@ -1,6 +1,10 @@
 import { actionTypes } from '../constants/actiontypes'
 import _ from 'lodash'
 
+/*
+ * revolvingAssignmentsの利用用途
+ * stateには、{primo, secundus, tertius}の各軌道上のassignmentsが軌道名をkeyにして格納される
+ */
 export function revolvingAssignments(state = null, action) {
   let newState = Object.assign({}, state)
   switch (action.type) {
@@ -24,6 +28,10 @@ export function revolvingAssignments(state = null, action) {
   }
 }
 
+/*
+ * selectedAssignmentsの利用用途
+ * stateには、ユーザがクリックし、UI上でチェックマーク付きのPlanetに紐付いたAssignmentIdsが格納される
+ */
 export function selectedAssignments(state = [], action) {
   switch (action.type) {
     case actionTypes.SELECT_ASSIGNMENT:
@@ -39,6 +47,10 @@ export function selectedAssignments(state = [], action) {
       return state
   }
 }
+/*
+ * destroyedAssignmentsの利用用途
+ * stateには、UI上からすでに削除され、履歴ページに表示されるためのAssignmentsが格納される
+ */
 
 export function destroyedAssignments(state = null, action) {
   switch (action.type) {
