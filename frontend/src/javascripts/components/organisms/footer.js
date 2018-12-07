@@ -4,7 +4,9 @@ import anime from 'animejs'
 
 import PlanetHolder from '../molecules/planet-holder'
 import FooterButtonsList from '../molecules/footer-buttons-list'
-import ConfirmModal from '../molecules/modal'
+import ConfirmModal from '../molecules/confirm-modal'
+import FormModal from '../molecules/form-modal'
+
 import {
   destroyAssignment,
   nullifySelectedAssignment,
@@ -351,6 +353,7 @@ class Footer extends Component {
         <PlanetHolder pathname={pathname} currentUser={currentUser} />
         <FooterButtonsList pathname={pathname} rootPath={rootPath} />
         <ConfirmModal />
+        <FormModal />
       </div>
     )
   }

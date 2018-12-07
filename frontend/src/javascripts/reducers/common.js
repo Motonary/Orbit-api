@@ -26,13 +26,13 @@ export function isDestroyIgnited(state = null, action) {
   }
 }
 
-export function modalIsOpen(state = false, action) {
+export function modalIsOpen(state = null, action) {
   switch (action.type) {
     case actionTypes.OPEN_MODAL:
       return action.status
 
     case actionTypes.CLOSE_MODAL:
-      return action.status
+      return null
 
     default:
       return state

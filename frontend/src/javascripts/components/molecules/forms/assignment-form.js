@@ -3,10 +3,14 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
-import { setSelectedStar, resetSelectedStar } from '../../../actions/common'
+import {
+  setSelectedStar,
+  resetSelectedStar,
+  resetModalStatus,
+} from '../../../actions/common'
 import { createAssignment } from '../../../actions/assignments'
 
-import '../../../../stylesheets/form_balloon.scss'
+import '../../../../stylesheets/form_modal.scss'
 
 class AssignmentForm extends Component {
   renderField({ placeholder, type, input, value, meta: { touched, error } }) {
@@ -36,7 +40,7 @@ class AssignmentForm extends Component {
   }
 
   onSubmit({ title, description, deadline, planet_size, orbit_pos }) {
-    const target = document.getElementById('form-balloon')
+    const target = document.getElementById('form-on-modal')
     const planet_type = this.props.selectedStar
     const project_id = this.props.currentProject.id
 
@@ -50,12 +54,13 @@ class AssignmentForm extends Component {
       project_id
     )
     this.props.resetSelectedStar()
+    this.props.resetModalStatus()
     target.style.display = 'none'
   }
 
   render() {
     return (
-      <div id="form-balloon">
+      <div id="form-on-modal">
         <div className="form-balloon-title">New Assignment</div>
         <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
           <div className="form-line-1">
@@ -164,6 +169,6 @@ export default reduxForm({
 })(
   connect(
     ({ selectedStar, currentProject }) => ({ selectedStar, currentProject }),
-    { createAssignment, setSelectedStar, resetSelectedStar }
+    { createAssignment, setSelectedStar, resetSelectedStar, resetModalStatus }
   )(AssignmentForm)
 )

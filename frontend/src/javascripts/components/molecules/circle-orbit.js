@@ -6,6 +6,11 @@ import {
 } from '../../actions/assignments'
 import PopupBox from '../atoms/popup-box'
 import Planet from '../atoms/planet'
+import {
+  setSelectedStar,
+  resetSelectedStar,
+  setModalStatus,
+} from '../../actions/common'
 
 class CircleOrbit extends Component {
   componentDidMount() {
@@ -17,7 +22,15 @@ class CircleOrbit extends Component {
     const target = document.getElementById('circle-' + this.props.orbit)
 
     //Entering into the droppable area
-    target.addEventListener('dragenter', () => {}, false)
+    target.addEventListener(
+      'dragenter',
+      () => {
+        if (!this.props.selectedStar) {
+          return
+        }
+      },
+      false
+    )
 
     //Leaving from the droppable area
     target.addEventListener(
@@ -49,6 +62,9 @@ class CircleOrbit extends Component {
         event.preventDefault()
         if (target.classList.contains('circle-shadow')) {
           target.classList.remove('circle-shadow')
+        }
+        if (!this.props.modalIsOpen) {
+          this.props.setModalStatus('form')
         }
       },
       false
@@ -138,6 +154,16 @@ class CircleOrbit extends Component {
 }
 
 export default connect(
-  ({ revolvingAssignments }) => ({ revolvingAssignments }),
-  { selectAssignment, disselectAssignment }
+  ({ revolvingAssignments, selectedStar, modalIsOpen }) => ({
+    revolvingAssignments,
+    selectedStar,
+    modalIsOpen,
+  }),
+  {
+    selectAssignment,
+    disselectAssignment,
+    setSelectedStar,
+    resetSelectedStar,
+    setModalStatus,
+  }
 )(CircleOrbit)

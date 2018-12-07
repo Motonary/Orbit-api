@@ -1,17 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Planet from '../atoms/planet'
-import { setSelectedStar } from '../../actions/common'
+import { setSelectedStar, resetSelectedStar } from '../../actions/common'
 
 class PlanetList extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      clickedStar: null,
-    }
-  }
-
   componentDidMount() {
     this.setDragnDrop()
   }
@@ -21,7 +13,13 @@ class PlanetList extends Component {
     const target = document.getElementById(this.props.planetType)
 
     //Start of dragging
-    target.addEventListener('dragstart', () => {}, false)
+    target.addEventListener(
+      'dragstart',
+      () => {
+        this.props.setSelectedStar(this.props.planetType)
+      },
+      false
+    )
 
     //During dragging
     target.addEventListener('drag', () => {}, false)
@@ -30,32 +28,11 @@ class PlanetList extends Component {
     target.addEventListener('dragend', () => {}, false)
   }
 
-  onClickSelectStar(star_type, e) {
-    const form_balloon = document.getElementById('form-balloon')
-    const prev_target = this.state.clickedStar
-    const target = e.target.parentNode
-
-    if (prev_target) {
-      prev_target.classList.remove('current-clicked')
-    }
-    target.classList.add('current-clicked')
-
-    this.setState({ clickedStar: target })
-
-    this.props.setSelectedStar(star_type)
-    form_balloon.style.display = 'block'
-  }
-
   render() {
     const { planetType } = this.props
 
     return (
-      <li
-        id={planetType}
-        className="planet draggable-element"
-        draggable={true}
-        onClick={this.onClickSelectStar.bind(this, planetType)}
-      >
+      <li id={planetType} className="planet" draggable={true}>
         <Planet className="planet-img" planetType={planetType} />
       </li>
     )
@@ -63,6 +40,6 @@ class PlanetList extends Component {
 }
 
 export default connect(
-  null,
-  { setSelectedStar }
+  ({ selectedStar }) => ({ selectedStar }),
+  { setSelectedStar, resetSelectedStar }
 )(PlanetList)

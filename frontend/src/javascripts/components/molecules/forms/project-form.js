@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import { setSelectedStar, resetSelectedStar } from '../../../actions/common'
 import { createProject } from '../../../actions/projects'
 
-import '../../../../stylesheets/form_balloon.scss'
+import '../../../../stylesheets/form_modal.scss'
 
 class ProjectForm extends Component {
   renderField({ placeholder, type, input, value, meta: { touched, error } }) {
