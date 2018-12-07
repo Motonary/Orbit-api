@@ -1,7 +1,7 @@
 import * as React from 'react'
 import TopPageBtn from '../../atoms/buttons/toppage-btn'
 import TopPageLogo from '../../atoms/toppage-logo'
-import TopPagePlanet from '../../atoms/toppage-planet-img.js'
+import TopPagePlanet from '../../atoms/toppage-planet-img'
 import TopPageForm from '../../molecules/forms/toppage-form'
 
 interface Props {
