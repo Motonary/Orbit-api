@@ -1,0 +1,33 @@
+@import "initializer";
+
+//field-style
+.field-style {
+  width: 320px;
+  margin: 10px 20px 10px 5px;
+  color: #fff;
+  background-color: $bg-common-color;
+
+  font-family: orator-std, monospace;
+  font-style: normal;
+  font-weight: 300;
+    
+  .input-error {
+    height: 15px;
+    line-height: 15px;
+    font-size: 12px;
+  }
+}
+.title {
+  width: 100px !important;
+  height: 30px !important;
+}
+.deadline {
+  width: 130px !important;
+  height: 30px !important;
+}
+.description {
+  width: 250px !important;
+  height: 40px !important;
+}
+.has-danger {
+}

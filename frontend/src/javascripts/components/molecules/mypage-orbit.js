@@ -39,8 +39,8 @@ class MypageOrbit extends Component {
     //Over the droppable area
     target.addEventListener(
       'dragover',
-      event => {
-        event.preventDefault()
+      e => {
+        e.preventDefault()
       },
       false
     )
@@ -48,8 +48,8 @@ class MypageOrbit extends Component {
     //Drop
     target.addEventListener(
       'drop',
-      event => {
-        event.preventDefault()
+      e => {
+        e.preventDefault()
         if (target.classList.contains('circle-shadow')) {
           target.classList.remove('circle-shadow')
         }

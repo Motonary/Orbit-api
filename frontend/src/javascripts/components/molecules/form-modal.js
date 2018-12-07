@@ -8,10 +8,11 @@ import ProjectForm from './forms/project-form'
 import { resetModalStatus, resetSelectedStar } from '../../actions/common'
 
 import '../../../stylesheets/modal.scss'
+import '../../../stylesheets/form_on_modal.scss'
 
 const customStyles = {
   overlay: {
-    zIndex: '1000',
+    zIndex: '500',
     backgroundColor: 'rgba(13, 25, 36, 0)',
   },
   content: {
@@ -19,7 +20,7 @@ const customStyles = {
     justifyContent: 'center',
     flexWrap: 'wrap',
     width: '400px',
-    height: '280px',
+    height: '240px',
     backgroundColor: 'rgba(13, 25, 36)',
     top: '50%',
     left: '50%',
@@ -29,6 +30,7 @@ const customStyles = {
     marginRight: '-50%',
     color: '#fff',
     transform: 'translate(-50%, -50%)',
+    zIndex: '1000',
   },
 }
 

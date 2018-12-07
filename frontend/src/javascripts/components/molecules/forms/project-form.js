@@ -10,7 +10,7 @@ import {
 } from '../../../actions/common'
 import { createProject } from '../../../actions/projects'
 
-import '../../../../stylesheets/form_modal.scss'
+import '../../../../stylesheets/form_on_modal.scss'
 
 class ProjectForm extends Component {
   renderField({ placeholder, type, input, value, meta: { touched, error } }) {

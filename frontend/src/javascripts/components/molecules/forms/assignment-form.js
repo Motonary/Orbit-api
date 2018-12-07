@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import classNames from 'classnames'
+
+import Field from '../../atoms/field'
 
 import {
   setSelectedStar,
@@ -10,35 +11,7 @@ import {
 } from '../../../actions/common'
 import { createAssignment } from '../../../actions/assignments'
 
-import '../../../../stylesheets/form_modal.scss'
-
 class AssignmentForm extends Component {
-  renderField({ placeholder, type, input, value, meta: { touched, error } }) {
-    const fieldClasses = classNames({
-      'form-group': true,
-      'has-danger': touched && error,
-      'assignment-fieled-style': true,
-      'assignment-fieled-text': true,
-      deadline: placeholder === 'deadline',
-      planet_type: placeholder === 'planet type',
-    })
-
-    return (
-      <div className={fieldClasses}>
-        <input
-          className={`text-style ${
-            placeholder === 'description' ? 'description' : ''
-          } ${placeholder === 'deadline' ? 'deadline' : ''}`}
-          placeholder={placeholder}
-          type={type}
-          value={value}
-          {...input}
-        />
-        <div className="text-help">{touched ? error : ''}</div>
-      </div>
-    )
-  }
-
   onSubmit({ title, description, deadline, planet_size }) {
     const planet_type = this.props.selectedStar
     const project_id = this.props.currentProject.id
@@ -60,9 +33,9 @@ class AssignmentForm extends Component {
   render() {
     return (
       <div id="form-on-modal">
-        <div className="form-balloon-title">New Assignment</div>
+        <div className="form-title">New Assignment</div>
         <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
-          <div className="form-line-2">
+          <div className="form-line-1">
             <Field
               placeholder="title"
               name="title"
@@ -76,7 +49,7 @@ class AssignmentForm extends Component {
               component={this.renderField}
             />
           </div>
-          <div className="form-line-3">
+          <div className="form-line-2">
             <Field
               placeholder="description"
               name="description"
@@ -84,12 +57,8 @@ class AssignmentForm extends Component {
               component={this.renderField}
             />
           </div>
-          <div className="form-line-4">
-            <Field
-              name="planet_size"
-              component="select"
-              className="assignment-select-fieled-style"
-            >
+          <div className="form-line-3">
+            <select name="planet_size" className="select-fieled-style">
               <option value="" className=" assignment-fieled-text">
                 SIZE
               </option>
@@ -102,8 +71,8 @@ class AssignmentForm extends Component {
               <option value="small" className="assignment-fieled-text">
                 small
               </option>
-            </Field>
-            <button type="submit" className="submit-btn assignment-fieled-text">
+            </select>
+            <button type="submit" className="form-btn assignment-fieled-text">
               決定
             </button>
           </div>

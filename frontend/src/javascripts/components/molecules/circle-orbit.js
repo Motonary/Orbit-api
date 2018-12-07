@@ -19,7 +19,7 @@ class CircleOrbit extends Component {
 
   setDrop() {
     //Droppable area
-    const target = document.getElementById('circle-' + this.props.orbit)
+    const target = document.getElementById(`circle-${this.props.orbit}`)
 
     //Entering into the droppable area
     target.addEventListener(
@@ -46,8 +46,8 @@ class CircleOrbit extends Component {
     //Over the droppable area
     target.addEventListener(
       'dragover',
-      event => {
-        event.preventDefault()
+      e => {
+        e.preventDefault()
       },
       false
     )
@@ -55,13 +55,13 @@ class CircleOrbit extends Component {
     //Drop
     target.addEventListener(
       'drop',
-      event => {
-        event.preventDefault()
+      e => {
+        e.preventDefault()
         if (target.classList.contains('circle-shadow')) {
           target.classList.remove('circle-shadow')
         }
         if (!this.props.modalOpen) {
-          this.props.setModalStatus('form-' + this.props.orbit)
+          this.props.setModalStatus(`form-${this.props.orbit}`)
         }
       },
       false
