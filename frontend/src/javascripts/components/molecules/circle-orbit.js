@@ -60,8 +60,8 @@ class CircleOrbit extends Component {
         if (target.classList.contains('circle-shadow')) {
           target.classList.remove('circle-shadow')
         }
-        if (!this.props.modalIsOpen) {
-          this.props.setModalStatus('form')
+        if (!this.props.modalOpen) {
+          this.props.setModalStatus('form-' + this.props.orbit)
         }
       },
       false
@@ -151,10 +151,10 @@ class CircleOrbit extends Component {
 }
 
 export default connect(
-  ({ revolvingAssignments, selectedStar, modalIsOpen }) => ({
+  ({ revolvingAssignments, selectedStar, modalOpen }) => ({
     revolvingAssignments,
     selectedStar,
-    modalIsOpen,
+    modalOpen,
   }),
   {
     selectAssignment,

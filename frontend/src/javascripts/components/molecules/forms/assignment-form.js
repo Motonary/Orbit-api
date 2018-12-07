@@ -39,9 +39,10 @@ class AssignmentForm extends Component {
     )
   }
 
-  onSubmit({ title, description, deadline, planet_size, orbit_pos }) {
+  onSubmit({ title, description, deadline, planet_size }) {
     const planet_type = this.props.selectedStar
     const project_id = this.props.currentProject.id
+    const orbit_pos = this.props.orbit
 
     this.props.createAssignment(
       title,
@@ -61,26 +62,6 @@ class AssignmentForm extends Component {
       <div id="form-on-modal">
         <div className="form-balloon-title">New Assignment</div>
         <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
-          <div className="form-line-1">
-            <Field
-              name="orbit_pos"
-              component="select"
-              className="assignment-select-fieled-style"
-            >
-              <option value="" className="assignment-fieled-text">
-                Orbit
-              </option>
-              <option value="primo" className="assignment-fieled-text">
-                1
-              </option>
-              <option value="secundus" className="assignment-fieled-text">
-                2
-              </option>
-              <option value="tertius" className="assignment-fieled-text">
-                3
-              </option>
-            </Field>
-          </div>
           <div className="form-line-2">
             <Field
               placeholder="title"

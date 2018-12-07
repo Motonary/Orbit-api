@@ -53,7 +53,7 @@ class MypageOrbit extends Component {
         if (target.classList.contains('circle-shadow')) {
           target.classList.remove('circle-shadow')
         }
-        if (!this.props.modalIsOpen) {
+        if (!this.props.modalOpen) {
           this.props.setModalStatus('form')
         }
       },

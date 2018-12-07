@@ -47,19 +47,25 @@ class FormModal extends Component {
 
   render() {
     const { pathname } = this.props
+    const orbit = this.props.modalOpen ? this.props.modalOpen.split('-')[1] : ''
+
     return (
       <Modal
-        isOpen={this.props.modalIsOpen === 'form'}
+        isOpen={!(orbit === '')}
         style={customStyles}
         contentLabel="Assignment From Modal"
       >
-        {pathname.includes('project') ? <AssignmentForm /> : <ProjectForm />}
+        {pathname.includes('project') ? (
+          <AssignmentForm orbit={orbit} />
+        ) : (
+          <ProjectForm />
+        )}
       </Modal>
     )
   }
 }
 
 export default connect(
-  ({ selectedStar, modalIsOpen }) => ({ selectedStar, modalIsOpen }),
+  ({ selectedStar, modalOpen }) => ({ selectedStar, modalOpen }),
   { resetModalStatus, resetSelectedStar }
 )(FormModal)

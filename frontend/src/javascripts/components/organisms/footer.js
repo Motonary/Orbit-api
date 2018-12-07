@@ -38,7 +38,7 @@ class Footer extends Component {
   componentDidUpdate(/*prevProps, prevState*/) {
     // TODO: 星破壊時の諸関数も最適化ししかるべきコンポーネントに移動する
     // 今後、発火のイベントとかも含めて再構築するので以下のネストのままで、一旦ペンディング
-    if (this.props.isDestroyIgnited && !this.props.modalIsOpen) {
+    if (this.props.isDestroyIgnited && !this.props.modalOpen) {
       if (this.props.selectedAssignments) {
         //console.log("didupdate")
         switch (this.props.isDestroyIgnited) {
@@ -365,13 +365,13 @@ export default connect(
     selectedAssignments,
     selectedStar,
     isDestroyIgnited,
-    modalIsOpen,
+    modalOpen,
   }) => ({
     currentUser,
     selectedAssignments,
     isDestroyIgnited,
     selectedStar,
-    modalIsOpen,
+    modalOpen,
   }),
   {
     destroyAssignment,
