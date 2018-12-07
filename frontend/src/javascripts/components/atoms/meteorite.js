@@ -2,12 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 //import anime from 'animejs'
 
-import {
-  setDestroyAction,
-  resetDestroyAction,
-  resetModalStatus,
-} from '../../actions/common'
-import { nullifySelectedAssignment } from '../../actions/assignments'
+import { resetDestroyAction, resetModalStatus } from '../../actions/common'
+import { resetSelectedAssignment } from '../../actions/assignments'
 
 class Meteorite extends Component {
   componentDidUpdate(/*prevProps, prevState*/) {
@@ -34,9 +30,8 @@ export default connect(
     modalOpen,
   }),
   {
-    setDestroyAction,
     resetDestroyAction,
     resetModalStatus,
-    nullifySelectedAssignment,
+    resetSelectedAssignment,
   }
 )(Meteorite)

@@ -4,12 +4,7 @@ import Modal from 'react-modal'
 
 import ConfirmBtn from '../atoms/buttons/confirm-btn'
 
-import {
-  igniteDestroyPlanets,
-  resetDestroyPlanets,
-  setModalStatus,
-  resetModalStatus,
-} from '../../actions/common'
+import { resetDestroyAction, resetModalStatus } from '../../actions/common'
 
 import '../../../stylesheets/modal.scss'
 
@@ -49,7 +44,8 @@ class ConfirmModal extends Component {
   }
 
   closeModal(/*isDestroy*/) {
-    this.props.resetModalStatus(false)
+    this.props.resetDestroyAction()
+    this.props.resetModalStatus()
   }
 
   render() {
@@ -61,14 +57,8 @@ class ConfirmModal extends Component {
       >
         <div className="modal-warning">{this.state.destroy}</div>
         <div className="modal-confirm-buttons">
-          <ConfirmBtn
-            message="いいえ"
-            onClick={this.closeModal.bind(this, false)}
-          />
-          <ConfirmBtn
-            message="はい"
-            onClick={this.closeModal.bind(this, true)}
-          />
+          <ConfirmBtn message="いいえ" onClick={this.closeModal.bind(this)} />
+          <ConfirmBtn message="はい" onClick={this.closeModal.bind(this)} />
         </div>
       </Modal>
     )
@@ -76,11 +66,9 @@ class ConfirmModal extends Component {
 }
 
 export default connect(
-  ({ isDestroyIgnited, modalOpen }) => ({ isDestroyIgnited, modalOpen }),
+  ({ modalOpen }) => ({ modalOpen }),
   {
-    igniteDestroyPlanets,
-    resetDestroyPlanets,
-    setModalStatus,
+    resetDestroyAction,
     resetModalStatus,
   }
 )(ConfirmModal)

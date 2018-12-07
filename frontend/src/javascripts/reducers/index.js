@@ -7,7 +7,7 @@ import {
   destroyedAssignments,
   selectedAssignments,
 } from './assignments'
-import { selectedStar, isDestroyIgnited, modalOpen } from './common'
+import { selectedStar, selectedDestroyAction, modalOpen } from './common'
 
 const rootReducer = combineReducers({
   // Form
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 
   //commmon
   selectedStar,
-  isDestroyIgnited,
+  selectedDestroyAction,
 
   // Users
   currentUser,

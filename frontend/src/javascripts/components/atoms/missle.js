@@ -2,12 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 //import anime from 'animejs'
 
-import {
-  setDestroyAction,
-  resetDestroyAction,
-  resetModalStatus,
-} from '../../actions/common'
-import { nullifySelectedAssignment } from '../../actions/assignments'
+import { resetDestroyAction, resetModalStatus } from '../../actions/common'
+import { resetSelectedAssignment } from '../../actions/assignments'
 
 import { DeleteActions } from '../../constants/images'
 
@@ -108,9 +104,8 @@ export default connect(
     modalOpen,
   }),
   {
-    setDestroyAction,
     resetDestroyAction,
     resetModalStatus,
-    nullifySelectedAssignment,
+    resetSelectedAssignment,
   }
 )(Missle)

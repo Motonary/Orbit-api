@@ -1,26 +1,11 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
 import PlanetHolder from '../molecules/planet-holder'
 import FooterButtonsList from '../molecules/footer-buttons-list'
 import ConfirmModal from '../molecules/confirm-modal'
 import FormModal from '../molecules/form-modal'
 
-import {
-  destroyAssignment,
-  nullifySelectedAssignment,
-} from '../../actions/assignments'
-import {
-  setSelectedStar,
-  resetSelectedStar,
-  resetDestroyPlanets,
-} from '../../actions/common'
-
 class Footer extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
     let planet_list = document.getElementById('planet-list')
     planet_list.style.display = 'none'
@@ -41,25 +26,4 @@ class Footer extends Component {
   }
 }
 
-export default connect(
-  ({
-    currentUser,
-    selectedAssignments,
-    selectedStar,
-    isDestroyIgnited,
-    modalOpen,
-  }) => ({
-    currentUser,
-    selectedAssignments,
-    isDestroyIgnited,
-    selectedStar,
-    modalOpen,
-  }),
-  {
-    destroyAssignment,
-    nullifySelectedAssignment,
-    setSelectedStar,
-    resetSelectedStar,
-    resetDestroyPlanets,
-  }
-)(Footer)
+export default Footer

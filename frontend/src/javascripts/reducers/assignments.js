@@ -34,24 +34,24 @@ export function revolvingAssignments(state = null, action) {
  */
 export function selectedAssignments(state = [], action) {
   switch (action.type) {
-    case actionTypes.SELECT_ASSIGNMENT:
+    case actionTypes.SET_SELECTED_ASSIGNMENT:
       return [...state, action.assignmentId]
 
-    case actionTypes.DISSELECT_ASSIGNMENT:
+    case actionTypes.REMOVE_SELECTED_ASSIGNMENT:
       return state.filter(item => item !== action.assignmentId)
 
-    case actionTypes.NULLIFY_SELECTED_ASSIGNMENT:
+    case actionTypes.RESET_SELECTED_ASSIGNMENT:
       return []
 
     default:
       return state
   }
 }
+
 /*
  * destroyedAssignmentsの利用用途
  * stateには、UI上からすでに削除され、履歴ページに表示されるためのAssignmentsが格納される
  */
-
 export function destroyedAssignments(state = null, action) {
   switch (action.type) {
     case actionTypes.FETCH_DESTROYED_ASSIGNMENTS:

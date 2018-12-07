@@ -49,11 +49,13 @@ class FormModal extends Component {
 
   render() {
     const { pathname } = this.props
-    const orbit = this.props.modalOpen ? this.props.modalOpen.split('-')[1] : ''
+    const orbit = this.props.modalOpen
+      ? this.props.modalOpen.split('-')[1]
+      : null
 
     return (
       <Modal
-        isOpen={!(orbit === '')}
+        isOpen={this.props.modalOpen !== null}
         style={customStyles}
         contentLabel="Assignment From Modal"
       >

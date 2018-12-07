@@ -4,13 +4,13 @@ import { RevivalImg } from '../../../constants/images'
 
 const RevivalBtn = ({ pathname, rootPath }) => {
   const revivalButtonClasses = classNames({
-    disapperance: true,
+    'delete-btn': true,
     'revival-button-show': pathname === `${rootPath}/history`,
   })
 
   return (
     <li className={revivalButtonClasses}>
-      <img src={RevivalImg} className="delete-btn" />
+      <img src={RevivalImg} className="delete-icon" />
     </li>
   )
 }

@@ -6,7 +6,7 @@ import {
   resetDestroyAction,
   resetModalStatus,
 } from '../../actions/common'
-import { nullifySelectedAssignment } from '../../actions/assignments'
+import { resetSelectedAssignment } from '../../actions/assignments'
 
 import { DeleteActions } from '../../constants/images'
 
@@ -20,7 +20,7 @@ class BlackHole extends Component {
 
   iginiteBlackHoleAnimation() {
     const targetIds = this.props.selectedAssignments
-    const actionKey = this.props.isDestroyIgnited
+    const actionKey = this.props.selectedDestroyAction
     const targetDom = document.getElementById('project-orbit')
     const insertDom = document.getElementById('fixed-star')
     const displayDoms = []
@@ -100,6 +100,6 @@ export default connect(
     setDestroyAction,
     resetDestroyAction,
     resetModalStatus,
-    nullifySelectedAssignment,
+    resetSelectedAssignment,
   }
 )(BlackHole)

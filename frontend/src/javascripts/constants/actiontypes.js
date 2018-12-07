@@ -4,9 +4,9 @@ export const actionTypes = keyMirror({
   // Common
   OPEN_MODAL: null,
   CLOSE_MODAL: null,
-  SELECT_STAR: null,
-  DISSELECT_STAR: null,
-  IGNITE_DESTROY_ACTION: null,
+  SET_SELECTED_STAR: null,
+  RESET_SELECTED_STAR: null,
+  SET_DESTROY_ACTION: null,
   RESET_DESTROY_ACTION: null,
 
   // User
@@ -27,7 +27,7 @@ export const actionTypes = keyMirror({
   CREATE_ASSIGNMENT: null,
   DESTROY_ASSIGNMENT: null,
   RESTORE_ASSIGNMENT: null,
-  SELECT_ASSIGNMENT: null,
-  DISSELECT_ASSIGNMENT: null,
-  NULLIFY_SELECTED_ASSIGNMENT: null,
+  SET_SELECTED_ASSIGNMENT: null,
+  REMOVE_SELECTED_ASSIGNMENT: null,
+  RESET_SELECTED_ASSIGNMENT: null,
 })

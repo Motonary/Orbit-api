@@ -97,20 +97,20 @@ export function restoreAssignment(assignmentId) {
 
 export function selectAssignment(assignmentId) {
   return {
-    type: actionTypes.SELECT_ASSIGNMENT,
+    type: actionTypes.SET_SELECTED_ASSIGNMENT,
     assignmentId,
   }
 }
 
 export function disselectAssignment(assignmentId) {
   return {
-    type: actionTypes.DISSELECT_ASSIGNMENT,
+    type: actionTypes.REMOVE_SELECTED_ASSIGNMENT,
     assignmentId,
   }
 }
 
-export function nullifySelectedAssignment() {
+export function resetSelectedAssignment() {
   return {
-    type: actionTypes.NULLIFY_SELECTED_ASSIGNMENT,
+    type: actionTypes.RESET_SELECTED_ASSIGNMENT,
   }
 }

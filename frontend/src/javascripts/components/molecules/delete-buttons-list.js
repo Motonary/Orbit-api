@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
-import { setModalStatus, igniteDestroyPlanets } from '../../actions/common'
+import { setModalStatus, setDestroyAction } from '../../actions/common'
 
 import { DeleteIcons } from '../../constants/images'
 
@@ -12,8 +12,8 @@ import BlackHole from '../atoms/blackhole'
 
 class DeleteButtonsList extends Component {
   onClickOpenModal(actionType) {
-    this.props.setModalStatus('destroy')
-    this.props.igniteDestroyPlanets(actionType)
+    //this.props.setModalStatus('destroy')
+    this.props.setDestroyAction(actionType)
     this.motionControll()
   }
 
@@ -64,5 +64,5 @@ class DeleteButtonsList extends Component {
 
 export default connect(
   null,
-  { setModalStatus, igniteDestroyPlanets }
+  { setModalStatus, setDestroyAction }
 )(DeleteButtonsList)
