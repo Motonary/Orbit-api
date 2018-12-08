@@ -33,8 +33,10 @@ class Assignment < ApplicationRecord
   enum orbit_pos:   [:primo, :secundus, :tertius]
 
   scope :fetch_with_user, -> user { joins(project: :users).merge(User.id_is user.id) }
-  scope :fetch_destroyed, -> { where(destroyed_flag: true).except(:project_id, :created_at, :updated_at, :done_flag, :destroyed_flag) }
+  scope :fetch_destroyed, -> { where(destroyed_flag: true) }
   scope :fetch_revolving_on_orbit, -> (project_id, orbit_pos) {
-    where(project_id: project_id).where(orbit_pos: orbit_pos).where(destroyed_flag: false).except(:project_id, :created_at, :updated_at, :done_flag, :destroyed_flag, :destroyed_at)
+    where(project_id: project_id).where(orbit_pos: orbit_pos).where(destroyed_flag: false)
   }
+  scope :select_for_revolving, -> { select(:id, :title, :description, :deadline, :planet_type, :planet_size, :orbit_pos) }
+  scope :select_for_destroyed, -> { select(:id, :title, :description, :deadline, :planet_type, :planet_size, :orbit_pos, :destroyed_at) }
 end

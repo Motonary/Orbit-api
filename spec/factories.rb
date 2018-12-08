@@ -4,7 +4,7 @@ FactoryBot.define do
   #
   factory :assignment, class: Assignment do
     title { Faker::HarryPotter.house }
-    description { Faker::HarryPotter.quote }
+    description { Faker::HarryPotter.spell }
     deadline  { Faker::Time.forward(20, :morning) }
     planet_type { rand(15) }
     planet_size { rand(3) }
@@ -13,7 +13,7 @@ FactoryBot.define do
 
   factory :destroyed_assignment, parent: :assignment do
     destroyed_flag  { true }
-    destroyed_at  { Faker::Time.backword(10, :evening) }
+    destroyed_at  { Faker::Time.backward(10, :evening) }
   end
 
   factory :done_assignment, parent: :assignment do
@@ -29,6 +29,7 @@ FactoryBot.define do
 
     after (:create) do |project|
       create(:assignment, project: project)
+      create(:destroyed_assignment, project: project)
     end
   end
 

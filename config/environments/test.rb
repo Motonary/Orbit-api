@@ -19,7 +19,7 @@ Rails.application.configure do
   }
 
   # Set Logger
-  config.logger = Logger.new('log/test.log')
+  config.logger = Logger.new('log/test.log', 20, 10 * 1024 * 1024)
   config.logger.formatter = proc do |severity, datetime, progname, msg|
     "[#{severity}]#{datetime}: #{progname} : #{msg}\n"
   end
