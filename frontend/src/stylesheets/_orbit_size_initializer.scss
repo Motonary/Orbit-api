@@ -6,12 +6,14 @@ $secundus-orbit-position: 135px + $position-move-distance;
 $tertius-orbit-position: 0px + $position-move-distance;
 
 /*　恒星の大きさ　：　基準値　*/
-$fixed-star-scale: 180px;
+$fixed-star-scale: 150px;
 
-/* 各軌道・惑星の恒星比 */
-$primo-orbit-ratio: 2.5;
+/* 各軌道の恒星比 */
+$primo-orbit-ratio: 2.3;
 $secundus-orbit-ratio: 4;
-$tertius-orbit-ratio: 5.5;
+$tertius-orbit-ratio: 5.1;
+
+/* 惑星の恒星比 */
 $large-planet-ratio: 0.75;
 $medium-planet-ratio: 0.65;
 $small-planet-ratio: 0.55;

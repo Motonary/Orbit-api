@@ -5,9 +5,9 @@ class ApplicationController < ActionController::API
     with: lambda { |e| response_error(e) }
  
   def response_error(exception)
-    status_code = ActionDispatch::ExceptionWrapper.new(env, exception).status_code
+    status_code = ActionDispatch::ExceptionWrapper.new(request.env, exception).status_code
 
-    ExceptionNotifier.logger_notify(exception, env: env, data: params)
+    ExceptionNotifier.logger_notify(exception, data: request.params)
     
     render json: {message: exception.message}, status: status_code
   end

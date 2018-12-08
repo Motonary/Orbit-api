@@ -1,6 +1,6 @@
 @import "orbit_size_initializer";
 
-$mypage-orbit: 550px;
+$mypage-orbit: 500px;
 
 #mypage-container {
   width: 100%;
@@ -72,8 +72,8 @@ $mypage-orbit: 550px;
     }
 
     .planet-large-secundus {
-      width: percentage($primo-orbit-large-planet * 1.5);
-      height: percentage($primo-orbit-large-planet * 1.5);
+      width: percentage($primo-orbit-large-planet * 1.2);
+      height: percentage($primo-orbit-large-planet * 1.2);
       border-radius: 50%;
       position: absolute;
       top: 0;
