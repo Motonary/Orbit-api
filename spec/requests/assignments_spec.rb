@@ -6,11 +6,11 @@ RSpec.describe "Assignments", type: :request do
     { 'Authorization': "Bearer #{token}" }
   end
 
-  describe "POST api/assignments/" do
+  describe "POST api/assignments/ but res 404 due to lack of params" do
     it "res new assignment" do
       user = FactoryBot.create(:user)
       post '/api/assignments/', headers: authenticated_header(user)
-      expect(response.status).to eq 200
+      expect(response.status).to eq 404
     end
   end
 
