@@ -18,8 +18,11 @@ import {
 import { DeleteActions } from '../../constants/images'
 
 import '../../../stylesheets/destroy_animate.scss'
+import currentUser from '../../reducers/current-user';
 
 interface Props {
+  currentUser: any,
+  pathname: any,
   isDestroyIgnited: any,
   modalIsOpen: any,
   selectedAssignments: any,
@@ -33,7 +36,7 @@ interface State {
 }
 
 class Footer extends React.Component<Props, State> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props)
 
     this.state = {
@@ -95,9 +98,11 @@ class Footer extends React.Component<Props, State> {
 
         removeTarget.classList.add('blackhole-action')
         Promise.resolve()
-          .then(this.waitFunc(2.5))
+          // .then(this.waitFunc(2.5))
           .then(() => {
-            blackholeDom.classList.add('blackhole-action')
+            setTimeout(() => {
+              blackholeDom.classList.add('blackhole-action')
+            }, 2500)
           })
       })
     }
@@ -315,6 +320,7 @@ class Footer extends React.Component<Props, State> {
     }
 
     var render: any = anime({
+      targets: 'hoge', // tsでエラーが起きてしまう暫定的に追加
       duration: Infinity,
       update: function() {
         let i = 0
@@ -371,13 +377,11 @@ class Footer extends React.Component<Props, State> {
 
 export default connect(
   ({
-    currentUser,
     selectedAssignments,
     selectedStar,
     isDestroyIgnited,
     modalIsOpen,
   }: any) => ({
-    currentUser,
     selectedAssignments,
     isDestroyIgnited,
     selectedStar,

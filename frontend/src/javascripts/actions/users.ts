@@ -82,8 +82,8 @@ export function updateUserImg(newAvatar: any) {
 }
 
 export function updateProfile(
-  name = null,
-  email = null,
+  name: any = null,
+  email: any = null,
   password: any,
   password_confirmation: any
 ) {

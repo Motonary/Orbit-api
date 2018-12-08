@@ -4,6 +4,10 @@ import classNames from 'classnames'
 import { setModalStatus, igniteDestroyPlanets } from '../../../actions/common'
 
 interface Props {
+  key: any,
+  deleteIcon: any,
+  pathname: any,
+  rootPath: any,
   setModalStatus: any,
   igniteDestroyPlanets: any,
 }
