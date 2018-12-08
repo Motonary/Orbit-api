@@ -15,13 +15,13 @@ $mypage-orbit: 500px;
 
   .user-info {
     margin: 0 auto;
-    width: 500px;
+    width: 450px;
     display: flex;
-    justify-content:center;
+    justify-content:flex-end;
     align-items: center;
 
     position: absolute;
-    top: 360px;
+    top: 320px;
 
     .user-img-container {
       margin: 0;
@@ -72,8 +72,8 @@ $mypage-orbit: 500px;
     }
 
     .planet-large-secundus {
-      width: percentage($primo-orbit-large-planet * 1.2);
-      height: percentage($primo-orbit-large-planet * 1.2);
+      width: percentage($primo-orbit-large-planet * 1.1);
+      height: percentage($primo-orbit-large-planet * 1.1);
       border-radius: 50%;
       position: absolute;
       top: 0;
