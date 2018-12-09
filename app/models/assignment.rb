@@ -18,7 +18,7 @@
 #
 
 class Assignment < ApplicationRecord
-  belongs_to :project, optional: true
+  belongs_to :project
   has_many :sub_assignments, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 50 }

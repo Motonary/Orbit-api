@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
   include Knock::Authenticable
 
   rescue_from StandardError,
-    with: lambda { |e| response_error(e) }
+    with: lambda { |e| response_error(e) } unless Rails.env.development?
  
   def response_error(exception)
     status_code = ActionDispatch::ExceptionWrapper.new(request.env, exception).status_code
