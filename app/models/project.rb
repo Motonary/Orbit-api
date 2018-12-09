@@ -18,4 +18,6 @@ class Project < ApplicationRecord
 
   enum fixed_star_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
                          :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
+
+  scope :select_for_res, -> { select(:id, :title, :fixed_star_type) }
 end

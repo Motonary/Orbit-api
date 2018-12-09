@@ -37,4 +37,6 @@ class Assignment < ApplicationRecord
   scope :fetch_revolving_on_orbit, -> (project_id, orbit_pos) {
     where(project_id: project_id).where(orbit_pos: orbit_pos).where(destroyed_flag: false)
   }
+  scope :select_for_revolving, -> { select(:id, :title, :description, :deadline, :planet_type, :planet_size, :orbit_pos) }
+  scope :select_for_destroyed, -> { select(:id, :title, :description, :deadline, :planet_type, :planet_size, :orbit_pos, :destroyed_at) }
 end
