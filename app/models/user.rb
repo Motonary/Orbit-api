@@ -12,10 +12,13 @@
 #
 
 class User < ApplicationRecord
+  MAX_PROJECTS_AMOUNT = 6
+
   has_secure_password
   before_save { email.downcase! }
 
   has_and_belongs_to_many :projects
+  validates :projects, length: {maximum: MAX_PROJECTS_AMOUNT}
 
   validates :name,  presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },

@@ -19,9 +19,9 @@ User.create!({
 # A project
 ririco = User.first
 
-4.times do |i|
+5.times do |i|
   ririco.projects.create!({
-    title: Faker::Lorem.word,
+    title: Faker::HarryPotter.house,
     fixed_star_type: fixed_star_keys[rand(0...14)]
   })
 end
@@ -30,8 +30,8 @@ end
 kanojo_project = Project.first
 4.times do |i|
   kanojo_project.assignments.create!({
-    title: Faker::Lorem.word,
-    detail: Faker::Lorem.sentence,
+    title: Faker::HarryPotter.character,
+    description: Faker::HarryPotter.quote,
     deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
     planet_type: planet_keys[rand(0...14)],
     planet_size: size_keys[rand(0...2)],
@@ -44,7 +44,7 @@ end
 6.times do |i|
   kanojo_project.assignments.create!({
     title: Faker::Lorem.word,
-    detail: Faker::Lorem.sentence,
+    description: Faker::Lorem.sentence,
     deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
     planet_type: planet_keys[rand(0...14)],
     planet_size: size_keys[rand(0...2)],
@@ -56,7 +56,7 @@ end
 2.times do |i|
   kanojo_project.assignments.create!({
     title: Faker::Lorem.word,
-    detail: Faker::Lorem.sentence,
+    description: Faker::Lorem.sentence,
     deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
     planet_type: planet_keys[rand(0...14)],
     planet_size: size_keys[rand(0...2)],

@@ -12,6 +12,16 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
 
+  # Logger
+  config.logger = Logger.new('log/development.log', 20, 10 * 1024 * 1024)
+  config.logger.formatter = proc do |severity, datetime, progname, msg|
+    "[#{severity}]#{datetime}: #{progname} : #{msg}\n"
+  end
+
+  # Use the lowest log level to ensure availability of diagnostic information
+  # when problems arise.
+  config.log_level = :debug
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
