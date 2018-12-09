@@ -72,7 +72,7 @@ input {
   text-align: left;
   border: none;
   border-bottom: solid 1px #ddd;
-  color: #fff;
-  background-color: $bg-common-color;
+  color: #fff !important;
+  background-color: $bg-common-color !important;
   padding: 0 5px;
 }

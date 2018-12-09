@@ -12,16 +12,31 @@ export default class Field extends Component {
       title: placeholder === 'title',
       description: placeholder === 'description',
       deadline: placeholder === 'deadline',
+      username: placeholder === 'NAME',
+      email: placeholder === 'EMAIL ADRESS',
+      password:
+        placeholder === 'PASSWORD' || placeholder === 'CONFIRM PASSWORD',
     })
     const inputClasses = classNames({
       title: placeholder === 'title',
       description: placeholder === 'description',
       deadline: placeholder === 'deadline',
+      username: placeholder === 'NAME',
+      email: placeholder === 'EMAIL ADRESS',
+      password:
+        placeholder === 'PASSWORD' || placeholder === 'CONFIRM PASSWORD',
+    })
+    const inputRadius = classNames({
+      'input-radius':
+        placeholder === 'NAME' ||
+        placeholder === 'EMAIL ADRESS' ||
+        placeholder === 'PASSWORD' ||
+        placeholder === 'CONFIRM PASSWORD',
     })
     return (
       <div className={fieldClasses}>
         <input
-          className={inputClasses}
+          className={`${inputClasses} ${inputRadius}`}
           placeholder={placeholder}
           type={type}
           {...input}

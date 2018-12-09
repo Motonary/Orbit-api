@@ -1,10 +1,11 @@
 @import "initializer";
 
 .toppage-btn {
-  display: block;
   position: fixed;
   top: 10px;
   right: 10px;
+  width: 180px;
+  height: 100px;
   cursor: pointer;
 
   .toppage-btn-img {
