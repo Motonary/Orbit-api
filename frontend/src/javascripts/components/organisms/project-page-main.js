@@ -46,7 +46,7 @@ class ProjectPageMain extends Component {
           <CircleOrbit orbit="secundus" />
           <CircleOrbit orbit="tertius" />
         </div>
-        <ProjectBar />
+        <ProjectBar currentProject={this.props.currentProject} />
       </div>
     )
   }

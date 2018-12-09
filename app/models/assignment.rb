@@ -18,11 +18,11 @@
 #
 
 class Assignment < ApplicationRecord
-  belongs_to :project
+  belongs_to :project, optional: true
   has_many :sub_assignments, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 50 }
-  validates :description, length: { maximum: 140 }
+  validates :description, length: { maximum: 200 }
   validates :planet_type, presence: true
   validates :planet_size, presence: true
   validates :orbit_pos,   presence: true

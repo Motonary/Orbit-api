@@ -42,22 +42,23 @@
     color: #fff;
 
     .assignment-title {
-      margin: 5px 0;
-      width: 80px;
-      height: 50px;
-      line-height: 50px;
+      margin: 0;
+      width: 300px;
+      height: 30px;
+      font-size: 16px;
+      line-height: 30px;
     }
     .assignment-deadline {
-      margin: 5px 0;
-      width: 180px;
-      height: 50px;
-      line-height: 50px;
+      margin: 0;
+      width: 300px;
+      height: 30px;
+      line-height: 30px;
+      text-align: right;
     }
     .assignment-description {
-      margin: 5px 0;
-      padding: 5px;
+      margin: 2px 0;
       width: 300px;
-      height: 100px;
+      height: 70px;
     }
   }
 }

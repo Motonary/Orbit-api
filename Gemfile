@@ -6,13 +6,11 @@ ruby '2.5.1'
 gem 'rails', '~> 5.2.1'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'jbuilder', '~> 2.5'
 gem 'bcrypt'
 gem 'react-rails'
 gem 'foreman'
 gem 'rack-cors'
 gem 'knock'
-gem 'faker'
 gem 'annotate'
 gem 'carrierwave'
 gem 'mini_magick'
@@ -20,6 +18,9 @@ gem 'mini_magick'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'sqlite3'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
@@ -29,7 +30,6 @@ group :development do
 end
 
 group :test do
-  gem 'rails-controller-testing', '1.0.2'
   gem 'minitest',                 '5.10.3'
   gem 'minitest-reporters',       '1.1.14'
 end
