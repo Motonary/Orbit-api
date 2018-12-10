@@ -1,34 +1,36 @@
 import * as React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, InjectedFormProps } from 'redux-form'
 import { connect } from 'react-redux'
 import { createSession, createUser } from '../../../actions/users'
 import Field from '../../atoms/field'
 import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
 
-interface Props {
+interface Props extends InjectedFormProps<FormData, {}> {
+  isSignIn: boolean,
+  isSignUp: boolean,
   history: any,
   createSession: any,
   createUser: any,
   handleSubmit: any,
 }
 
-class TopPageForm extends React.Component<Props, {}> {
+class TopPageForm extends React.Component<Props> {
   onSubmitSignInData({ email, password }: any) {
-    this.props.createSession(email, password, (userId: any) => {
-      this.props.history.push(`/users/${userId}`)
-    })
+    // this.props.createSession(email, password, (userId: any) => {
+    //   this.props.history.push(`/users/${userId}`)
+    // })
   }
 
   onSubmitSignUpData({ username, email, password, confirmation }: any) {
-    this.props.createUser(
-      username,
-      email,
-      password,
-      confirmation,
-      (newUserId: any) => {
-        this.props.history.push(`/users/${newUserId}`)
-      }
-    )
+    // this.props.createUser(
+    //   username,
+    //   email,
+    //   password,
+    //   confirmation,
+    //   (newUserId: any) => {
+    //     this.props.history.push(`/users/${newUserId}`)
+    //   }
+    // )
   }
 
   render() {

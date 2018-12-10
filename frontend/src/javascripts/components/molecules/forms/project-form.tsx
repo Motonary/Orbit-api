@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
@@ -15,7 +15,7 @@ interface Props {
   handleSubmit: any
 }
 
-class ProjectForm extends React.Component<Props, {}> {
+class ProjectForm extends React.Component<InjectedFormProps> {
   renderField({ placeholder, type, input, value, meta: { touched, error } }: any) {
     const fieldClasses: any = classNames({
       'form-group': true,
@@ -46,14 +46,14 @@ class ProjectForm extends React.Component<Props, {}> {
   }
 
   onSubmit({ title }: any) {
-    const target: any = document.getElementById('form-balloon')
-    const target_star: any = document.getElementsByClassName('current-clicked')[0]
-    const fixed_star_type: any = this.props.selectedStar
+    // const target: any = document.getElementById('form-balloon')
+    // const target_star: any = document.getElementsByClassName('current-clicked')[0]
+    // const fixed_star_type: any = this.props.selectedStar
 
-    this.props.createProject(title, fixed_star_type)
-    this.props.resetSelectedStar()
-    target_star.classList.remove('current-clicked')
-    target.style.display = 'none'
+    // this.props.createProject(title, fixed_star_type)
+    // this.props.resetSelectedStar()
+    // target_star.classList.remove('current-clicked')
+    // target.style.display = 'none'
   }
 
   render() {

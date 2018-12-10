@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
@@ -17,7 +17,7 @@ interface Props {
 
 }
 
-class AssignmentForm extends React.Component<Props, {}> {
+class AssignmentForm extends React.Component<InjectedFormProps> {
   renderField({ placeholder, type, input, value, meta: { touched, error } }: any) {
     const fieldClasses: any = classNames({
       'form-group': true,
@@ -45,21 +45,21 @@ class AssignmentForm extends React.Component<Props, {}> {
   }
 
   onSubmit({ title, description, deadline, planet_size, orbit_pos }: any) {
-    const target: any = document.getElementById('form-balloon')
-    const planet_type: any = this.props.selectedStar
-    const project_id: any = this.props.currentProject.id
+    // const target: any = document.getElementById('form-balloon')
+    // const planet_type: any = this.props.selectedStar
+    // const project_id: any = this.props.currentProject.id
 
-    this.props.createAssignment(
-      title,
-      description,
-      deadline,
-      planet_type,
-      planet_size,
-      orbit_pos,
-      project_id
-    )
-    this.props.resetSelectedStar()
-    target.style.display = 'none'
+    // this.props.createAssignment(
+    //   title,
+    //   description,
+    //   deadline,
+    //   planet_type,
+    //   planet_size,
+    //   orbit_pos,
+    //   project_id
+    // )
+    // this.props.resetSelectedStar()
+    // target.style.display = 'none'
   }
 
   render() {

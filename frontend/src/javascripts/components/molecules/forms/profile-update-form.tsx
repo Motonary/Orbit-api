@@ -1,24 +1,33 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
+import { reduxForm, InjectedFormProps } from 'redux-form'
 import Field from '../../atoms/field'
 import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
 import { updateProfile } from '../../../actions/users'
 
-interface Props {
-  updateProfile: any,
-  handleSubmit: any,
-  history: any
-}
+// interface FormData {
+//   name: string,
+//   email: string,
+//   password: string,
+//   confirmation: string
+// }
 
-class ProfileUpdateForm extends React.Component<Props, {}> {
+// interface Props extends InjectedFormProps<FormData, {}> {
+//   updateProfile: any,
+//   handleSubmit: any,
+//   history: any
+// }
+
+
+
+class ProfileUpdateForm extends React.Component<Props> {
   onSubmit({ username, email, password, confirmation }: any) {
     // TODO: Flashメッセージの実装
-    if (window.confirm('プロフィール情報を更新していいですか？')) {
-      this.props
-        .updateProfile(username, email, password, confirmation)
-        .then(() => this.props.history.push('/'))
-    }
+    // if (window.confirm('プロフィール情報を更新していいですか？')) {
+    //   this.props
+    //     .updateProfile(username, email, password, confirmation)
+    //     .then(() => this.props.history.push('/'))
+    // }
   }
 
   render() {
