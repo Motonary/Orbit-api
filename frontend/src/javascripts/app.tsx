@@ -25,10 +25,10 @@ import '../stylesheets/project_page.scss'
 import '../stylesheets/history_page.scss'
 import '../stylesheets/setting_page.scss'
 
-// const createStoreWithMiddleware: any = applyMiddleware(promise)(createStore)
+const createStoreWithMiddleware: any = applyMiddleware(promise)(createStore)
 
 ReactDOM.render(
-  <Provider store={createStore(reducers)}>
+  <Provider store={createStoreWithMiddleware(reducers)}>
     <Router>
       <Main>
         <Switch>
