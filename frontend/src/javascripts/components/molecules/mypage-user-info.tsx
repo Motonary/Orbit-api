@@ -3,7 +3,8 @@ import UserImg from '../atoms/user-img'
 import WelcomeUser from '../atoms/welcome-user'
 
 // なんかもう少しいいコンポーネント名ないかな
-const MypageUserInfo = ({ currentUser }: any) => (
+// currentUserの実態がわかるdefault定義をしたい
+const MypageUserInfo: React.SFC<{}> = ({ currentUser = null }: any) => (
   <div className="user-info">
     <UserImg user={currentUser} />
     <WelcomeUser user={currentUser} />

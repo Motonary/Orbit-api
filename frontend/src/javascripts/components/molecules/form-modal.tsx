@@ -11,8 +11,10 @@ import '../../../stylesheets/modal.scss'
 import '../../../stylesheets/form_on_modal.scss'
 
 interface FormModalProps {
+  pathname: any,
+  
   selectedStar: any,
-  modalIsOpen: any,
+  modalOpen: any,
 
   resetSelectedStar: any,
   resetModalStatus: any,
@@ -46,7 +48,7 @@ Modal.setAppElement('#app')
 
 class FormModal extends React.Component<FormModalProps, {}> {
   componentDidMount() {
-    document.addEventListener('click', e => {
+    document.addEventListener('click', (e: any) => {
       const isOverlayArea = e.target.classList.contains('ReactModal__Overlay')
       if (isOverlayArea) {
         this.props.resetSelectedStar()

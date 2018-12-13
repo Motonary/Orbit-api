@@ -15,7 +15,7 @@ import '../../../stylesheets/modal.scss'
 
 interface ConfirmModalProps {
   isDestroyIgnited: any,
-  modalIsOpen: any,
+  modalOpen: any,
   resetModalStatus: any,
 }
 

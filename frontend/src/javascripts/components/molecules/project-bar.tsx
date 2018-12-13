@@ -9,6 +9,8 @@ import { changeCurrentProject } from '../../actions/projects'
 import '../../../stylesheets/project_bar.scss'
 
 interface Props {
+  currentProject: any,
+  
   changeCurrentProject: any,
   revolvingProjects: any,
   fetchRevolvingAssignments: any,

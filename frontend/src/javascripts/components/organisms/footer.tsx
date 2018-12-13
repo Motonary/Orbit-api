@@ -22,23 +22,25 @@ import { DeleteActions } from '../../constants/images'
 import '../../../stylesheets/destroy_animate.scss'
 import currentUser from '../../reducers/current-user';
 
-interface Props {
+interface FooterProps {
   currentUser: any,
   pathname: any,
+
   isDestroyIgnited: any,
-  modalIsOpen: any,
+  modalOpen: any,
   selectedAssignments: any,
+
   resetDestroyPlanets: any,
   nullifySelectedAssignment: any,
-  destroyAssignment: any
+  destroyAssignment: any,
 }
 
-interface State {
-  clickedStar: any
+interface FooterState {
+  clickedStar: any,
 }
 
-class Footer extends React.Component<Props, State> {
-  constructor(props: Props) {
+class Footer extends React.Component<FooterProps, FooterState> {
+  constructor(props: FooterProps) {
     super(props)
 
     this.state = {

@@ -5,15 +5,17 @@ import FixedStarInList from '../atoms/fixed-star-in-list'
 import { setCurrentProject } from '../../actions/projects'
 import { setModalStatus } from '../../actions/common'
 
-interface Props {
+interface MypageOrbitProps {
   history: any,
   match: any,
 
   revolvingProjects: any,
+
+  setModalStatus: any,
   setCurrentProject: any,
 }
 
-class MypageOrbit extends React.Component<Props, {}> {
+class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
   componentDidMount() {
     this.setDrop()
   }
@@ -47,7 +49,7 @@ class MypageOrbit extends React.Component<Props, {}> {
     //Over the droppable area
     target.addEventListener(
       'dragover',
-      e => {
+      (e: any) => {
         e.preventDefault()
       },
       false
@@ -56,7 +58,7 @@ class MypageOrbit extends React.Component<Props, {}> {
     //Drop
     target.addEventListener(
       'drop',
-      e => {
+      (e: any) => {
         e.preventDefault()
         if (target.classList.contains('circle-shadow')) {
           target.classList.remove('circle-shadow')

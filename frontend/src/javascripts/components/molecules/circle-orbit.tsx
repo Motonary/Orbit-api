@@ -14,14 +14,22 @@ import {
   disselectAssignment,
 } from '../../actions/assignments'
 
-interface Props {
+interface CircleOrbitProps {
+  orbit: any,
+
+  modalOpen: any,
+  selectedStar: any,
+  revolvingAssignments: any,
+
+  setSelectedStar: any,
+  resetSelectedStar: any,
+  setModalStatus: any,
+
   selectAssignment: any,
   disselectAssignment: any,
-  revolvingAssignments: any,
-  orbit: any
 }
 
-class CircleOrbit extends React.Component<Props, {}> {
+class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
   componentDidMount() {
     this.setDrop()
   }
@@ -55,7 +63,7 @@ class CircleOrbit extends React.Component<Props, {}> {
     //Over the droppable area
     target.addEventListener(
       'dragover',
-      e => {
+      (e: any) => {
         e.preventDefault()
       },
       false
@@ -64,7 +72,7 @@ class CircleOrbit extends React.Component<Props, {}> {
     //Drop
     target.addEventListener(
       'drop',
-      e => {
+      (e: any) => {
         e.preventDefault()
         if (target.classList.contains('circle-shadow')) {
           target.classList.remove('circle-shadow')
