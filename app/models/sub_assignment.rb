@@ -27,4 +27,5 @@ class SubAssignment < ApplicationRecord
 
   scope :fetch_with_user, -> user { joins(assignment: [project: :users]).merge(User.id_is user.id) }
   scope :fetch_destroyed, -> { where(destroyed_flag: true) }
+  scope :select_for_destroyed, -> { select(:id, :title, :description, :deadline, :planet_type, :planet_size, :orbit_pos, :destroyed_at) }
 end

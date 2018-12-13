@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  title          :string
-#  detail         :text
+#  description    :text
 #  deadline       :datetime
 #  planet_type    :integer
 #  planet_size    :integer
@@ -22,7 +22,7 @@ class Assignment < ApplicationRecord
   has_many :sub_assignments, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 50 }
-  validates :detail, length: { maximum: 140 }
+  validates :description, length: { maximum: 200 }
   validates :planet_type, presence: true
   validates :planet_size, presence: true
   validates :orbit_pos,   presence: true
@@ -37,4 +37,6 @@ class Assignment < ApplicationRecord
   scope :fetch_revolving_on_orbit, -> (project_id, orbit_pos) {
     where(project_id: project_id).where(orbit_pos: orbit_pos).where(destroyed_flag: false)
   }
+  scope :select_for_revolving, -> { select(:id, :title, :description, :deadline, :planet_type, :planet_size, :orbit_pos) }
+  scope :select_for_destroyed, -> { select(:id, :title, :description, :deadline, :planet_type, :planet_size, :orbit_pos, :destroyed_at) }
 end

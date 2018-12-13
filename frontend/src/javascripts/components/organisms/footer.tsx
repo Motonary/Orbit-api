@@ -4,7 +4,9 @@ import anime from 'animejs'
 
 import PlanetHolder from '../molecules/planet-holder'
 import FooterButtonsList from '../molecules/footer-buttons-list'
-import ConfirmModal from '../molecules/modal'
+import ConfirmModal from '../molecules/confirm-modal'
+import FormModal from '../molecules/form-modal'
+
 import {
   destroyAssignment,
   nullifySelectedAssignment,
@@ -52,7 +54,7 @@ class Footer extends React.Component<Props, State> {
   componentDidUpdate(/*prevProps, prevState*/) {
     // TODO: 星破壊時の諸関数も最適化ししかるべきコンポーネントに移動する
     // 今後、発火のイベントとかも含めて再構築するので以下のネストのままで、一旦ペンディング
-    if (this.props.isDestroyIgnited && !this.props.modalIsOpen) {
+    if (this.props.isDestroyIgnited && !this.props.modalOpen) {
       if (this.props.selectedAssignments) {
         //console.log("didupdate")
         switch (this.props.isDestroyIgnited) {
@@ -370,6 +372,7 @@ class Footer extends React.Component<Props, State> {
         <PlanetHolder pathname={pathname} currentUser={currentUser} />
         <FooterButtonsList pathname={pathname} rootPath={rootPath} />
         <ConfirmModal />
+        <FormModal pathname={pathname} />
       </div>
     )
   }
@@ -380,12 +383,13 @@ export default connect(
     selectedAssignments,
     selectedStar,
     isDestroyIgnited,
-    modalIsOpen,
+    modalOpen,
   }: any) => ({
+    currentUser,
     selectedAssignments,
     isDestroyIgnited,
     selectedStar,
-    modalIsOpen,
+    modalOpen,
   }),
   {
     destroyAssignment,

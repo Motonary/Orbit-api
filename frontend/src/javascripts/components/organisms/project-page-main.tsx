@@ -50,7 +50,7 @@ class ProjectPageMain extends React.Component<Props, {}> {
           <CircleOrbit orbit="secundus" />
           <CircleOrbit orbit="tertius" />
         </div>
-        <ProjectBar />
+        <ProjectBar currentProject={this.props.currentProject} />
       </div>
     )
   }

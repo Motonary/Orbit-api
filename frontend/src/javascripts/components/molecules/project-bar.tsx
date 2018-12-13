@@ -25,15 +25,17 @@ class ProjectBar extends React.Component<Props, {}> {
   }
 
   render() {
-    const ProjectList: any = _.map(this.props.revolvingProjects, project => {
-      return (
-        <FixedStarInList
-          key={project.id}
-          project={project}
-          className="revolving-project"
-          onClick={this.onClickFixedStarOnBar.bind(this, project.id)}
-        />
-      )
+    const ProjectList:any = _.map(this.props.revolvingProjects, project => {
+      if (project.id !== this.props.currentProject.id) {
+        return (
+          <FixedStarInList
+            key={project.id}
+            project={project}
+            className="revolving-project"
+            onClick={this.onClickFixedStarOnBar.bind(this, project.id)}
+          />
+        )
+      }
     })
 
     return (

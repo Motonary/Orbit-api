@@ -26,9 +26,6 @@ class PlanetHolderOpener extends React.Component<Props, {}> {
       planet_list.style.width = '400px'
       //planet_holder.classList.add('holder-border');
     }
-
-    const target: any = document.getElementById('form-balloon')
-    target.style.display = 'none'
   }
 
   render() {

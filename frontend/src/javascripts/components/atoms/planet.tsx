@@ -1,4 +1,8 @@
 import * as React from 'react'
+
+import CheckMark from './check-mark'
+import PlanetImg from './planet-img'
+
 import { PlanetImgs } from '../../constants/images'
 
 const Planet = ({
@@ -14,10 +18,8 @@ const Planet = ({
     onMouseOver={onMouseOver}
     onMouseOut={onMouseOut}
   >
-    <img className="planet" src={PlanetImgs[planetType]} />
-    <div className="mark-container">
-      <div className="check-mark" />
-    </div>
+    <PlanetImg src={PlanetImgs[planetType]} />
+    <CheckMark />
   </div>
 )
 

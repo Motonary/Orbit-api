@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  title          :string
-#  detail         :text
+#  description    :text
 #  deadline       :datetime
 #  planet_type    :integer
 #  planet_size    :integer

@@ -1,12 +1,15 @@
 import * as React from 'react'
 import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { connect } from 'react-redux'
-import classNames from 'classnames'
 
-import { setSelectedStar, resetSelectedStar } from '../../../actions/common'
+import Field from '../../atoms/field'
+
+import {
+  setSelectedStar,
+  resetSelectedStar,
+  resetModalStatus,
+} from '../../../actions/common'
 import { createAssignment } from '../../../actions/assignments'
-
-import '../../../../stylesheets/form_balloon.scss'
 
 interface Props {
   selectedStar: any,
@@ -14,7 +17,6 @@ interface Props {
   createAssignment: any,
   resetSelectedStar: any,
   handleSubmit: any,
-
 }
 
 class AssignmentForm extends React.Component<InjectedFormProps> {
@@ -64,30 +66,10 @@ class AssignmentForm extends React.Component<InjectedFormProps> {
 
   render() {
     return (
-      <div id="form-balloon">
-        <div className="form-balloon-title">New Assignment</div>
+      <div id="form-on-modal">
+        <div className="form-title">New Assignment</div>
         <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
           <div className="form-line-1">
-            <Field
-              name="orbit_pos"
-              component="select"
-              className="assignment-select-fieled-style"
-            >
-              <option value="" className="assignment-fieled-text">
-                Orbit
-              </option>
-              <option value="primo" className="assignment-fieled-text">
-                1
-              </option>
-              <option value="secundus" className="assignment-fieled-text">
-                2
-              </option>
-              <option value="tertius" className="assignment-fieled-text">
-                3
-              </option>
-            </Field>
-          </div>
-          <div className="form-line-2">
             <Field
               placeholder="title"
               name="title"
@@ -101,7 +83,7 @@ class AssignmentForm extends React.Component<InjectedFormProps> {
               component={this.renderField}
             />
           </div>
-          <div className="form-line-3">
+          <div className="form-line-2">
             <Field
               placeholder="description"
               name="description"
@@ -109,12 +91,8 @@ class AssignmentForm extends React.Component<InjectedFormProps> {
               component={this.renderField}
             />
           </div>
-          <div className="form-line-4">
-            <Field
-              name="planet_size"
-              component="select"
-              className="assignment-select-fieled-style"
-            >
+          <div className="form-line-3">
+            <select name="planet_size" className="select-fieled-style">
               <option value="" className=" assignment-fieled-text">
                 SIZE
               </option>
@@ -127,8 +105,8 @@ class AssignmentForm extends React.Component<InjectedFormProps> {
               <option value="small" className="assignment-fieled-text">
                 small
               </option>
-            </Field>
-            <button type="submit" className="submit-btn assignment-fieled-text">
+            </select>
+            <button type="submit" className="form-btn assignment-fieled-text">
               決定
             </button>
           </div>

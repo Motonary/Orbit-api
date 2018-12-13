@@ -11,7 +11,7 @@
     height: 100%;
     position: relative;
     overflow: scroll;
-    margin: 30px auto;
+    margin: 40px auto;
 
     &::-webkit-scrollbar {
       display: none;
@@ -32,7 +32,7 @@
         z-index: 100;
       }
     }
-    .circle-primo {
+    #circle-primo {
       width: $primo-orbit;
       height: $primo-orbit;
       position: absolute;
@@ -40,7 +40,7 @@
       left: $primo-orbit-position;
       z-index: 90;
     }
-    .circle-secundus {
+    #circle-secundus {
       width: $secundus-orbit;
       height: $secundus-orbit;
       position: absolute;
@@ -48,7 +48,7 @@
       left: $secundus-orbit-position;
       z-index: 80;
     }
-    .circle-tertius {
+    #circle-tertius {
       width: $tertius-orbit;
       height: $tertius-orbit;
       position: absolute;
@@ -61,6 +61,10 @@
       border: 1px #fff;
       border-style: solid;
       border-radius: 50%;
+    }
+    .circle-shadow {
+      /* box-shadow */
+      box-shadow: 0px 0px 10px 10px rgba(220,220,220,0.7), 0px 0px 10px -2px rgba(220,220,220,0.7) inset;
     }
 
     .common {

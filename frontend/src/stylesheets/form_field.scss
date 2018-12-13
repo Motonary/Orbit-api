@@ -1,41 +1,5 @@
 @import "initializer";
 
-@mixin placeholder($color) {
-  &::placeholder {
-    font-size: 13px;
-    font-family: orator-std, monospace;
-    font-weight: lighter;
-    letter-spacing: 4px;
-    color: $color;
-  }
-  // IE
-  &:-ms-input-placeholder {
-    font-size: 14px;
-    font-family: orator-std, monospace;
-    font-weight: lighter;
-    letter-spacing: 4px;
-    color: $color;
-  }
-
-  // Edge
-  &::-ms-input-placeholder {
-    font-size: 14px;
-    font-family: orator-std, monospace;
-    font-weight: lighter;
-    letter-spacing: 4px;
-    color: $color;
-  }
-
-  //mozila
-  ::-moz-placeholder {
-    font-size: 14px;
-    font-family: orator-std, monospace;
-    font-weight: lighter;
-    letter-spacing: 4px;
-    color: $color;
-  }
-}
-
 .signup-form {
   display: flex;
   justify-content: center;
@@ -51,29 +15,4 @@
   flex-wrap: wrap;
   width: 400px;
   margin: 10px auto;
-}
-
-.field-style {
-  display: block;
-  width: 320px;
-  margin: 10px auto;
-  color: #fff;
-
-  font-family: orator-std, monospace;
-  font-style: normal;
-  font-weight: 300;
-
-  input {
-    @include placeholder(#fff);
-    width: 300px;
-    text-align: center;
-    background-color: $bg-common-color;
-    border: 1px solid #fff;
-    border-radius: 20px;
-    padding: 5px;
-    color: #fff;
-  }
-}
-.text-style {
-  color: #fff;
 }

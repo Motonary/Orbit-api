@@ -2,7 +2,7 @@ class Api::ProjectsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    render json: current_user.projects
+    render json: current_user.projects.select_for_res
   end
 
   def create
