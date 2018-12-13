@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { connect } from 'react-redux'
-import classNames from 'classnames'
+
+import InputField from '../../atoms/input-field'
 
 import {
   setSelectedStar,
@@ -12,43 +13,14 @@ import { createProject } from '../../../actions/projects'
 
 import '../../../../stylesheets/form_on_modal.scss'
 
-interface Props {
+interface ProjectFormProps {
   selectedStar: any,
   createProject: any,
   resetSelectedStar: any,
   handleSubmit: any
 }
 
-class ProjectForm extends React.Component<InjectedFormProps> {
-  renderField({ placeholder, type, input, value, meta: { touched, error } }: any) {
-    const fieldClasses: any = classNames({
-      'form-group': true,
-      'has-danger': touched && error,
-      'assignment-fieled-style': true,
-      'assignment-fieled-text': true,
-      planet_type: placeholder === 'planet type',
-    })
-
-    const inInputClasses: any = classNames({
-      'text-style': true,
-      description: placeholder === 'description',
-      deadline: placeholder === 'deadline',
-    })
-
-    return (
-      <div className={fieldClasses}>
-        <input
-          className={inInputClasses}
-          placeholder={placeholder}
-          type={type}
-          value={value}
-          {...input}
-        />
-        <div className="text-help">{touched ? error : ''}</div>
-      </div>
-    )
-  }
-
+class ProjectForm extends React.Component<ProjectFormProps & InjectedFormProps> {
   onSubmit({ title }: any) {
     // const target: any = document.getElementById('form-balloon')
     // const target_star: any = document.getElementsByClassName('current-clicked')[0]
@@ -69,14 +41,14 @@ class ProjectForm extends React.Component<InjectedFormProps> {
   render() {
     return (
       <div id="form-on-modal">
-        <div className="form-balloon-title">New Project</div>
+        <div className="form-title">New Project</div>
         <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
           <div className="form-line-2">
             <Field
               placeholder="title"
               name="title"
               type="text"
-              component={this.renderField}
+              component={InputField}
             />
           </div>
           <div className="form-line-4">

@@ -4,11 +4,13 @@ import _ from 'lodash'
 import FixedStarInList from '../atoms/fixed-star-in-list'
 import { setCurrentProject } from '../../actions/projects'
 import { setModalStatus } from '../../actions/common'
+import { modalOpen } from '../../reducers/common';
 
 interface MypageOrbitProps {
   history: any,
   match: any,
 
+  modalOpen: any,
   revolvingProjects: any,
 
   setModalStatus: any,

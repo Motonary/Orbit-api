@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
+import { reducer as reduxFormReducer } from 'redux-form'
 import currentUser from './current-user'
 import { revolvingProjects, currentProject } from './projects'
 import {
@@ -11,7 +11,7 @@ import { selectedStar, isDestroyIgnited, modalOpen } from './common'
 
 const rootReducer = combineReducers({
   // Form
-  form: formReducer,
+  form: reduxFormReducer,
 
   //commmon
   selectedStar,

@@ -2,49 +2,39 @@ import * as React from 'react'
 import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { connect } from 'react-redux'
 
-import Field from '../../atoms/field'
+import InputField from '../../atoms/input-field'
+import SelectField from '../../atoms/select-field'
 
 import {
   setSelectedStar,
   resetSelectedStar,
-  resetModalStatus,
 } from '../../../actions/common'
 import { createAssignment } from '../../../actions/assignments'
 
-interface Props {
-  selectedStar: any,
-  currentProject: any,
-  createAssignment: any,
-  resetSelectedStar: any,
-  handleSubmit: any,
+declare type GenericFieldHTMLAttributes = React.InputHTMLAttributes<HTMLInputElement> & React.SelectHTMLAttributes<HTMLSelectElement> & React.TextareaHTMLAttributes<HTMLTextAreaElement>
+
+interface FormFields {
+  input: any,
+  name: any,
+  placeholder: any,
+  type: any,
+  component: any,
 }
 
-class AssignmentForm extends React.Component<InjectedFormProps> {
-  renderField({ placeholder, type, input, value, meta: { touched, error } }: any) {
-    const fieldClasses: any = classNames({
-      'form-group': true,
-      'has-danger': touched && error,
-      'assignment-fieled-style': true,
-      'assignment-fieled-text': true,
-      deadline: placeholder === 'deadline',
-      planet_type: placeholder === 'planet type',
-    })
+interface AssignmentFormProps extends InjectedFormProps {
+  selectedStar: any,
+  currentProject: any,
 
-    return (
-      <div className={fieldClasses}>
-        <input
-          className={`text-style ${
-            placeholder === 'description' ? 'description' : ''
-          } ${placeholder === 'deadline' ? 'deadline' : ''}`}
-          placeholder={placeholder}
-          type={type}
-          value={value}
-          {...input}
-        />
-        <div className="text-help">{touched ? error : ''}</div>
-      </div>
-    )
-  }
+  setSelectedStar: any,
+  resetSelectedStar: any,
+  createAssignment: any,
+
+  handleSubmit: any,
+
+  onSubmit: (data: FormFields) => void,
+}
+
+class AssignmentForm extends React.Component<AssignmentFormProps & GenericFieldHTMLAttributes > {
 
   onSubmit({ title, description, deadline, planet_size, orbit_pos }: any) {
     // const target: any = document.getElementById('form-balloon')
@@ -74,13 +64,13 @@ class AssignmentForm extends React.Component<InjectedFormProps> {
               placeholder="title"
               name="title"
               type="text"
-              component={this.renderField}
+              component={InputField}
             />
             <Field
               placeholder="deadline"
               name="deadline"
               type="date"
-              component={this.renderField}
+              component={InputField}
             />
           </div>
           <div className="form-line-2">
@@ -88,24 +78,15 @@ class AssignmentForm extends React.Component<InjectedFormProps> {
               placeholder="description"
               name="description"
               type="textarea"
-              component={this.renderField}
+              component={InputField}
             />
           </div>
           <div className="form-line-3">
-            <select name="planet_size" className="select-fieled-style">
-              <option value="" className=" assignment-fieled-text">
-                SIZE
-              </option>
-              <option value="large" className="assignment-fieled-text">
-                large
-              </option>
-              <option value="medium" className="assignment-fieled-text">
-                medium
-              </option>
-              <option value="small" className="assignment-fieled-text">
-                small
-              </option>
-            </select>
+            <Field
+              name="planet_size"
+              type="select"
+              component={SelectField}
+            />
             <button type="submit" className="form-btn assignment-fieled-text">
               決定
             </button>

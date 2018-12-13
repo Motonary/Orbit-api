@@ -1,11 +1,13 @@
 import * as React from 'react'
-import { reduxForm, InjectedFormProps } from 'redux-form'
+import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { connect } from 'react-redux'
-import { createSession, createUser } from '../../../actions/users'
-import Field from '../../atoms/field'
+
+import InputField from '../../atoms/input-field'
 import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
 
-interface Props extends InjectedFormProps<FormData, {}> {
+import { createSession, createUser } from '../../../actions/users'
+
+interface TopPageFormProps extends InjectedFormProps<FormData, {}> {
   isSignIn: boolean,
   isSignUp: boolean,
   history: any,
@@ -14,7 +16,7 @@ interface Props extends InjectedFormProps<FormData, {}> {
   handleSubmit: any,
 }
 
-class TopPageForm extends React.Component<Props> {
+class TopPageForm extends React.Component<TopPageFormProps> {
   onSubmitSignInData({ email, password }: any) {
     // this.props.createSession(email, password, (userId: any) => {
     //   this.props.history.push(`/users/${userId}`)
@@ -43,8 +45,8 @@ class TopPageForm extends React.Component<Props> {
               this.onSubmitSignInData.bind(this)
             )}
           >
-            <Field placeholder="EMAIL ADRESS" name="email" type="text" />
-            <Field placeholder="PASSWORD" name="password" type="password" />
+            <Field placeholder="EMAIL ADRESS" name="email" type="text" component={InputField} />
+            <Field placeholder="PASSWORD" name="password" type="password" component={InputField} />
             <FormSubmitBtn label="SIGN IN" />
           </form>
         ) : (
@@ -54,13 +56,14 @@ class TopPageForm extends React.Component<Props> {
             )}
             className="signup-form"
           >
-            <Field placeholder="NAME" name="username" type="text" />
-            <Field placeholder="EMAIL ADRESS" name="email" type="text" />
-            <Field placeholder="PASSWORD" name="password" type="password" />
+            <Field placeholder="NAME" name="username" type="text" component={InputField} />
+            <Field placeholder="EMAIL ADRESS" name="email" type="text" component={InputField} />
+            <Field placeholder="PASSWORD" name="password" type="password" component={InputField} />
             <Field
               placeholder="CONFIRM PASSWORD"
               name="confirmation"
               type="password"
+              component={InputField}
             />
             <FormSubmitBtn label="SIGN UP" />
           </form>
