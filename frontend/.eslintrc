@@ -6,7 +6,12 @@
     "plugin:react/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["react"],
+  "settings": {
+    "react": {
+      "version": "16.5.2"
+    }
+  },
+  "plugins": ["react", "jest"],
   "rules": {
     "semi": [2, "never"],
     "space-before-function-paren" : [2, "never"],
@@ -25,7 +30,8 @@
   "env": {
     "browser": true,
     "node": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "parserOptions": {
     "ecmaVersion": 6,
