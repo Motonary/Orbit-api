@@ -38,8 +38,4 @@
 
 # Ignore coverage files.
 /coverage
-<<<<<<< HEAD
 /frontend/coverage
-=======
-/frontend/coverage
->>>>>>> 1a360e9c9e172b80387825d183ef9f9cc3d02806
