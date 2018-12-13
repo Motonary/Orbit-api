@@ -7,15 +7,15 @@
   "license": "ISC",
   "scripts": {
     "release": "webpack --mode production --config webpack.config.js",
-    "watch": "npm run fix && webpack-dev-server --mode development --history-api-fallback",
-    "lint": "eslint src/javascripts src/__tests__",
-    "fix": "eslint --fix src/javascripts src/__tests__",
+    "watch": "webpack-dev-server --mode development --history-api-fallback",
+    "lint": "eslint src/javascripts",
+    "fix": "eslint --fix src/javascripts",
     "precommit": "lint-staged",
     "test": "jest"
   },
   "lint-staged": {
     "*.js": [
-      "npm run fix",
+      "yarn fix",
       "git add"
     ]
   },
