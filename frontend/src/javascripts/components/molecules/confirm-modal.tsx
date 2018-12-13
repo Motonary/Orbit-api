@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 
@@ -13,7 +13,18 @@ import {
 
 import '../../../stylesheets/modal.scss'
 
-const customStyles = {
+interface ConfirmModalProps {
+  isDestroyIgnited: any,
+  modalIsOpen: any,
+  resetModalStatus: any,
+}
+
+interface ConfirmModalState {
+  destroy: string,
+  restore: string
+}
+
+const customStyles: any = {
   overlay: {
     zIndex: '1000',
     backgroundColor: 'rgba(13, 25, 36, 0)',
@@ -38,8 +49,8 @@ const customStyles = {
 
 Modal.setAppElement('#app')
 
-class ConfirmModal extends Component {
-  constructor(props) {
+class ConfirmModal extends React.Component<ConfirmModalProps, ConfirmModalState> {
+  constructor(props: any) {
     super(props)
 
     this.state = {
@@ -76,7 +87,7 @@ class ConfirmModal extends Component {
 }
 
 export default connect(
-  ({ isDestroyIgnited, modalOpen }) => ({ isDestroyIgnited, modalOpen }),
+  ({ isDestroyIgnited, modalOpen }: any) => ({ isDestroyIgnited, modalOpen }),
   {
     igniteDestroyPlanets,
     resetDestroyPlanets,

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 
@@ -9,6 +9,14 @@ import { resetModalStatus, resetSelectedStar } from '../../actions/common'
 
 import '../../../stylesheets/modal.scss'
 import '../../../stylesheets/form_on_modal.scss'
+
+interface FormModalProps {
+  selectedStar: any,
+  modalIsOpen: any,
+
+  resetSelectedStar: any,
+  resetModalStatus: any,
+}
 
 const customStyles = {
   overlay: {
@@ -36,7 +44,7 @@ const customStyles = {
 
 Modal.setAppElement('#app')
 
-class FormModal extends Component {
+class FormModal extends React.Component<FormModalProps, {}> {
   componentDidMount() {
     document.addEventListener('click', e => {
       const isOverlayArea = e.target.classList.contains('ReactModal__Overlay')
@@ -48,8 +56,8 @@ class FormModal extends Component {
   }
 
   render() {
-    const { pathname } = this.props
-    const orbit = this.props.modalOpen ? this.props.modalOpen.split('-')[1] : ''
+    const { pathname }: any = this.props
+    const orbit: string = this.props.modalOpen ? this.props.modalOpen.split('-')[1] : ''
 
     return (
       <Modal
@@ -68,6 +76,6 @@ class FormModal extends Component {
 }
 
 export default connect(
-  ({ selectedStar, modalOpen }) => ({ selectedStar, modalOpen }),
+  ({ selectedStar, modalOpen }: any) => ({ selectedStar, modalOpen }),
   { resetModalStatus, resetSelectedStar }
 )(FormModal)

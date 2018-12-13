@@ -1,9 +1,20 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
+
 import Planet from '../atoms/planet'
+
 import { setSelectedStar, resetSelectedStar } from '../../actions/common'
 
-class PlanetList extends Component {
+interface PlanetListProps {
+  planetType: string,
+
+  selectedStar: any,
+
+  setSelectedStar: any,
+  resetSelectedStar: any,
+}
+
+class PlanetList extends React.Component<PlanetListProps, {}> {
   componentDidMount() {
     this.setDragnDrop()
   }
@@ -40,6 +51,6 @@ class PlanetList extends Component {
 }
 
 export default connect(
-  ({ selectedStar }) => ({ selectedStar }),
+  ({ selectedStar }: any) => ({ selectedStar }),
   { setSelectedStar, resetSelectedStar }
 )(PlanetList)

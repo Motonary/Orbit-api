@@ -1,6 +1,6 @@
-import React from 'react'
+import * as React from 'react'
 
-const CheckMark = () => (
+const CheckMark: React.SFC<{}> = () => (
   <div className="mark-container">
     <div className="check-mark" />
   </div>
