@@ -11,14 +11,9 @@ import {
 } from '../../../actions/common'
 import { createAssignment } from '../../../actions/assignments'
 
-declare type GenericFieldHTMLAttributes = React.InputHTMLAttributes<HTMLInputElement> & React.SelectHTMLAttributes<HTMLSelectElement> & React.TextareaHTMLAttributes<HTMLTextAreaElement>
-
 interface FormFields {
-  input: any,
-  name: any,
   placeholder: any,
   type: any,
-  component: any,
 }
 
 interface AssignmentFormProps extends InjectedFormProps {
@@ -30,11 +25,9 @@ interface AssignmentFormProps extends InjectedFormProps {
   createAssignment: any,
 
   handleSubmit: any,
-
-  onSubmit: (data: FormFields) => void,
 }
 
-class AssignmentForm extends React.Component<AssignmentFormProps & GenericFieldHTMLAttributes > {
+class AssignmentForm extends React.Component<AssignmentFormProps　& InjectedFormProps<{}, FormFields>> {
 
   onSubmit({ title, description, deadline, planet_size, orbit_pos }: any) {
     // const target: any = document.getElementById('form-balloon')
@@ -61,22 +54,22 @@ class AssignmentForm extends React.Component<AssignmentFormProps & GenericFieldH
         <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
           <div className="form-line-1">
             <Field
-              placeholder="title"
               name="title"
+              placeholder="title"
               type="text"
               component={InputField}
             />
             <Field
-              placeholder="deadline"
               name="deadline"
+              placeholder="deadline"
               type="date"
               component={InputField}
             />
           </div>
           <div className="form-line-2">
             <Field
-              placeholder="description"
               name="description"
+              placeholder="description"
               type="textarea"
               component={InputField}
             />
