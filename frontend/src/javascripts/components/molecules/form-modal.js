@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Modal from 'react-modal'
 
 import AssignmentForm from './forms/assignment-form'
+import Subassignment from './forms/subassignment-form'
 import ProjectForm from './forms/project-form'
 
 import { resetModalStatus, resetSelectedStar } from '../../actions/common'
@@ -47,9 +48,24 @@ class FormModal extends Component {
     })
   }
 
-  render() {
+  renderForm(orbit, assignmentId) {
     const { pathname } = this.props
-    const orbit = this.props.modalOpen ? this.props.modalOpen.split('-')[1] : ''
+
+    if (pathname.match(/project/)) {
+      return orbit === '' ? (
+        <Subassignment assignmentId={assignmentId} />
+      ) : (
+        <AssignmentForm orbit={orbit} />
+      )
+    } else {
+      return <ProjectForm />
+    }
+  }
+
+  render() {
+    const form = this.props.modalOpen ? this.props.modalOpen.split('-') : ''
+    const orbit = form[1]
+    const assignmentId = form[2] ? form[2] : ''
 
     return (
       <Modal
@@ -57,17 +73,13 @@ class FormModal extends Component {
         style={customStyles}
         contentLabel="Assignment From Modal"
       >
-        {pathname.match(/project/) ? (
-          <AssignmentForm orbit={orbit} />
-        ) : (
-          <ProjectForm />
-        )}
+        {this.renderForm(orbit, assignmentId)}
       </Modal>
     )
   }
 }
 
 export default connect(
-  ({ selectedStar, modalOpen }) => ({ selectedStar, modalOpen }),
+  ({ modalOpen }) => ({ modalOpen }),
   { resetModalStatus, resetSelectedStar }
 )(FormModal)

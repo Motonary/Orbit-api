@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
+import PopupBox from '../atoms/popup-box'
+import Planet from '../atoms/planet'
+
 import {
   selectAssignment,
   disselectAssignment,
@@ -11,9 +14,6 @@ import {
   resetSelectedStar,
   setModalStatus,
 } from '../../actions/common'
-
-import PopupBox from '../atoms/popup-box'
-import Planet from '../atoms/planet'
 
 class CircleOrbit extends Component {
   componentDidMount() {
@@ -68,7 +68,7 @@ class CircleOrbit extends Component {
             target.classList.remove('circle-shadow')
           }
           if (!this.props.modalOpen) {
-            this.props.setModalStatus(`form-${assignment.id}`)
+            this.props.setModalStatus(`form-satelite-${assignment.id}`)
           }
         },
         false
