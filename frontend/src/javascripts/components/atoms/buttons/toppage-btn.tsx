@@ -1,7 +1,12 @@
 import * as React from 'react'
 import { TopPageImgs } from '../../../constants/images'
 
-const TopPageBtn = ({ isSignIn, onClick }: any) => (
+interface TopPageBtnProps {
+  isSignIn: boolean
+  onClick: () => void
+}
+
+const TopPageBtn: React.SFC<TopPageBtnProps> = ({ isSignIn, onClick }) => (
   <a className="toppage-btn" onClick={onClick}>
     {isSignIn ? (
       <img className="toppage-btn-img" src={TopPageImgs['signUp']} />

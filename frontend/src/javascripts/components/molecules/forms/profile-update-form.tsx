@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-// import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 
 import InputField from '../../atoms/input-field'
-
 import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
+
 import { updateProfile } from '../../../actions/users'
 
 type ProfileUpdateFormProps = {
@@ -38,7 +37,7 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps> {
     )
   }
 }
-
+//  参考資料として
 // function validate(values: any) {
 //   const errors: any= {}
 
@@ -69,13 +68,7 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps> {
 //   return errors
 // }
 
-// export default reduxForm({
-//   validate,
-//   form: 'ProfileUpdateForm',
-// })(
 export default connect(
   null,
   { updateProfile }
 )(ProfileUpdateForm)
-// ProfileUpdateForm
-// )

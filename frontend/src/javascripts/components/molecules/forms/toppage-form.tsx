@@ -12,7 +12,6 @@ interface TopPageFormProps {
   history: any
   createSession: any
   createUser: any
-  // handleSubmit: any,
 }
 
 class TopPageForm extends React.Component<TopPageFormProps> {

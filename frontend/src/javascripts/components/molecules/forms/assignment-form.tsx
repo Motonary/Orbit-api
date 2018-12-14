@@ -6,6 +6,7 @@ import SelectField from '../../atoms/select-field'
 
 import { setSelectedStar, resetSelectedStar } from '../../../actions/common'
 import { createAssignment } from '../../../actions/assignments'
+import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
 
 interface AssignmentFormProps {
   orbit: string
@@ -16,15 +17,26 @@ interface AssignmentFormProps {
   setSelectedStar: any
   resetSelectedStar: any
   createAssignment: any
+}
 
-  // handleSubmit: any,
+interface CreateAssignmentProps {
+  title: string
+  description: string
+  deadline: string
+  planet_size: number
+  orbit_pos: number
 }
 
 class AssignmentForm extends React.Component<AssignmentFormProps> {
-  onSubmit({ title, description, deadline, planet_size, orbit_pos }: any) {
-    const target: any = document.getElementById('form-balloon')
-    const planet_type: any = this.props.selectedStar
-    const project_id: any = this.props.currentProject.id
+  onSubmit({
+    title,
+    description,
+    deadline,
+    planet_size,
+    orbit_pos,
+  }: CreateAssignmentProps) {
+    const planet_type: any = this.props.selectedStar // reducerでの型付けと対応
+    const project_id: number = this.props.currentProject.id
 
     this.props.createAssignment(
       title,
@@ -36,30 +48,27 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
       project_id
     )
     this.props.resetSelectedStar()
-    target.style.display = 'none'
   }
 
   render() {
     return (
       <div id="form-on-modal">
         <div className="form-title">New Assignment</div>
-        <form onSubmit={this.onSubmit.bind(this)}>
+        <form>
           <div className="form-line-1">
-            <InputField name="title" placeholder="title" type="text" />
-            <InputField name="deadline" placeholder="deadline" type="date" />
+            <InputField name="title" type="text" placeholder="title" />
+            <InputField name="deadline" type="date" placeholder="deadline" />
           </div>
           <div className="form-line-2">
             <InputField
               name="description"
-              placeholder="description"
               type="textarea"
+              placeholder="description"
             />
           </div>
           <div className="form-line-3">
             <SelectField />
-            <button type="submit" className="form-btn assignment-fieled-text">
-              決定
-            </button>
+            <FormSubmitBtn label="決定" />
           </div>
         </form>
       </div>
@@ -67,6 +76,7 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
   }
 }
 
+// 参考資料として
 // function validate(values: any) {
 //   const errors: any = {}
 //   //TODO: 現状validatが適当 → rails側と絡めて後々実装
@@ -96,12 +106,7 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
 //   return errors
 // }
 
-// export default reduxForm({
-//   validate,
-//   form: 'AssignmentForm',
-// })(
 export default connect(
   ({ selectedStar, currentProject }: any) => ({ selectedStar, currentProject }),
   { createAssignment, setSelectedStar, resetSelectedStar }
 )(AssignmentForm)
-// )
