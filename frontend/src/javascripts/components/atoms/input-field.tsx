@@ -1,18 +1,18 @@
 import * as React from 'react'
-import { WrappedFieldProps } from 'redux-form'
+//import { WrappedFieldProps, InputProps } from 'redux-form'
 import classNames from 'classnames'
 
 import '../../../stylesheets/field.scss'
 
-type InputFieldProps = {
+interface InputFieldProps {
   input: any,
   meta: any,
   name: string,
   type: string,
   placeholder: string,
-} & React.InputHTMLAttributes<HTMLInputElement> & WrappedFieldProps
+}
 
-const InputField: React.SFC<InputFieldProps> = ({input, name, type, placeholder, meta: { touched, error }} : InputFieldProps) => {
+const InputField: React.SFC<InputFieldProps> = ({input, name, type, placeholder, meta: { touched, error }}) => {
 
   const fieldClasses = classNames({
     'has-danger': touched && error,

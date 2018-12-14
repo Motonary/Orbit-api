@@ -11,12 +11,9 @@ import {
 } from '../../../actions/common'
 import { createAssignment } from '../../../actions/assignments'
 
-interface FormFields {
-  placeholder: any,
-  type: any,
-}
-
 interface AssignmentFormProps extends InjectedFormProps {
+  orbit: string, 
+
   selectedStar: any,
   currentProject: any,
 
@@ -27,7 +24,7 @@ interface AssignmentFormProps extends InjectedFormProps {
   handleSubmit: any,
 }
 
-class AssignmentForm extends React.Component<AssignmentFormProps　& InjectedFormProps<{}, FormFields>> {
+class AssignmentForm extends React.Component<AssignmentFormProps> {
 
   onSubmit({ title, description, deadline, planet_size, orbit_pos }: any) {
     // const target: any = document.getElementById('form-balloon')
