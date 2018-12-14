@@ -4,7 +4,7 @@ import CircleOrbit from '../molecules/circle-orbit'
 import ProjectBar from '../molecules/project-bar'
 
 interface Props {
-  currentProject: any,
+  currentProject: any
 }
 
 class ProjectPageMain extends React.Component<Props, {}> {

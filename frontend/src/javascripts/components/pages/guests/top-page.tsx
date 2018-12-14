@@ -5,13 +5,13 @@ import TopPagePlanet from '../../atoms/toppage-planet-img'
 import TopPageForm from '../../molecules/forms/toppage-form'
 
 interface Props {
-  currentUser: any,
-  pathname: any,
+  currentUser: any
+  pathname: any
   history: any
 }
 
 interface State {
-  isSignIn: boolean,
+  isSignIn: boolean
   isSignUp: boolean
 }
 

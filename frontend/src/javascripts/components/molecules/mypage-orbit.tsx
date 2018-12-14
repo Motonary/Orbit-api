@@ -6,14 +6,14 @@ import { setCurrentProject } from '../../actions/projects'
 import { setModalStatus } from '../../actions/common'
 
 interface MypageOrbitProps {
-  history: any,
-  match: any,
+  history: any
+  match: any
 
-  modalOpen: any,
-  revolvingProjects: any,
+  modalOpen: any
+  revolvingProjects: any
 
-  setModalStatus: any,
-  setCurrentProject: any,
+  setModalStatus: any
+  setCurrentProject: any
 }
 
 class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
@@ -22,10 +22,10 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
   }
 
   setDrop() {
-    //Droppable area
+    // Droppable area
     const target = document.getElementById('mypage-orbit-circle')
 
-    //Entering into the droppable area
+    // Entering into the droppable area
     target.addEventListener(
       'dragenter',
       () => {
@@ -36,7 +36,7 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
       false
     )
 
-    //Leaving from the droppable area
+    // Leaving from the droppable area
     target.addEventListener(
       'dragleave',
       () => {
@@ -47,7 +47,7 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
       false
     )
 
-    //Over the droppable area
+    // Over the droppable area
     target.addEventListener(
       'dragover',
       (e: any) => {
@@ -56,7 +56,7 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
       false
     )
 
-    //Drop
+    // Drop
     target.addEventListener(
       'drop',
       (e: any) => {
@@ -87,23 +87,26 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
     if (!revolvingProjects) return <ul id="mypage-orbit-circle" />
 
     const pos: any = ['top', 'right', 'left', 'bottom']
-    const projectList: any = _.map(revolvingProjects, (project: any, index: any) => {
-      return (
-        <div
-          key={project.id}
-          className={`common ${
-            pos[index % 4]
-          } mypage-orbit-motion start-animation`}
-        >
-          <FixedStarInList
+    const projectList: any = _.map(
+      revolvingProjects,
+      (project: any, index: any) => {
+        return (
+          <div
             key={project.id}
-            project={project}
-            className="planet-large-secundus"
-            onClick={this.onClickFixedStar.bind(this, project.id)}
-          />
-        </div>
-      )
-    })
+            className={`common ${
+              pos[index % 4]
+            } mypage-orbit-motion start-animation`}
+          >
+            <FixedStarInList
+              key={project.id}
+              project={project}
+              className="planet-large-secundus"
+              onClick={this.onClickFixedStar.bind(this, project.id)}
+            />
+          </div>
+        )
+      }
+    )
 
     return <ul id="mypage-orbit-circle">{projectList}</ul>
   }

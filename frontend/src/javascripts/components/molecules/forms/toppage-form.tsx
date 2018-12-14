@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { connect } from 'react-redux'
 
 import InputField from '../../atoms/input-field'
@@ -8,11 +7,11 @@ import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
 import { createSession, createUser } from '../../../actions/users'
 
 interface TopPageFormProps {
-  isSignIn: boolean,
-  isSignUp: boolean,
-  history: any,
-  createSession: any,
-  createUser: any,
+  isSignIn: boolean
+  isSignUp: boolean
+  history: any
+  createSession: any
+  createUser: any
   // handleSubmit: any,
 }
 
@@ -41,11 +40,13 @@ class TopPageForm extends React.Component<TopPageFormProps> {
     return (
       <div className="sign-form">
         {isSignIn && !isSignUp ? (
-          <form
-            onSubmit={this.onSubmitSignInData.bind(this)}
-          >
-            <InputField placeholder="EMAIL ADRESS" name="email" type="text"  />
-            <InputField placeholder="PASSWORD" name="password" type="password"  />
+          <form onSubmit={this.onSubmitSignInData.bind(this)}>
+            <InputField placeholder="EMAIL ADRESS" name="email" type="text" />
+            <InputField
+              placeholder="PASSWORD"
+              name="password"
+              type="password"
+            />
             <FormSubmitBtn label="SIGN IN" />
           </form>
         ) : (
@@ -53,9 +54,13 @@ class TopPageForm extends React.Component<TopPageFormProps> {
             onSubmit={this.onSubmitSignUpData.bind(this)}
             className="signup-form"
           >
-            <InputField placeholder="NAME" name="username" type="text"  />
-            <InputField placeholder="EMAIL ADRESS" name="email" type="text"  />
-            <InputField placeholder="PASSWORD" name="password" type="password"  />
+            <InputField placeholder="NAME" name="username" type="text" />
+            <InputField placeholder="EMAIL ADRESS" name="email" type="text" />
+            <InputField
+              placeholder="PASSWORD"
+              name="password"
+              type="password"
+            />
             <InputField
               placeholder="CONFIRM PASSWORD"
               name="confirmation"
@@ -104,8 +109,8 @@ class TopPageForm extends React.Component<TopPageFormProps> {
 //   validate,
 //   form: 'TopPageForm',
 // })(
-  export default connect(
-    null,
-    { createSession, createUser }
-  )(TopPageForm)
+export default connect(
+  null,
+  { createSession, createUser }
+)(TopPageForm)
 // )

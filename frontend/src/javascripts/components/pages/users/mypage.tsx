@@ -6,10 +6,10 @@ import MyPageMain from '../../organisms/mypage-main'
 import Footer from '../../organisms/footer'
 
 interface Props {
-  currentUser: any,
-  location: any,
-  history: any,
-  match: any,
+  currentUser: any
+  location: any
+  history: any
+  match: any
   fetchRevolvingProjects: any
 }
 

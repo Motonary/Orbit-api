@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import { reducer as reduxFormReducer } from 'redux-form'
 import currentUser from './current-user'
 import { revolvingProjects, currentProject } from './projects'
 import {
@@ -10,10 +9,7 @@ import {
 import { selectedStar, isDestroyIgnited, modalOpen } from './common'
 
 const rootReducer = combineReducers({
-  // Form
-  form: reduxFormReducer,
-
-  //commmon
+  // commmon
   selectedStar,
   isDestroyIgnited,
 
@@ -23,7 +19,7 @@ const rootReducer = combineReducers({
   // Projects
   revolvingProjects,
   currentProject,
-  //selectedProjects,
+  // selectedProjects,
 
   // Assignments
   revolvingAssignments,

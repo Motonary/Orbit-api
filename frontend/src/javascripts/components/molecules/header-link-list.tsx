@@ -4,8 +4,8 @@ import HeaderRightLink from '../atoms/buttons/header-right-link'
 import HeaderBackLink from '../atoms/buttons/header-back-link'
 
 interface Props {
-  currentUser: any,
-  pathname: any,
+  currentUser: any
+  pathname: any
   history: any
 }
 

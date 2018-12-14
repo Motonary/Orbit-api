@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { fetchCurrentUser } from '../../actions/users'
 
 interface Props {
-  currentUser: any,
+  currentUser: any
   fetchCurrentUser: any
 }
 

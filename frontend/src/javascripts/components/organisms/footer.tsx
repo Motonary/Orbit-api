@@ -20,23 +20,22 @@ import {
 import { DeleteActions } from '../../constants/images'
 
 import '../../../stylesheets/destroy_animate.scss'
-import currentUser from '../../reducers/current-user';
 
 interface FooterProps {
-  currentUser: any,
-  pathname: any,
+  currentUser: any
+  pathname: any
 
-  isDestroyIgnited: any,
-  modalOpen: any,
-  selectedAssignments: any,
+  isDestroyIgnited: any
+  modalOpen: any
+  selectedAssignments: any
 
-  resetDestroyPlanets: any,
-  nullifySelectedAssignment: any,
-  destroyAssignment: any,
+  resetDestroyPlanets: any
+  nullifySelectedAssignment: any
+  destroyAssignment: any
 }
 
 interface FooterState {
-  clickedStar: any,
+  clickedStar: any
 }
 
 class Footer extends React.Component<FooterProps, FooterState> {
@@ -58,7 +57,7 @@ class Footer extends React.Component<FooterProps, FooterState> {
     // 今後、発火のイベントとかも含めて再構築するので以下のネストのままで、一旦ペンディング
     if (this.props.isDestroyIgnited && !this.props.modalOpen) {
       if (this.props.selectedAssignments) {
-        //console.log("didupdate")
+        // console.log("didupdate")
         switch (this.props.isDestroyIgnited) {
           case 'Meteorite':
             this.onIgniteDestroyAnimation()
@@ -98,7 +97,9 @@ class Footer extends React.Component<FooterProps, FooterState> {
     function withFadeOut(): any {
       displayDoms.forEach((displayDom: any) => {
         let removeTarget: any = displayDom.children[1]
-        let blackholeDom: any = document.getElementById(displayDom.children[2].id)
+        let blackholeDom: any = document.getElementById(
+          displayDom.children[2].id
+        )
 
         removeTarget.classList.add('blackhole-action')
         Promise.resolve()
@@ -116,7 +117,9 @@ class Footer extends React.Component<FooterProps, FooterState> {
         let removeTarget: any = displayDom
         displayDom.parentNode.removeChild(removeTarget)
 
-        let blackholeDom: any = document.getElementById(displayDom.children[2].id)
+        let blackholeDom: any = document.getElementById(
+          displayDom.children[2].id
+        )
         targetDom.removeChild(blackholeDom)
       })
     }
@@ -185,7 +188,7 @@ class Footer extends React.Component<FooterProps, FooterState> {
     movDom.classList.add('move-animation')
     movDom.style.transform = `translateX(${disX}px) translateY(${disY}px)`
 
-    //TODO: async/awaitで再実装
+    // TODO: async/awaitで再実装
     Promise.resolve()
       .then(this.waitFunc(2.5))
       .then(() => {
@@ -194,7 +197,7 @@ class Footer extends React.Component<FooterProps, FooterState> {
   }
 
   removePlanet(parent: any) {
-    //FIXME: 一旦canvas以外のImgとballoonを削除・DOM上にはPlanetを表示する親要素は残る。
+    // FIXME: 一旦canvas以外のImgとballoonを削除・DOM上にはPlanetを表示する親要素は残る。
     parent.map((doc: any) => {
       let parent = doc
       let child = doc.firstChild
@@ -213,9 +216,9 @@ class Footer extends React.Component<FooterProps, FooterState> {
   onClickDestroyPlanets(selectedAssignments: any) {
     const target_ids: any = selectedAssignments
 
-    var parent: any = []
-    var canvasEl: any = []
-    var ctx: any = []
+    let parent: any = []
+    let canvasEl: any = []
+    let ctx: any = []
 
     if (target_ids.length > 0) {
       target_ids.map((id: any) => {
@@ -227,13 +230,13 @@ class Footer extends React.Component<FooterProps, FooterState> {
     }
 
     const numberOfParticules: any = 80
-    //const colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C']
+    // const colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C']
     const colors: any = ['#FFF', '#FFF', '#FFF', '#FFF']
 
-    var pointerX: any = 0
-    var pointerY: any = 0
+    let pointerX: any = 0
+    let pointerY: any = 0
 
-    //console.log(parent, canvasEl, ctx)
+    // console.log(parent, canvasEl, ctx)
 
     function setCanvasSize() {
       let i: any = 0
@@ -270,9 +273,9 @@ class Footer extends React.Component<FooterProps, FooterState> {
     }
 
     function setParticuleDirection(p: any) {
-      var angle: any = (anime.random(0, 360) * Math.PI) / 180
-      var value: any = anime.random(50, 180)
-      var radius: any = [-1, 1][anime.random(0, 1)] * value
+      let angle: any = (anime.random(0, 360) * Math.PI) / 180
+      let value: any = anime.random(50, 180)
+      let radius: any = [-1, 1][anime.random(0, 1)] * value
       return {
         x: p.x + radius * Math.cos(angle),
         y: p.y + radius * Math.sin(angle),
@@ -304,7 +307,7 @@ class Footer extends React.Component<FooterProps, FooterState> {
     }
 
     function animateParticules(x: any, y: any) {
-      var particules: any = []
+      let particules: any = []
       for (let i = 0; i < numberOfParticules; i++) {
         particules.push(createParticule(x, y))
       }
@@ -323,7 +326,7 @@ class Footer extends React.Component<FooterProps, FooterState> {
       })
     }
 
-    var render: any = anime({
+    let render: any = anime({
       targets: 'hoge', // tsでエラーが起きてしまう暫定的に追加
       duration: Infinity,
       update: function() {

@@ -9,11 +9,11 @@ import { changeCurrentProject } from '../../actions/projects'
 import '../../../stylesheets/project_bar.scss'
 
 interface Props {
-  currentProject: any,
-  
-  changeCurrentProject: any,
-  revolvingProjects: any,
-  fetchRevolvingAssignments: any,
+  currentProject: any
+
+  changeCurrentProject: any
+  revolvingProjects: any
+  fetchRevolvingAssignments: any
 }
 
 class ProjectBar extends React.Component<Props, {}> {
@@ -27,7 +27,7 @@ class ProjectBar extends React.Component<Props, {}> {
   }
 
   render() {
-    const ProjectList:any = _.map(this.props.revolvingProjects, project => {
+    const ProjectList: any = _.map(this.props.revolvingProjects, project => {
       if (project.id !== this.props.currentProject.id) {
         return (
           <FixedStarInList

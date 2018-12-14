@@ -7,7 +7,7 @@ import HistoryPage from '../pages/users/history-page'
 import SettingPage from '../pages/users/setting-page'
 
 interface Props {
-  currentUser: any,
+  currentUser: any
   match: any
 }
 

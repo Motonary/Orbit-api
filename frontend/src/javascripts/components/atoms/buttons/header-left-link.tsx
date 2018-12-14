@@ -4,8 +4,8 @@ import UserImg from '../user-img'
 import UserName from '../user-name'
 
 interface Props {
-  pathname: any,
-  currentUser: any,
+  pathname: any
+  currentUser: any
   history: any
 }
 
