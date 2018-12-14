@@ -8,7 +8,7 @@ import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
 import { updateProfile } from '../../../actions/users'
 
 type ProfileUpdateFormProps = {
-  updateProfile: any,
+  updateProfile: any
   history: any
 }
 
@@ -24,10 +24,7 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps> {
 
   render() {
     return (
-      <form
-        onSubmit={this.onSubmit.bind(this)}
-        className="update-form"
-      >
+      <form onSubmit={this.onSubmit.bind(this)} className="update-form">
         <InputField placeholder="NAME" name="username" type="text" />
         <InputField placeholder="EMAIL ADRESS" name="email" type="text" />
         <InputField placeholder="PASSWORD" name="password" type="password" />
@@ -77,8 +74,8 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps> {
 //   form: 'ProfileUpdateForm',
 // })(
 export default connect(
-    null,
-    { updateProfile }
-  )(ProfileUpdateForm)
-  // ProfileUpdateForm
+  null,
+  { updateProfile }
+)(ProfileUpdateForm)
+// ProfileUpdateForm
 // )
