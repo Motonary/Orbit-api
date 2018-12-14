@@ -9,7 +9,7 @@ import {
 import { selectedStar, isDestroyIgnited, modalOpen } from './common'
 
 const rootReducer = combineReducers({
-  //commmon
+  // commmon
   selectedStar,
   isDestroyIgnited,
 
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   // Projects
   revolvingProjects,
   currentProject,
-  //selectedProjects,
+  // selectedProjects,
 
   // Assignments
   revolvingAssignments,

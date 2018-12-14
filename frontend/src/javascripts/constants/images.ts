@@ -2,14 +2,14 @@
 // import
 // -----------------------------------------------------------------------------
 
-//HeaderIcons
+// HeaderIcons
 import ImgHistoryIcon from '../../images/header/history_icon.png'
 import ImgSettingIcon from '../../images/header/setting_icon.png'
 import ImgBackIcon from '../../images/header/back_icon.png'
 import SignInButton from '../../images/header/sign_in_button.png'
 import SignUpButton from '../../images/header/sign_up_button.png'
 
-//planet images
+// planet images
 import ImgStar1 from '../../images/planets/star_1.png'
 import ImgStar2 from '../../images/planets/star_2.png'
 import ImgStar3 from '../../images/planets/star_3.png'
@@ -26,15 +26,15 @@ import ImgStar13 from '../../images/planets/star_13.png'
 import ImgStar14 from '../../images/planets/star_14.png'
 import ImgStar15 from '../../images/planets/star_15.png'
 
-//delete icons
+// delete icons
 import DeleteIcon1 from '../../images/footer/delete_btn_1.png'
 import DeleteIcon2 from '../../images/footer/delete_btn_2.png'
 import DeleteIcon3 from '../../images/footer/delete_btn_3.png'
 
-//revival icons
+// revival icons
 import RevivalIcon from '../../images/footer/revival_btn.png'
 
-//delete action
+// delete action
 import MeteoriteImg from '../../images/main/metor.png'
 import MissileImg from '../../images/main/missile.png'
 import BlackHoleImg from '../../images/main/blackhole.png'

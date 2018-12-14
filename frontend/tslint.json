@@ -7,6 +7,7 @@
     "tslint-config-prettier"
   ],
   "rules": {
+    "variable-name": false,
     "prettier": [
       true,
       {
