@@ -2,7 +2,7 @@ import * as React from 'react'
 import TopPageBtn from '../../atoms/buttons/toppage-btn'
 import TopPageLogo from '../../atoms/toppage-logo'
 import TopPagePlanet from '../../atoms/toppage-planet-img'
-import TopPageForm from '../../molecules/forms/toppage-form'
+import ToppageFormContainer from '../../molecules/toppage-form-container'
 
 interface Props {
   currentUser: any,
@@ -12,7 +12,6 @@ interface Props {
 
 interface State {
   isSignIn: boolean,
-  isSignUp: boolean
 }
 
 export default class TopPage extends React.Component<Props, State> {
@@ -20,29 +19,22 @@ export default class TopPage extends React.Component<Props, State> {
     super(props)
     this.state = {
       isSignIn: true,
-      isSignUp: false,
     }
   }
 
   onClickTopPageButton() {
-    const { isSignIn, isSignUp } = this.state
-    if (isSignIn && !isSignUp) {
-      this.setState({
-        isSignIn: false,
-        isSignUp: true,
-      })
-    } else if (!isSignIn && isSignUp) {
-      this.setState({
-        isSignIn: true,
-        isSignUp: false,
-      })
+    const { isSignIn } = this.state
+    if (isSignIn) {
+      this.setState({isSignIn: false})
+    } else if (!isSignIn) {
+      this.setState({isSignIn: true})
     } else {
       throw new Error('Sorry, something went wrong...') // 暫定の例外処理
     }
   }
 
   render() {
-    const { isSignIn, isSignUp } = this.state
+    const { isSignIn} = this.state
     const { history } = this.props
 
     return (
@@ -52,9 +44,8 @@ export default class TopPage extends React.Component<Props, State> {
           onClick={this.onClickTopPageButton.bind(this)}
         />
         <TopPageLogo />
-        <TopPageForm
+        <ToppageFormContainer
           isSignIn={isSignIn}
-          isSignUp={isSignUp}
           history={history}
         />
         <TopPagePlanet />
