@@ -20,7 +20,6 @@ import {
 import { DeleteActions } from '../../constants/images'
 
 import '../../../stylesheets/destroy_animate.scss'
-import currentUser from '../../reducers/current-user';
 
 interface FooterProps {
   currentUser: any,

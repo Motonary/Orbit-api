@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { connect } from 'react-redux'
 
 import InputField from '../../atoms/input-field'
@@ -18,7 +17,6 @@ interface ProjectFormProps {
   createProject: any,
   resetSelectedStar: any,
   resetModalStatus: any,
-  // handleSubmit: any
 }
 
 class ProjectForm extends React.Component<ProjectFormProps> {
@@ -31,8 +29,6 @@ class ProjectForm extends React.Component<ProjectFormProps> {
     this.props.resetSelectedStar()
     target_star.classList.remove('current-clicked')
     target.style.display = 'none'
-
-    // const fixed_star_type: any = this.props.selectedStar
 
     this.props.createProject(title, fixed_star_type)
     this.props.resetSelectedStar()
@@ -62,24 +58,7 @@ class ProjectForm extends React.Component<ProjectFormProps> {
   }
 }
 
-// function validate(values: any) {
-//   const errors: any = {}
-//   //TODO: 現状validatが適当 → rails側と絡めて後々実装
-//   if (!values.title) {
-//     errors.title = 'Title required'
-//   } else if (values.title.length > 50) {
-//     errors.title = 'Too long title'
-//   }
-
-//   return errors
-// }
-
-// export default reduxForm({
-//   validate,
-//   form: 'ProjectForm',
-// })(
-  export default connect(
-    ({ selectedStar }: any) => ({ selectedStar }),
-    { createProject, setSelectedStar, resetSelectedStar, resetModalStatus }
-  )(ProjectForm)
-// )
+export default connect(
+  ({ selectedStar }: any) => ({ selectedStar }),
+  { createProject, setSelectedStar, resetSelectedStar, resetModalStatus }
+)(ProjectForm)

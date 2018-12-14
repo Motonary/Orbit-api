@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { connect } from 'react-redux'
 
 import InputField from '../../atoms/input-field'
@@ -20,8 +19,6 @@ interface AssignmentFormProps {
   setSelectedStar: any,
   resetSelectedStar: any,
   createAssignment: any,
-
-  // handleSubmit: any,
 }
 
 class AssignmentForm extends React.Component<AssignmentFormProps> {
@@ -80,6 +77,7 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
   }
 }
 
+// 参考資料として
 // function validate(values: any) {
 //   const errors: any = {}
 //   //TODO: 現状validatが適当 → rails側と絡めて後々実装
@@ -109,12 +107,7 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
 //   return errors
 // }
 
-// export default reduxForm({
-//   validate,
-//   form: 'AssignmentForm',
-// })(
 export default connect(
     ({ selectedStar, currentProject }: any) => ({ selectedStar, currentProject }),
     { createAssignment, setSelectedStar, resetSelectedStar }
   )(AssignmentForm)
-// )

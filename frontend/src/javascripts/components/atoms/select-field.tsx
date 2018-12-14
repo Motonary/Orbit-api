@@ -6,9 +6,6 @@ const InputField: React.SFC = () => {
   return (
     <div className="select-fieled-style">
       <select
-        // { ...input }
-        // type={type}
-        // placeholder={placeholder}
       >
         <option value="">SIZE</option>
         <option value="large">large</option>

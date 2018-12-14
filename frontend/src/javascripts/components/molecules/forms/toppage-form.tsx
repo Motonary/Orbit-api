@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { connect } from 'react-redux'
 
 import InputField from '../../atoms/input-field'
@@ -13,7 +12,6 @@ interface TopPageFormProps {
   history: any,
   createSession: any,
   createUser: any,
-  // handleSubmit: any,
 }
 
 class TopPageForm extends React.Component<TopPageFormProps> {
@@ -69,43 +67,7 @@ class TopPageForm extends React.Component<TopPageFormProps> {
   }
 }
 
-// function validate(values: any) {
-//   const errors: any = {}
-
-//   if (!values.email) {
-//     errors.email = 'Email required'
-//   } else if (values.email.length > 255) {
-//     errors.email = 'Too long email address'
-//   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-//     errors.email = 'Invalid email address'
-//   }
-
-//   if (!values.password) {
-//     errors.password = 'Password required'
-//   } else if (values.password.length < 6) {
-//     errors.password = 'Password must contain at least 6 characters'
-//   }
-
-//   if (!values.username) {
-//     errors.username = 'Username required'
-//   } else if (values.username.length > 50) {
-//     errors.username = 'Too long username'
-//   }
-
-//   if (!values.confirmation) {
-//     errors.confirmation = 'Password confirmation required'
-//   } else if (values.password !== values.confirmation) {
-//     errors.confirmation = 'Not match password'
-//   }
-//   return errors
-// }
-
-// export default reduxForm({
-//   validate,
-//   form: 'TopPageForm',
-// })(
-  export default connect(
-    null,
-    { createSession, createUser }
-  )(TopPageForm)
-// )
+export default connect(
+  null,
+  { createSession, createUser }
+)(TopPageForm)
