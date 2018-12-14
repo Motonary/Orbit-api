@@ -32,3 +32,10 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore snapchat
+/frontend/src/__tests__/**/__snapshots__
+
+# Ignore coverage files.
+/coverage
+/frontend/coverage
