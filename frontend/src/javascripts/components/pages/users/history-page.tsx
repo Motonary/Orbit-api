@@ -5,8 +5,8 @@ import HistoryPageMain from '../../organisms/history-page-main'
 import Footer from '../../organisms/footer'
 
 interface Props {
-  currentUser: any,
-  location: any,
+  currentUser: any
+  location: any
   history: any
 }
 

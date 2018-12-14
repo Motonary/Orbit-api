@@ -5,8 +5,8 @@ import SettingPageMain from '../../organisms/setting-page-main'
 import Footer from '../../organisms/footer'
 
 interface Props {
-  currentUser: any,
-  location: any,
+  currentUser: any
+  location: any
   history: any
 }
 

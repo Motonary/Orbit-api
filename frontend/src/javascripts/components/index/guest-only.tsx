@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import TopPage from '../pages/guests/top-page'
 
 interface Props {
-  currentUser: any,
+  currentUser: any
 }
 
 class GuestOnly extends React.Component<Props, {}> {

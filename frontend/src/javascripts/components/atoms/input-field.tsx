@@ -1,17 +1,20 @@
 import * as React from 'react'
-//import { WrappedFieldProps, InputProps } from 'redux-form'
+// import { WrappedFieldProps, InputProps } from 'redux-form'
 import classNames from 'classnames'
 
 import '../../../stylesheets/field.scss'
 
 interface InputFieldProps {
-  name: string,
-  type: string,
-  placeholder: string,
+  name: string
+  type: string
+  placeholder: string
 }
 
-const InputField: React.SFC<InputFieldProps> = ({name, type, placeholder}) => {
-
+const InputField: React.SFC<InputFieldProps> = ({
+  name,
+  type,
+  placeholder,
+}) => {
   const fieldClasses = classNames({
     // 'has-danger': touched && error,
     'field-style': true,
@@ -34,7 +37,7 @@ const InputField: React.SFC<InputFieldProps> = ({name, type, placeholder}) => {
         type={type}
         placeholder={placeholder}
       />
-        {/* <div className="input-error">{touched ? error : ''}</div> */}
+      {/* <div className="input-error">{touched ? error : ''}</div> */}
     </div>
   )
 }

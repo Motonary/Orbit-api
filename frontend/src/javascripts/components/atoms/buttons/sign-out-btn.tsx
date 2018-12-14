@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { expireCurrentUser } from '../../../actions/users'
 
 interface Props {
-  history: any,
+  history: any
   expireCurrentUser: any
 }
 

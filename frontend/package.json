@@ -8,8 +8,8 @@
   "scripts": {
     "release": "webpack --mode production --config webpack.config.js",
     "watch": "webpack-dev-server --mode development --history-api-fallback",
-    "lint": "yarn tslint ./src/**/*.ts",
-    "fix": "yarn tslint --fix ./src/**/*.ts",
+    "lint": "yarn tslint ./src/**/*.ts*",
+    "fix": "yarn tslint --fix ./src/javascripts/**/*.{ts,tsx}",
     "precommit": "lint-staged",
     "test": "jest"
   },

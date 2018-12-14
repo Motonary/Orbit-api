@@ -7,9 +7,9 @@ import {
 import { PlanetImgs } from '../../constants/images'
 
 interface Props {
-  destroyedAssignments: any,
-  fetchDestroyedAssignments: any,
-  restoreAssignment: any,
+  destroyedAssignments: any
+  fetchDestroyedAssignments: any
+  restoreAssignment: any
 }
 
 class HistoryPageMain extends React.Component<Props, {}> {
