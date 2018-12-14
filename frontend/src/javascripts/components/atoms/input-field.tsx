@@ -5,17 +5,15 @@ import classNames from 'classnames'
 import '../../../stylesheets/field.scss'
 
 interface InputFieldProps {
-  input: any,
-  meta: any,
   name: string,
   type: string,
   placeholder: string,
 }
 
-const InputField: React.SFC<InputFieldProps> = ({input, name, type, placeholder, meta: { touched, error }}) => {
+const InputField: React.SFC<InputFieldProps> = ({name, type, placeholder}) => {
 
   const fieldClasses = classNames({
-    'has-danger': touched && error,
+    // 'has-danger': touched && error,
     'field-style': true,
     title: name === 'title',
     description: name === 'description',
@@ -31,12 +29,12 @@ const InputField: React.SFC<InputFieldProps> = ({input, name, type, placeholder,
   return (
     <div className={fieldClasses}>
       <input
-        { ...input }
+        // { ...input }
         className={inputClasses}
         type={type}
         placeholder={placeholder}
       />
-        <div className="input-error">{touched ? error : ''}</div>
+        {/* <div className="input-error">{touched ? error : ''}</div> */}
     </div>
   )
 }

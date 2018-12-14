@@ -7,7 +7,7 @@ import SignOutBtn from '../atoms/buttons/sign-out-btn'
 const SettingPageMain = ({ currentUser, history }: any) => (
   <div id="setting-page">
     <UserImgUpdater currentUser={currentUser} />
-    <ProfileUpdateForm />
+    <ProfileUpdateForm history={history} />
     <SignOutBtn history={history} />
   </div>
 )

@@ -11,8 +11,8 @@ import {
 } from '../../../actions/common'
 import { createAssignment } from '../../../actions/assignments'
 
-interface AssignmentFormProps extends InjectedFormProps {
-  orbit: string, 
+interface AssignmentFormProps {
+  orbit: string,
 
   selectedStar: any,
   currentProject: any,
@@ -21,62 +21,55 @@ interface AssignmentFormProps extends InjectedFormProps {
   resetSelectedStar: any,
   createAssignment: any,
 
-  handleSubmit: any,
+  // handleSubmit: any,
 }
 
 class AssignmentForm extends React.Component<AssignmentFormProps> {
 
   onSubmit({ title, description, deadline, planet_size, orbit_pos }: any) {
-    // const target: any = document.getElementById('form-balloon')
-    // const planet_type: any = this.props.selectedStar
-    // const project_id: any = this.props.currentProject.id
+    const target: any = document.getElementById('form-balloon')
+    const planet_type: any = this.props.selectedStar
+    const project_id: any = this.props.currentProject.id
 
-    // this.props.createAssignment(
-    //   title,
-    //   description,
-    //   deadline,
-    //   planet_type,
-    //   planet_size,
-    //   orbit_pos,
-    //   project_id
-    // )
-    // this.props.resetSelectedStar()
-    // target.style.display = 'none'
+    this.props.createAssignment(
+      title,
+      description,
+      deadline,
+      planet_type,
+      planet_size,
+      orbit_pos,
+      project_id
+    )
+    this.props.resetSelectedStar()
+    target.style.display = 'none'
   }
 
   render() {
     return (
       <div id="form-on-modal">
         <div className="form-title">New Assignment</div>
-        <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
+        <form onSubmit={this.onSubmit.bind(this)}>
           <div className="form-line-1">
-            <Field
+            <InputField
               name="title"
               placeholder="title"
               type="text"
-              component={InputField}
             />
-            <Field
+            <InputField
               name="deadline"
               placeholder="deadline"
               type="date"
-              component={InputField}
             />
           </div>
           <div className="form-line-2">
-            <Field
+            <InputField
               name="description"
               placeholder="description"
               type="textarea"
-              component={InputField}
             />
           </div>
           <div className="form-line-3">
-            <Field
-              name="planet_size"
-              type="select"
-              component={SelectField}
-            />
+            <SelectField />
             <button type="submit" className="form-btn assignment-fieled-text">
               決定
             </button>
@@ -87,41 +80,41 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
   }
 }
 
-function validate(values: any) {
-  const errors: any = {}
-  //TODO: 現状validatが適当 → rails側と絡めて後々実装
-  if (!values.orbit_pos) {
-    errors.orbit_pos = 'Orbit Position required'
-  }
+// function validate(values: any) {
+//   const errors: any = {}
+//   //TODO: 現状validatが適当 → rails側と絡めて後々実装
+//   if (!values.orbit_pos) {
+//     errors.orbit_pos = 'Orbit Position required'
+//   }
 
-  if (!values.title) {
-    errors.title = 'Title required'
-  } else if (values.title.length > 50) {
-    errors.title = 'Too long title'
-  }
+//   if (!values.title) {
+//     errors.title = 'Title required'
+//   } else if (values.title.length > 50) {
+//     errors.title = 'Too long title'
+//   }
 
-  if (!values.deadline) {
-    errors.deadline = 'deadline required'
-  }
+//   if (!values.deadline) {
+//     errors.deadline = 'deadline required'
+//   }
 
-  if (!values.description) {
-    errors.description = 'Description required'
-  } else if (values.description.length > 140) {
-    errors.description = 'Too long description'
-  }
-  if (!values.planet_size) {
-    errors.planet_size = 'Orbit Position required'
-  }
+//   if (!values.description) {
+//     errors.description = 'Description required'
+//   } else if (values.description.length > 140) {
+//     errors.description = 'Too long description'
+//   }
+//   if (!values.planet_size) {
+//     errors.planet_size = 'Orbit Position required'
+//   }
 
-  return errors
-}
+//   return errors
+// }
 
-export default reduxForm({
-  validate,
-  form: 'AssignmentForm',
-})(
-  connect(
+// export default reduxForm({
+//   validate,
+//   form: 'AssignmentForm',
+// })(
+export default connect(
     ({ selectedStar, currentProject }: any) => ({ selectedStar, currentProject }),
     { createAssignment, setSelectedStar, resetSelectedStar }
   )(AssignmentForm)
-)
+// )

@@ -4,7 +4,6 @@ import _ from 'lodash'
 import FixedStarInList from '../atoms/fixed-star-in-list'
 import { setCurrentProject } from '../../actions/projects'
 import { setModalStatus } from '../../actions/common'
-import { modalOpen } from '../../reducers/common';
 
 interface MypageOrbitProps {
   history: any,
@@ -111,6 +110,6 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
 }
 
 export default connect(
-  ({ revolvingProjects }: any) => ({ revolvingProjects }),
+  ({ revolvingProjects, modalOpen }: any) => ({ revolvingProjects, modalOpen }),
   { setCurrentProject, setModalStatus }
 )(MypageOrbit)

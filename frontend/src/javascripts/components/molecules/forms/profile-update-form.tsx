@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm, InjectedFormProps } from 'redux-form'
+// import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 
 import InputField from '../../atoms/input-field'
 
@@ -10,7 +10,7 @@ import { updateProfile } from '../../../actions/users'
 type ProfileUpdateFormProps = {
   updateProfile: any,
   history: any
-} & InjectedFormProps
+}
 
 class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps> {
   onSubmit({ username, email, password, confirmation }: any) {
@@ -25,17 +25,16 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps> {
   render() {
     return (
       <form
-        onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}
+        onSubmit={this.onSubmit.bind(this)}
         className="update-form"
       >
-        <Field placeholder="NAME" name="username" type="text" component={InputField} />
-        <Field placeholder="EMAIL ADRESS" name="email" type="text" component={InputField} />
-        <Field placeholder="PASSWORD" name="password" type="password" component={InputField} />
-        <Field
+        <InputField placeholder="NAME" name="username" type="text" />
+        <InputField placeholder="EMAIL ADRESS" name="email" type="text" />
+        <InputField placeholder="PASSWORD" name="password" type="password" />
+        <InputField
           placeholder="CONFIRM PASSWORD"
           name="confirmation"
           type="password"
-          component={InputField}
         />
         <FormSubmitBtn label="UPDATE" />
       </form>
@@ -43,43 +42,43 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps> {
   }
 }
 
-function validate(values: any) {
-  const errors: any= {}
+// function validate(values: any) {
+//   const errors: any= {}
 
-  if (values.username && values.username.length > 50) {
-    errors.username = 'Too long username'
-  }
+//   if (values.username && values.username.length > 50) {
+//     errors.username = 'Too long username'
+//   }
 
-  if (values.email && values.email.length > 255) {
-    errors.email = 'Too long email address'
-  } else if (
-    values.email &&
-    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-  ) {
-    errors.email = 'Invalid email address'
-  }
+//   if (values.email && values.email.length > 255) {
+//     errors.email = 'Too long email address'
+//   } else if (
+//     values.email &&
+//     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+//   ) {
+//     errors.email = 'Invalid email address'
+//   }
 
-  if (!values.password) {
-    errors.password = 'Password required to update profile'
-  } else if (values.password.length < 6) {
-    errors.password = 'Password must contain at least 6 characters'
-  }
+//   if (!values.password) {
+//     errors.password = 'Password required to update profile'
+//   } else if (values.password.length < 6) {
+//     errors.password = 'Password must contain at least 6 characters'
+//   }
 
-  if (!values.confirmation) {
-    errors.confirmation = 'Password confirmation required'
-  } else if (values.password !== values.confirmation) {
-    errors.confirmation = 'Not match password'
-  }
-  return errors
-}
+//   if (!values.confirmation) {
+//     errors.confirmation = 'Password confirmation required'
+//   } else if (values.password !== values.confirmation) {
+//     errors.confirmation = 'Not match password'
+//   }
+//   return errors
+// }
 
-export default reduxForm({
-  validate,
-  form: 'ProfileUpdateForm',
-})(
-  connect(
+// export default reduxForm({
+//   validate,
+//   form: 'ProfileUpdateForm',
+// })(
+export default connect(
     null,
     { updateProfile }
   )(ProfileUpdateForm)
   // ProfileUpdateForm
-)
+// )

@@ -17,38 +17,38 @@ interface ProjectFormProps {
   selectedStar: any,
   createProject: any,
   resetSelectedStar: any,
-  handleSubmit: any
+  resetModalStatus: any,
+  // handleSubmit: any
 }
 
-class ProjectForm extends React.Component<ProjectFormProps & InjectedFormProps> {
+class ProjectForm extends React.Component<ProjectFormProps> {
   onSubmit({ title }: any) {
-    // const target: any = document.getElementById('form-balloon')
-    // const target_star: any = document.getElementsByClassName('current-clicked')[0]
+    const target: any = document.getElementById('form-balloon')
+    const target_star: any = document.getElementsByClassName('current-clicked')[0]
+    const fixed_star_type: any = this.props.selectedStar
+
+    this.props.createProject(title, fixed_star_type)
+    this.props.resetSelectedStar()
+    target_star.classList.remove('current-clicked')
+    target.style.display = 'none'
+
     // const fixed_star_type: any = this.props.selectedStar
 
-    // this.props.createProject(title, fixed_star_type)
-    // this.props.resetSelectedStar()
-    // target_star.classList.remove('current-clicked')
-    // target.style.display = 'none'
-
-    //const fixed_star_type = this.props.selectedStar
-
-    //this.props.createProject(title, fixed_star_type)
-    //this.props.resetSelectedStar()
-    //this.props.resetModalStatus()
+    this.props.createProject(title, fixed_star_type)
+    this.props.resetSelectedStar()
+    this.props.resetModalStatus()
   }
 
   render() {
     return (
       <div id="form-on-modal">
         <div className="form-title">New Project</div>
-        <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
+        <form onSubmit={this.onSubmit.bind(this)}>
           <div className="form-line-2">
-            <Field
+            <InputField
               placeholder="title"
               name="title"
               type="text"
-              component={InputField}
             />
           </div>
           <div className="form-line-4">
@@ -62,24 +62,24 @@ class ProjectForm extends React.Component<ProjectFormProps & InjectedFormProps> 
   }
 }
 
-function validate(values: any) {
-  const errors: any = {}
-  //TODO: 現状validatが適当 → rails側と絡めて後々実装
-  if (!values.title) {
-    errors.title = 'Title required'
-  } else if (values.title.length > 50) {
-    errors.title = 'Too long title'
-  }
+// function validate(values: any) {
+//   const errors: any = {}
+//   //TODO: 現状validatが適当 → rails側と絡めて後々実装
+//   if (!values.title) {
+//     errors.title = 'Title required'
+//   } else if (values.title.length > 50) {
+//     errors.title = 'Too long title'
+//   }
 
-  return errors
-}
+//   return errors
+// }
 
-export default reduxForm({
-  validate,
-  form: 'ProjectForm',
-})(
-  connect(
+// export default reduxForm({
+//   validate,
+//   form: 'ProjectForm',
+// })(
+  export default connect(
     ({ selectedStar }: any) => ({ selectedStar }),
     { createProject, setSelectedStar, resetSelectedStar, resetModalStatus }
   )(ProjectForm)
-)
+// )

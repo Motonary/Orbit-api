@@ -12,7 +12,7 @@ import '../../../stylesheets/form_on_modal.scss'
 
 interface FormModalProps {
   pathname: any,
-  
+
   selectedStar: any,
   modalOpen: any,
 

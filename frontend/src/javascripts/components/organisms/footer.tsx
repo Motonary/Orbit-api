@@ -387,7 +387,6 @@ export default connect(
     isDestroyIgnited,
     modalOpen,
   }: any) => ({
-    currentUser,
     selectedAssignments,
     isDestroyIgnited,
     selectedStar,
