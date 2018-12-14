@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import classNames from 'classnames'
+
+import InputField from '../../atoms/input-field'
 
 import {
   setSelectedStar,
@@ -13,35 +14,6 @@ import { createProject } from '../../../actions/projects'
 import '../../../../stylesheets/form_on_modal.scss'
 
 class ProjectForm extends Component {
-  renderField({ placeholder, type, input, value, meta: { touched, error } }) {
-    const fieldClasses = classNames({
-      'form-group': true,
-      'has-danger': touched && error,
-      'assignment-fieled-style': true,
-      'assignment-fieled-text': true,
-      planet_type: placeholder === 'planet type',
-    })
-
-    const inInputClasses = classNames({
-      'text-style': true,
-      description: placeholder === 'description',
-      deadline: placeholder === 'deadline',
-    })
-
-    return (
-      <div className={fieldClasses}>
-        <input
-          className={inInputClasses}
-          placeholder={placeholder}
-          type={type}
-          value={value}
-          {...input}
-        />
-        <div className="text-help">{touched ? error : ''}</div>
-      </div>
-    )
-  }
-
   onSubmit({ title }) {
     const fixed_star_type = this.props.selectedStar
 
@@ -60,11 +32,11 @@ class ProjectForm extends Component {
               placeholder="title"
               name="title"
               type="text"
-              component={this.renderField}
+              component={InputField}
             />
           </div>
           <div className="form-line-4">
-            <button type="submit" className="submit-btn assignment-fieled-text">
+            <button type="submit" className="submit-btn">
               決定
             </button>
           </div>

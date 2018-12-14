@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import Field from '../../atoms/field'
+import InputField from '../../atoms/input-field'
+import SelectField from '../../atoms/select-field'
 
 import {
   setSelectedStar,
@@ -40,13 +41,13 @@ class AssignmentForm extends Component {
               placeholder="title"
               name="title"
               type="text"
-              component={this.renderField}
+              component={InputField}
             />
             <Field
               placeholder="deadline"
               name="deadline"
               type="date"
-              component={this.renderField}
+              component={InputField}
             />
           </div>
           <div className="form-line-2">
@@ -54,25 +55,12 @@ class AssignmentForm extends Component {
               placeholder="description"
               name="description"
               type="textarea"
-              component={this.renderField}
+              component={InputField}
             />
           </div>
           <div className="form-line-3">
-            <select name="planet_size" className="select-fieled-style">
-              <option value="" className=" assignment-fieled-text">
-                SIZE
-              </option>
-              <option value="large" className="assignment-fieled-text">
-                large
-              </option>
-              <option value="medium" className="assignment-fieled-text">
-                medium
-              </option>
-              <option value="small" className="assignment-fieled-text">
-                small
-              </option>
-            </select>
-            <button type="submit" className="form-btn assignment-fieled-text">
+            <Field name="planet_size" type="select" component={SelectField} />
+            <button type="submit" className="form-btn">
               決定
             </button>
           </div>

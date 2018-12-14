@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
-import Field from '../../atoms/field'
+import { Field, reduxForm } from 'redux-form'
+
+import InputField from '../../atoms/input-field'
 import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
+
 import { updateProfile } from '../../../actions/users'
+
+import '../../../../stylesheets/form_field.scss'
 
 class ProfileUpdateForm extends Component {
   onSubmit({ username, email, password, confirmation }) {
@@ -21,13 +25,29 @@ class ProfileUpdateForm extends Component {
         onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}
         className="update-form"
       >
-        <Field placeholder="NAME" name="username" type="text" />
-        <Field placeholder="EMAIL ADRESS" name="email" type="text" />
-        <Field placeholder="PASSWORD" name="password" type="password" />
+        <Field
+          placeholder="NAME"
+          name="username"
+          type="text"
+          component={InputField}
+        />
+        <Field
+          placeholder="EMAIL ADRESS"
+          name="email"
+          type="text"
+          component={InputField}
+        />
+        <Field
+          placeholder="PASSWORD"
+          name="password"
+          type="password"
+          component={InputField}
+        />
         <Field
           placeholder="CONFIRM PASSWORD"
           name="confirmation"
           type="password"
+          component={InputField}
         />
         <FormSubmitBtn label="UPDATE" />
       </form>
