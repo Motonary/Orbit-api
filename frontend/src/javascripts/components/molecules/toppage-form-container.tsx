@@ -24,7 +24,4 @@ class TopPageForm extends React.Component<TopPageFormProps> {
   }
 }
 
-export default connect(
-  null,
-  {}
-)(TopPageForm)
+export default TopPageForm
