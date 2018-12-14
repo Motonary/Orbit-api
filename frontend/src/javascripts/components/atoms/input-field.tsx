@@ -4,13 +4,16 @@ import classNames from 'classnames'
 import '../../../stylesheets/field.scss'
 
 interface InputFieldProps {
-  name: string,
-  type: string,
-  placeholder: string,
+  name: string
+  type: string
+  placeholder: string
 }
 
-const InputField: React.SFC<InputFieldProps> = ({name, type, placeholder}) => {
-
+const InputField: React.SFC<InputFieldProps> = ({
+  name,
+  type,
+  placeholder,
+}) => {
   const fieldClasses = classNames({
     'field-style': true,
     title: name === 'title',
@@ -38,7 +41,6 @@ const InputField: React.SFC<InputFieldProps> = ({name, type, placeholder}) => {
       name === 'confirmation',
   })
 
-
   return (
     <div className={fieldClasses}>
       <input
@@ -46,7 +48,7 @@ const InputField: React.SFC<InputFieldProps> = ({name, type, placeholder}) => {
         type={type}
         placeholder={placeholder}
       />
-        {/* <div className="input-error">{touched ? error : ''}</div> */}
+      {/* <div className="input-error">{touched ? error : ''}</div> */}
     </div>
   )
 }

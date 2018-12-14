@@ -5,8 +5,8 @@ import SignInForm from './forms/signin-form'
 import SignUpForm from './forms/signup-form'
 
 interface TopPageFormProps {
-  isSignIn: boolean,
-  history: any,
+  isSignIn: boolean
+  history: any
 }
 
 class TopPageForm extends React.Component<TopPageFormProps> {
@@ -14,12 +14,17 @@ class TopPageForm extends React.Component<TopPageFormProps> {
     const { isSignIn }: any = this.props
     return (
       <div className="sign-form">
-        { isSignIn ? (<SignInForm history={history} />) : (<SignUpForm history={history} />) }
+        {isSignIn ? (
+          <SignInForm history={history} />
+        ) : (
+          <SignUpForm history={history} />
+        )}
       </div>
     )
   }
 }
 
 export default connect(
-  null,{ }
+  null,
+  {}
 )(TopPageForm)

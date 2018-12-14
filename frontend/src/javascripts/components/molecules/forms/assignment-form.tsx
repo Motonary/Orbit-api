@@ -4,36 +4,38 @@ import { connect } from 'react-redux'
 import InputField from '../../atoms/input-field'
 import SelectField from '../../atoms/select-field'
 
-import {
-  setSelectedStar,
-  resetSelectedStar,
-} from '../../../actions/common'
+import { setSelectedStar, resetSelectedStar } from '../../../actions/common'
 import { createAssignment } from '../../../actions/assignments'
-import FormSubmitBtn from '../../atoms/buttons/form-submit-btn';
+import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
 
 interface AssignmentFormProps {
-  orbit: string,
+  orbit: string
 
-  selectedStar: any,
-  currentProject: any,
+  selectedStar: any
+  currentProject: any
 
-  setSelectedStar: any,
-  resetSelectedStar: any,
-  createAssignment: any,
+  setSelectedStar: any
+  resetSelectedStar: any
+  createAssignment: any
 }
 
-interface createAssignmentProps {
-  title: string, 
-  description: string,
-  deadline: string,
-  planet_size: number,
-  orbit_pos: number,
+interface CreateAssignmentProps {
+  title: string
+  description: string
+  deadline: string
+  planet_size: number
+  orbit_pos: number
 }
 
 class AssignmentForm extends React.Component<AssignmentFormProps> {
-
-  onSubmit({ title, description, deadline, planet_size, orbit_pos }: createAssignmentProps) {
-    const planet_type: any = this.props.selectedStar            //reducerでの型付けと対応
+  onSubmit({
+    title,
+    description,
+    deadline,
+    planet_size,
+    orbit_pos,
+  }: CreateAssignmentProps) {
+    const planet_type: any = this.props.selectedStar // reducerでの型付けと対応
     const project_id: number = this.props.currentProject.id
 
     this.props.createAssignment(
@@ -54,16 +56,8 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
         <div className="form-title">New Assignment</div>
         <form>
           <div className="form-line-1">
-            <InputField
-              name="title"
-              type="text"
-              placeholder="title"
-            />
-            <InputField
-              name="deadline"
-              type="date"
-              placeholder="deadline"
-            />
+            <InputField name="title" type="text" placeholder="title" />
+            <InputField name="deadline" type="date" placeholder="deadline" />
           </div>
           <div className="form-line-2">
             <InputField
@@ -113,6 +107,6 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
 // }
 
 export default connect(
-    ({ selectedStar, currentProject }: any) => ({ selectedStar, currentProject }),
-    { createAssignment, setSelectedStar, resetSelectedStar }
-  )(AssignmentForm)
+  ({ selectedStar, currentProject }: any) => ({ selectedStar, currentProject }),
+  { createAssignment, setSelectedStar, resetSelectedStar }
+)(AssignmentForm)

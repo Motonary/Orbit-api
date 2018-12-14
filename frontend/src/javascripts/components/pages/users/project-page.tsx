@@ -13,16 +13,15 @@ import ProjectPageMain from '../../organisms/project-page-main'
 import Footer from '../../organisms/footer'
 
 interface Props {
-  currentUser: any,
-  currentProject: any,
-  history: any,
-  match: any,
-  location: any,
-  revolvingProjects: any,
-  fetchRevolvingAssignments: any,
-  fetchRevolvingProjects: any,
-  setDefaultProject: any,
-
+  currentUser: any
+  currentProject: any
+  history: any
+  match: any
+  location: any
+  revolvingProjects: any
+  fetchRevolvingAssignments: any
+  fetchRevolvingProjects: any
+  setDefaultProject: any
 }
 
 class ProjectPage extends React.Component<Props, {}> {
@@ -60,7 +59,7 @@ class ProjectPage extends React.Component<Props, {}> {
 
     if (!currentUser) return <div>Loading....</div>
 
-    if (currentUser.id != match.params.userId) {
+    if (currentUser.id !== match.params.userId) {
       const correctPath = `/users/${currentUser.id}`
       return <Redirect to={correctPath} />
     }
@@ -74,9 +73,7 @@ class ProjectPage extends React.Component<Props, {}> {
           history={history}
           pathname={pathname}
         />
-        <ProjectPageMain
-          currentProject={currentProject}
-        />
+        <ProjectPageMain currentProject={currentProject} />
         <Footer currentUser={currentUser} pathname={pathname} />
       </div>
     )

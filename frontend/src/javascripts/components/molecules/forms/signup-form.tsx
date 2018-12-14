@@ -7,9 +7,9 @@ import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
 import { createUser } from '../../../actions/users'
 
 interface SignUpFormProps {
-  history: any,
+  history: any
 
-  createUser: any,
+  createUser: any
 }
 
 class SignUpForm extends React.Component<SignUpFormProps, {}> {
@@ -29,9 +29,9 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
     return (
       <div className="signup-form">
         <form onSubmit={this.onSubmitSignUpData.bind(this)}>
-          <InputField placeholder="NAME" name="username" type="text"  />
-          <InputField placeholder="EMAIL ADRESS" name="email" type="text"  />
-          <InputField placeholder="PASSWORD" name="password" type="password"  />
+          <InputField placeholder="NAME" name="username" type="text" />
+          <InputField placeholder="EMAIL ADRESS" name="email" type="text" />
+          <InputField placeholder="PASSWORD" name="password" type="password" />
           <InputField
             placeholder="CONFIRM PASSWORD"
             name="confirmation"
@@ -44,4 +44,7 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
   }
 }
 
-export default connect(null, { createUser })(SignUpForm)
+export default connect(
+  null,
+  { createUser }
+)(SignUpForm)

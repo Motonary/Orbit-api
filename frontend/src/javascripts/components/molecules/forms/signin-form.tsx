@@ -7,9 +7,9 @@ import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
 import { createSession } from '../../../actions/users'
 
 interface SignInFormProps {
-  history: any, //historyの型付け
+  history: any // historyの型付け
 
-  createSession: any,
+  createSession: any
 }
 
 class SignInForm extends React.Component<SignInFormProps, {}> {
@@ -22,9 +22,9 @@ class SignInForm extends React.Component<SignInFormProps, {}> {
   render() {
     return (
       <div className="signin-form">
-        <form onSubmit={this.onSubmitSignInData.bind(this)} >
-          <InputField placeholder="EMAIL ADRESS" name="email" type="text"  />
-          <InputField placeholder="PASSWORD" name="password" type="password"  />
+        <form onSubmit={this.onSubmitSignInData.bind(this)}>
+          <InputField placeholder="EMAIL ADRESS" name="email" type="text" />
+          <InputField placeholder="PASSWORD" name="password" type="password" />
           <FormSubmitBtn label="SIGN IN" />
         </form>
       </div>
@@ -32,4 +32,7 @@ class SignInForm extends React.Component<SignInFormProps, {}> {
   }
 }
 
-export default connect( null, { createSession })(SignInForm)
+export default connect(
+  null,
+  { createSession }
+)(SignInForm)

@@ -5,14 +5,13 @@ import '../../../stylesheets/field.scss'
 const InputField: React.SFC = () => {
   return (
     <div className="select-fieled-style">
-      <select
-      >
+      <select>
         <option value="">SIZE</option>
         <option value="large">large</option>
         <option value="medium">medium</option>
         <option value="small">small</option>
       </select>
-        {/* <div className="input-error">{touched ? error : ''}</div> */}
+      {/* <div className="input-error">{touched ? error : ''}</div> */}
     </div>
   )
 }

@@ -11,13 +11,13 @@ import '../../../stylesheets/modal.scss'
 import '../../../stylesheets/form_on_modal.scss'
 
 interface FormModalProps {
-  pathname: any,
+  pathname: any
 
-  selectedStar: any,
-  modalOpen: any,
+  selectedStar: any
+  modalOpen: any
 
-  resetSelectedStar: any,
-  resetModalStatus: any,
+  resetSelectedStar: any
+  resetModalStatus: any
 }
 
 const customStyles = {
@@ -59,7 +59,9 @@ class FormModal extends React.Component<FormModalProps, {}> {
 
   render() {
     const { pathname }: any = this.props
-    const orbit: string = this.props.modalOpen ? this.props.modalOpen.split('-')[1] : ''
+    const orbit: string = this.props.modalOpen
+      ? this.props.modalOpen.split('-')[1]
+      : ''
 
     return (
       <Modal

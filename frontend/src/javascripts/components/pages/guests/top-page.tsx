@@ -5,13 +5,13 @@ import TopPagePlanet from '../../atoms/toppage-planet-img'
 import ToppageFormContainer from '../../molecules/toppage-form-container'
 
 interface Props {
-  currentUser: any,
-  pathname: any,
+  currentUser: any
+  pathname: any
   history: any
 }
 
 interface State {
-  isSignIn: boolean,
+  isSignIn: boolean
 }
 
 export default class TopPage extends React.Component<Props, State> {
@@ -25,16 +25,16 @@ export default class TopPage extends React.Component<Props, State> {
   onClickTopPageButton() {
     const { isSignIn } = this.state
     if (isSignIn) {
-      this.setState({isSignIn: false})
+      this.setState({ isSignIn: false })
     } else if (!isSignIn) {
-      this.setState({isSignIn: true})
+      this.setState({ isSignIn: true })
     } else {
       throw new Error('Sorry, something went wrong...') // 暫定の例外処理
     }
   }
 
   render() {
-    const { isSignIn} = this.state
+    const { isSignIn } = this.state
     const { history } = this.props
 
     return (
@@ -44,10 +44,7 @@ export default class TopPage extends React.Component<Props, State> {
           onClick={this.onClickTopPageButton.bind(this)}
         />
         <TopPageLogo />
-        <ToppageFormContainer
-          isSignIn={isSignIn}
-          history={history}
-        />
+        <ToppageFormContainer isSignIn={isSignIn} history={history} />
         <TopPagePlanet />
       </div>
     )

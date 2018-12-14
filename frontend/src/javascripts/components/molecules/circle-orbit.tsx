@@ -15,18 +15,18 @@ import {
 } from '../../actions/assignments'
 
 interface CircleOrbitProps {
-  orbit: any,
+  orbit: any
 
-  modalOpen: any,
-  selectedStar: any,
-  revolvingAssignments: any,
+  modalOpen: any
+  selectedStar: any
+  revolvingAssignments: any
 
-  setSelectedStar: any,
-  resetSelectedStar: any,
-  setModalStatus: any,
+  setSelectedStar: any
+  resetSelectedStar: any
+  setModalStatus: any
 
-  selectAssignment: any,
-  disselectAssignment: any,
+  selectAssignment: any
+  disselectAssignment: any
 }
 
 class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
@@ -35,10 +35,10 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
   }
 
   setDrop() {
-    //Droppable area
+    // Droppable area
     const target = document.getElementById(`circle-${this.props.orbit}`)
 
-    //Entering into the droppable area
+    // Entering into the droppable area
     target.addEventListener(
       'dragenter',
       () => {
@@ -49,7 +49,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
       false
     )
 
-    //Leaving from the droppable area
+    // Leaving from the droppable area
     target.addEventListener(
       'dragleave',
       () => {
@@ -60,7 +60,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
       false
     )
 
-    //Over the droppable area
+    // Over the droppable area
     target.addEventListener(
       'dragover',
       (e: any) => {
@@ -69,7 +69,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
       false
     )
 
-    //Drop
+    // Drop
     target.addEventListener(
       'drop',
       (e: any) => {
@@ -86,7 +86,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
   }
 
   onMouseOver(e: any) {
-    const target_planet = e.target.parentNode.parentNode //e.g. div.planet-secundus-small
+    const target_planet = e.target.parentNode.parentNode // e.g. div.planet-secundus-small
     if (target_planet.firstChild.classList[0] === 'detail-balloon') {
       target_planet.firstChild.style.display = 'inline-block'
     }
@@ -100,12 +100,12 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
   }
 
   onSelected(e: any) {
-    const target: any = e.target.parentNode.children[1] //e.target = .planet-img-container -> div.mark-container
-    const targetPlanet: any = e.target.parentNode.parentNode.children[2] //canvas #2-Earth
+    const target: any = e.target.parentNode.children[1] // e.target = .planet-img-container -> div.mark-container
+    const targetPlanet: any = e.target.parentNode.parentNode.children[2] // canvas #2-Earth
     const selectedPlanetId: any = targetPlanet.id.split('-')[0]
     try {
       Number(selectedPlanetId)
-      target.style
+      // target.style // 文法的に誤っているので書き直す
     } catch (e) {
       return
     }
@@ -121,8 +121,9 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
 
   render() {
     const { revolvingAssignments, orbit } = this.props
-    if (!revolvingAssignments)
+    if (!revolvingAssignments) {
       return <div id={`circle-${this.props.orbit}`} className="common-circle" />
+    }
 
     const pos = ['top', 'right', 'left', 'bottom']
 

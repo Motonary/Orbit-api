@@ -6,12 +6,12 @@ import Planet from '../atoms/planet'
 import { setSelectedStar, resetSelectedStar } from '../../actions/common'
 
 interface PlanetListProps {
-  planetType: string,
+  planetType: string
 
-  selectedStar: any,
+  selectedStar: any
 
-  setSelectedStar: any,
-  resetSelectedStar: any,
+  setSelectedStar: any
+  resetSelectedStar: any
 }
 
 class PlanetList extends React.Component<PlanetListProps, {}> {
@@ -20,10 +20,10 @@ class PlanetList extends React.Component<PlanetListProps, {}> {
   }
 
   setDragnDrop() {
-    //Draggable Element
+    // Draggable Element
     const target = document.getElementById(this.props.planetType)
 
-    //Start of dragging
+    // Start of dragging
     target.addEventListener(
       'dragstart',
       () => {
@@ -32,11 +32,11 @@ class PlanetList extends React.Component<PlanetListProps, {}> {
       false
     )
 
-    //During dragging
-    target.addEventListener('drag', () => {}, false)
+    // During dragging
+    // target.addEventListener('drag', () => {}, false)
 
-    //End of dragging
-    target.addEventListener('dragend', () => {}, false)
+    // End of dragging
+    // target.addEventListener('dragend', () => {}, false)
   }
 
   render() {

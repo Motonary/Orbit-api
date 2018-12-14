@@ -38,7 +38,7 @@ export function createAssignment(
   planet_type: any,
   planet_size: any,
   orbit_pos: any,
-  projectId: any,
+  projectId: any
 ) {
   return axios({
     method: 'post',

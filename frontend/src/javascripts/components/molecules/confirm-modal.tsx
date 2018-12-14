@@ -14,13 +14,13 @@ import {
 import '../../../stylesheets/modal.scss'
 
 interface ConfirmModalProps {
-  isDestroyIgnited: any,
-  modalOpen: any,
-  resetModalStatus: any,
+  isDestroyIgnited: any
+  modalOpen: any
+  resetModalStatus: any
 }
 
 interface ConfirmModalState {
-  destroy: string,
+  destroy: string
   restore: string
 }
 
@@ -49,7 +49,10 @@ const customStyles: any = {
 
 Modal.setAppElement('#app')
 
-class ConfirmModal extends React.Component<ConfirmModalProps, ConfirmModalState> {
+class ConfirmModal extends React.Component<
+  ConfirmModalProps,
+  ConfirmModalState
+> {
   constructor(props: any) {
     super(props)
 
