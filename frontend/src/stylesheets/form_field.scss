@@ -1,5 +1,13 @@
 @import "initializer";
 
+.signin-form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 740px;
+}
+
 .signup-form {
   display: flex;
   justify-content: center;

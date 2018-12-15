@@ -10,13 +10,20 @@
   font-family: orator-std, monospace;
   font-style: normal;
   font-weight: 300;
-    
-  .input-error {
-    height: 15px;
-    line-height: 15px;
-    font-size: 12px;
+
+  .input-radius {
+    border-radius: 20px;
+    text-align: center
   }
 }
+
+.input-error {
+  margin: 5px auto;
+  height: 15px;
+  line-height: 15px;
+  font-size: 12px;
+}
+
 .title {
   width: 100px !important;
   height: 30px !important;
@@ -28,6 +35,21 @@
 .description {
   width: 250px !important;
   height: 40px !important;
+}
+.email {
+  margin: 10px auto;
+  width: 200px !important;
+  height: 20px !important;
+}
+.username {
+  margin: 10px auto;
+  width: 200px !important;
+  height: 20px !important;
+}
+.password {
+  margin: 10px auto;
+  width: 200px !important;
+  height: 20px !important;
 }
 .has-danger {
 }

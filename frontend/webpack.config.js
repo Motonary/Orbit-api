@@ -3,12 +3,15 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: {
-    bundle: './src/javascripts/app.js',
+    bundle: './src/javascripts/app.tsx',
   },
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: '[name].js',
     publicPath: '/',
+  },
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx'],
   },
   devServer: {
     contentBase: 'dist',
@@ -18,16 +21,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
-        },
-      },
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
@@ -45,6 +38,13 @@ module.exports = {
             },
           },
         ],
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'ts-loader',
+        },
       },
     ],
   },
