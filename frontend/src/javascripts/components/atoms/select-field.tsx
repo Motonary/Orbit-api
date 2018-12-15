@@ -2,18 +2,29 @@ import * as React from 'react'
 
 import '../../../stylesheets/field.scss'
 
-const InputField: React.SFC = () => {
+interface SelectFieldProps {
+  name: string
+  value: string | number
+  onChange: (e: React.SyntheticEvent<HTMLSelectElement>) => void
+  onBlur: (e: React.SyntheticEvent<HTMLSelectElement>) => void
+}
+
+const SelectField: React.SFC<SelectFieldProps> = ({
+  name,
+  value,
+  onChange,
+  onBlur,
+}) => {
   return (
     <div className="select-fieled-style">
-      <select>
+      <select name={name} value={value} onChange={onChange} onBlur={onBlur}>
         <option value="">SIZE</option>
         <option value="large">large</option>
         <option value="medium">medium</option>
         <option value="small">small</option>
       </select>
-      {/* <div className="input-error">{touched ? error : ''}</div> */}
     </div>
   )
 }
 
-export default InputField
+export default SelectField

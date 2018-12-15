@@ -30,4 +30,7 @@ export const actionTypes = keyMirror({
   SELECT_ASSIGNMENT: null,
   DISSELECT_ASSIGNMENT: null,
   NULLIFY_SELECTED_ASSIGNMENT: null,
+
+  // SubAssignments
+  CREATE_SUBASSIGNMENT: null,
 })

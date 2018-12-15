@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { Formik } from 'formik'
 
 import InputField from '../../atoms/input-field'
 import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
@@ -12,21 +13,63 @@ interface SignInFormProps {
   createSession: any
 }
 
-class SignInForm extends React.Component<SignInFormProps, {}> {
-  onSubmitSignInData({ email, password }: any) {
-    this.props.createSession(email, password, (userId: any) => {
-      this.props.history.push(`/users/${userId}`)
-    })
-  }
+interface CreateSessionProps {
+  email: string
+  password: string
+}
 
+class SignInForm extends React.Component<SignInFormProps, {}> {
   render() {
     return (
       <div className="signin-form">
-        <form onSubmit={this.onSubmitSignInData.bind(this)}>
-          <InputField placeholder="EMAIL ADRESS" name="email" type="text" />
-          <InputField placeholder="PASSWORD" name="password" type="password" />
-          <FormSubmitBtn label="SIGN IN" />
-        </form>
+        <Formik
+          initialValues={{ email: '', password: '' }}
+          onSubmit={(values: CreateSessionProps, { setSubmitting }) => {
+            setTimeout(() => {
+              this.props.createSession(
+                values.email,
+                values.password,
+                (userId: any) => {
+                  this.props.history.push(`/users/${userId}`)
+                }
+              )
+              setSubmitting(false)
+            }, 400)
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            /* and other goodies */
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <InputField
+                type="email"
+                name="email"
+                placeholder="EMAIL ADRESS"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errors.email && touched.email && errors.email}
+              <InputField
+                type="password"
+                name="password"
+                placeholder="PASSWORD"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errors.password && touched.password && errors.password}
+              <FormSubmitBtn label="SIGN IN" disable={isSubmitting} />
+            </form>
+          )}
+        </Formik>
       </div>
     )
   }
