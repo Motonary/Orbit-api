@@ -1,0 +1,21 @@
+{
+  "rulesDirectory": [
+    "tslint-plugin-prettier"
+  ],
+  "extends": [
+    "tslint-config-standard",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "variable-name": false,
+    "one-variable-per-declaration": false,
+    "prettier": [
+      true,
+      {
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "semi": false
+      }
+    ]
+  }
+}

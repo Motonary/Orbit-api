@@ -18,6 +18,16 @@ Rails.application.configure do
     'Cache-Control' => "public, max-age=#{1.hour.to_i}"
   }
 
+  # Set Logger
+  config.logger = Logger.new('log/test.log', 20, 10 * 1024 * 1024)
+  config.logger.formatter = proc do |severity, datetime, progname, msg|
+    "[#{severity}]#{datetime}: #{progname} : #{msg}\n"
+  end
+
+  # Use the lowest log level to ensure availability of diagnostic information
+  # when problems arise.
+  config.log_level = :debug
+
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false

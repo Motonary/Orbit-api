@@ -4,9 +4,7 @@ $available-planet-size: 40px;
   position: fixed;
   top: 150px;
   right: 40px;
-  border: solid 3px rgb(231, 72, 122);
-  border-radius: 50px;
-  z-index: 500px;
+  z-index: 500;
 
   ul.projects-list {
     width: 60px;

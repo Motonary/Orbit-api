@@ -1,0 +1,56 @@
+import * as React from 'react'
+
+import PlanetHolder from '../molecules/planet-holder'
+import FooterButtonsList from '../molecules/footer-buttons-list'
+import ConfirmModal from '../molecules/confirm-modal'
+import FormModal from '../molecules/form-modal'
+
+import '../../../stylesheets/destroy_animate.scss'
+
+interface FooterProps {
+  currentUser: any
+  pathname: any
+
+  isDestroyIgnited: any
+  modalOpen: any
+  selectedAssignments: any
+
+  resetDestroyPlanets: any
+  nullifySelectedAssignment: any
+  destroyAssignment: any
+}
+
+interface FooterState {
+  clickedStar: any
+}
+
+class Footer extends React.Component<FooterProps, FooterState> {
+  constructor(props: FooterProps) {
+    super(props)
+
+    this.state = {
+      clickedStar: null,
+    }
+  }
+
+  componentDidMount() {
+    let planet_list: any = document.getElementById('planet-list')
+    planet_list.style.display = 'none'
+  }
+
+  render() {
+    const { currentUser, pathname }: any = this.props
+    const rootPath = `/users/${currentUser.id}`
+
+    return (
+      <div id="footer">
+        <PlanetHolder pathname={pathname} currentUser={currentUser} />
+        <FooterButtonsList pathname={pathname} rootPath={rootPath} />
+        <ConfirmModal />
+        <FormModal pathname={pathname} />
+      </div>
+    )
+  }
+}
+
+export default Footer
