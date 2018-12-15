@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 
 import InputField from '../../atoms/input-field'
 import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
@@ -40,11 +41,12 @@ class TopPageForm extends React.Component<TopPageFormProps> {
       <div className="sign-form">
         {isSignIn && !isSignUp ? (
           <form onSubmit={this.onSubmitSignInData.bind(this)}>
-            <InputField placeholder="EMAIL ADRESS" name="email" type="text" />
-            <InputField
+            <Field placeholder="EMAIL ADRESS" name="email" type="text" />
+            <Field
               placeholder="PASSWORD"
               name="password"
               type="password"
+              component={this.renderField}
             />
             <FormSubmitBtn label="SIGN IN" />
           </form>
@@ -53,14 +55,15 @@ class TopPageForm extends React.Component<TopPageFormProps> {
             onSubmit={this.onSubmitSignUpData.bind(this)}
             className="signup-form"
           >
-            <InputField placeholder="NAME" name="username" type="text" />
-            <InputField placeholder="EMAIL ADRESS" name="email" type="text" />
-            <InputField
+            <Field placeholder="NAME" name="username" type="text" component={this.renderField} />
+            <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
+            <Field
               placeholder="PASSWORD"
               name="password"
               type="password"
+              component={this.renderField}
             />
-            <InputField
+            <Field
               placeholder="CONFIRM PASSWORD"
               name="confirmation"
               type="password"
