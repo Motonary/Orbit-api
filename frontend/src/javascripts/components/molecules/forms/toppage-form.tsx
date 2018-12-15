@@ -55,8 +55,18 @@ class TopPageForm extends React.Component<TopPageFormProps> {
             onSubmit={this.onSubmitSignUpData.bind(this)}
             className="signup-form"
           >
-            <Field placeholder="NAME" name="username" type="text" component={this.renderField} />
-            <Field placeholder="EMAIL ADRESS" name="email" type="text" component={this.renderField} />
+            <Field
+              placeholder="NAME"
+              name="username"
+              type="text"
+              component={this.renderField}
+            />
+            <Field
+              placeholder="EMAIL ADRESS"
+              name="email"
+              type="text"
+              component={this.renderField}
+            />
             <Field
               placeholder="PASSWORD"
               name="password"
