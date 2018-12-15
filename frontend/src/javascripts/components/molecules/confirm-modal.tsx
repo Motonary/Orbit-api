@@ -10,6 +10,7 @@ import '../../../stylesheets/modal.scss'
 
 interface ConfirmModalProps {
   modalOpen: any
+  resetDestroyAction: any
   resetModalStatus: any
 }
 
