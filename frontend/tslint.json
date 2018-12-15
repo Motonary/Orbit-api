@@ -9,7 +9,7 @@
   "rules": {
     "variable-name": false,
     "prettier": [
-      true,
+      false,
       {
         "singleQuote": true,
         "trailingComma": "es5",
