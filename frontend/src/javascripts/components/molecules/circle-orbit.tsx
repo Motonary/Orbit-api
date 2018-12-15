@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 import PopupBox from '../atoms/popup-box'
 import Planet from '../atoms/planet'
@@ -39,7 +40,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
   setPlanetDrop() {
     // Droppable area
     _.forEach(this.props.revolvingAssignments, assignment => {
-      const target = document.getElementById(
+      const target: any = document.getElementById(
         `${assignment.id}-${assignment.planet_type}`
       ).parentNode
       target.addEventListener(
@@ -77,7 +78,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
       // Drop
       target.addEventListener(
         'drop',
-        e => {
+        (e: any) => {
           e.preventDefault()
           if (target.classList.contains('circle-shadow')) {
             target.classList.remove('circle-shadow')
