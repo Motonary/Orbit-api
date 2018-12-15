@@ -37,7 +37,7 @@ class Main extends Component {
           return null
       }
     })[0]
-    console.log(childrenWithProps)
+    // console.log(childrenWithProps)
 
     return (
       (sessionStorage.getItem('jwt') && !this.props.currentUser)
