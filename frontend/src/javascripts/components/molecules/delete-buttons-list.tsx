@@ -16,8 +16,6 @@ interface DeleteButtonsListProps {
   pathname: any
   rootPath: any
 
-  DeleteIcons: any
-
   setModalStatus: any
   setDestroyAction: any
 }

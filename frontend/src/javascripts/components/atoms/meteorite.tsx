@@ -259,6 +259,7 @@ export default connect(
     modalOpen,
   }: any) => ({
     selectedAssignments,
+    destroyedAssignments,
     selectedDestroyAction,
     modalOpen,
   }),
