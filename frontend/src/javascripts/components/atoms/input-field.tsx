@@ -51,6 +51,7 @@ const InputField: React.SFC<InputFieldProps> = ({
     <div className={fieldClasses}>
       <input
         className={`${inputClasses} ${inputRadius}`}
+        name={name}
         type={type}
         placeholder={placeholder}
         value={value}

@@ -79,7 +79,7 @@ class FormModal extends React.Component<FormModalProps, {}> {
 
     return (
       <Modal
-        isOpen={!(orbit === '')}
+        isOpen={!(form === '')}
         style={customStyles}
         contentLabel="Assignment From Modal"
       >

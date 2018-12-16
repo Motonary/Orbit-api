@@ -37,7 +37,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
     this.setPlanetDrop()
   }
 
-  setPlanetDrop() {
+  setPlanetDrop(): void {
     // Droppable area
     _.forEach(this.props.revolvingAssignments, assignment => {
       const target: any = document.getElementById(
@@ -92,7 +92,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
     })
   }
 
-  setOrbitDrop() {
+  setOrbitDrop(): void {
     // Droppable area
     const target = document.getElementById(`circle-${this.props.orbit}`)
 
