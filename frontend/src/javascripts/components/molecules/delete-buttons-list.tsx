@@ -2,13 +2,15 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
+import Meteorite from '../atoms/meteorite'
+import Missle from '../atoms/missle'
+import BlackHole from '../atoms/blackhole'
+
 import { setModalStatus, setDestroyAction } from '../../actions/common'
 
 import { DeleteIcons } from '../../constants/images'
 
-import Meteorite from '../atoms/meteorite'
-import Missle from '../atoms/missle'
-import BlackHole from '../atoms/blackhole'
+import '../../../stylesheets/destroy_animate.scss'
 
 interface DeleteButtonsListProps {
   pathname: any
@@ -46,7 +48,7 @@ class DeleteButtonsList extends React.Component<DeleteButtonsListProps, {}> {
   render() {
     const { pathname, rootPath } = this.props
     const actionType = Object.keys(DeleteIcons)
-    const deleteButtonsclass = classNames({
+    const deleteButtonsClass = classNames({
       'delete-buttons-show':
         pathname === `${rootPath}` ||
         /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
@@ -54,18 +56,30 @@ class DeleteButtonsList extends React.Component<DeleteButtonsListProps, {}> {
     })
 
     return (
-      <div className={deleteButtonsclass}>
+      <div>
         <Meteorite
           icon={DeleteIcons[actionType[0]]}
-          onClick={this.onClickOpenModal(actionType[0])}
+          deleteBtnClass={deleteButtonsClass}
+          motionControll={() => this.motionControll()}
+          onClick={() => {
+            this.onClickOpenModal(actionType[0])
+          }}
         />
         <Missle
           icon={DeleteIcons[actionType[1]]}
-          onClick={this.onClickOpenModal(actionType[1])}
+          deleteBtnClass={deleteButtonsClass}
+          motionControll={() => this.motionControll()}
+          onClick={() => {
+            this.onClickOpenModal(actionType[1])
+          }}
         />
         <BlackHole
           icon={DeleteIcons[actionType[2]]}
-          onClick={this.onClickOpenModal(actionType[2])}
+          deleteBtnClass={deleteButtonsClass}
+          motionControll={() => this.motionControll()}
+          onClick={() => {
+            this.onClickOpenModal(actionType[2])
+          }}
         />
       </div>
     )

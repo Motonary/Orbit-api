@@ -13,7 +13,7 @@ export function resetSelectedStar() {
   }
 }
 
-export function igniteDestroyPlanets(status: any) {
+export function setDestroyAction(status: any) {
   return {
     type: actionTypes.SET_DESTROY_ACTION,
     status,
