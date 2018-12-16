@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
   // commmon
   selectedStar,
   selectedDestroyAction,
+  modalOpen,
 
   // Users
   currentUser,
@@ -25,7 +26,6 @@ const rootReducer = combineReducers({
   revolvingAssignments,
   destroyedAssignments,
   selectedAssignments,
-  modalOpen,
 })
 
 export default rootReducer

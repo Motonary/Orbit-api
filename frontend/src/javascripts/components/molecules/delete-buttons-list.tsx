@@ -2,9 +2,9 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
-import Meteorite from '../atoms/meteorite'
-import Missle from '../atoms/missle'
-import BlackHole from '../atoms/blackhole'
+import Meteorite from './meteorite'
+import Missle from './missle'
+import BlackHole from './blackhole'
 
 import { setModalStatus, setDestroyAction } from '../../actions/common'
 

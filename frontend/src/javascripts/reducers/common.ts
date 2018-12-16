@@ -21,7 +21,7 @@ export function selectedStar(state: any = null, action: any) {
  * selectedDestroyActionの利用用途
  * stateには、ユーザが選択したMeteorite or Missle or BlackHole いずれかの破壊モーションの名称が格納される
  */
-export function isDestroyIgnited(state: any = null, action: any) {
+export function selectedDestroyAction(state: any = null, action: any) {
   switch (action.type) {
     case actionTypes.SET_DESTROY_ACTION:
       return action.status
