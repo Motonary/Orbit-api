@@ -10,29 +10,9 @@ import '../../../stylesheets/destroy_animate.scss'
 interface FooterProps {
   currentUser: any
   pathname: any
-
-  isDestroyIgnited: any
-  modalOpen: any
-  selectedAssignments: any
-
-  resetDestroyPlanets: any
-  nullifySelectedAssignment: any
-  destroyAssignment: any
 }
 
-interface FooterState {
-  clickedStar: any
-}
-
-class Footer extends React.Component<FooterProps, FooterState> {
-  constructor(props: FooterProps) {
-    super(props)
-
-    this.state = {
-      clickedStar: null,
-    }
-  }
-
+class Footer extends React.Component<FooterProps, {}> {
   componentDidMount() {
     let planet_list: any = document.getElementById('planet-list')
     planet_list.style.display = 'none'

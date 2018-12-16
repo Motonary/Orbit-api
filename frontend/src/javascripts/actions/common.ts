@@ -7,9 +7,10 @@ export function setSelectedStar(star_type: any) {
   }
 }
 
-export function resetSelectedStar() {
+export function resetSelectedStar(status: any) {
   return {
     type: actionTypes.RESET_SELECTED_STAR,
+    status,
   }
 }
 

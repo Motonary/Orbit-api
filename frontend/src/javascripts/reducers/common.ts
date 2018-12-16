@@ -6,10 +6,10 @@ import { actionTypes } from '../constants/actiontypes'
  */
 export function selectedStar(state: any = null, action: any) {
   switch (action.type) {
-    case actionTypes.SELECT_STAR:
+    case actionTypes.SET_SELECTED_STAR:
       return action.star_type
 
-    case actionTypes.DISSELECT_STAR:
+    case actionTypes.RESET_SELECTED_STAR:
       return null
 
     default:
@@ -23,7 +23,7 @@ export function selectedStar(state: any = null, action: any) {
  */
 export function isDestroyIgnited(state: any = null, action: any) {
   switch (action.type) {
-    case actionTypes.SELECT_DESTROY_ACTION:
+    case actionTypes.SET_DESTROY_ACTION:
       return action.status
 
     case actionTypes.RESET_DESTROY_ACTION:
