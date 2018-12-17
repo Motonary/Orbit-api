@@ -59,7 +59,7 @@ class ProjectPage extends React.Component<Props, {}> {
 
     if (!currentUser) return <div>Loading....</div>
 
-    if (currentUser.id !== match.params.userId) {
+    if (currentUser.id !== parseInt(match.params.userId, 10)) {
       const correctPath = `/users/${currentUser.id}`
       return <Redirect to={correctPath} />
     }
