@@ -44,20 +44,17 @@ class SubAssignmentForm extends React.Component<AssignmentFormProps> {
             deadline: '',
             planet_size: 0,
           }}
-          onSubmit={(values: CreateSubAssignmentProps, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2))
-              this.props.createSubAssignment(
-                values.title,
-                values.description,
-                values.deadline,
-                satelite_type,
-                values.planet_size,
-                assignmentId
-              )
-              this.props.resetSelectedStar()
-              setSubmitting(false)
-            }, 400)
+          onSubmit={(values: CreateSubAssignmentProps, actions: any) => {
+            this.props.createSubAssignment(
+              values.title,
+              values.description,
+              values.deadline,
+              satelite_type,
+              values.planet_size,
+              assignmentId
+            )
+            this.props.resetSelectedStar()
+            actions.setSubmitting(false)
           }}
         >
           {({
@@ -68,7 +65,6 @@ class SubAssignmentForm extends React.Component<AssignmentFormProps> {
             handleBlur,
             handleSubmit,
             isSubmitting,
-            /* and other goodies */
           }) => (
             <form onSubmit={handleSubmit}>
               <div className="form-line-1">
@@ -108,7 +104,7 @@ class SubAssignmentForm extends React.Component<AssignmentFormProps> {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                <FormSubmitBtn label="決定" disabled={isSubmitting} />
+                <FormSubmitBtn label="決定" isSubmit={isSubmitting} />
               </div>
             </form>
           )}

@@ -31,19 +31,17 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
             password: '',
             confirmation: '',
           }}
-          onSubmit={(values: CreateUserProps, { setSubmitting }) => {
-            setTimeout(() => {
-              this.props.createUser(
-                values.username,
-                values.email,
-                values.password,
-                values.confirmation,
-                (newUserId: any) => {
-                  this.props.history.push(`/users/${newUserId}`)
-                }
-              )
-              setSubmitting(false)
-            }, 400)
+          onSubmit={(values: CreateUserProps, actions: any) => {
+            this.props.createUser(
+              values.username,
+              values.email,
+              values.password,
+              values.confirmation,
+              (newUserId: any) => {
+                this.props.history.push(`/users/${newUserId}`)
+              }
+            )
+            actions.setSubmitting(false)
           }}
         >
           {({
@@ -54,7 +52,6 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
             handleBlur,
             handleSubmit,
             isSubmitting,
-            /* and other goodies */
           }) => (
             <form onSubmit={handleSubmit}>
               <InputField
@@ -86,7 +83,7 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
               {errors.confirmation &&
                 touched.confirmation &&
                 errors.confirmation}
-              <FormSubmitBtn label="SIGN UP" disable={isSubmitting} />
+              <FormSubmitBtn label="SIGN UP" isSubmit={isSubmitting} />
             </form>
           )}
         </Formik>

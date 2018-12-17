@@ -19,7 +19,7 @@ interface UpdateProfileProps {
   confirmation: any
 }
 
-class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps> {
+class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
   render() {
     return (
       <Formik
@@ -29,20 +29,20 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps> {
           password: '',
           confirmation: '',
         }}
-        onSubmit={(values: UpdateProfileProps, { setSubmitting }) => {
-          setTimeout(() => {
-            // TODO: Flashメッセージの実装
-            if (window.confirm('プロフィール情報を更新していいですか？')) {
-              this.props
-                .updateProfile(
-                  values.username,
-                  values.email,
-                  values.password,
-                  values.confirmation
-                )
-                .then(() => this.props.history.push('/'))
-            }
-          }, 400)
+        onSubmit={(values: UpdateProfileProps, actions: any) => {
+          // TODO: Flashメッセージの実装
+          if (window.confirm('プロフィール情報を更新していいですか？')) {
+            this.props.updateProfile(
+              values.username,
+              values.email,
+              values.password,
+              values.confirmation
+            )
+            setTimeout(() => {
+              this.props.history.push('/')
+              actions.setSubmitting(false)
+            }, 400)
+          }
         }}
       >
         {({
@@ -53,7 +53,6 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps> {
           handleBlur,
           handleSubmit,
           isSubmitting,
-          /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
             <InputField
@@ -83,7 +82,7 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps> {
               onBlur={handleBlur}
             />
             {errors.confirmation && touched.confirmation && errors.confirmation}
-            <FormSubmitBtn label="SIGN UP" disable={isSubmitting} />
+            <FormSubmitBtn label="SIGN UP" isSubmit={isSubmitting} />
           </form>
         )}
       </Formik>

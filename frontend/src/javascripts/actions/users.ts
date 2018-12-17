@@ -15,7 +15,7 @@ export function createUser(
     })
     .then(res => {
       callback(res.data.id)
-      createSession(email, password, null)
+      createSession(email, password)
       return {
         type: actionTypes.SET_CURRENT_USER,
         currentUser: res.data,
@@ -24,16 +24,14 @@ export function createUser(
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function createSession(email: any, password: any, callback: any) {
+export function createSession(email: any, password: any) {
   return axios
     .post(`${ROOT_URL}/api/user_token`, {
       auth: { email: email, password: password },
     })
     .then(res => {
       sessionStorage.setItem('jwt', res.data.jwt.token)
-      const id: number = res.data.signinUser.id
       const user: Object = res.data.signinUser
-      callback(id)
       return {
         type: actionTypes.SET_CURRENT_USER,
         currentUser: user,

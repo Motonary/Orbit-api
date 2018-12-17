@@ -25,45 +25,26 @@ interface CreateProjectProps {
   title: string
 }
 
-class ProjectForm extends React.Component<ProjectFormProps> {
-  onSubmit({ title }: any) {
-    const target: any = document.getElementById('form-balloon')
-    const target_star: any = document.getElementsByClassName(
-      'current-clicked'
-    )[0]
-    const fixed_star_type: any = this.props.selectedStar
-
-    this.props.createProject(title, fixed_star_type)
-    this.props.resetSelectedStar()
-    target_star.classList.remove('current-clicked')
-    target.style.display = 'none'
-
-    this.props.createProject(title, fixed_star_type)
-    this.props.resetSelectedStar()
-    this.props.resetModalStatus()
-  }
-
+class ProjectForm extends React.Component<ProjectFormProps, {}> {
   render() {
     return (
       <div id="form-on-modal">
         <div className="form-title">New Project</div>
         <Formik
           initialValues={{ title: '' }}
-          onSubmit={(values: CreateProjectProps, { setSubmitting }) => {
-            setTimeout(() => {
-              const target: any = document.getElementById('form-balloon')
-              const target_star: any = document.getElementsByClassName(
-                'current-clicked'
-              )[0]
-              const fixed_star_type: any = this.props.selectedStar
+          onSubmit={(values: CreateProjectProps, actions: any) => {
+            const target: any = document.getElementById('form-balloon')
+            const target_star: any = document.getElementsByClassName(
+              'current-clicked'
+            )[0]
+            const fixed_star_type: any = this.props.selectedStar
 
-              target_star.classList.remove('current-clicked')
-              target.style.display = 'none'
+            target_star.classList.remove('current-clicked')
+            target.style.display = 'none'
 
-              this.props.createProject(values.title, fixed_star_type)
-              this.props.resetSelectedStar()
-              this.props.resetModalStatus()
-            }, 400)
+            this.props.createProject(values.title, fixed_star_type)
+            this.props.resetSelectedStar()
+            this.props.resetModalStatus()
           }}
         >
           {({
@@ -74,7 +55,6 @@ class ProjectForm extends React.Component<ProjectFormProps> {
             handleBlur,
             handleSubmit,
             isSubmitting,
-            /* and other goodies */
           }) => (
             <form onSubmit={handleSubmit}>
               <div className="form-line-2">
@@ -89,7 +69,7 @@ class ProjectForm extends React.Component<ProjectFormProps> {
                 {errors.title && touched.title && errors.title}
               </div>
               <div className="form-line-4">
-                <FormSubmitBtn label="決定" />
+                <FormSubmitBtn label="決定" isSubmit={isSubmitting} />
               </div>
             </form>
           )}

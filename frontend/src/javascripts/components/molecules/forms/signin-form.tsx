@@ -24,25 +24,9 @@ class SignInForm extends React.Component<SignInFormProps, {}> {
       <div className="signin-form">
         <Formik
           initialValues={{ email: '', password: '' }}
-          onSubmit={(values: CreateSessionProps, { setSubmitting }) => {
-            this.props.createSession(
-              values.email,
-              values.password,
-              (userId: any) => {
-                console.log(userId, this.props.history)
-                this.props.history.push(`/users/${userId}`)
-              }
-            )
-            // setTimeout(() => {
-            //   this.props.createSession(
-            //     values.email,
-            //     values.password,
-            //     (userId: any) => {
-            //       this.props.history.push(`/users/${userId}`)
-            //     }
-            //   )
-            //   setSubmitting(false)
-            // }, 400)
+          onSubmit={(values: CreateSessionProps, actions: any) => {
+            this.props.createSession(values.email, values.password)
+            actions.setSubmitting(true)
           }}
         >
           {({
@@ -53,7 +37,6 @@ class SignInForm extends React.Component<SignInFormProps, {}> {
             handleBlur,
             handleSubmit,
             isSubmitting,
-            /* and other goodies */
           }) => (
             <form onSubmit={handleSubmit}>
               <InputField
@@ -74,7 +57,7 @@ class SignInForm extends React.Component<SignInFormProps, {}> {
                 onBlur={handleBlur}
               />
               {errors.password && touched.password && errors.password}
-              <FormSubmitBtn label="SIGN IN" disable={isSubmitting} />
+              <FormSubmitBtn label="SIGN IN" isSubmit={isSubmitting} />
             </form>
           )}
         </Formik>
