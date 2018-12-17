@@ -1,8 +1,16 @@
 import axios from 'axios'
 import { actionTypes } from '../constants/actiontypes'
 import { ROOT_URL } from '../constants/url'
+import { revolvingAssignments } from '../reducers/assignments'
 
-export function fetchRevolvingAssignments(projectId: any) {
+interface FetchRevolvingAssignmentsAction {
+  type: typeof actionTypes.FETCH_REVOLVING_ASSIGNMENTS
+  revolvingAssignments: Object
+}
+
+export function fetchRevolvingAssignments(
+  projectId: any
+): Promise<FetchRevolvingAssignmentsAction | void> {
   return axios
     .get(`${ROOT_URL}/api/assignments/revolving`, {
       headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
