@@ -26,7 +26,7 @@ class SignInForm extends React.Component<SignInFormProps, {}> {
           initialValues={{ email: '', password: '' }}
           onSubmit={(values: CreateSessionProps, actions: any) => {
             this.props.createSession(values.email, values.password)
-            actions.setSubmitting(true)
+            actions.setSubmitting(false)
           }}
         >
           {({
