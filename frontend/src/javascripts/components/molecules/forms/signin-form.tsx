@@ -13,13 +13,17 @@ interface SignInFormProps {
 }
 
 class SignInForm extends React.Component<SignInFormProps, {}> {
-  onSubmitSignInData({ email, password }: any) {
-    this.props.createSession(email, password, (userId: any) => {
+  onSubmitSignInData() {
+    const email: string = 'ririco722tomato@example.com'
+    const password: string = 'password'
+    this.props.createSession(email, password, (userId: number) => {
       this.props.history.push(`/users/${userId}`)
     })
   }
 
   render() {
+    console.log('rendered')
+    console.log(this.props.history)
     return (
       <div className="signin-form">
         <form onSubmit={this.onSubmitSignInData.bind(this)}>
