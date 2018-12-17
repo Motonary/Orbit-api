@@ -24,15 +24,8 @@ class SignInForm extends React.Component<SignInFormProps, {}> {
       <div className="signin-form">
         <Formik
           initialValues={{ email: '', password: '' }}
-          onSubmit={(values: CreateSessionProps, { setSubmitting }) => {
-            this.props.createSession(
-              values.email,
-              values.password,
-              (userId: any) => {
-                console.log(userId, this.props.history)
-                this.props.history.push(`/users/${userId}`)
-              }
-            )
+          onSubmit={(values: CreateSessionProps) => {
+            this.props.createSession(values.email, values.password)
             // setTimeout(() => {
             //   this.props.createSession(
             //     values.email,
