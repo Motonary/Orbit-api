@@ -20,7 +20,7 @@ export function createUser(
         currentUser: res.data,
       }
     })
-    .catch((e: any) => alert(`Sorry, something went wrong...\n ${e}`))
+    .catch((err: any) => alert(`Sorry, something went wrong...\n ${err}`))
 }
 
 export function createSession(email: any, password: any) {

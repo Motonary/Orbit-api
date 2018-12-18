@@ -24,7 +24,6 @@ export default class TopPage extends React.Component<Props, State> {
 
   onClickTopPageButton() {
     const { isSignIn } = this.state
-    console.log(isSignIn)
     if (isSignIn) {
       this.setState({ isSignIn: false })
     } else if (!isSignIn) {
