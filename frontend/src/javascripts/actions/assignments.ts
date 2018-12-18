@@ -7,56 +7,42 @@ interface BaseAction {
   payload?: any
 }
 
-export interface FetchRevolvingAssignmentsAction extends BaseAction {
+interface FetchRevolvingAssignmentsAction extends BaseAction {
   type: string
-  payload: {
-    revolvingAssignments: Object
-  }
+  payload: { revolvingAssignments: Object }
 }
 
-export interface FetchDestroyedAssignmentsAction extends BaseAction {
+interface FetchDestroyedAssignmentsAction extends BaseAction {
   type: string
-  payload: {
-    destroyedAssignments: Object
-  }
+  payload: { destroyedAssignments: Object }
 }
 
-export interface CreateAssignmentAction extends BaseAction {
+interface CreateAssignmentAction extends BaseAction {
   type: string
-  payload: {
-    newAssignment: Object
-  }
+  payload: { newAssignment: Object }
 }
 
-export interface DestroyAssignmentAction extends BaseAction {
+interface DestroyAssignmentAction extends BaseAction {
   type: string
-  payload: {
-    assignmentId: string // TODO: numberかも
-  }
+  payload: { assignmentId: string } // TODO: numberかも
 }
 
-export interface RestoreAssignmentAction extends BaseAction {
+interface RestoreAssignmentAction extends BaseAction {
   type: string
-  payload: {
-    assignmentId: number // TODO: stringかも
-  }
+  payload: { assignmentId: number } // TODO: stringかも
 }
 
-export interface SelectAssignmentAction extends BaseAction {
+interface SelectAssignmentAction extends BaseAction {
   type: string
-  payload: {
-    assignmentId: number // TODO: stringかも
-  }
+  payload: { assignmentId: number } // TODO: stringかも
 }
 
-export interface DisselectAssignmentAction extends BaseAction {
+interface DisselectAssignmentAction extends BaseAction {
   type: string
-  payload: {
-    assignmentId: number // TODO: stringかも
-  }
+  payload: { assignmentId: number } // TODO: stringかも
 }
 
-export interface NullifySelectedAssignment extends BaseAction {
+interface NullifySelectedAssignment extends BaseAction {
   type: string
 }
 
@@ -81,9 +67,7 @@ export function fetchRevolvingAssignments(
     .then(res => {
       return {
         type: actionTypes.FETCH_REVOLVING_ASSIGNMENTS,
-        payload: {
-          revolvingAssignments: res.data,
-        },
+        payload: { revolvingAssignments: res.data },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
@@ -97,9 +81,7 @@ export function fetchDestroyedAssignments(): Promise<FetchDestroyedAssignmentsAc
     .then(res => {
       return {
         type: actionTypes.FETCH_DESTROYED_ASSIGNMENTS,
-        payload: {
-          destroyedAssignments: res.data,
-        },
+        payload: { destroyedAssignments: res.data },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
@@ -133,9 +115,7 @@ export function createAssignment(
     .then(res => {
       return {
         type: actionTypes.CREATE_ASSIGNMENT,
-        payload: {
-          newAssignment: res.data,
-        },
+        payload: { newAssignment: res.data },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
@@ -152,9 +132,7 @@ export function destroyAssignment(
     .then(() => {
       return {
         type: actionTypes.DESTROY_ASSIGNMENT,
-        payload: {
-          assignmentId,
-        },
+        payload: { assignmentId },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
@@ -171,9 +149,7 @@ export function restoreAssignment(
     .then(() => {
       return {
         type: actionTypes.RESTORE_ASSIGNMENT,
-        payload: {
-          assignmentId,
-        },
+        payload: { assignmentId },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
@@ -182,9 +158,7 @@ export function restoreAssignment(
 export function selectAssignment(assignmentId: any): SelectAssignmentAction {
   return {
     type: actionTypes.SELECT_ASSIGNMENT,
-    payload: {
-      assignmentId,
-    },
+    payload: { assignmentId },
   }
 }
 
@@ -193,9 +167,7 @@ export function disselectAssignment(
 ): DisselectAssignmentAction {
   return {
     type: actionTypes.DISSELECT_ASSIGNMENT,
-    payload: {
-      assignmentId,
-    },
+    payload: { assignmentId },
   }
 }
 
