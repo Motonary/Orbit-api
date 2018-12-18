@@ -23,5 +23,5 @@ $ rails db:seed
 $ foreman start
 ```
 ## Author
-- [Yuki Shirota](https://github.com/yuki-s-utmafia)
-- [Taishi Murakami](https://github.com/Taishi-M-UTMafia)
+- [Yuki Shirota](https://github.com/rechtburg)
+- [Taishi Murakami](https://github.com/bokusunny)

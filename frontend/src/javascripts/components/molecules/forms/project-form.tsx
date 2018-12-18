@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { Formik } from 'formik'
 
 import InputField from '../../atoms/input-field'
 
@@ -11,6 +12,7 @@ import {
 import { createProject } from '../../../actions/projects'
 
 import '../../../../stylesheets/form_on_modal.scss'
+import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
 
 interface ProjectFormProps {
   selectedStar: any
@@ -19,38 +21,59 @@ interface ProjectFormProps {
   resetModalStatus: any
 }
 
-class ProjectForm extends React.Component<ProjectFormProps> {
-  onSubmit({ title }: any) {
-    const target: any = document.getElementById('form-balloon')
-    const target_star: any = document.getElementsByClassName(
-      'current-clicked'
-    )[0]
-    const fixed_star_type: any = this.props.selectedStar
+interface CreateProjectValues {
+  title: string
+}
 
-    this.props.createProject(title, fixed_star_type)
-    this.props.resetSelectedStar()
-    target_star.classList.remove('current-clicked')
-    target.style.display = 'none'
-
-    this.props.createProject(title, fixed_star_type)
-    this.props.resetSelectedStar()
-    this.props.resetModalStatus()
-  }
-
+class ProjectForm extends React.Component<ProjectFormProps, {}> {
   render() {
     return (
       <div id="form-on-modal">
         <div className="form-title">New Project</div>
-        <form onSubmit={this.onSubmit.bind(this)}>
-          <div className="form-line-2">
-            <InputField placeholder="title" name="title" type="text" />
-          </div>
-          <div className="form-line-4">
-            <button type="submit" className="submit-btn assignment-fieled-text">
-              決定
-            </button>
-          </div>
-        </form>
+        <Formik
+          initialValues={{ title: '' }}
+          onSubmit={(values: CreateProjectValues, actions: any) => {
+            const target: any = document.getElementById('form-balloon')
+            const target_star: any = document.getElementsByClassName(
+              'current-clicked'
+            )[0]
+            const fixed_star_type: any = this.props.selectedStar
+
+            target_star.classList.remove('current-clicked')
+            target.style.display = 'none'
+
+            this.props.createProject(values.title, fixed_star_type)
+            this.props.resetSelectedStar()
+            this.props.resetModalStatus()
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <div className="form-line-2">
+                <InputField
+                  type="title"
+                  name="title"
+                  placeholder="title"
+                  value={values.title}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.title && touched.title && errors.title}
+              </div>
+              <div className="form-line-4">
+                <FormSubmitBtn label="決定" isSubmit={isSubmitting} />
+              </div>
+            </form>
+          )}
+        </Formik>
       </div>
     )
   }

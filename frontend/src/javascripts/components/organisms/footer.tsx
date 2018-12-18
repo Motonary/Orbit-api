@@ -14,7 +14,7 @@ import {
 import {
   setSelectedStar,
   resetSelectedStar,
-  resetDestroyPlanets,
+  resetDestroyAction,
 } from '../../actions/common'
 
 import { DeleteActions } from '../../constants/images'
@@ -29,7 +29,7 @@ interface FooterProps {
   modalOpen: any
   selectedAssignments: any
 
-  resetDestroyPlanets: any
+  resetDestroyAction: any
   nullifySelectedAssignment: any
   destroyAssignment: any
 }
@@ -345,7 +345,7 @@ class Footer extends React.Component<FooterProps, FooterState> {
     removeImg()
     removeDestroyImg()
     animateParticules(pointerX, pointerY)
-    this.props.resetDestroyPlanets(null)
+    this.props.resetDestroyAction(null)
     this.removeAssignmentData(parent)
     this.removePlanet(parent)
     this.props.nullifySelectedAssignment()
@@ -400,6 +400,6 @@ export default connect(
     nullifySelectedAssignment,
     setSelectedStar,
     resetSelectedStar,
-    resetDestroyPlanets,
+    resetDestroyAction,
   }
 )(Footer)
