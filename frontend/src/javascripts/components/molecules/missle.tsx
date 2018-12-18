@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import anime from 'animejs'
 
-import DeleteBtn from '../atoms/buttons/delete-btn'
+import ActionBtn from '../atoms/buttons/action-btn'
 
 import { resetDestroyAction, resetModalStatus } from '../../actions/common'
 import { resetSelectedAssignment } from '../../actions/assignments'
@@ -11,7 +11,7 @@ import { DeleteActions } from '../../constants/images'
 
 interface MissleProps {
   icon: string
-  deleteBtnClass: string
+  actionBtnClass: string
   motionControll: () => void
   onClick: () => void
 
@@ -243,11 +243,11 @@ class Missle extends React.Component<MissleProps, {}> {
   }
 
   render() {
-    const { icon, deleteBtnClass, onClick } = this.props
+    const { icon, actionBtnClass, onClick } = this.props
     return (
-      <DeleteBtn
+      <ActionBtn
         icon={icon}
-        deleteBtnClass={deleteBtnClass}
+        actionBtnClass={actionBtnClass}
         onClick={onClick}
       />
     )

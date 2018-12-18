@@ -38,6 +38,7 @@ export function selectedAssignments(state: any = [], action: any) {
       return [...state, action.assignmentId]
 
     case actionTypes.REMOVE_SELECTED_ASSIGNMENT:
+      // この比較文の型付け（potential error）
       return state.filter((item: any) => item !== action.assignmentId)
 
     case actionTypes.RESET_SELECTED_ASSIGNMENT:

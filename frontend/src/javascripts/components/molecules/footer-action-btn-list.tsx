@@ -2,17 +2,18 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
+import Rival from './revival'
 import Meteorite from './meteorite'
 import Missle from './missle'
 import BlackHole from './blackhole'
 
 import { setModalStatus, setDestroyAction } from '../../actions/common'
 
-import { DeleteIcons } from '../../constants/images'
+import { ActionIcons } from '../../constants/images'
 
 import '../../../stylesheets/destroy_animate.scss'
 
-interface DeleteButtonsListProps {
+interface FooterActionBtnListProps {
   pathname: any
   rootPath: any
 
@@ -20,9 +21,11 @@ interface DeleteButtonsListProps {
   setDestroyAction: any
 }
 
-class DeleteButtonsList extends React.Component<DeleteButtonsListProps, {}> {
+class FooterActionBtnList extends React.Component<
+  FooterActionBtnListProps,
+  {}
+> {
   onClickOpenModal(actionType: string) {
-    // this.props.setModalStatus('destroy')
     this.props.setDestroyAction(actionType)
     this.motionControll()
   }
@@ -45,8 +48,13 @@ class DeleteButtonsList extends React.Component<DeleteButtonsListProps, {}> {
 
   render() {
     const { pathname, rootPath } = this.props
-    const actionType = Object.keys(DeleteIcons)
-    const deleteButtonsClass = classNames({
+    const actionType = Object.keys(ActionIcons)
+    const rivivalBtnClass = classNames({
+      'action-btn': true,
+      'revival-button-show': pathname === `${rootPath}/history`,
+    })
+    const deleteBtnsClass: string = classNames({
+      'action-btn': true,
       'delete-buttons-show':
         pathname === `${rootPath}` ||
         /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
@@ -54,32 +62,39 @@ class DeleteButtonsList extends React.Component<DeleteButtonsListProps, {}> {
     })
 
     return (
-      <div>
-        <Meteorite
-          icon={DeleteIcons[actionType[0]]}
-          deleteBtnClass={deleteButtonsClass}
-          motionControll={() => this.motionControll()}
+      <ul id="action-button-list">
+        <Rival
+          icon={ActionIcons[actionType[0]]}
+          actionBtnClass={rivivalBtnClass}
           onClick={() => {
             this.onClickOpenModal(actionType[0])
           }}
         />
-        <Missle
-          icon={DeleteIcons[actionType[1]]}
-          deleteBtnClass={deleteButtonsClass}
+        <Meteorite
+          icon={ActionIcons[actionType[1]]}
+          actionBtnClass={deleteBtnsClass}
           motionControll={() => this.motionControll()}
           onClick={() => {
             this.onClickOpenModal(actionType[1])
           }}
         />
-        <BlackHole
-          icon={DeleteIcons[actionType[2]]}
-          deleteBtnClass={deleteButtonsClass}
+        <Missle
+          icon={ActionIcons[actionType[2]]}
+          actionBtnClass={deleteBtnsClass}
           motionControll={() => this.motionControll()}
           onClick={() => {
             this.onClickOpenModal(actionType[2])
           }}
         />
-      </div>
+        <BlackHole
+          icon={ActionIcons[actionType[3]]}
+          actionBtnClass={deleteBtnsClass}
+          motionControll={() => this.motionControll()}
+          onClick={() => {
+            this.onClickOpenModal(actionType[3])
+          }}
+        />
+      </ul>
     )
   }
 }
@@ -87,4 +102,4 @@ class DeleteButtonsList extends React.Component<DeleteButtonsListProps, {}> {
 export default connect(
   null,
   { setModalStatus, setDestroyAction }
-)(DeleteButtonsList)
+)(FooterActionBtnList)

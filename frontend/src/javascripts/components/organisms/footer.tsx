@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import PlanetHolder from '../molecules/planet-holder'
-import FooterButtonsList from '../molecules/footer-buttons-list'
+import FooterActionBtnList from '../molecules/footer-action-btn-list'
 import ConfirmModal from '../molecules/confirm-modal'
 import FormModal from '../molecules/form-modal'
 
@@ -25,7 +25,7 @@ class Footer extends React.Component<FooterProps, {}> {
     return (
       <div id="footer">
         <PlanetHolder pathname={pathname} currentUser={currentUser} />
-        <FooterButtonsList pathname={pathname} rootPath={rootPath} />
+        <FooterActionBtnList pathname={pathname} rootPath={rootPath} />
         <ConfirmModal />
         <FormModal pathname={pathname} />
       </div>

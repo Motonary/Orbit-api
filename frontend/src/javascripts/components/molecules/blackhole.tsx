@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import DeleteBtn from '../atoms/buttons/delete-btn'
+import ActionBtn from '../atoms/buttons/action-btn'
 
 import {
   setDestroyAction,
@@ -14,7 +14,7 @@ import { DeleteActions } from '../../constants/images'
 
 interface BlackHoleProps {
   icon: string
-  deleteBtnClass: string
+  actionBtnClass: string
   motionControll: () => void
   onClick: () => void
 
@@ -102,11 +102,11 @@ class BlackHole extends React.Component<BlackHoleProps, {}> {
   }
 
   render() {
-    const { icon, deleteBtnClass, onClick } = this.props
+    const { icon, actionBtnClass, onClick } = this.props
     return (
-      <DeleteBtn
+      <ActionBtn
         icon={icon}
-        deleteBtnClass={deleteBtnClass}
+        actionBtnClass={actionBtnClass}
         onClick={onClick}
       />
     )

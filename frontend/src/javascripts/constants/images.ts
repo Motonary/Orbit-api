@@ -75,13 +75,12 @@ export const PlanetImgs: any = {
   Egg: ImgStar15,
 }
 
-export const DeleteIcons: any = {
+export const ActionIcons: any = {
+  Revival: RevivalIcon,
   Meteorite: DeleteIcon1,
   Missile: DeleteIcon2,
   BlackHole: DeleteIcon3,
 }
-
-export const RevivalImg: any = RevivalIcon
 
 export const DeleteActions: any = {
   Meteorite: MeteoriteImg,

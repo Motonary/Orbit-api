@@ -77,37 +77,34 @@ $holder-height: 100px;
       width: 400px;
     }
   }
-  #action-button-holder {
+
+  ul#action-button-list {
     height: $holder-height;
     margin: 0 10px;
     padding: 0;
+    display: flex;
 
-    ul#action-button-list {
-      margin: 0 5px;
-      padding: 0;
-      display: flex;
+    li.action-btn {
+      list-style: none;
+      width: $holder-height;
+      height: $holder-height;
+      margin-right: 10px;
+      cursor: pointer;
+      display: none;
 
-      li.delete-btn {
-        list-style: none;
+      .action-icon {
         width: $holder-height;
         height: $holder-height;
-        margin-right: 10px;
-        cursor: pointer;
-        display: none;
-
-        .delete-icon {
-          width: $holder-height;
-          height: $holder-height;
-        }
-      }
-      li.delete-buttons-show {
-        display: flex;
-      }
-      li.revival-button-show {
-        display: flex;
       }
     }
+    li.delete-buttons-show {
+      display: flex;
+    }
+    li.revival-button-show {
+      display: flex;
+    }
   }
+
   .holder-border {
     border: solid 1px #000;
     border-radius: 20px;
