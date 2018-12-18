@@ -4,7 +4,7 @@ import '../../../stylesheets/field.scss'
 
 interface SelectFieldProps {
   name: string
-  value: string | number
+  value: string
   onChange: (e: React.SyntheticEvent<HTMLSelectElement>) => void
   onBlur: (e: React.SyntheticEvent<HTMLSelectElement>) => void
 }
@@ -16,7 +16,7 @@ const SelectField: React.SFC<SelectFieldProps> = ({
   onBlur,
 }) => {
   return (
-    <div className="select-fieled-style">
+    <div className="select-field-style">
       <select name={name} value={value} onChange={onChange} onBlur={onBlur}>
         <option value="">SIZE</option>
         <option value="large">large</option>

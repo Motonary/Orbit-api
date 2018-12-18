@@ -9,12 +9,12 @@ import FormModal from '../molecules/form-modal'
 
 import {
   destroyAssignment,
-  nullifySelectedAssignment,
+  resetSelectedAssignment,
 } from '../../actions/assignments'
 import {
   setSelectedStar,
   resetSelectedStar,
-  resetDestroyPlanets,
+  resetDestroyAction,
 } from '../../actions/common'
 
 import { DeleteActions } from '../../constants/images'
@@ -29,8 +29,8 @@ interface FooterProps {
   modalOpen: any
   selectedAssignments: any
 
-  resetDestroyPlanets: any
-  nullifySelectedAssignment: any
+  resetDestroyAction: any
+  resetSelectedAssignment: any
   destroyAssignment: any
 }
 
@@ -345,10 +345,10 @@ class Footer extends React.Component<FooterProps, FooterState> {
     removeImg()
     removeDestroyImg()
     animateParticules(pointerX, pointerY)
-    this.props.resetDestroyPlanets(null)
+    this.props.resetDestroyAction(null)
     this.removeAssignmentData(parent)
     this.removePlanet(parent)
-    this.props.nullifySelectedAssignment()
+    this.props.resetSelectedAssignment()
     this.motionControll()
   }
 
@@ -397,9 +397,9 @@ export default connect(
   }),
   {
     destroyAssignment,
-    nullifySelectedAssignment,
+    resetSelectedAssignment,
     setSelectedStar,
     resetSelectedStar,
-    resetDestroyPlanets,
+    resetDestroyAction,
   }
 )(Footer)

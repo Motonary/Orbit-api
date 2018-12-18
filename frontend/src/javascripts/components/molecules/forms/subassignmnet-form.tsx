@@ -22,11 +22,11 @@ interface AssignmentFormProps {
   createSubAssignment: any
 }
 
-interface CreateSubAssignmentProps {
+interface CreateSubAssignmentValues {
   title: string
   description: string
   deadline: string
-  planet_size: number
+  planet_size: string
 }
 
 class SubAssignmentForm extends React.Component<AssignmentFormProps> {
@@ -42,9 +42,9 @@ class SubAssignmentForm extends React.Component<AssignmentFormProps> {
             title: '',
             description: '',
             deadline: '',
-            planet_size: 0,
+            planet_size: '',
           }}
-          onSubmit={(values: CreateSubAssignmentProps, actions: any) => {
+          onSubmit={(values: CreateSubAssignmentValues, actions: any) => {
             this.props.createSubAssignment(
               values.title,
               values.description,

@@ -20,11 +20,11 @@ interface AssignmentFormProps {
   createAssignment: any
 }
 
-interface CreateAssignmentProps {
+interface CreateAssignmentValues {
   title: string
   description: string
   deadline: string
-  planet_size: number
+  planet_size: string
 }
 
 class AssignmentForm extends React.Component<AssignmentFormProps> {
@@ -41,9 +41,9 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
             title: '',
             description: '',
             deadline: '',
-            planet_size: 0,
+            planet_size: '',
           }}
-          onSubmit={(values: CreateAssignmentProps, actions: any) => {
+          onSubmit={(values: CreateAssignmentValues, actions: any) => {
             this.props.createAssignment(
               values.title,
               values.description,

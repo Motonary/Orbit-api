@@ -13,7 +13,7 @@ interface SignUpFormProps {
   createUser: any
 }
 
-interface CreateUserProps {
+interface CreateUserValues {
   username: string
   email: string
   password: string
@@ -31,7 +31,7 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
             password: '',
             confirmation: '',
           }}
-          onSubmit={(values: CreateUserProps, actions: any) => {
+          onSubmit={(values: CreateUserValues, actions: any) => {
             this.props.createUser(
               values.username,
               values.email,

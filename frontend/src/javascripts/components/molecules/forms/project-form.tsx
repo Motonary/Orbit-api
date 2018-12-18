@@ -21,7 +21,7 @@ interface ProjectFormProps {
   resetModalStatus: any
 }
 
-interface CreateProjectProps {
+interface CreateProjectValues {
   title: string
 }
 
@@ -32,7 +32,7 @@ class ProjectForm extends React.Component<ProjectFormProps, {}> {
         <div className="form-title">New Project</div>
         <Formik
           initialValues={{ title: '' }}
-          onSubmit={(values: CreateProjectProps, actions: any) => {
+          onSubmit={(values: CreateProjectValues, actions: any) => {
             const target: any = document.getElementById('form-balloon')
             const target_star: any = document.getElementsByClassName(
               'current-clicked'

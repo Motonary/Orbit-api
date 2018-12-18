@@ -12,7 +12,7 @@ type ProfileUpdateFormProps = {
   history: any
 }
 
-interface UpdateProfileProps {
+interface UpdateProfileValues {
   username: any
   email: any
   password: any
@@ -29,19 +29,20 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
           password: '',
           confirmation: '',
         }}
-        onSubmit={(values: UpdateProfileProps, actions: any) => {
+        onSubmit={(values: UpdateProfileValues, actions: any) => {
           // TODO: Flashメッセージの実装
           if (window.confirm('プロフィール情報を更新していいですか？')) {
-            this.props.updateProfile(
-              values.username,
-              values.email,
-              values.password,
-              values.confirmation
-            )
-            setTimeout(() => {
-              this.props.history.push('/')
-              actions.setSubmitting(false)
-            }, 400)
+            Promise.resolve()
+              .then(
+                this.props.updateProfile(
+                  values.username,
+                  values.email,
+                  values.password,
+                  values.confirmation
+                )
+              )
+              .then(this.props.history.push('/'))
+            actions.setSubmitting(false)
           }
         }}
       >

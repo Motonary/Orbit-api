@@ -13,7 +13,7 @@ interface SignInFormProps {
   createSession: any
 }
 
-interface CreateSessionProps {
+interface CreateSessionValues {
   email: string
   password: string
 }
@@ -24,7 +24,7 @@ class SignInForm extends React.Component<SignInFormProps, {}> {
       <div className="signin-form">
         <Formik
           initialValues={{ email: '', password: '' }}
-          onSubmit={(values: CreateSessionProps, actions: any) => {
+          onSubmit={(values: CreateSessionValues, actions: any) => {
             this.props.createSession(values.email, values.password)
             actions.setSubmitting(false)
           }}

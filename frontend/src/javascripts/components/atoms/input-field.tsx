@@ -7,7 +7,7 @@ interface InputFieldProps {
   type: string
   name: string
   placeholder: string
-  value: string | number
+  value: string
   onChange: (e: React.SyntheticEvent<HTMLInputElement>) => void
   onBlur: (e: React.SyntheticEvent<HTMLInputElement>) => void
 }
