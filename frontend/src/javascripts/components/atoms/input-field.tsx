@@ -4,15 +4,21 @@ import classNames from 'classnames'
 import '../../../stylesheets/field.scss'
 
 interface InputFieldProps {
-  name: string
   type: string
+  name: string
   placeholder: string
+  value: string
+  onChange: (e: React.SyntheticEvent<HTMLInputElement>) => void
+  onBlur: (e: React.SyntheticEvent<HTMLInputElement>) => void
 }
 
 const InputField: React.SFC<InputFieldProps> = ({
-  name,
   type,
+  name,
   placeholder,
+  value,
+  onChange,
+  onBlur,
 }) => {
   const fieldClasses = classNames({
     'field-style': true,
@@ -45,10 +51,13 @@ const InputField: React.SFC<InputFieldProps> = ({
     <div className={fieldClasses}>
       <input
         className={`${inputClasses} ${inputRadius}`}
+        name={name}
         type={type}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
       />
-      {/* <div className="input-error">{touched ? error : ''}</div> */}
     </div>
   )
 }

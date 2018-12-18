@@ -6,35 +6,33 @@ export function createUser(
   name: any,
   email: any,
   password: any,
-  password_confirmation: any,
-  callback: any
+  password_confirmation: any
 ) {
   return axios
     .post(`${ROOT_URL}/api/signup`, {
       user: { name, email, password, password_confirmation },
     })
     .then(res => {
-      callback(res.data.id)
-      createSession(email, password, null)
+      createSession(email, password) // Promise
       return {
         type: actionTypes.SET_CURRENT_USER,
         currentUser: res.data,
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch((err: any) => alert(`Sorry, something went wrong...\n ${err}`))
 }
 
-export function createSession(email: any, password: any, callback: any) {
+export function createSession(email: any, password: any) {
   return axios
     .post(`${ROOT_URL}/api/user_token`, {
       auth: { email: email, password: password },
     })
     .then(res => {
       sessionStorage.setItem('jwt', res.data.jwt.token)
-      callback(res.data.signinUser.id)
+      const user: Object = res.data.signinUser
       return {
         type: actionTypes.SET_CURRENT_USER,
-        currentUser: res.data.signinUser,
+        currentUser: user,
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))

@@ -6,6 +6,7 @@ import MypageOrbit from '../molecules/mypage-orbit'
 const MyPageMain = ({ currentUser, match, history }: any) => {
   if (!currentUser) return <div>Loading....</div>
 
+  // currentUser.id: number, match.param.userId: string
   if (currentUser.id !== parseInt(match.params.userId, 10)) {
     return <Redirect to={`/users/${currentUser.id}`} />
   }
