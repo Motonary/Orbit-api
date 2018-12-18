@@ -2,6 +2,18 @@ import axios from 'axios'
 import { actionTypes } from '../constants/actiontypes'
 import { ROOT_URL } from '../constants/url'
 
+interface BaseAction {
+  type: string
+  payload?: any
+}
+
+interface CreateSubAssignmentAction extends BaseAction {
+  type: string
+  newSubAssignment: Object
+}
+
+export type SubAssignmentAction = CreateSubAssignmentAction
+
 export function createSubAssignment(
   title: any,
   description: any,
@@ -9,7 +21,7 @@ export function createSubAssignment(
   planet_type: any,
   planet_size: any,
   assignmentId: any
-) {
+): Promise<CreateSubAssignmentAction | void> {
   return axios({
     method: 'post',
     url: `${ROOT_URL}/api/subassignments`,

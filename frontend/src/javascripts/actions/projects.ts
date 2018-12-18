@@ -2,7 +2,50 @@ import axios from 'axios'
 import { actionTypes } from '../constants/actiontypes'
 import { ROOT_URL } from '../constants/url'
 
-export function fetchRevolvingProjects() {
+interface BaseAction {
+  type: string
+  payload?: any
+}
+
+interface FetchRevolvingProjectsAction extends BaseAction {
+  type: string
+  payload: { currentUserAllProjects: any }
+}
+
+interface SetCurrentProjectAction extends BaseAction {
+  type: string
+  payload: { currentProject: Object }
+}
+
+interface SetDefaultProjectAction extends BaseAction {
+  type: string
+  payload: { currentProject: Object }
+}
+
+interface ChangeCurrentProjectAction extends BaseAction {
+  type: string
+  payload: { currentProject: Object }
+}
+
+interface CreateProjectAction extends BaseAction {
+  type: string
+  payload: { newProject: Object }
+}
+
+interface DestroyProjectAction extends BaseAction {
+  type: string
+  // payload: { projectId: number } // TODO: stringかも // エラー回避のため一時的にコメントアウト
+}
+
+export type ProjectAction =
+  | FetchRevolvingProjectsAction
+  | SetCurrentProjectAction
+  | SetDefaultProjectAction
+  | ChangeCurrentProjectAction
+  | CreateProjectAction
+  | DestroyProjectAction
+
+export function fetchRevolvingProjects(): Promise<FetchRevolvingProjectsAction | void> {
   return axios
     .get(`${ROOT_URL}/api/projects/`, {
       headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
@@ -10,37 +53,49 @@ export function fetchRevolvingProjects() {
     .then(res => {
       return {
         type: actionTypes.FETCH_REVOLVING_PROJECTS,
-        currentUserAllProjects: res.data,
+        payload: { currentUserAllProjects: res.data },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function setCurrentProject(currentProject: any, callback: any) {
+export function setCurrentProject(
+  currentProject: any,
+  callback: any
+): SetCurrentProjectAction {
   callback()
   return {
     type: actionTypes.SET_CURRENT_PROJECT,
-    currentProject,
+    payload: { currentProject },
   }
 }
 
-export function setDefaultProject(defaultProject: any, callback: any) {
+export function setDefaultProject(
+  defaultProject: any,
+  callback: any
+): SetDefaultProjectAction {
   callback(defaultProject.id)
   return {
     type: actionTypes.SET_CURRENT_PROJECT,
-    currentProject: defaultProject,
+    payload: { currentProject: defaultProject },
   }
 }
 
-export function changeCurrentProject(newProject: any, callback: any) {
+export function changeCurrentProject(
+  newProject: any,
+  callback: any
+): ChangeCurrentProjectAction {
   callback()
   return {
     type: actionTypes.SET_CURRENT_PROJECT,
-    currentProject: newProject,
+    payload: { currentProject: newProject },
   }
 }
 
-export function createProject(title: any, fixed_star_type: any) {
+export function createProject(
+  title: any,
+  fixed_star_type: any
+): Promise<CreateProjectAction | void> {
   return axios({
     method: 'post',
     url: `${ROOT_URL}/api/projects`,
@@ -50,13 +105,15 @@ export function createProject(title: any, fixed_star_type: any) {
     .then(res => {
       return {
         type: actionTypes.CREATE_PROJECT,
-        newProject: res.data,
+        payload: { newProject: res.data },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function destroyProject(projectId: any) {
+export function destroyProject(
+  projectId: any
+): Promise<DestroyProjectAction | void> {
   return axios({
     method: 'delete',
     url: `${ROOT_URL}/api/projects/${projectId}`,
@@ -65,7 +122,7 @@ export function destroyProject(projectId: any) {
     .then(() => {
       return {
         type: actionTypes.DESTROY_PROJECT,
-        projectId,
+        payload: { projectId },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))

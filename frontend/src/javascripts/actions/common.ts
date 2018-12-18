@@ -10,7 +10,7 @@ interface SetSelectedStarAction extends BaseAction {
   payload: { star_type: number } // TODO: stringかも
 }
 
-interface ResetSelectedStarActiopn extends BaseAction {
+interface ResetSelectedStarAction extends BaseAction {
   type: string
 }
 
@@ -37,7 +37,7 @@ interface ResetMOdalStatusAction extends BaseAction {
 
 export type CommonAction =
   | SetSelectedStarAction
-  | ResetSelectedStarActiopn
+  | ResetSelectedStarAction
   | IgniteDestroyPlanetsAction
   | ResetDestroyActionAction
   | SetModalStatusAction
@@ -50,7 +50,7 @@ export function setSelectedStar(star_type: any): SetSelectedStarAction {
   }
 }
 
-export function resetSelectedStar(): ResetSelectedStarActiopn {
+export function resetSelectedStar(): ResetSelectedStarAction {
   return {
     type: actionTypes.DISSELECT_STAR,
   }
