@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { Formik } from 'formik'
 
 import InputField from '../../atoms/input-field'
 import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
@@ -11,29 +12,81 @@ type ProfileUpdateFormProps = {
   history: any
 }
 
-class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps> {
-  onSubmit({ username, email, password, confirmation }: any) {
-    // TODO: Flashメッセージの実装
-    if (window.confirm('プロフィール情報を更新していいですか？')) {
-      this.props
-        .updateProfile(username, email, password, confirmation)
-        .then(() => this.props.history.push('/'))
-    }
-  }
+interface UpdateProfileValues {
+  username: any
+  email: any
+  password: any
+  confirmation: any
+}
 
+class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
   render() {
     return (
-      <form onSubmit={this.onSubmit.bind(this)} className="update-form">
-        <InputField placeholder="NAME" name="username" type="text" />
-        <InputField placeholder="EMAIL ADRESS" name="email" type="text" />
-        <InputField placeholder="PASSWORD" name="password" type="password" />
-        <InputField
-          placeholder="CONFIRM PASSWORD"
-          name="confirmation"
-          type="password"
-        />
-        <FormSubmitBtn label="UPDATE" />
-      </form>
+      <Formik
+        initialValues={{
+          username: '',
+          email: '',
+          password: '',
+          confirmation: '',
+        }}
+        onSubmit={(values: UpdateProfileValues, actions: any) => {
+          // TODO: Flashメッセージの実装
+          if (window.confirm('プロフィール情報を更新していいですか？')) {
+            Promise.resolve()
+              .then(
+                this.props.updateProfile(
+                  values.username,
+                  values.email,
+                  values.password,
+                  values.confirmation
+                )
+              )
+              .then(this.props.history.push('/'))
+            actions.setSubmitting(false)
+          }
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <InputField
+              type="email"
+              name="email"
+              placeholder="EMAIL ADRESS"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {errors.email && touched.email && errors.email}
+            <InputField
+              type="password"
+              name="password"
+              placeholder="PASSWORD"
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {errors.password && touched.password && errors.password}
+            <InputField
+              type="password"
+              name="confirmation"
+              placeholder="CONFIRM PASSWORD"
+              value={values.confirmation}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {errors.confirmation && touched.confirmation && errors.confirmation}
+            <FormSubmitBtn label="SIGN UP" isSubmit={isSubmitting} />
+          </form>
+        )}
+      </Formik>
     )
   }
 }

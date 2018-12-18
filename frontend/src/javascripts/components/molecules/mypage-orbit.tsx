@@ -74,6 +74,7 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
 
   onClickFixedStar(projectId: any) {
     // TODO: プロジェクトページへ遷移する前になんらかのアニメーション追加(Fadeoutとか)
+    console.log(this.props.match.url, projectId)
     this.props.setCurrentProject(
       this.props.revolvingProjects[projectId],
       () => {

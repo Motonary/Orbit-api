@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Formik } from 'formik'
 
@@ -6,32 +7,32 @@ import InputField from '../../atoms/input-field'
 import SelectField from '../../atoms/select-field'
 
 import { setSelectedStar, resetSelectedStar } from '../../../actions/common'
-import { createAssignment } from '../../../actions/assignments'
+import { createSubAssignment } from '../../../actions/subassignmnets'
+
 import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
 
 interface AssignmentFormProps {
-  orbit: string
+  assignmentId: string
 
   selectedStar: any
   currentProject: any
 
   setSelectedStar: any
   resetSelectedStar: any
-  createAssignment: any
+  createSubAssignment: any
 }
 
-interface CreateAssignmentValues {
+interface CreateSubAssignmentValues {
   title: string
   description: string
   deadline: string
   planet_size: string
 }
 
-class AssignmentForm extends React.Component<AssignmentFormProps> {
+class SubAssignmentForm extends React.Component<AssignmentFormProps> {
   render() {
-    const planet_type: any = this.props.selectedStar // reducerでの型付けと対応
-    const project_id: number = this.props.currentProject.id
-    const { orbit } = this.props
+    const satelite_type: any = this.props.selectedStar // reducerでの型付けと対応
+    const { assignmentId } = this.props
 
     return (
       <div id="form-on-modal">
@@ -43,15 +44,14 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
             deadline: '',
             planet_size: '',
           }}
-          onSubmit={(values: CreateAssignmentValues, actions: any) => {
-            this.props.createAssignment(
+          onSubmit={(values: CreateSubAssignmentValues, actions: any) => {
+            this.props.createSubAssignment(
               values.title,
               values.description,
               values.deadline,
-              planet_type,
+              satelite_type,
               values.planet_size,
-              orbit,
-              project_id
+              assignmentId
             )
             this.props.resetSelectedStar()
             actions.setSubmitting(false)
@@ -114,7 +114,18 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
   }
 }
 
+const mapStateToProps = ({ selectedStar, currentProject }: any) => {
+  return { selectedStar, currentProject }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return bindActionCreators(
+    { setSelectedStar, resetSelectedStar, createSubAssignment },
+    dispatch
+  )
+}
+
 export default connect(
-  ({ selectedStar, currentProject }: any) => ({ selectedStar, currentProject }),
-  { createAssignment, setSelectedStar, resetSelectedStar }
-)(AssignmentForm)
+  mapStateToProps,
+  mapDispatchToProps
+)(SubAssignmentForm)
