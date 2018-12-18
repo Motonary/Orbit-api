@@ -1,12 +1,74 @@
 import axios from 'axios'
 import { actionTypes } from '../constants/actiontypes'
 import { ROOT_URL } from '../constants/url'
-import { revolvingAssignments } from '../reducers/assignments'
 
-interface FetchRevolvingAssignmentsAction {
-  type: typeof actionTypes.FETCH_REVOLVING_ASSIGNMENTS
-  revolvingAssignments: Object
+interface BaseAction {
+  type: string
+  payload?: any
 }
+
+export interface FetchRevolvingAssignmentsAction extends BaseAction {
+  type: string
+  payload: {
+    revolvingAssignments: Object
+  }
+}
+
+export interface FetchDestroyedAssignmentsAction extends BaseAction {
+  type: string
+  payload: {
+    destroyedAssignments: Object
+  }
+}
+
+export interface CreateAssignmentAction extends BaseAction {
+  type: string
+  payload: {
+    newAssignment: Object
+  }
+}
+
+export interface DestroyAssignmentAction extends BaseAction {
+  type: string
+  payload: {
+    assignmentId: string // TODO: numberかも
+  }
+}
+
+export interface RestoreAssignmentAction extends BaseAction {
+  type: string
+  payload: {
+    assignmentId: number // TODO: stringかも
+  }
+}
+
+export interface SelectAssignmentAction extends BaseAction {
+  type: string
+  payload: {
+    assignmentId: number // TODO: stringかも
+  }
+}
+
+export interface DisselectAssignmentAction extends BaseAction {
+  type: string
+  payload: {
+    assignmentId: number // TODO: stringかも
+  }
+}
+
+export interface NullifySelectedAssignment extends BaseAction {
+  type: string
+}
+
+export type AssignmentAction =
+  | FetchRevolvingAssignmentsAction
+  | FetchDestroyedAssignmentsAction
+  | CreateAssignmentAction
+  | DestroyAssignmentAction
+  | RestoreAssignmentAction
+  | SelectAssignmentAction
+  | DisselectAssignmentAction
+  | NullifySelectedAssignment
 
 export function fetchRevolvingAssignments(
   projectId: any
@@ -19,13 +81,15 @@ export function fetchRevolvingAssignments(
     .then(res => {
       return {
         type: actionTypes.FETCH_REVOLVING_ASSIGNMENTS,
-        revolvingAssignments: res.data,
+        payload: {
+          revolvingAssignments: res.data,
+        },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function fetchDestroyedAssignments() {
+export function fetchDestroyedAssignments(): Promise<FetchDestroyedAssignmentsAction | void> {
   return axios
     .get(`${ROOT_URL}/api/assignments/destroyed`, {
       headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
@@ -33,7 +97,9 @@ export function fetchDestroyedAssignments() {
     .then(res => {
       return {
         type: actionTypes.FETCH_DESTROYED_ASSIGNMENTS,
-        destroyedAssignments: res.data,
+        payload: {
+          destroyedAssignments: res.data,
+        },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
@@ -47,7 +113,7 @@ export function createAssignment(
   planet_size: any,
   orbit_pos: any,
   projectId: any
-) {
+): Promise<CreateAssignmentAction | void> {
   return axios({
     method: 'post',
     url: `${ROOT_URL}/api/assignments`,
@@ -67,13 +133,17 @@ export function createAssignment(
     .then(res => {
       return {
         type: actionTypes.CREATE_ASSIGNMENT,
-        newAssignment: res.data,
+        payload: {
+          newAssignment: res.data,
+        },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function destroyAssignment(assignmentId: any) {
+export function destroyAssignment(
+  assignmentId: any
+): Promise<DestroyAssignmentAction | void> {
   return axios({
     method: 'patch',
     url: `${ROOT_URL}/api/assignments/${assignmentId}/destroy`,
@@ -82,13 +152,17 @@ export function destroyAssignment(assignmentId: any) {
     .then(() => {
       return {
         type: actionTypes.DESTROY_ASSIGNMENT,
-        assignmentId,
+        payload: {
+          assignmentId,
+        },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function restoreAssignment(assignmentId: any) {
+export function restoreAssignment(
+  assignmentId: any
+): Promise<RestoreAssignmentAction | void> {
   return axios({
     method: 'patch',
     url: `${ROOT_URL}/api/assignments/${assignmentId}/restore`,
@@ -97,27 +171,35 @@ export function restoreAssignment(assignmentId: any) {
     .then(() => {
       return {
         type: actionTypes.RESTORE_ASSIGNMENT,
-        assignmentId,
+        payload: {
+          assignmentId,
+        },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function selectAssignment(assignmentId: any) {
+export function selectAssignment(assignmentId: any): SelectAssignmentAction {
   return {
     type: actionTypes.SELECT_ASSIGNMENT,
-    assignmentId,
+    payload: {
+      assignmentId,
+    },
   }
 }
 
-export function disselectAssignment(assignmentId: any) {
+export function disselectAssignment(
+  assignmentId: any
+): DisselectAssignmentAction {
   return {
     type: actionTypes.DISSELECT_ASSIGNMENT,
-    assignmentId,
+    payload: {
+      assignmentId,
+    },
   }
 }
 
-export function nullifySelectedAssignment() {
+export function nullifySelectedAssignment(): NullifySelectedAssignment {
   return {
     type: actionTypes.NULLIFY_SELECTED_ASSIGNMENT,
   }
