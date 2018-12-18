@@ -36,10 +36,7 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
               values.username,
               values.email,
               values.password,
-              values.confirmation,
-              (newUserId: any) => {
-                this.props.history.push(`/users/${newUserId}`)
-              }
+              values.confirmation
             )
             actions.setSubmitting(false)
           }}
@@ -54,6 +51,15 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
             isSubmitting,
           }) => (
             <form onSubmit={handleSubmit}>
+              <InputField
+                type="username"
+                name="username"
+                placeholder="USER NAME"
+                value={values.username}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {errors.username && touched.username && errors.username}
               <InputField
                 type="email"
                 name="email"

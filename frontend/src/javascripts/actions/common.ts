@@ -20,7 +20,7 @@ export function igniteDestroyPlanets(status: any) {
   }
 }
 
-export function resetDestroyPlanets(status: any) {
+export function resetDestroyAction(status: any) {
   return {
     type: actionTypes.RESET_DESTROY_ACTION,
     status,

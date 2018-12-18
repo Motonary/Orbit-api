@@ -6,7 +6,7 @@ import ConfirmBtn from '../atoms/buttons/confirm-btn'
 
 import {
   igniteDestroyPlanets,
-  resetDestroyPlanets,
+  resetDestroyAction,
   setModalStatus,
   resetModalStatus,
 } from '../../actions/common'
@@ -93,7 +93,7 @@ export default connect(
   ({ isDestroyIgnited, modalOpen }: any) => ({ isDestroyIgnited, modalOpen }),
   {
     igniteDestroyPlanets,
-    resetDestroyPlanets,
+    resetDestroyAction,
     setModalStatus,
     resetModalStatus,
   }

@@ -14,14 +14,13 @@ export function createUser(
       user: { name, email, password, password_confirmation },
     })
     .then(res => {
-      callback(res.data.id)
-      createSession(email, password)
+      createSession(email, password) // Promise
       return {
         type: actionTypes.SET_CURRENT_USER,
         currentUser: res.data,
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch((e: any) => alert(`Sorry, something went wrong...\n ${e}`))
 }
 
 export function createSession(email: any, password: any) {
