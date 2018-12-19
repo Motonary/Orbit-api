@@ -12,11 +12,11 @@ import { setModalStatus, setDestroyAction } from '../../actions/common'
 import { ActionIcons } from '../../constants/images'
 
 import '../../../stylesheets/destroy_animate.scss'
-import { modalOpen } from '../../reducers/common'
 
 interface FooterActionBtnListProps {
   pathname: any
   rootPath: any
+  motionControll: () => void
 
   modalOpen: string
 
@@ -31,23 +31,7 @@ class FooterActionBtnList extends React.Component<
   onClickOpenModal(actionType: string) {
     this.props.setDestroyAction(actionType)
     this.props.setModalStatus(actionType)
-    this.motionControll()
-  }
-
-  motionControll() {
-    const target_classes: any = [
-      document.getElementsByClassName('primo-orbit-motion'),
-      document.getElementsByClassName('secundus-orbit-motion'),
-      document.getElementsByClassName('tertius-orbit-motion'),
-      document.getElementsByClassName('satelite-orbit-motion'),
-    ]
-
-    for (const target of target_classes) {
-      for (let i = 0; i < target.length; i++) {
-        target[i].classList.toggle('pause-animation')
-        target[i].classList.toggle('start-animation')
-      }
-    }
+    this.props.motionControll()
   }
 
   render() {
@@ -67,7 +51,6 @@ class FooterActionBtnList extends React.Component<
 
     return (
       <ul id="action-button-list">
-        <div>{this.props.modalOpen}</div>
         <Rival
           icon={ActionIcons[actionType[0]]}
           actionBtnClass={rivivalBtnClass}
@@ -78,7 +61,7 @@ class FooterActionBtnList extends React.Component<
         <Meteorite
           icon={ActionIcons[actionType[1]]}
           actionBtnClass={deleteBtnsClass}
-          motionControll={() => this.motionControll()}
+          motionControll={() => this.props.motionControll()}
           onClick={() => {
             this.onClickOpenModal(actionType[1])
           }}
@@ -86,7 +69,7 @@ class FooterActionBtnList extends React.Component<
         <Missle
           icon={ActionIcons[actionType[2]]}
           actionBtnClass={deleteBtnsClass}
-          motionControll={() => this.motionControll()}
+          motionControll={() => this.props.motionControll()}
           onClick={() => {
             this.onClickOpenModal(actionType[2])
           }}
@@ -94,7 +77,7 @@ class FooterActionBtnList extends React.Component<
         <BlackHole
           icon={ActionIcons[actionType[3]]}
           actionBtnClass={deleteBtnsClass}
-          motionControll={() => this.motionControll()}
+          motionControll={() => this.props.motionControll()}
           onClick={() => {
             this.onClickOpenModal(actionType[3])
           }}

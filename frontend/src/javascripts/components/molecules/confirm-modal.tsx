@@ -9,8 +9,9 @@ import { resetDestroyAction, resetModalStatus } from '../../actions/common'
 import '../../../stylesheets/modal.scss'
 
 interface ConfirmModalProps {
+  motionControll: () => void
+
   modalOpen: string
-  selectedAssignments: any
   resetDestroyAction: any
   resetModalStatus: any
 }
@@ -61,14 +62,12 @@ class ConfirmModal extends React.Component<
   // TODO 削除　openModal / selectedAssignment
   igniteAction() {
     this.props.resetModalStatus()
-    console.log('done')
-    console.log(this.props.selectedAssignments)
-    console.log(this.props.modalOpen)
   }
 
   closeModal(/*isDestroy*/) {
     this.props.resetDestroyAction()
     this.props.resetModalStatus()
+    this.props.motionControll()
   }
 
   render() {
@@ -90,10 +89,7 @@ class ConfirmModal extends React.Component<
 }
 
 export default connect(
-  ({ modalOpen, selectedAssignments }: any) => ({
-    modalOpen,
-    selectedAssignments,
-  }),
+  ({ modalOpen }: any) => ({ modalOpen }),
   {
     resetDestroyAction,
     resetModalStatus,

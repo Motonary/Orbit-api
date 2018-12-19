@@ -18,6 +18,24 @@ class Footer extends React.Component<FooterProps, {}> {
     planet_list.style.display = 'none'
   }
 
+  motionControll() {
+    const orbitalMove: any = [
+      document.getElementsByClassName('primo-orbit-motion'),
+      document.getElementsByClassName('secundus-orbit-motion'),
+      document.getElementsByClassName('tertius-orbit-motion'),
+      document.getElementsByClassName('satelite-orbit-motion'),
+    ]
+
+    for (const target of orbitalMove) {
+      for (let i = 0; i < target.length; i++) {
+        target[i].classList.toggle('pause-animation')
+        target[i].classList.toggle('start-animation')
+        target[i].firstChild.classList.toggle('pause-animation')
+        target[i].firstChild.classList.toggle('start-animation')
+      }
+    }
+  }
+
   render() {
     const { currentUser, pathname }: any = this.props
     const rootPath = `/users/${currentUser.id}`
@@ -25,8 +43,12 @@ class Footer extends React.Component<FooterProps, {}> {
     return (
       <div id="footer">
         <PlanetHolder pathname={pathname} currentUser={currentUser} />
-        <FooterActionBtnList pathname={pathname} rootPath={rootPath} />
-        <ConfirmModal />
+        <FooterActionBtnList
+          pathname={pathname}
+          rootPath={rootPath}
+          motionControll={() => this.motionControll()}
+        />
+        <ConfirmModal motionControll={() => this.motionControll()} />
         <FormModal pathname={pathname} />
       </div>
     )
