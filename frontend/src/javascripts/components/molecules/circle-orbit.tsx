@@ -196,6 +196,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
               key={assignmentInfo.id}
             >
               <div
+                id={`planet-${assignmentInfo.id}-${assignmentInfo.planet_type}`}
                 className={`planet-${assignmentInfo.planet_size}-${
                   assignmentInfo.orbit_pos
                 }`}

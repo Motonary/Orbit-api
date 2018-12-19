@@ -55,12 +55,16 @@ class Missle extends React.Component<MissleProps, {}> {
   makeMovement(targetDiv: any) {
     const movDom: any = targetDiv
     const targetDom: any = document.getElementById(
-      this.props.selectedAssignments[0]
-    ).previousSibling // should be <Planet /> class=planet-img-container
+      `planet-${this.props.selectedAssignments[0]}`
+    ) // should be div.id="planet-2-Earth" class="planet-medium-secundus"
 
     // 要素の位置座標を取得.
     const clientRectMov: any = movDom.getBoundingClientRect()
     const clientRectTarget: any = targetDom.getBoundingClientRect()
+
+    // 要素の大きさを取得
+    const TargetWidth: number = targetDom.clientWidth
+    const TargetHeight: number = targetDom.clientHeight
 
     // 画面の左端から、要素の左端までの距離
     const xM: number = clientRectMov.left
@@ -69,7 +73,7 @@ class Missle extends React.Component<MissleProps, {}> {
     const yM: number = clientRectMov.top
     const yT: number = clientRectTarget.top
 
-    // 要素までの距離(px)とArctanへの引数
+    // 目標惑星中心までの距離(px)とArctanへの引数
     const disX: number = xT - xM
     const disY: number = yT - yM
     const arcvalue: number = -disY / disX
@@ -90,13 +94,13 @@ class Missle extends React.Component<MissleProps, {}> {
         easing: 'easeInQuart',
       },
       translateX: {
-        value: disX - 110,
+        value: disX - TargetWidth,
         duration: 2000,
         easing: 'easeInExpo',
         delay: 500,
       },
       traslateY: {
-        value: disY - 110,
+        value: disY - TargetHeight,
         duration: 2000,
         easing: 'easeInExpo',
         delay: 500,
@@ -114,12 +118,12 @@ class Missle extends React.Component<MissleProps, {}> {
       let destroyedCvs: any = destroyDom.children[1]
       let destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
       this.props.setRemovedAssignment(destroyedAssignmentId)
+      console.log(this.props.removedAssignments)
     })
   }
 
   destroyPlanets(selectedAssignments: any) {
     const target_ids: any = selectedAssignments
-    console.log('destroyPlanets targetIds', target_ids)
 
     let parent: any = []
     let canvasEl: any = []
@@ -162,8 +166,6 @@ class Missle extends React.Component<MissleProps, {}> {
 
     function removeImg() {
       parent.map((doc: any) => {
-        console.log('removeImg')
-        console.log(doc, doc.children)
         const child: any = doc.children[1]
         doc.removeChild(child)
       })
@@ -273,15 +275,15 @@ export default connect(
   ({
     selectedAssignments,
     destroyedAssignments,
+    removedAssignments,
     selectedDestroyAction,
     modalOpen,
-    removedAssignments,
   }: any) => ({
     selectedAssignments,
     destroyedAssignments,
+    removedAssignments,
     selectedDestroyAction,
     modalOpen,
-    removedAssignments,
   }),
   {
     resetDestroyAction,

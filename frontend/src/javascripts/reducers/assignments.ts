@@ -30,9 +30,10 @@ export function revolvingAssignments(state: any = null, action: any) {
 
 /*
  * selectedAssignmentsの利用用途
- * stateには、ユーザがクリックし、UI上でチェックマーク付きのPlanetに紐付いたAssignmentIdsが格納される
+ * stateには、ユーザがクリックし、UI上でチェックマーク付きのPlanetに紐付いた"3-Earth"のような
+ * ”assignmentId-planetType”というstringが格納される
  */
-export function selectedAssignments(state: any = [], action: any) {
+export function selectedAssignments(state: string[] = [], action: any) {
   switch (action.type) {
     case actionTypes.SET_SELECTED_ASSIGNMENT:
       return [...state, action.assignmentId]

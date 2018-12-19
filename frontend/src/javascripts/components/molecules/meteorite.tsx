@@ -5,7 +5,10 @@ import anime from 'animejs'
 import ActionBtn from '../atoms/buttons/action-btn'
 
 import { resetDestroyAction, resetModalStatus } from '../../actions/common'
-import { resetSelectedAssignment } from '../../actions/assignments'
+import {
+  resetSelectedAssignment,
+  setRemovedAssignment,
+} from '../../actions/assignments'
 
 import { DeleteActions } from '../../constants/images'
 
@@ -19,43 +22,49 @@ interface MeteoriteProps {
   destroyedAssignments: any
   selectedDestroyAction: any
   modalOpen: any
+  removedAssignments: any
 
   resetDestroyAction: any
   resetModalStatus: any
   resetSelectedAssignment: any
+  setRemovedAssignment: any
 }
 
 class Meteorite extends React.Component<MeteoriteProps, {}> {
   componentDidUpdate(/*prevProps, prevState*/) {
-    const selected = this.props.selectedAssignments && !this.props.modalOpen
-    if (selected && this.props.selectedDestroyAction === 'Missle') {
+    const selected: boolean =
+      this.props.selectedAssignments.length !== 0 && this.props.modalOpen === ''
+    if (selected && this.props.selectedDestroyAction === 'Meteorite') {
       this.onIgniteDestroyAnimation()
     }
   }
 
   onIgniteDestroyAnimation() {
-    const targetDom: any = document.getElementById('project-orbit')
-    const insertDom: any = document.getElementById('fixed-star')
-    const actionKey: any = this.props.selectedDestroyAction
+    const targetDom: any = document.getElementById('project-page-container')
+    const insertDom: any = document.getElementById('project-container')
+    const actionType: any = this.props.selectedDestroyAction
     let newDiv: any = document.createElement('div')
     let newImg: any = document.createElement('img')
     newDiv.classList.add('destroy-action')
-    newImg.src = DeleteActions[actionKey]
+    newImg.src = DeleteActions[actionType]
     newDiv.appendChild(newImg)
     targetDom.insertBefore(newDiv, insertDom)
-    this.makeMovement()
+    this.makeMovement(newDiv)
   }
 
-  makeMovement() {
-    const movDom: any = document.getElementsByClassName('destroy-action')[0]
-    let targetDom: any
-    if (this.props.selectedAssignments) {
-      targetDom = document.getElementById(this.props.selectedAssignments[0])
-    }
+  makeMovement(targetDiv: any) {
+    const movDom: any = targetDiv
+    const targetDom: any = document.getElementById(
+      `planet-${this.props.selectedAssignments[0]}`
+    ) // should be div.id="planet-2-Earth" class="planet-medium-secundus"
 
     // 要素の位置座標を取得.
     const clientRectMov: any = movDom.getBoundingClientRect()
     const clientRectTarget: any = targetDom.getBoundingClientRect()
+
+    // 要素の大きさを取得
+    const TargetWidth: number = targetDom.clientWidth
+    const TargetHeight: number = targetDom.clientHeight
 
     // 画面の左端から、要素の左端までの距離
     const xM: number = clientRectMov.left
@@ -64,41 +73,52 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     const yM: number = clientRectMov.top
     const yT: number = clientRectTarget.top
 
-    // 要素までの距離(px)とArctanへの引数
+    // 目標惑星中心までの距離(px)とArctanへの引数
     const disX: number = xT - xM
     const disY: number = yT - yM
-    const arcvalue: number = disY / disX
+    const arcvalue: number = -disY / disX
 
     // Arctanのマクローリン展開（４次近似）により、arctanの整数値から目標物への角度を求める
-    const args: number =
+    const approximateRad: number =
       arcvalue -
       Math.pow(arcvalue, 3) / 3 +
       Math.pow(arcvalue, 5) / 5 -
       Math.pow(arcvalue, 7) / 7
+    const deg: number = (approximateRad * 180) / Math.PI
 
-    movDom.classList.add('move-animation')
-    movDom.style.tranform = `rotate(-${args}deg)`
-    movDom.style.transform = `translateX(${disX}px) translateY(${disY}px)`
+    const MissileTransforms = anime({
+      targets: '#project-page-container .destroy-action',
+      rotate: {
+        value: -deg,
+        duration: 1000,
+        easing: 'easeInQuart',
+      },
+      translateX: {
+        value: disX - TargetWidth,
+        duration: 2000,
+        easing: 'easeInExpo',
+        delay: 500,
+      },
+      traslateY: {
+        value: disY - TargetHeight,
+        duration: 2000,
+        easing: 'easeInExpo',
+        delay: 500,
+      },
+    })
 
     setTimeout(() => {
       this.destroyPlanets(this.props.selectedAssignments)
-    }, 2500)
+    }, 2450)
   }
 
-  removePlanet(parent: any) {
-    // FIXME: 一旦canvas以外のImgとballoonを削除・DOM上にはPlanetを表示する親要素は残る
-    parent.map((doc: any) => {
-      let parent: any = doc
-      let child: any = doc.firstChild
-      parent.removeChild(child)
-    })
-  }
-
+  // 削除されたAssignmentIdをcanvasのidから特定し、destroyedAssignmentsに格納
   removeAssignmentData(parent: any) {
-    parent.map((doc: any) => {
-      let cvs: any = doc.children[1]
-      let cvs_info: any = cvs.id.split('-')
-      this.props.destroyedAssignments(cvs_info[0])
+    parent.map((destroyDom: any) => {
+      let destroyedCvs: any = destroyDom.children[1]
+      let destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
+      this.props.setRemovedAssignment(destroyedAssignmentId)
+      console.log(this.props.removedAssignments)
     })
   }
 
@@ -118,13 +138,11 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
       })
     }
 
-    const numberOfParticules: number = 80
+    const numberOfParticules: number = 70
     const colors: string[] = ['#FFF', '#FFF', '#FFF', '#FFF']
 
     let pointerX: number = 0
     let pointerY: number = 0
-
-    // console.log(parent, canvasEl, ctx)
 
     function setCanvasSize() {
       let i: number = 0
@@ -154,7 +172,7 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     }
 
     function removeDestroyImg() {
-      const targetDom: any = document.getElementById('project-orbit')
+      const targetDom: any = document.getElementById('project-page-container')
       const movDom: any = document.getElementsByClassName('destroy-action')[0]
 
       targetDom.removeChild(movDom)
@@ -195,7 +213,7 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     }
 
     function animateParticules(x: number, y: number) {
-      let particules: any = []
+      let particules = []
       for (let i = 0; i < numberOfParticules; i++) {
         particules.push(createParticule(x, y))
       }
@@ -236,9 +254,8 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     removeDestroyImg()
     animateParticules(pointerX, pointerY)
     this.props.resetDestroyAction(null)
-    this.removeAssignmentData(parent)
-    this.removePlanet(parent)
     this.props.resetSelectedAssignment()
+    this.removeAssignmentData(parent)
     this.props.motionControll()
   }
 
@@ -258,11 +275,13 @@ export default connect(
   ({
     selectedAssignments,
     destroyedAssignments,
+    removedAssignments,
     selectedDestroyAction,
     modalOpen,
   }: any) => ({
     selectedAssignments,
     destroyedAssignments,
+    removedAssignments,
     selectedDestroyAction,
     modalOpen,
   }),
@@ -270,5 +289,6 @@ export default connect(
     resetDestroyAction,
     resetModalStatus,
     resetSelectedAssignment,
+    setRemovedAssignment,
   }
 )(Meteorite)
