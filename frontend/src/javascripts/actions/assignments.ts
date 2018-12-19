@@ -1,12 +1,9 @@
 import axios from 'axios'
-import { actionTypes } from '../constants/actiontypes'
+import { actionTypes } from '../constants/action-types'
+import { BaseAction } from '../constants/static-types'
 import { ROOT_URL } from '../constants/url'
 
-interface BaseAction {
-  type: string
-  payload?: any
-}
-
+// TODO: Reducerの種類でActionを分ける
 interface FetchRevolvingAssignmentsAction extends BaseAction {
   type: string
   payload: { revolvingAssignments: Object }

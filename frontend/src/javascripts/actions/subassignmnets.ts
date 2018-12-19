@@ -1,15 +1,11 @@
 import axios from 'axios'
-import { actionTypes } from '../constants/actiontypes'
+import { actionTypes } from '../constants/action-types'
+import { BaseAction } from '../constants/static-types'
 import { ROOT_URL } from '../constants/url'
-
-interface BaseAction {
-  type: string
-  payload?: any
-}
 
 interface CreateSubAssignmentAction extends BaseAction {
   type: string
-  newSubAssignment: Object
+  payload: { newSubAssignment: Object }
 }
 
 export type SubAssignmentAction = CreateSubAssignmentAction
@@ -40,7 +36,7 @@ export function createSubAssignment(
     .then(res => {
       return {
         type: actionTypes.CREATE_SUBASSIGNMENT,
-        newSubAssignment: res.data,
+        payload: { newSubAssignment: res.data },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))

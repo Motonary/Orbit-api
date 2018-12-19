@@ -1,9 +1,5 @@
-import { actionTypes } from '../constants/actiontypes'
-
-interface BaseAction {
-  type: string
-  payload?: any
-}
+import { actionTypes } from '../constants/action-types'
+import { BaseAction } from '../constants/static-types'
 
 interface SetSelectedStarAction extends BaseAction {
   type: string

@@ -1,4 +1,4 @@
-import { actionTypes } from '../constants/actiontypes'
+import { actionTypes } from '../constants/action-types'
 import _ from 'lodash'
 import { AssignmentAction } from '../actions/assignments'
 

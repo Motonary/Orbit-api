@@ -1,4 +1,4 @@
-import { actionTypes } from '../constants/actiontypes'
+import { actionTypes } from '../constants/action-types'
 import { CommonAction } from '../actions/common'
 
 /*

@@ -1,11 +1,7 @@
 import axios from 'axios'
-import { actionTypes } from '../constants/actiontypes'
+import { actionTypes } from '../constants/action-types'
+import { BaseAction } from '../constants/static-types'
 import { ROOT_URL } from '../constants/url'
-
-interface BaseAction {
-  type: string
-  payload?: any
-}
 
 interface FetchRevolvingProjectsAction extends BaseAction {
   type: string
