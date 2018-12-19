@@ -5,18 +5,24 @@ import { ProjectAction } from '../actions/projects'
 export function revolvingProjects(state: any = null, action: ProjectAction) {
   switch (action.type) {
     case actionTypes.FETCH_REVOLVING_PROJECTS:
-      return _.mapKeys(action.payload.currentUserAllProjects, 'id')
+      if ('currentUserAllProjects' in action.payload) {
+        return _.mapKeys(action.payload.currentUserAllProjects, 'id')
+      }
+      break
 
     case actionTypes.CREATE_PROJECT:
-      const { newProject } = action.payload
-      return {
-        ...state,
-        [newProject.id]: newProject,
+      if ('newProject' in action.payload) {
+        const { newProject } = action.payload
+        return { ...state, [newProject.id]: newProject }
       }
+      break
 
-    // Project削除のanimationを実装ごにテスト
+    // TODO: Project削除のanimationを実装後にテスト
     case actionTypes.DESTROY_PROJECT:
-      return _.omit(state, action.payload.projectId)
+      if ('projectId' in action.payload) {
+        return _.omit(state, action.payload.projectId)
+      }
+      break
 
     default:
       return state
@@ -26,7 +32,10 @@ export function revolvingProjects(state: any = null, action: ProjectAction) {
 export function currentProject(state: any = null, action: ProjectAction) {
   switch (action.type) {
     case actionTypes.SET_CURRENT_PROJECT:
-      return action.payload.currentProject
+      if ('currentProject' in action.payload) {
+        return action.payload.currentProject
+      }
+      break
 
     default:
       return state
