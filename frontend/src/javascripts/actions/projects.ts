@@ -3,16 +3,6 @@ import { actionTypes } from '../constants/action-types'
 import { BaseAction } from '../constants/static-types'
 import { ROOT_URL } from '../constants/url'
 
-// interface BaseAction {
-//   type: string
-//   payload: {
-//     currentUserAllProjects?: Array<Object>
-//     currentProject?: Object
-//     newProject?: Object
-//     projectId?: number
-//   }
-// }
-
 interface FetchRevolvingProjectsAction extends BaseAction {
   type: string
   payload: { currentUserAllProjects: Array<Object> }
@@ -35,12 +25,12 @@ interface ChangeCurrentProjectAction extends BaseAction {
 
 interface CreateProjectAction extends BaseAction {
   type: string
-  payload: { newProject: any }
+  payload: { newProject: any } // newProject.idのところでエラーが起きてしまうので一旦any
 }
 
 interface DestroyProjectAction extends BaseAction {
   type: string
-  payload: { projectId: number } // TODO: stringかも // エラー回避のため一時的にコメントアウト
+  payload: { projectId: number } // TODO: stringかも
 }
 
 export type ProjectAction =
