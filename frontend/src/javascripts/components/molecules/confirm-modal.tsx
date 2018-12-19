@@ -9,7 +9,8 @@ import { resetDestroyAction, resetModalStatus } from '../../actions/common'
 import '../../../stylesheets/modal.scss'
 
 interface ConfirmModalProps {
-  modalOpen: any
+  modalOpen: string
+  selectedAssignments: any
   resetDestroyAction: any
   resetModalStatus: any
 }
@@ -57,22 +58,31 @@ class ConfirmModal extends React.Component<
     }
   }
 
+  // TODO 削除　openModal / selectedAssignment
+  igniteAction() {
+    this.props.resetModalStatus()
+    console.log('done')
+    console.log(this.props.selectedAssignments)
+    console.log(this.props.modalOpen)
+  }
+
   closeModal(/*isDestroy*/) {
     this.props.resetDestroyAction()
     this.props.resetModalStatus()
   }
 
   render() {
+    const actionTypes = ['Missile', 'Meteorite', 'BlackHole']
     return (
       <Modal
-        isOpen={this.props.modalOpen === 'destroy'}
+        isOpen={actionTypes.includes(this.props.modalOpen)}
         style={customStyles}
-        contentLabel="Example Modal"
+        contentLabel="Confirmation Modal"
       >
         <div className="modal-warning">{this.state.destroy}</div>
         <div className="modal-confirm-buttons">
           <ConfirmBtn message="いいえ" onClick={this.closeModal.bind(this)} />
-          <ConfirmBtn message="はい" onClick={this.closeModal.bind(this)} />
+          <ConfirmBtn message="はい" onClick={this.igniteAction.bind(this)} />
         </div>
       </Modal>
     )
@@ -80,7 +90,10 @@ class ConfirmModal extends React.Component<
 }
 
 export default connect(
-  ({ modalOpen }: any) => ({ modalOpen }),
+  ({ modalOpen, selectedAssignments }: any) => ({
+    modalOpen,
+    selectedAssignments,
+  }),
   {
     resetDestroyAction,
     resetModalStatus,

@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import Rival from './revival'
 import Meteorite from './meteorite'
-import Missle from './missle'
+import Missle from './missile'
 import BlackHole from './blackhole'
 
 import { setModalStatus, setDestroyAction } from '../../actions/common'
@@ -12,10 +12,13 @@ import { setModalStatus, setDestroyAction } from '../../actions/common'
 import { ActionIcons } from '../../constants/images'
 
 import '../../../stylesheets/destroy_animate.scss'
+import { modalOpen } from '../../reducers/common'
 
 interface FooterActionBtnListProps {
   pathname: any
   rootPath: any
+
+  modalOpen: string
 
   setModalStatus: any
   setDestroyAction: any
@@ -27,6 +30,7 @@ class FooterActionBtnList extends React.Component<
 > {
   onClickOpenModal(actionType: string) {
     this.props.setDestroyAction(actionType)
+    this.props.setModalStatus(actionType)
     this.motionControll()
   }
 
@@ -63,6 +67,7 @@ class FooterActionBtnList extends React.Component<
 
     return (
       <ul id="action-button-list">
+        <div>{this.props.modalOpen}</div>
         <Rival
           icon={ActionIcons[actionType[0]]}
           actionBtnClass={rivivalBtnClass}
@@ -100,6 +105,6 @@ class FooterActionBtnList extends React.Component<
 }
 
 export default connect(
-  null,
+  ({ modalOpen }: any) => ({ modalOpen }),
   { setModalStatus, setDestroyAction }
 )(FooterActionBtnList)

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { actionTypes } from '../constants/actiontypes'
 import { ROOT_URL } from '../constants/url'
+import { string } from 'prop-types'
 
 export function fetchRevolvingAssignments(projectId: any) {
   return axios
@@ -112,5 +113,12 @@ export function disselectAssignment(assignmentId: any) {
 export function resetSelectedAssignment() {
   return {
     type: actionTypes.RESET_SELECTED_ASSIGNMENT,
+  }
+}
+
+export function setRemovedAssignment(removedAssignmentId: string) {
+  return {
+    type: actionTypes.SET_REMOVED_ASSIGNMENTS,
+    removedAssignmentId,
   }
 }

@@ -7,7 +7,7 @@
   margin: 10px auto;
 
   #project-orbit {
-    width: 65%;
+    width: 900px;
     height: 100%;
     position: relative;
     overflow: scroll;
@@ -22,8 +22,8 @@
       height: $fixed-star-scale;
       margin: 0 auto;
       position: absolute;
-      top: $fixed-star-position;
-      left: $fixed-star-position;
+      top: $fixed-star-position-top;
+      left: $fixed-star-position-left;
       z-index: 100;
 
       img {
@@ -36,24 +36,24 @@
       width: $primo-orbit;
       height: $primo-orbit;
       position: absolute;
-      top: $primo-orbit-position;
-      left: $primo-orbit-position;
+      top: $primo-orbit-position-top;
+      left: $primo-orbit-position-left;
       z-index: 90;
     }
     #circle-secundus {
       width: $secundus-orbit;
       height: $secundus-orbit;
       position: absolute;
-      top: $secundus-orbit-position;
-      left: $secundus-orbit-position;
+      top: $secundus-orbit-position-top;
+      left: $secundus-orbit-position-left;
       z-index: 80;
     }
     #circle-tertius {
       width: $tertius-orbit;
       height: $tertius-orbit;
       position: absolute;
-      top: $tertius-orbit-position;
-      left: $tertius-orbit-position;
+      top: $tertius-orbit-position-top;
+      left: $tertius-orbit-position-left;
       z-index: 70;
     }
     .common-circle {

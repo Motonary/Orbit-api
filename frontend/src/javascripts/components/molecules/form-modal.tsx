@@ -15,7 +15,7 @@ interface FormModalProps {
   pathname: any
 
   selectedStar: any
-  modalOpen: any
+  modalOpen: string
 
   resetSelectedStar: any
   resetModalStatus: any
@@ -61,11 +61,11 @@ class FormModal extends React.Component<FormModalProps, {}> {
   renderForm(orbit: string, assignmentId: string) {
     const { pathname } = this.props
 
-    if (pathname.match(/project/)) {
-      return orbit === '' ? (
-        <SubAssignmentForm assignmentId={assignmentId} />
-      ) : (
+    if (pathname.includes('project')) {
+      return orbit !== '' ? (
         <AssignmentForm orbit={orbit} />
+      ) : (
+        <SubAssignmentForm assignmentId={assignmentId} />
       )
     } else {
       return <ProjectForm />
@@ -73,15 +73,18 @@ class FormModal extends React.Component<FormModalProps, {}> {
   }
 
   render() {
-    const form = this.props.modalOpen ? this.props.modalOpen.split('-') : ''
-    const orbit = form[1]
-    const assignmentId = form[2] ? form[2] : ''
+    const orbit: string = this.props.modalOpen.includes('form')
+      ? this.props.modalOpen.split('-')[1]
+      : ''
+    const assignmentId: string = this.props.modalOpen.includes('satelite')
+      ? this.props.modalOpen.split('-')[2]
+      : ''
 
     return (
       <Modal
-        isOpen={this.props.modalOpen !== null}
+        isOpen={orbit !== '' || assignmentId !== ''}
         style={customStyles}
-        contentLabel="Assignment From Modal"
+        contentLabel="Assignment Form Modal"
       >
         {this.renderForm(orbit, assignmentId)}
       </Modal>

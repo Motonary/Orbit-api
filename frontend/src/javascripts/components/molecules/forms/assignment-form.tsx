@@ -32,6 +32,7 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
     const planet_type: any = this.props.selectedStar // reducerでの型付けと対応
     const project_id: number = this.props.currentProject.id
     const { orbit } = this.props
+    console.log(planet_type)
 
     return (
       <div id="form-on-modal">
@@ -99,7 +100,7 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
               </div>
               <div className="form-line-3">
                 <SelectField
-                  name={name}
+                  name="planet_size"
                   value={values.planet_size}
                   onChange={handleChange}
                   onBlur={handleBlur}

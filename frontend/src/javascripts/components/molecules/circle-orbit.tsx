@@ -22,6 +22,7 @@ interface CircleOrbitProps {
   modalOpen: any
   selectedStar: any
   revolvingAssignments: any
+  selectedAssignments: any
 
   setSelectedStar: any
   resetSelectedStar: any
@@ -160,21 +161,16 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
   onSelected(e: any) {
     const target: any = e.target.parentNode.children[1] // e.target = .planet-img-container -> div.mark-container
     const targetPlanet: any = e.target.parentNode.parentNode.children[2] // canvas #2-Earth
-    const selectedPlanetId: any = targetPlanet.id.split('-')[0]
-    try {
-      Number(selectedPlanetId)
-      // target.style // 文法的に誤っているので書き直す
-    } catch (e) {
-      return
-    }
+    const selectedPlanet: string = targetPlanet.id
 
     if (target.style.display === 'block') {
       target.style.display = 'none'
-      this.props.disselectAssignment(selectedPlanetId)
+      this.props.disselectAssignment(selectedPlanet)
     } else if (target.style.display === '' || target.style.display === 'none') {
       target.style.display = 'block'
-      this.props.selectAssignment(selectedPlanetId)
+      this.props.selectAssignment(selectedPlanet)
     }
+    console.log(this.props.selectedAssignments)
   }
 
   render() {
@@ -226,8 +222,14 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
 }
 
 export default connect(
-  ({ revolvingAssignments, selectedStar, modalOpen }: any) => ({
+  ({
     revolvingAssignments,
+    selectedAssignments,
+    selectedStar,
+    modalOpen,
+  }: any) => ({
+    revolvingAssignments,
+    selectedAssignments,
     selectedStar,
     modalOpen,
   }),

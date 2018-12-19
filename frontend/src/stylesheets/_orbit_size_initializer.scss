@@ -1,9 +1,16 @@
 /* 恒星系の配置　*/
-$position-move-distance: 30px;
-$fixed-star-position: 300px + $position-move-distance;
-$primo-orbit-position: 210px + $position-move-distance;
-$secundus-orbit-position: 100px + $position-move-distance;
-$tertius-orbit-position: 0px + $position-move-distance;
+$position-move-distance-top: 50px;
+$position-move-distance-left: 0px;
+
+$fixed-star-position-top: 300px + $position-move-distance-top;
+$primo-orbit-position-top: 210px + $position-move-distance-top;
+$secundus-orbit-position-top: 100px + $position-move-distance-top;
+$tertius-orbit-position-top: 0px + $position-move-distance-top;
+
+$fixed-star-position-left: 300px + $position-move-distance-left;
+$primo-orbit-position-left: 210px + $position-move-distance-left;
+$secundus-orbit-position-left: 100px + $position-move-distance-left;
+$tertius-orbit-position-left: 0px + $position-move-distance-left;
 
 /*　恒星の大きさ　：　基準値　*/
 $fixed-star-scale: 150px;

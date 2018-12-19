@@ -68,3 +68,18 @@ export function destroyedAssignments(state: any = null, action: any) {
       return state
   }
 }
+
+/*
+ * removedAssignmentsの利用用途
+ * stateには、UI上からDestroyActionによって削除されたAssignmnetが一旦格納される
+ * 紐づくProjectのProjectPageから離脱された時に、この値を利用してDBのデータを削除する
+ */
+export function removedAssignments(state: string[] = [], action: any) {
+  switch (action.type) {
+    case actionTypes.SET_REMOVED_ASSIGNMENTS:
+      return [...state, action.removedAssignmentId]
+
+    default:
+      return state
+  }
+}
