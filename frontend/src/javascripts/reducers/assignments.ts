@@ -1,10 +1,6 @@
 import { actionTypes } from '../constants/action-types'
 import _ from 'lodash'
-import {
-  RevolvingAssignmentsAction,
-  SelectedAssignmentsAction,
-  DestroyedAssignmentsAction,
-} from '../actions/assignments'
+import { RevolvingAssignmentsAction, SelectedAssignmentsAction, DestroyedAssignmentsAction } from '../actions/assignments'
 // import {
 //   RevolvingAssignmentsState,
 //   SelectedAssignmentsState,
@@ -15,10 +11,7 @@ import {
  * revolvingAssignmentsの利用用途
  * stateには、{primo, secundus, tertius}の各軌道上のassignmentsが軌道名をkeyにして格納される
  */
-export function revolvingAssignments(
-  state: any = null,
-  action: RevolvingAssignmentsAction
-) {
+export function revolvingAssignments(state: any = null, action: RevolvingAssignmentsAction) {
   let newState = Object.assign({}, state)
   switch (action.type) {
     case actionTypes.FETCH_REVOLVING_ASSIGNMENTS:
@@ -29,8 +22,7 @@ export function revolvingAssignments(
 
     case actionTypes.CREATE_ASSIGNMENT:
       if ('newAssignment' in action.payload) {
-        const newAssignmentOrbit: 'primo' | 'secundus' | 'tertius' =
-          action.payload.newAssignment.orbit_pos
+        const newAssignmentOrbit: 'primo' | 'secundus' | 'tertius' = action.payload.newAssignment.orbit_pos
         newState[newAssignmentOrbit].push(action.payload.newAssignment)
         return newState
       }
@@ -54,10 +46,7 @@ export function revolvingAssignments(
  * stateには、ユーザがクリックし、UI上でチェックマーク付きのPlanetに紐付いた"3-Earth"のような
  * ”assignmentId-planetType”というstringが格納される
  */
-export function selectedAssignments(
-  state: any,
-  action: SelectedAssignmentsAction
-) {
+export function selectedAssignments(state: any, action: SelectedAssignmentsAction) {
   switch (action.type) {
     case actionTypes.SET_SELECTED_ASSIGNMENT:
       return [...state, action.payload.assignmentId]
@@ -77,10 +66,7 @@ export function selectedAssignments(
  * destroyedAssignmentsの利用用途
  * stateには、UI上からすでに削除され、履歴ページに表示されるためのAssignmentsが格納される
  */
-export function destroyedAssignments(
-  state: any = null,
-  action: DestroyedAssignmentsAction
-) {
+export function destroyedAssignments(state: any = null, action: DestroyedAssignmentsAction) {
   switch (action.type) {
     case actionTypes.FETCH_DESTROYED_ASSIGNMENTS:
       if ('destroyedAssignments' in action.payload) {

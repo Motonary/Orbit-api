@@ -43,9 +43,7 @@ interface ResetDestroyActionAction extends BaseAction {
   payload: { status: string }
 }
 
-export type IsDestroyIgnitedAction =
-  | IgniteDestroyPlanetsAction
-  | ResetDestroyActionAction
+export type IsDestroyIgnitedAction = IgniteDestroyPlanetsAction | ResetDestroyActionAction
 
 export function setDestroyAction(status: any): IgniteDestroyPlanetsAction {
   return {

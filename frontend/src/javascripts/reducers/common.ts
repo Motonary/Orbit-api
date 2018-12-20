@@ -1,9 +1,5 @@
 import { actionTypes } from '../constants/action-types'
-import {
-  SelectedStarAction,
-  IsDestroyIgnitedAction,
-  ModalOpenAction,
-} from '../actions/common'
+import { SelectedStarAction, IsDestroyIgnitedAction, ModalOpenAction } from '../actions/common'
 
 /*
  * selectedStarの利用用途
@@ -26,10 +22,7 @@ export function selectedStar(state: any = null, action: SelectedStarAction) {
  * selectedDestroyActionの利用用途
  * stateには、ユーザが選択したMeteorite or Missle or BlackHole いずれかの破壊モーションの名称が格納される
  */
-export function selectedDestroyAction(
-  state: any = null,
-  action: IsDestroyIgnitedAction
-) {
+export function selectedDestroyAction(state: any = null, action: IsDestroyIgnitedAction) {
   switch (action.type) {
     case actionTypes.SET_DESTROY_ACTION:
       return action.payload.status
