@@ -39,8 +39,7 @@ class BlackHole extends React.Component<BlackHoleProps, {}> {
   // 削除されたAssignmentIdをcanvasのidから特定し、destroyedAssignmentsに格納
   removeAssignmentData(parent: any) {
     _.forEach(parent, (destroyDom: any) => {
-      let destroyedCvs: any = destroyDom.children[1]
-      let destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
+      let destroyedAssignmentId: string = destroyDom.id.split('-')[1] // <div #planet-2-Mras />
       this.props.destroyAssignment(destroyedAssignmentId)
     })
   }
