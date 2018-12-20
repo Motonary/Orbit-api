@@ -25,24 +25,36 @@ export default class HistoryCanvas extends React.Component<{}, {}> {
     if (context) {
       context.strokeStyle = 'rgb(255, 255, 255)'
 
-      context.beginPath()
-      context.moveTo(50, 20)
+      const initialHeight = 50
+      const leftEnd = 100
+      const rightEnd = 800
+      const radius = 50
 
+      context.beginPath()
+      context.moveTo(leftEnd, initialHeight)
+
+      context.beginPath()
+      context.moveTo(50, 100)
       // 座標を指定してラインを引いていく
-      context.lineTo(250, 20)
-      context.arc(250, 50, 30, (-90 / 180) * Math.PI, (90 / 180) * Math.PI, false)
-      context.moveTo(250, 80)
-      context.lineTo(50, 80)
-      context.arc(50, 110, 30, (-90 / 180) * Math.PI, (90 / 180) * Math.PI, true)
-      context.moveTo(50, 140)
-      context.lineTo(250, 140)
-      context.arc(250, 170, 30, (-90 / 180) * Math.PI, (90 / 180) * Math.PI, false)
+      context.lineTo(rightEnd, 100)
+      context.arc(rightEnd, 150, radius, (-90 / 180) * Math.PI, (90 / 180) * Math.PI, false)
+      context.moveTo(rightEnd, 200)
+      context.lineTo(leftEnd, 200)
+      context.arc(leftEnd, 250, radius, (-90 / 180) * Math.PI, (90 / 180) * Math.PI, true)
+      context.moveTo(leftEnd, 300)
+      context.lineTo(rightEnd, 300)
+      context.arc(rightEnd, 350, radius, (-90 / 180) * Math.PI, (90 / 180) * Math.PI, false)
+      context.moveTo(rightEnd, 400)
+      context.lineTo(leftEnd, 400)
+      context.arc(leftEnd, 450, radius, (-90 / 180) * Math.PI, (90 / 180) * Math.PI, true)
+      context.moveTo(leftEnd, 500)
+      context.lineTo(rightEnd, 500)
       // 現在のパスを輪郭表示する
       context.stroke()
     }
   }
 
   render() {
-    return <canvas id="background-liner" />
+    return <canvas id="background-liner" width="900" height="600" />
   }
 }
