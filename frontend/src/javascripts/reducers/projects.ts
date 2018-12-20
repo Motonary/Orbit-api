@@ -5,6 +5,10 @@ import {
   CurrentProjectAction,
 } from '../actions/projects'
 
+/*
+ * revolvingProjectsの利用用途
+ * stateには、current_userの持つ全Projectのidがkeyとなって格納される
+ */
 export function revolvingProjects(
   state: any = null,
   action: RevoivingProjectsAction
@@ -34,7 +38,10 @@ export function revolvingProjects(
       return state
   }
 }
-
+/*
+ * currentProjectsの利用用途
+ * stateには、現在のProjectPageのProjectのオブジェクトが格納される
+ */
 export function currentProject(
   state: any = null,
   action: CurrentProjectAction
@@ -51,6 +58,10 @@ export function currentProject(
   }
 }
 
+/*
+ * selectedProjectsの利用用途
+ * stateには、Mypage上でユーザがクリックし、UIとしてはチェックマーク付きのPlanetに紐付いたProjectIdsが格納される
+ */
 export function selectedProjects(state: any = null, action: any) {
   switch (action.type) {
     default:

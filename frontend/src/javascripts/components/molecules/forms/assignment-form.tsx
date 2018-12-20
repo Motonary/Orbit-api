@@ -99,7 +99,7 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
               </div>
               <div className="form-line-3">
                 <SelectField
-                  name={name}
+                  name="planet_size"
                   value={values.planet_size}
                   onChange={handleChange}
                   onBlur={handleBlur}

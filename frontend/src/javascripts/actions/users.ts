@@ -48,7 +48,6 @@ export function createUser(
   email: any,
   password: any,
   password_confirmation: any
-  // callback: any
 ): Promise<CreateUserAction | void> {
   return axios
     .post(`${ROOT_URL}/api/signup`, {

@@ -17,14 +17,15 @@ export type SelectedStarAction = SetSelectedStarAction | ResetSelectedStarAction
 
 export function setSelectedStar(star_type: any): SetSelectedStarAction {
   return {
-    type: actionTypes.SELECT_STAR,
+    type: actionTypes.SET_SELECTED_STAR,
     payload: { star_type },
   }
 }
 
-export function resetSelectedStar(): ResetSelectedStarAction {
+export function resetSelectedStar(status: any): ResetSelectedStarAction {
   return {
-    type: actionTypes.DISSELECT_STAR,
+    type: actionTypes.RESET_SELECTED_STAR,
+    payload: { status },
   }
 }
 
@@ -39,21 +40,21 @@ interface IgniteDestroyPlanetsAction extends BaseAction {
 // TODO: 命名気持ち悪いかな
 interface ResetDestroyActionAction extends BaseAction {
   type: string
-  payload: { status: boolean }
+  payload: { status: string }
 }
 
 export type IsDestroyIgnitedAction =
   | IgniteDestroyPlanetsAction
   | ResetDestroyActionAction
 
-export function igniteDestroyPlanets(status: any): IgniteDestroyPlanetsAction {
+export function setDestroyAction(status: any): IgniteDestroyPlanetsAction {
   return {
-    type: actionTypes.IGNITE_DESTROY_ACTION,
+    type: actionTypes.SET_DESTROY_ACTION,
     payload: { status },
   }
 }
 
-export function resetDestroyAction(status: any): ResetDestroyActionAction {
+export function resetDestroyAction(): ResetDestroyActionAction {
   return {
     type: actionTypes.RESET_DESTROY_ACTION,
     payload: { status },
@@ -68,12 +69,12 @@ interface SetModalStatusAction extends BaseAction {
   payload: { status: boolean }
 }
 
-interface ResetMOdalStatusAction extends BaseAction {
+interface ResetModalStatusAction extends BaseAction {
   type: string
   payload: { status: boolean }
 }
 
-export type ModalOpenAction = SetModalStatusAction | ResetMOdalStatusAction
+export type ModalOpenAction = SetModalStatusAction | ResetModalStatusAction
 
 export function setModalStatus(status: any): SetModalStatusAction {
   return {
@@ -82,7 +83,7 @@ export function setModalStatus(status: any): SetModalStatusAction {
   }
 }
 
-export function resetModalStatus(status: any): ResetMOdalStatusAction {
+export function resetModalStatus(status: any): ResetModalStatusAction {
   return {
     type: actionTypes.CLOSE_MODAL,
     payload: { status },

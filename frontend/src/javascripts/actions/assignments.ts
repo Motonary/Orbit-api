@@ -107,18 +107,18 @@ interface DisselectAssignmentAction extends BaseAction {
   payload: { assignmentId: number } // TODO: stringかも
 }
 
-interface NullifySelectedAssignment extends BaseAction {
+interface ResetSelectedAssignment extends BaseAction {
   type: string
 }
 
 export type SelectedAssignmentsAction =
   | SelectAssignmentAction
   | DisselectAssignmentAction
-  | NullifySelectedAssignment
+  | ResetSelectedAssignment
 
 export function selectAssignment(assignmentId: any): SelectAssignmentAction {
   return {
-    type: actionTypes.SELECT_ASSIGNMENT,
+    type: actionTypes.SET_SELECTED_ASSIGNMENT,
     payload: { assignmentId },
   }
 }
@@ -127,14 +127,14 @@ export function disselectAssignment(
   assignmentId: any
 ): DisselectAssignmentAction {
   return {
-    type: actionTypes.DISSELECT_ASSIGNMENT,
+    type: actionTypes.REMOVE_SELECTED_ASSIGNMENT,
     payload: { assignmentId },
   }
 }
 
-export function nullifySelectedAssignment(): NullifySelectedAssignment {
+export function resetSelectedAssignment(): ResetSelectedAssignment {
   return {
-    type: actionTypes.NULLIFY_SELECTED_ASSIGNMENT,
+    type: actionTypes.RESET_SELECTED_ASSIGNMENT,
   }
 }
 

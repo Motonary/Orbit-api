@@ -8,6 +8,7 @@
   ],
   "rules": {
     "variable-name": false,
+    "one-variable-per-declaration": false,
     "prettier": [
       true,
       {

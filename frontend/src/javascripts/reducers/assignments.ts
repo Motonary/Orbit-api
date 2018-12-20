@@ -5,12 +5,16 @@ import {
   SelectedAssignmentsAction,
   DestroyedAssignmentsAction,
 } from '../actions/assignments'
-import {
-  RevolvingAssignmentsState,
-  SelectedAssignmentsState,
-  DestroyedAssignmentsState,
-} from '../constants/static-types'
+// import {
+//   RevolvingAssignmentsState,
+//   SelectedAssignmentsState,
+//   DestroyedAssignmentsState,
+// } from '../constants/static-types'
 
+/*
+ * revolvingAssignmentsの利用用途
+ * stateには、{primo, secundus, tertius}の各軌道上のassignmentsが軌道名をkeyにして格納される
+ */
 export function revolvingAssignments(
   state: any = null,
   action: RevolvingAssignmentsAction
@@ -45,18 +49,23 @@ export function revolvingAssignments(
   }
 }
 
+/*
+ * selectedAssignmentsの利用用途
+ * stateには、ユーザがクリックし、UI上でチェックマーク付きのPlanetに紐付いた"3-Earth"のような
+ * ”assignmentId-planetType”というstringが格納される
+ */
 export function selectedAssignments(
-  state: any = [],
+  state: any,
   action: SelectedAssignmentsAction
 ) {
   switch (action.type) {
-    case actionTypes.SELECT_ASSIGNMENT:
+    case actionTypes.SET_SELECTED_ASSIGNMENT:
       return [...state, action.payload.assignmentId]
 
-    case actionTypes.DISSELECT_ASSIGNMENT:
+    case actionTypes.REMOVE_SELECTED_ASSIGNMENT:
       return state.filter((item: any) => item !== action.payload.assignmentId)
 
-    case actionTypes.NULLIFY_SELECTED_ASSIGNMENT:
+    case actionTypes.RESET_SELECTED_ASSIGNMENT:
       return []
 
     default:
@@ -64,6 +73,10 @@ export function selectedAssignments(
   }
 }
 
+/*
+ * destroyedAssignmentsの利用用途
+ * stateには、UI上からすでに削除され、履歴ページに表示されるためのAssignmentsが格納される
+ */
 export function destroyedAssignments(
   state: any = null,
   action: DestroyedAssignmentsAction

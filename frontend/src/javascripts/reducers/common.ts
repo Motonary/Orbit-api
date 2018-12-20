@@ -11,10 +11,10 @@ import {
  */
 export function selectedStar(state: any = null, action: SelectedStarAction) {
   switch (action.type) {
-    case actionTypes.SELECT_STAR:
+    case actionTypes.SET_SELECTED_STAR:
       return action.payload.star_type
 
-    case actionTypes.DISSELECT_STAR:
+    case actionTypes.RESET_SELECTED_STAR:
       return null
 
     default:
@@ -22,12 +22,16 @@ export function selectedStar(state: any = null, action: SelectedStarAction) {
   }
 }
 
-export function isDestroyIgnited(
+/*
+ * selectedDestroyActionの利用用途
+ * stateには、ユーザが選択したMeteorite or Missle or BlackHole いずれかの破壊モーションの名称が格納される
+ */
+export function selectedDestroyAction(
   state: any = null,
   action: IsDestroyIgnitedAction
 ) {
   switch (action.type) {
-    case actionTypes.IGNITE_DESTROY_ACTION:
+    case actionTypes.SET_DESTROY_ACTION:
       return action.payload.status
 
     case actionTypes.RESET_DESTROY_ACTION:
@@ -44,13 +48,13 @@ export function isDestroyIgnited(
  * form-${orbit} は、ModalがProjectもしくはAssignmentを追加するFormを伴う時に用いられる
  * destroyは、ModalがrojectもしくはAssignmentを削除する時の確認画面として開かれる時に用いられる
  */
-export function modalOpen(state: any = false, action: ModalOpenAction) {
+export function modalOpen(state: any, action: ModalOpenAction) {
   switch (action.type) {
     case actionTypes.OPEN_MODAL:
       return action.payload.status
 
     case actionTypes.CLOSE_MODAL:
-      return null
+      return ''
 
     default:
       return state
