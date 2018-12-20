@@ -1,6 +1,9 @@
 import { actionTypes } from '../constants/action-types'
 import { BaseAction } from '../constants/static-types'
 
+// -------------------------------------------------------------------------------------
+// SelectedStar
+// -------------------------------------------------------------------------------------
 interface SetSelectedStarAction extends BaseAction {
   type: string
   payload: { star_type: number } // TODO: stringかも
@@ -10,34 +13,7 @@ interface ResetSelectedStarAction extends BaseAction {
   type: string
 }
 
-interface IgniteDestroyPlanetsAction extends BaseAction {
-  type: string
-  payload: { status: boolean }
-}
-
-// TODO: 命名気持ち悪いかな
-interface ResetDestroyActionAction extends BaseAction {
-  type: string
-  payload: { status: boolean }
-}
-
-interface SetModalStatusAction extends BaseAction {
-  type: string
-  payload: { status: boolean }
-}
-
-interface ResetMOdalStatusAction extends BaseAction {
-  type: string
-  payload: { status: boolean }
-}
-
-export type CommonAction =
-  | SetSelectedStarAction
-  | ResetSelectedStarAction
-  | IgniteDestroyPlanetsAction
-  | ResetDestroyActionAction
-  | SetModalStatusAction
-  | ResetMOdalStatusAction
+export type SelectedStarAction = SetSelectedStarAction | ResetSelectedStarAction
 
 export function setSelectedStar(star_type: any): SetSelectedStarAction {
   return {
@@ -52,6 +28,24 @@ export function resetSelectedStar(): ResetSelectedStarAction {
   }
 }
 
+// -------------------------------------------------------------------------------------
+// IsDestroyIgnited
+// -------------------------------------------------------------------------------------
+interface IgniteDestroyPlanetsAction extends BaseAction {
+  type: string
+  payload: { status: boolean }
+}
+
+// TODO: 命名気持ち悪いかな
+interface ResetDestroyActionAction extends BaseAction {
+  type: string
+  payload: { status: boolean }
+}
+
+export type IsDestroyIgnitedAction =
+  | IgniteDestroyPlanetsAction
+  | ResetDestroyActionAction
+
 export function igniteDestroyPlanets(status: any): IgniteDestroyPlanetsAction {
   return {
     type: actionTypes.IGNITE_DESTROY_ACTION,
@@ -65,6 +59,21 @@ export function resetDestroyAction(status: any): ResetDestroyActionAction {
     payload: { status },
   }
 }
+
+// -------------------------------------------------------------------------------------
+// ModalOpen
+// -------------------------------------------------------------------------------------
+interface SetModalStatusAction extends BaseAction {
+  type: string
+  payload: { status: boolean }
+}
+
+interface ResetMOdalStatusAction extends BaseAction {
+  type: string
+  payload: { status: boolean }
+}
+
+export type ModalOpenAction = SetModalStatusAction | ResetMOdalStatusAction
 
 export function setModalStatus(status: any): SetModalStatusAction {
   return {

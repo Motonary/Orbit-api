@@ -1,7 +1,8 @@
 import { actionTypes } from '../constants/action-types'
-import { UserAction } from '../actions/users'
+import { CurrentUserAction } from '../actions/users'
 
-export default (state: any = null, action: UserAction) => {
+// TODO: ファイル名をuser.tsにしてcurrent-userはその一部にする
+export default (state: any = null, action: CurrentUserAction) => {
   switch (action.type) {
     case actionTypes.SET_CURRENT_USER:
       return action.payload.currentUser

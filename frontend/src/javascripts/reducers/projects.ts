@@ -1,8 +1,14 @@
 import { actionTypes } from '../constants/action-types'
 import _ from 'lodash'
-import { ProjectAction } from '../actions/projects'
+import {
+  RevoivingProjectsAction,
+  CurrentProjectAction,
+} from '../actions/projects'
 
-export function revolvingProjects(state: any = null, action: ProjectAction) {
+export function revolvingProjects(
+  state: any = null,
+  action: RevoivingProjectsAction
+) {
   switch (action.type) {
     case actionTypes.FETCH_REVOLVING_PROJECTS:
       if ('currentUserAllProjects' in action.payload) {
@@ -29,7 +35,10 @@ export function revolvingProjects(state: any = null, action: ProjectAction) {
   }
 }
 
-export function currentProject(state: any = null, action: ProjectAction) {
+export function currentProject(
+  state: any = null,
+  action: CurrentProjectAction
+) {
   switch (action.type) {
     case actionTypes.SET_CURRENT_PROJECT:
       if ('currentProject' in action.payload) {
@@ -42,7 +51,7 @@ export function currentProject(state: any = null, action: ProjectAction) {
   }
 }
 
-export function selectedProjects(state: any = null, action: ProjectAction) {
+export function selectedProjects(state: any = null, action: any) {
   switch (action.type) {
     default:
       return state

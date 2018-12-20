@@ -1,34 +1,48 @@
 import { actionTypes } from '../constants/action-types'
 import _ from 'lodash'
-import { AssignmentAction } from '../actions/assignments'
+import {
+  RevolvingAssignmentsAction,
+  SelectedAssignmentsAction,
+  DestroyedAssignmentsAction,
+} from '../actions/assignments'
 
 export function revolvingAssignments(
   state: any = null,
-  action: AssignmentAction
+  action: RevolvingAssignmentsAction
 ) {
   let newState = Object.assign({}, state)
   switch (action.type) {
     case actionTypes.FETCH_REVOLVING_ASSIGNMENTS:
-      return action.payload.revolvingAssignments
+      if ('revolvingAssignments' in action.payload) {
+        return action.payload.revolvingAssignments
+      }
+      break
 
     case actionTypes.CREATE_ASSIGNMENT:
-      const newAssignmentOrbit = action.payload.newAssignment.orbit_pos
-      newState[newAssignmentOrbit].push(action.payload.newAssignment)
-      return newState
+      if ('newAssignment' in action.payload) {
+        const newAssignmentOrbit = action.payload.newAssignment.orbit_pos
+        newState[newAssignmentOrbit].push(action.payload.newAssignment)
+        return newState
+      }
+      break
 
     case actionTypes.DESTROY_ASSIGNMENT:
       // TODO: あとでやる
-      return _.remove(
-        [...state],
-        eachState => eachState.id !== action.payload.assignmentId
-      )
+      if ('assignmentId' in action.payload) {
+        const { assignmentId } = action.payload
+        return _.remove([...state], eachState => eachState.id !== assignmentId)
+      }
+      break
 
     default:
       return state
   }
 }
 
-export function selectedAssignments(state: any = [], action: AssignmentAction) {
+export function selectedAssignments(
+  state: any = [],
+  action: SelectedAssignmentsAction
+) {
   switch (action.type) {
     case actionTypes.SELECT_ASSIGNMENT:
       return [...state, action.payload.assignmentId]
@@ -46,17 +60,21 @@ export function selectedAssignments(state: any = [], action: AssignmentAction) {
 
 export function destroyedAssignments(
   state: any = null,
-  action: AssignmentAction
+  action: DestroyedAssignmentsAction
 ) {
   switch (action.type) {
     case actionTypes.FETCH_DESTROYED_ASSIGNMENTS:
-      return action.payload.destroyedAssignments
+      if ('destroyedAssignments' in action.payload) {
+        return action.payload.destroyedAssignments
+      }
+      break
 
     case actionTypes.RESTORE_ASSIGNMENT:
-      return _.remove(
-        [...state],
-        eachState => eachState.id !== action.payload.assignmentId
-      )
+      if ('assignmentId' in action.payload) {
+        const { assignmentId } = action.payload
+        return _.remove([...state], eachState => eachState.id !== assignmentId)
+      }
+      break
 
     default:
       return state

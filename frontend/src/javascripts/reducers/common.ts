@@ -1,11 +1,15 @@
 import { actionTypes } from '../constants/action-types'
-import { CommonAction } from '../actions/common'
+import {
+  SelectedStarAction,
+  IsDestroyIgnitedAction,
+  ModalOpenAction,
+} from '../actions/common'
 
 /*
  * selectedStarの利用用途
  * stateには、Earth、Loveなどのユーザが選択した惑星の名称が格納される
  */
-export function selectedStar(state: any = null, action: CommonAction) {
+export function selectedStar(state: any = null, action: SelectedStarAction) {
   switch (action.type) {
     case actionTypes.SELECT_STAR:
       return action.payload.star_type
@@ -18,7 +22,10 @@ export function selectedStar(state: any = null, action: CommonAction) {
   }
 }
 
-export function isDestroyIgnited(state: any = null, action: CommonAction) {
+export function isDestroyIgnited(
+  state: any = null,
+  action: IsDestroyIgnitedAction
+) {
   switch (action.type) {
     case actionTypes.IGNITE_DESTROY_ACTION:
       return action.payload.status
@@ -37,7 +44,7 @@ export function isDestroyIgnited(state: any = null, action: CommonAction) {
  * form-${orbit} は、ModalがProjectもしくはAssignmentを追加するFormを伴う時に用いられる
  * destroyは、ModalがrojectもしくはAssignmentを削除する時の確認画面として開かれる時に用いられる
  */
-export function modalOpen(state: any = false, action: CommonAction) {
+export function modalOpen(state: any = false, action: ModalOpenAction) {
   switch (action.type) {
     case actionTypes.OPEN_MODAL:
       return action.payload.status

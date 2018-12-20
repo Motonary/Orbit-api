@@ -3,6 +3,9 @@ import { actionTypes } from '../constants/action-types'
 import { BaseAction } from '../constants/static-types'
 import { ROOT_URL } from '../constants/url'
 
+// -------------------------------------------------------------------------------------
+// CurrentUser
+// -------------------------------------------------------------------------------------
 interface CreateUserAction extends BaseAction {
   type: string
   payload: { currentUser: Object }
@@ -32,7 +35,7 @@ interface UpdateProfileAction extends BaseAction {
   payload: { updatedUser: Object }
 }
 
-export type UserAction =
+export type CurrentUserAction =
   | CreateUserAction
   | CreateSessionAction
   | FetchCurrentUserAction

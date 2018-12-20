@@ -3,24 +3,12 @@ import { actionTypes } from '../constants/action-types'
 import { BaseAction } from '../constants/static-types'
 import { ROOT_URL } from '../constants/url'
 
+// -------------------------------------------------------------------------------------
+// RevolvingProjects
+// -------------------------------------------------------------------------------------
 interface FetchRevolvingProjectsAction extends BaseAction {
   type: string
   payload: { currentUserAllProjects: Array<Object> }
-}
-
-interface SetCurrentProjectAction extends BaseAction {
-  type: string
-  payload: { currentProject: Object }
-}
-
-interface SetDefaultProjectAction extends BaseAction {
-  type: string
-  payload: { currentProject: Object }
-}
-
-interface ChangeCurrentProjectAction extends BaseAction {
-  type: string
-  payload: { currentProject: Object }
 }
 
 interface CreateProjectAction extends BaseAction {
@@ -33,11 +21,8 @@ interface DestroyProjectAction extends BaseAction {
   payload: { projectId: number } // TODO: stringかも
 }
 
-export type ProjectAction =
+export type RevoivingProjectsAction =
   | FetchRevolvingProjectsAction
-  | SetCurrentProjectAction
-  | SetDefaultProjectAction
-  | ChangeCurrentProjectAction
   | CreateProjectAction
   | DestroyProjectAction
 
@@ -53,39 +38,6 @@ export function fetchRevolvingProjects(): Promise<FetchRevolvingProjectsAction |
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
-}
-
-export function setCurrentProject(
-  currentProject: any,
-  callback: any
-): SetCurrentProjectAction {
-  callback()
-  return {
-    type: actionTypes.SET_CURRENT_PROJECT,
-    payload: { currentProject },
-  }
-}
-
-export function setDefaultProject(
-  defaultProject: any,
-  callback: any
-): SetDefaultProjectAction {
-  callback(defaultProject.id)
-  return {
-    type: actionTypes.SET_CURRENT_PROJECT,
-    payload: { currentProject: defaultProject },
-  }
-}
-
-export function changeCurrentProject(
-  newProject: any,
-  callback: any
-): ChangeCurrentProjectAction {
-  callback()
-  return {
-    type: actionTypes.SET_CURRENT_PROJECT,
-    payload: { currentProject: newProject },
-  }
 }
 
 export function createProject(
@@ -122,4 +74,60 @@ export function destroyProject(
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
+}
+
+// -------------------------------------------------------------------------------------
+// CurrentProject
+// -------------------------------------------------------------------------------------
+interface SetCurrentProjectAction extends BaseAction {
+  type: string
+  payload: { currentProject: Object }
+}
+
+interface SetDefaultProjectAction extends BaseAction {
+  type: string
+  payload: { currentProject: Object }
+}
+
+interface ChangeCurrentProjectAction extends BaseAction {
+  type: string
+  payload: { currentProject: Object }
+}
+
+export type CurrentProjectAction =
+  | SetCurrentProjectAction
+  | SetDefaultProjectAction
+  | ChangeCurrentProjectAction
+
+export function setCurrentProject(
+  currentProject: any,
+  callback: any
+): SetCurrentProjectAction {
+  callback()
+  return {
+    type: actionTypes.SET_CURRENT_PROJECT,
+    payload: { currentProject },
+  }
+}
+
+export function setDefaultProject(
+  defaultProject: any,
+  callback: any
+): SetDefaultProjectAction {
+  callback(defaultProject.id)
+  return {
+    type: actionTypes.SET_CURRENT_PROJECT,
+    payload: { currentProject: defaultProject },
+  }
+}
+
+export function changeCurrentProject(
+  newProject: any,
+  callback: any
+): ChangeCurrentProjectAction {
+  callback()
+  return {
+    type: actionTypes.SET_CURRENT_PROJECT,
+    payload: { currentProject: newProject },
+  }
 }
