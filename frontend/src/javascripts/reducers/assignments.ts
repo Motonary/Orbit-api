@@ -51,7 +51,7 @@ export function revolvingAssignments(state: any = null, action: RevolvingAssignm
  * stateには、ユーザがクリックし、UI上でチェックマーク付きのPlanetに紐付いた"3-Earth"のような
  * ”assignmentId-planetType”というstringが格納される
  */
-export function selectedAssignments(state: any, action: SelectedAssignmentsAction) {
+export function selectedAssignments(state: any = [], action: SelectedAssignmentsAction) {
   switch (action.type) {
     case actionTypes.SET_SELECTED_ASSIGNMENT:
       return [...state, action.payload.assignmentId]
