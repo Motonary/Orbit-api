@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import anime from 'animejs'
 
 import ActionBtn from '../atoms/buttons/action-btn'
@@ -114,9 +115,10 @@ class Missle extends React.Component<MissleProps, {}> {
 
   // 削除されたAssignmentIdをcanvasのidから特定し、destroyedAssignmentsに格納
   removeAssignmentData(parent: any) {
-    parent.map((destroyDom: any) => {
+    _.forEach(parent, (destroyDom: any) => {
       let destroyedCvs: any = destroyDom.children[1]
       let destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
+      this.props.setRemovedAssignment(destroyedAssignmentId)
       this.props.destroyAssignment(destroyedAssignmentId)
     })
   }
@@ -129,7 +131,7 @@ class Missle extends React.Component<MissleProps, {}> {
     let ctx: any = []
 
     if (target_ids.length > 0) {
-      target_ids.map((id: string) => {
+      target_ids.forEach((id: string) => {
         let tar: any = document.getElementById(id)
         parent.push(tar.parentNode)
         canvasEl.push(tar)
@@ -145,7 +147,7 @@ class Missle extends React.Component<MissleProps, {}> {
 
     function setCanvasSize() {
       let i: number = 0
-      canvasEl.map((target: any) => {
+      canvasEl.forEach((target: any) => {
         target.style.width = parent[i].parentNode.clientWidth + 'px'
         target.style.height = parent[i].parentNode.clientHeight + 'px'
         target.style.top = `-${parent[i].parentNode.clientWidth / 2}px`
@@ -164,7 +166,7 @@ class Missle extends React.Component<MissleProps, {}> {
     }
 
     function removeImg() {
-      parent.map((doc: any) => {
+      _.forEach(parent, (doc: any) => {
         const child: any = doc.children[1]
         doc.removeChild(child)
       })
@@ -195,7 +197,7 @@ class Missle extends React.Component<MissleProps, {}> {
       p.radius = anime.random(10, 20)
       p.endPos = setParticuleDirection(p)
       p.draw = function() {
-        ctx.map((tar: any) => {
+        ctx.forEach((tar: any) => {
           tar.beginPath()
           tar.arc(p.x, p.y, p.radius, 0, 2 * Math.PI, true)
           tar.fillStyle = p.color
@@ -233,7 +235,7 @@ class Missle extends React.Component<MissleProps, {}> {
 
     function clear() {
       let i: number = 0
-      ctx.map((val: any) => {
+      ctx.forEach((val: any) => {
         val.clearRect(0, 0, canvasEl[i].width, canvasEl[i].height)
         i++
       })
