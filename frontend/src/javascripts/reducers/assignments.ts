@@ -5,6 +5,11 @@ import {
   SelectedAssignmentsAction,
   DestroyedAssignmentsAction,
 } from '../actions/assignments'
+import {
+  RevolvingAssignmentsState,
+  SelectedAssignmentsState,
+  DestroyedAssignmentsState,
+} from '../constants/static-types'
 
 export function revolvingAssignments(
   state: any = null,
@@ -20,7 +25,8 @@ export function revolvingAssignments(
 
     case actionTypes.CREATE_ASSIGNMENT:
       if ('newAssignment' in action.payload) {
-        const newAssignmentOrbit = action.payload.newAssignment.orbit_pos
+        const newAssignmentOrbit: 'primo' | 'secundus' | 'tertius' =
+          action.payload.newAssignment.orbit_pos
         newState[newAssignmentOrbit].push(action.payload.newAssignment)
         return newState
       }
@@ -29,8 +35,8 @@ export function revolvingAssignments(
     case actionTypes.DESTROY_ASSIGNMENT:
       // TODO: あとでやる
       if ('assignmentId' in action.payload) {
-        const { assignmentId } = action.payload
-        return _.remove([...state], eachState => eachState.id !== assignmentId)
+        // const { assignmentId } = action.payload
+        // return _.remove([...state], eachState => eachState.id !== assignmentId)
       }
       break
 
