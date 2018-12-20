@@ -1,11 +1,13 @@
 #history-container {
   width: 100%;
   height: 100%;
-}
 
-#background-liner {
-  margin: 20px auto;
-  z-index: -100;
+  #background-liner {
+    margin: 20px auto;
+    max-width: 980px;
+    width: 80%; 
+    z-index: -100;
+  }
 }
 
 #stored-planet-list {
