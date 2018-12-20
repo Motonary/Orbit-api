@@ -74,12 +74,9 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
 
   onClickFixedStar(projectId: any) {
     // TODO: プロジェクトページへ遷移する前になんらかのアニメーション追加(Fadeoutとか)
-    this.props.setCurrentProject(
-      this.props.revolvingProjects[projectId],
-      () => {
-        this.props.history.push(`${this.props.match.url}/projects`)
-      }
-    )
+    this.props.setCurrentProject(this.props.revolvingProjects[projectId], () => {
+      this.props.history.push(`${this.props.match.url}/projects`)
+    })
   }
 
   render() {
@@ -87,26 +84,21 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
     if (!revolvingProjects) return <ul id="mypage-orbit-circle" />
 
     const pos: any = ['top', 'right', 'left', 'bottom']
-    const projectList: any = _.map(
-      revolvingProjects,
-      (project: any, index: any) => {
-        return (
-          <div
+    const projectList: any = _.map(revolvingProjects, (project: any, index: any) => {
+      return (
+        <div
+          key={project.id}
+          className={`common ${pos[index % 4]} mypage-orbit-motion start-animation`}
+        >
+          <FixedStarInList
             key={project.id}
-            className={`common ${
-              pos[index % 4]
-            } mypage-orbit-motion start-animation`}
-          >
-            <FixedStarInList
-              key={project.id}
-              project={project}
-              className="planet-large-secundus"
-              onClick={this.onClickFixedStar.bind(this, project.id)}
-            />
-          </div>
-        )
-      }
-    )
+            project={project}
+            className="planet-large-secundus"
+            onClick={this.onClickFixedStar.bind(this, project.id)}
+          />
+        </div>
+      )
+    })
 
     return <ul id="mypage-orbit-circle">{projectList}</ul>
   }

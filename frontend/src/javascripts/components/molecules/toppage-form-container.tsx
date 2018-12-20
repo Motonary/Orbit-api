@@ -14,11 +14,7 @@ class TopPageForm extends React.Component<TopPageFormProps> {
     const { isSignIn }: any = this.props
     return (
       <div className="sign-form">
-        {isSignIn ? (
-          <SignInForm history={history} />
-        ) : (
-          <SignUpForm history={history} />
-        )}
+        {isSignIn ? <SignInForm history={history} /> : <SignUpForm history={history} />}
       </div>
     )
   }

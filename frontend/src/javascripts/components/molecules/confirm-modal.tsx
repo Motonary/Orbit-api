@@ -46,10 +46,7 @@ const customStyles: any = {
 
 Modal.setAppElement('#app')
 
-class ConfirmModal extends React.Component<
-  ConfirmModalProps,
-  ConfirmModalState
-> {
+class ConfirmModal extends React.Component<ConfirmModalProps, ConfirmModalState> {
   constructor(props: any) {
     super(props)
 

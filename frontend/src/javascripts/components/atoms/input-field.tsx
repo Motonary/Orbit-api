@@ -41,10 +41,7 @@ const InputField: React.SFC<InputFieldProps> = ({
 
   const inputRadius = classNames({
     'input-radius':
-      name === 'username' ||
-      name === 'email' ||
-      name === 'password' ||
-      name === 'confirmation',
+      name === 'username' || name === 'email' || name === 'password' || name === 'confirmation',
   })
 
   return (

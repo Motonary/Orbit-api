@@ -20,11 +20,7 @@ class SettingPage extends React.Component<Props, {}> {
 
     return (
       <div id="page-container">
-        <Header
-          currentUser={currentUser}
-          history={history}
-          pathname={pathname}
-        />
+        <Header currentUser={currentUser} history={history} pathname={pathname} />
         <SettingPageMain currentUser={currentUser} history={history} />
         <Footer currentUser={currentUser} pathname={pathname} />
       </div>

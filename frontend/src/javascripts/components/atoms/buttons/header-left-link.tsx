@@ -28,10 +28,7 @@ class HeaderLeftLink extends React.Component<Props, {}> {
     })
 
     return (
-      <a
-        className={headerleftClasses}
-        onClick={this.onClickHeaderLeft.bind(this)}
-      >
+      <a className={headerleftClasses} onClick={this.onClickHeaderLeft.bind(this)}>
         <UserImg user={currentUser} />
         <UserName user={currentUser} />
       </a>

@@ -57,15 +57,7 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
             actions.setSubmitting(false)
           }}
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-          }) => (
+          {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
             <form onSubmit={handleSubmit}>
               <div className="form-line-1">
                 <InputField

@@ -24,10 +24,7 @@ interface FooterActionBtnListProps {
   setDestroyAction: any
 }
 
-class FooterActionBtnList extends React.Component<
-  FooterActionBtnListProps,
-  {}
-> {
+class FooterActionBtnList extends React.Component<FooterActionBtnListProps, {}> {
   onClickOpenModal(actionType: string) {
     this.props.setDestroyAction(actionType)
     this.props.setModalStatus(actionType)

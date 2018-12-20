@@ -5,16 +5,9 @@ import _ from 'lodash'
 import PopupBox from '../atoms/popup-box'
 import Planet from '../atoms/planet'
 
-import {
-  selectAssignment,
-  disselectAssignment,
-} from '../../actions/assignments'
+import { selectAssignment, disselectAssignment } from '../../actions/assignments'
 
-import {
-  setSelectedStar,
-  resetSelectedStar,
-  setModalStatus,
-} from '../../actions/common'
+import { setSelectedStar, resetSelectedStar, setModalStatus } from '../../actions/common'
 
 interface CircleOrbitProps {
   orbit: any
@@ -225,12 +218,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
 }
 
 export default connect(
-  ({
-    revolvingAssignments,
-    selectedAssignments,
-    selectedStar,
-    modalOpen,
-  }: any) => ({
+  ({ revolvingAssignments, selectedAssignments, selectedStar, modalOpen }: any) => ({
     revolvingAssignments,
     selectedAssignments,
     selectedStar,

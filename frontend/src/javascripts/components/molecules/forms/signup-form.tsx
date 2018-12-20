@@ -41,15 +41,7 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
             actions.setSubmitting(false)
           }}
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-          }) => (
+          {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
             <form onSubmit={handleSubmit}>
               <InputField
                 type="username"
@@ -86,9 +78,7 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {errors.confirmation &&
-                touched.confirmation &&
-                errors.confirmation}
+              {errors.confirmation && touched.confirmation && errors.confirmation}
               <FormSubmitBtn label="SIGN UP" isSubmit={isSubmitting} />
             </form>
           )}

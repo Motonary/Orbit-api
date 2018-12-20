@@ -38,8 +38,7 @@ class HeaderRightLinkList extends React.Component<Props, {}> {
     // setting-page, history-pageのみで表示(show-right: true)
     const backButtonClasses = classNames({
       'back-icon-container': true,
-      'show-right':
-        pathname === `${rootPath}/history` || pathname === `${rootPath}/edit`,
+      'show-right': pathname === `${rootPath}/history` || pathname === `${rootPath}/edit`,
     })
 
     return (
