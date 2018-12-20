@@ -54,6 +54,7 @@ class BlackHole extends React.Component<BlackHoleProps, {}> {
     let targetImgTop: number = 0
     let targetImgLeft: number = 0
 
+    debugger
     targetIds.forEach((id: string) => {
       displayDoms.push(document.getElementById(`planet-${id}`)) // planet-2-Earth <Plant />の親要素
     })
