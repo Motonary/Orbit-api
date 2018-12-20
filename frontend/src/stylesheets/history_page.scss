@@ -1,46 +1,79 @@
+@import 'initializer';
+
+@mixin size() {
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin: 10px 30px;
+  font-size: 16px;
+  border-radius: 50%;
+}
+
 #history-container {
   width: 100%;
   height: 100%;
+  position: relative;
 
-  #background-liner {
+  .background-liner-parent{
     display: block;
-    margin: 20px auto;
-    max-width: 1000px;
-    z-index: -100;
-    overflow: scroll;
-  }
-}
+    position: absolute;
+    top: 100px;
+    left: 150px;
+    padding: 0;
+    width: 900px;
+    height: 600px;
+    overflow-y: scroll;
 
-#stored-planet-list {
-  display: flex;
-  align-content: flex-start;
-  flex-wrap: wrap;
-
-  width: 90%;
-  height: 80%;
-  margin: 10px auto;
-  padding: 0;
-  overflow-y: scroll;
-
-  .planet-list-row {
-    display: inline-flex;
-
-    li.planet {
-      width: 100px;
-      height: 100px;
-      margin: 10px;
-
-      .stored-planet {
-        width: 100px;
-        height: 100px;
-        background-color: #fff;
-      }
+    #background-liner {
+      margin: 0;
+      padding: 0;
+      max-width: 1000px;
+      z-index: -100;
+      
     }
   }
-  .planet-list-row:nth-child(2n+1) {
+
+  #stored-planet-list {
+    display: flex;
     align-content: flex-start;
-  }
-  .planet-list-row:nth-child(2n) {
-    align-content: flex-end;
+    flex-wrap: wrap;
+    flex-direction: row;
+    color: #fff;
+
+    position: absolute;
+    top: 130px;
+    left: 200px;
+
+    width: 900px;
+    height: 600px;
+    margin: 20px auto;
+    padding: 0;
+    z-index: 200;
+    overflow-y: scroll;
+
+    .year, .day {
+      @include size();
+      line-height: 80px;
+      text-align: center;
+      border: solid 1px #fff;
+      border-radius: 50%;
+      background-color: $bg-common-color;
+    }
+
+    .stored-planet {
+      @include size();
+
+      img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    .planet-list-row:nth-child(2n+1) {
+      align-content: flex-start;
+    }
+    .planet-list-row:nth-child(2n) {
+      align-content: flex-end;
+    }
   }
 }

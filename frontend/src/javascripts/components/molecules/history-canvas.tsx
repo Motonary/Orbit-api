@@ -49,12 +49,22 @@ export default class HistoryCanvas extends React.Component<{}, {}> {
       context.arc(leftEnd, 450, radius, (-90 / 180) * Math.PI, (90 / 180) * Math.PI, true)
       context.moveTo(leftEnd, 500)
       context.lineTo(rightEnd, 500)
+      context.arc(rightEnd, 550, radius, (-90 / 180) * Math.PI, (90 / 180) * Math.PI, false)
+      context.moveTo(rightEnd, 600)
+      context.lineTo(leftEnd, 600)
+      context.arc(leftEnd, 650, radius, (-90 / 180) * Math.PI, (90 / 180) * Math.PI, true)
+      context.moveTo(leftEnd, 700)
+      context.lineTo(rightEnd, 700)
       // 現在のパスを輪郭表示する
       context.stroke()
     }
   }
 
   render() {
-    return <canvas id="background-liner" width="900" height="600" />
+    return (
+      <div className="background-liner-parent">
+        <canvas id="background-liner" width="900" height="750" />
+      </div>
+    )
   }
 }

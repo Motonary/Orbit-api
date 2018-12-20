@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 
 import HistoryCanvas from '../molecules/history-canvas'
 import StoredPlanetList from '../molecules/stored-planet-list'
