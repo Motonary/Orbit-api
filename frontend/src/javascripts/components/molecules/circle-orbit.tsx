@@ -39,9 +39,10 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
   }
 
   setPlanetDrop(): void {
-    if (!this.props.revolvingAssignments) return
+    const { revolvingAssignments, modalOpen, orbit } = this.props
+    if (!revolvingAssignments) return
     // Droppable area
-    _.forEach(this.props.revolvingAssignments[this.props.orbit], assignment => {
+    _.forEach(revolvingAssignments[orbit], assignment => {
       const target: any = document.getElementById(
         `planet-${assignment.id}-${assignment.planet_type}`
       )
@@ -85,7 +86,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
           if (target.classList.contains('circle-shadow')) {
             target.classList.remove('circle-shadow')
           }
-          if (!this.props.modalOpen) {
+          if (modalOpen !== '') {
             this.props.setModalStatus(`form-satelite-${assignment.id}`)
           }
         },
@@ -95,8 +96,9 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
   }
 
   setOrbitDrop(): void {
+    const { modalOpen, orbit } = this.props
     // Droppable area
-    const target = document.getElementById(`circle-${this.props.orbit}`)
+    const target = document.getElementById(`circle-${orbit}`)
 
     // Entering into the droppable area
     target.addEventListener(
@@ -137,8 +139,8 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
         if (target.classList.contains('circle-shadow')) {
           target.classList.remove('circle-shadow')
         }
-        if (!this.props.modalOpen) {
-          this.props.setModalStatus(`form-${this.props.orbit}`)
+        if (!modalOpen) {
+          this.props.setModalStatus(`form-${orbit}`)
         }
       },
       false

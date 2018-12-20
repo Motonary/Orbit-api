@@ -59,7 +59,6 @@ class ConfirmModal extends React.Component<
     }
   }
 
-  // TODO 削除　openModal / selectedAssignment
   igniteAction() {
     this.props.resetModalStatus()
   }
