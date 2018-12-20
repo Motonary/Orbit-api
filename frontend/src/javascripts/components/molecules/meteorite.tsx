@@ -6,7 +6,7 @@ import anime from 'animejs'
 import ActionBtn from '../atoms/buttons/action-btn'
 
 import { resetDestroyAction, resetModalStatus } from '../../actions/common'
-import { destroyAssignment, resetSelectedAssignment, setRemovedAssignment } from '../../actions/assignments'
+import { destroyAssignment, resetSelectedAssignment } from '../../actions/assignments'
 
 import { DeleteActions } from '../../constants/images'
 
@@ -25,7 +25,6 @@ interface MeteoriteProps {
   resetModalStatus: any
   destroyAssignment: any
   resetSelectedAssignment: any
-  setRemovedAssignment: any
 }
 
 class Meteorite extends React.Component<MeteoriteProps, {}> {
@@ -74,7 +73,8 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     const arcvalue: number = -disY / disX
 
     // Arctanのマクローリン展開（４次近似）により、arctanの整数値から目標物への角度(rad)を求める
-    const approximateRad: number = arcvalue - Math.pow(arcvalue, 3) / 3 + Math.pow(arcvalue, 5) / 5 - Math.pow(arcvalue, 7) / 7
+    const approximateRad: number =
+      arcvalue - Math.pow(arcvalue, 3) / 3 + Math.pow(arcvalue, 5) / 5 - Math.pow(arcvalue, 7) / 7
     const deg: number = (approximateRad * 180) / Math.PI // rad -> degree
 
     const MissileTransforms = anime({
@@ -108,7 +108,6 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     _.forEach(parent, (destroyDom: any) => {
       let destroyedCvs: any = destroyDom.children[1]
       let destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
-      this.props.setRemovedAssignment(destroyedAssignmentId)
       this.props.destroyAssignment(destroyedAssignmentId)
     })
   }
@@ -264,6 +263,5 @@ export default connect(
     resetModalStatus,
     destroyAssignment,
     resetSelectedAssignment,
-    setRemovedAssignment,
   }
 )(Meteorite)

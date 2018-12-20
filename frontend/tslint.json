@@ -9,13 +9,15 @@
   "rules": {
     "variable-name": false,
     "one-variable-per-declaration": false,
+    "no-console": "error",
+    "no-debugger": true,
     "prettier": [
       true,
       {
         "singleQuote": true,
         "trailingComma": "es5",
         "semi": false,
-        "printWidth": 140
+        "printWidth": 100
       }
     ]
   }

@@ -86,7 +86,10 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
     const pos: any = ['top', 'right', 'left', 'bottom']
     const projectList: any = _.map(revolvingProjects, (project: any, index: any) => {
       return (
-        <div key={project.id} className={`common ${pos[index % 4]} mypage-orbit-motion start-animation`}>
+        <div
+          key={project.id}
+          className={`common ${pos[index % 4]} mypage-orbit-motion start-animation`}
+        >
           <FixedStarInList
             key={project.id}
             project={project}

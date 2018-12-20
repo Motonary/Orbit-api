@@ -62,18 +62,30 @@ class FormModal extends React.Component<FormModalProps, {}> {
     const { pathname } = this.props
 
     if (pathname.includes('project')) {
-      return orbit !== '' ? <AssignmentForm orbit={orbit} /> : <SubAssignmentForm assignmentId={assignmentId} />
+      return orbit !== '' ? (
+        <AssignmentForm orbit={orbit} />
+      ) : (
+        <SubAssignmentForm assignmentId={assignmentId} />
+      )
     } else {
       return <ProjectForm />
     }
   }
 
   render() {
-    const orbit: string = this.props.modalOpen.includes('form') ? this.props.modalOpen.split('-')[1] : ''
-    const assignmentId: string = this.props.modalOpen.includes('satelite') ? this.props.modalOpen.split('-')[2] : ''
+    const orbit: string = this.props.modalOpen.includes('form')
+      ? this.props.modalOpen.split('-')[1]
+      : ''
+    const assignmentId: string = this.props.modalOpen.includes('satelite')
+      ? this.props.modalOpen.split('-')[2]
+      : ''
 
     return (
-      <Modal isOpen={orbit !== '' || assignmentId !== ''} style={customStyles} contentLabel="Assignment Form Modal">
+      <Modal
+        isOpen={orbit !== '' || assignmentId !== ''}
+        style={customStyles}
+        contentLabel="Assignment Form Modal"
+      >
         {this.renderForm(orbit, assignmentId)}
       </Modal>
     )

@@ -33,8 +33,9 @@ class ProjectPage extends React.Component<Props, {}> {
       this.props.fetchRevolvingProjects().then(() => {
         const { revolvingProjects } = this.props
         if (revolvingProjects) {
-          this.props.setDefaultProject(revolvingProjects[Object.keys(revolvingProjects)[0]], (defaultProjectId: any) =>
-            this.props.fetchRevolvingAssignments(defaultProjectId)
+          this.props.setDefaultProject(
+            revolvingProjects[Object.keys(revolvingProjects)[0]],
+            (defaultProjectId: any) => this.props.fetchRevolvingAssignments(defaultProjectId)
           )
         }
       })

@@ -41,7 +41,7 @@ export function selectedDestroyAction(state: any = null, action: IsDestroyIgnite
  * form-${orbit} は、ModalがProjectもしくはAssignmentを追加するFormを伴う時に用いられる
  * destroyは、ModalがrojectもしくはAssignmentを削除する時の確認画面として開かれる時に用いられる
  */
-export function modalOpen(state: any, action: ModalOpenAction) {
+export function modalOpen(state: any = '', action: ModalOpenAction) {
   switch (action.type) {
     case actionTypes.OPEN_MODAL:
       return action.payload.status

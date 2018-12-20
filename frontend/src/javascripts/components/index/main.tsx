@@ -13,7 +13,11 @@ class Main extends React.Component<Props, {}> {
     if (sessionStorage.getItem('jwt')) this.props.fetchCurrentUser()
   }
   render() {
-    return sessionStorage.getItem('jwt') && !this.props.currentUser ? <div>Loading...</div> : this.props.children
+    return sessionStorage.getItem('jwt') && !this.props.currentUser ? (
+      <div>Loading...</div>
+    ) : (
+      this.props.children
+    )
   }
 }
 

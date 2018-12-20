@@ -12,7 +12,11 @@ interface TopPageFormProps {
 class TopPageForm extends React.Component<TopPageFormProps> {
   render() {
     const { isSignIn }: any = this.props
-    return <div className="sign-form">{isSignIn ? <SignInForm history={history} /> : <SignUpForm history={history} />}</div>
+    return (
+      <div className="sign-form">
+        {isSignIn ? <SignInForm history={history} /> : <SignUpForm history={history} />}
+      </div>
+    )
   }
 }
 

@@ -1,6 +1,10 @@
 import { actionTypes } from '../constants/action-types'
 import _ from 'lodash'
-import { RevolvingAssignmentsAction, SelectedAssignmentsAction, DestroyedAssignmentsAction } from '../actions/assignments'
+import {
+  RevolvingAssignmentsAction,
+  SelectedAssignmentsAction,
+  DestroyedAssignmentsAction,
+} from '../actions/assignments'
 // import {
 //   RevolvingAssignmentsState,
 //   SelectedAssignmentsState,
@@ -22,7 +26,8 @@ export function revolvingAssignments(state: any = null, action: RevolvingAssignm
 
     case actionTypes.CREATE_ASSIGNMENT:
       if ('newAssignment' in action.payload) {
-        const newAssignmentOrbit: 'primo' | 'secundus' | 'tertius' = action.payload.newAssignment.orbit_pos
+        const newAssignmentOrbit: 'primo' | 'secundus' | 'tertius' =
+          action.payload.newAssignment.orbit_pos
         newState[newAssignmentOrbit].push(action.payload.newAssignment)
         return newState
       }
@@ -46,7 +51,7 @@ export function revolvingAssignments(state: any = null, action: RevolvingAssignm
  * stateには、ユーザがクリックし、UI上でチェックマーク付きのPlanetに紐付いた"3-Earth"のような
  * ”assignmentId-planetType”というstringが格納される
  */
-export function selectedAssignments(state: any, action: SelectedAssignmentsAction) {
+export function selectedAssignments(state: any = [], action: SelectedAssignmentsAction) {
   switch (action.type) {
     case actionTypes.SET_SELECTED_ASSIGNMENT:
       return [...state, action.payload.assignmentId]
