@@ -43,7 +43,11 @@ class Footer extends React.Component<FooterProps, {}> {
     return (
       <div id="footer">
         <PlanetHolder pathname={pathname} currentUser={currentUser} />
-        <FooterActionBtnList pathname={pathname} rootPath={rootPath} motionControll={() => this.motionControll()} />
+        <FooterActionBtnList
+          pathname={pathname}
+          rootPath={rootPath}
+          motionControll={() => this.motionControll()}
+        />
         <ConfirmModal motionControll={() => this.motionControll()} />
         <FormModal pathname={pathname} />
       </div>

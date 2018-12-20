@@ -6,7 +6,11 @@ import anime from 'animejs'
 import ActionBtn from '../atoms/buttons/action-btn'
 
 import { resetDestroyAction, resetModalStatus } from '../../actions/common'
-import { destroyAssignment, resetSelectedAssignment, setRemovedAssignment } from '../../actions/assignments'
+import {
+  destroyAssignment,
+  resetSelectedAssignment,
+  setRemovedAssignment,
+} from '../../actions/assignments'
 
 import { DeleteActions } from '../../constants/images'
 
@@ -74,7 +78,8 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     const arcvalue: number = -disY / disX
 
     // Arctanのマクローリン展開（４次近似）により、arctanの整数値から目標物への角度(rad)を求める
-    const approximateRad: number = arcvalue - Math.pow(arcvalue, 3) / 3 + Math.pow(arcvalue, 5) / 5 - Math.pow(arcvalue, 7) / 7
+    const approximateRad: number =
+      arcvalue - Math.pow(arcvalue, 3) / 3 + Math.pow(arcvalue, 5) / 5 - Math.pow(arcvalue, 7) / 7
     const deg: number = (approximateRad * 180) / Math.PI // rad -> degree
 
     const MissileTransforms = anime({

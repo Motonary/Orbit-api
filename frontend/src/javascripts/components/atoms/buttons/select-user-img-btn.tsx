@@ -17,7 +17,13 @@ class SelectUserImgBtn extends React.Component<Props, {}> {
     return (
       <label className="submit-btn for-user-img">
         SELECT <br /> USER IMAGE
-        <input className="display-none" name="avatar" accept="image/*" type="file" onChange={this.onSelectUserImg.bind(this)} />
+        <input
+          className="display-none"
+          name="avatar"
+          accept="image/*"
+          type="file"
+          onChange={this.onSelectUserImg.bind(this)}
+        />
       </label>
     )
   }
