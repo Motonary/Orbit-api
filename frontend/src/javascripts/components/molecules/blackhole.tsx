@@ -6,7 +6,7 @@ import anime from 'animejs'
 import ActionBtn from '../atoms/buttons/action-btn'
 
 import { setDestroyAction, resetDestroyAction, resetModalStatus } from '../../actions/common'
-import { destroyAssignment, resetSelectedAssignment, setRemovedAssignment } from '../../actions/assignments'
+import { destroyAssignment, resetSelectedAssignment } from '../../actions/assignments'
 
 import { DeleteActions } from '../../constants/images'
 

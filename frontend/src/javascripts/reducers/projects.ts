@@ -1,35 +1,48 @@
-import { actionTypes } from '../constants/actiontypes'
+import { actionTypes } from '../constants/action-types'
 import _ from 'lodash'
+import { RevoivingProjectsAction, CurrentProjectAction } from '../actions/projects'
 
 /*
  * revolvingProjectsの利用用途
  * stateには、current_userの持つ全Projectのidがkeyとなって格納される
  */
-export function revolvingProjects(state: any = null, action: any) {
+export function revolvingProjects(state: any = null, action: RevoivingProjectsAction) {
   switch (action.type) {
     case actionTypes.FETCH_REVOLVING_PROJECTS:
-      return _.mapKeys(action.currentUserAllProjects, 'id')
+      if ('currentUserAllProjects' in action.payload) {
+        return _.mapKeys(action.payload.currentUserAllProjects, 'id')
+      }
+      break
 
     case actionTypes.CREATE_PROJECT:
-      return { ...state, [action.newProject.id]: action.newProject }
+      if ('newProject' in action.payload) {
+        const { newProject } = action.payload
+        return { ...state, [newProject.id]: newProject }
+      }
+      break
 
-    // Project削除のanimationを実装ごにテスト
+    // TODO: Project削除のanimationを実装後にテスト
     case actionTypes.DESTROY_PROJECT:
-      return _.omit(state, action.projectId)
+      if ('projectId' in action.payload) {
+        return _.omit(state, action.payload.projectId)
+      }
+      break
 
     default:
       return state
   }
 }
-
 /*
  * currentProjectsの利用用途
  * stateには、現在のProjectPageのProjectのオブジェクトが格納される
  */
-export function currentProject(state: any = null, action: any) {
+export function currentProject(state: any = null, action: CurrentProjectAction) {
   switch (action.type) {
     case actionTypes.SET_CURRENT_PROJECT:
-      return action.currentProject
+      if ('currentProject' in action.payload) {
+        return action.payload.currentProject
+      }
+      break
 
     default:
       return state

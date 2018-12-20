@@ -1,21 +1,23 @@
-import { actionTypes } from '../constants/actiontypes'
+import { actionTypes } from '../constants/action-types'
+import { CurrentUserAction } from '../actions/users'
 
-export default (state: any = null, action: any) => {
+// TODO: ファイル名をuser.tsにしてcurrent-userはその一部にする
+export default (state: any = null, action: CurrentUserAction) => {
   switch (action.type) {
     case actionTypes.SET_CURRENT_USER:
-      return action.currentUser
+      return action.payload.currentUser
 
     case actionTypes.EXPIRE_CURRENT_USER:
       return null
 
     case actionTypes.UPDATE_AVATAR: {
       let newUser = Object.assign({}, state)
-      newUser.avatar = action.newAvatarUrl
+      newUser.avatar = action.payload.newAvatarUrl
       return newUser
     }
 
     case actionTypes.UPDATE_PROFILE:
-      return action.updatedUser
+      return action.payload.updatedUser
 
     default:
       return state
