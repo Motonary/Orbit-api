@@ -6,11 +6,7 @@ import anime from 'animejs'
 import ActionBtn from '../atoms/buttons/action-btn'
 
 import { resetDestroyAction, resetModalStatus } from '../../actions/common'
-import {
-  destroyAssignment,
-  resetSelectedAssignment,
-  setRemovedAssignment,
-} from '../../actions/assignments'
+import { destroyAssignment, resetSelectedAssignment } from '../../actions/assignments'
 
 import { DeleteActions } from '../../constants/images'
 
@@ -29,7 +25,6 @@ interface MeteoriteProps {
   resetModalStatus: any
   destroyAssignment: any
   resetSelectedAssignment: any
-  setRemovedAssignment: any
 }
 
 class Meteorite extends React.Component<MeteoriteProps, {}> {
@@ -113,7 +108,6 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     _.forEach(parent, (destroyDom: any) => {
       let destroyedCvs: any = destroyDom.children[1]
       let destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
-      this.props.setRemovedAssignment(destroyedAssignmentId)
       this.props.destroyAssignment(destroyedAssignmentId)
     })
   }
@@ -269,6 +263,5 @@ export default connect(
     resetModalStatus,
     destroyAssignment,
     resetSelectedAssignment,
-    setRemovedAssignment,
   }
 )(Meteorite)
