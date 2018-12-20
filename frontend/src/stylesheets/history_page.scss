@@ -60,7 +60,7 @@
       background-color: $bg-common-color;
     }
 
-    .stored-planet {
+    .stored-planet.planet-list-row {
       @include size();
 
       img {
