@@ -32,7 +32,9 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
         onSubmit={(values: UpdateProfileValues, actions: any) => {
           // TODO: Flashメッセージの実装
           if (window.confirm('プロフィール情報を更新していいですか？')) {
-            this.props.updateProfile(values.username, values.email, values.password, values.confirmation).then(this.props.history.push('/'))
+            this.props
+              .updateProfile(values.username, values.email, values.password, values.confirmation)
+              .then(this.props.history.push('/'))
             actions.setSubmitting(false)
           }
         }}

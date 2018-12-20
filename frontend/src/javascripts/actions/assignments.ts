@@ -21,9 +21,14 @@ interface DestroyAssignmentAction extends BaseAction {
   payload: { assignmentId: string } // TODO: numberかも
 }
 
-export type RevolvingAssignmentsAction = FetchRevolvingAssignmentsAction | CreateAssignmentAction | DestroyAssignmentAction
+export type RevolvingAssignmentsAction =
+  | FetchRevolvingAssignmentsAction
+  | CreateAssignmentAction
+  | DestroyAssignmentAction
 
-export function fetchRevolvingAssignments(projectId: any): Promise<FetchRevolvingAssignmentsAction | void> {
+export function fetchRevolvingAssignments(
+  projectId: any
+): Promise<FetchRevolvingAssignmentsAction | void> {
   return axios
     .get(`${ROOT_URL}/api/assignments/revolving`, {
       headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
@@ -104,7 +109,10 @@ interface ResetSelectedAssignment extends BaseAction {
   type: string
 }
 
-export type SelectedAssignmentsAction = SelectAssignmentAction | DisselectAssignmentAction | ResetSelectedAssignment
+export type SelectedAssignmentsAction =
+  | SelectAssignmentAction
+  | DisselectAssignmentAction
+  | ResetSelectedAssignment
 
 export function selectAssignment(assignmentId: any): SelectAssignmentAction {
   return {

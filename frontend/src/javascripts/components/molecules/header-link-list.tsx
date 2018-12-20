@@ -20,13 +20,19 @@ class HeaderRightLinkList extends React.Component<Props, {}> {
     // mypage, project-page, setting-pageのみで表示(show-right: true)
     const historyButtonClasses = classNames({
       'icon-container': true,
-      'show-right': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/edit`,
+      'show-right':
+        pathname === `${rootPath}` ||
+        /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
+        pathname === `${rootPath}/edit`,
     })
 
     // mypage, project-page, history-pageのみで表示(show-right: true)
     const settingButtonClasses = classNames({
       'icon-container': true,
-      'show-right': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/history`,
+      'show-right':
+        pathname === `${rootPath}` ||
+        /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
+        pathname === `${rootPath}/history`,
     })
 
     // setting-page, history-pageのみで表示(show-right: true)
@@ -37,9 +43,21 @@ class HeaderRightLinkList extends React.Component<Props, {}> {
 
     return (
       <div className="links-container">
-        <HeaderRightLink className={historyButtonClasses} toPath={`/users/${currentUser.id}/history`} label="HISTORY" />
-        <HeaderRightLink className={settingButtonClasses} toPath={`/users/${currentUser.id}/edit`} label="SETTING" />
-        <HeaderBackLink className={backButtonClasses} onClick={this.onClickBackButton.bind(this)} label="BACK" />
+        <HeaderRightLink
+          className={historyButtonClasses}
+          toPath={`/users/${currentUser.id}/history`}
+          label="HISTORY"
+        />
+        <HeaderRightLink
+          className={settingButtonClasses}
+          toPath={`/users/${currentUser.id}/edit`}
+          label="SETTING"
+        />
+        <HeaderBackLink
+          className={backButtonClasses}
+          onClick={this.onClickBackButton.bind(this)}
+          label="BACK"
+        />
       </div>
     )
   }

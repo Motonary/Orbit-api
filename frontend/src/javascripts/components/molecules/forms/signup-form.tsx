@@ -32,7 +32,12 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
             confirmation: '',
           }}
           onSubmit={(values: CreateUserValues, actions: any) => {
-            this.props.createUser(values.username, values.email, values.password, values.confirmation)
+            this.props.createUser(
+              values.username,
+              values.email,
+              values.password,
+              values.confirmation
+            )
             actions.setSubmitting(false)
           }}
         >
