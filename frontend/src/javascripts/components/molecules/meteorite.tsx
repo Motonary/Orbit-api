@@ -146,8 +146,7 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     let pointerY: number = 0
 
     function setCanvasSize() {
-      let i: number = 0
-      canvasEl.forEach((target: any) => {
+      canvasEl.forEach((target: any, i: number) => {
         target.style.width = parent[i].parentNode.clientWidth + 'px'
         target.style.height = parent[i].parentNode.clientHeight + 'px'
         target.style.top = `-${parent[i].parentNode.clientWidth / 2}px`
@@ -156,7 +155,6 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
         target.height = parent[i].parentNode.clientHeight
         target.style.zIndex = 500
         target.getContext('2d').scale(2, 2)
-        i++
       })
     }
 
@@ -234,10 +232,8 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     }
 
     function clear() {
-      let i: number = 0
-      ctx.forEach((val: any) => {
+      ctx.forEach((val: any, i: number) => {
         val.clearRect(0, 0, canvasEl[i].width, canvasEl[i].height)
-        i++
       })
     }
 
