@@ -2,12 +2,7 @@ import axios from 'axios'
 import { actionTypes } from '../constants/actiontypes'
 import { ROOT_URL } from '../constants/url'
 
-export function createUser(
-  name: any,
-  email: any,
-  password: any,
-  password_confirmation: any
-) {
+export function createUser(name: any, email: any, password: any, password_confirmation: any) {
   return axios
     .post(`${ROOT_URL}/api/signup`, {
       user: { name, email, password, password_confirmation },
