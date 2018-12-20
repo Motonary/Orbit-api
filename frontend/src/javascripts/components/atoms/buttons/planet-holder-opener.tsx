@@ -25,7 +25,7 @@ class PlanetHolderOpener extends React.Component<Props, {}> {
       target_class[0].classList.add('click-rotate')
       planet_list.classList.add('is-show')
       planet_list.style.display = ''
-      planet_list.style.width = '400px'
+      planet_list.style.width = '300px'
       // planet_holder.classList.add('holder-border');
     }
   }

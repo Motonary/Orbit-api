@@ -22,6 +22,7 @@ interface CircleOrbitProps {
   modalOpen: any
   selectedStar: any
   revolvingAssignments: any
+  selectedAssignments: any
 
   setSelectedStar: any
   resetSelectedStar: any
@@ -38,11 +39,13 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
   }
 
   setPlanetDrop(): void {
+    const { revolvingAssignments, modalOpen, orbit } = this.props
+    if (!revolvingAssignments) return
     // Droppable area
-    _.forEach(this.props.revolvingAssignments, assignment => {
+    _.forEach(revolvingAssignments[orbit], assignment => {
       const target: any = document.getElementById(
-        `${assignment.id}-${assignment.planet_type}`
-      ).parentNode
+        `planet-${assignment.id}-${assignment.planet_type}`
+      )
       target.addEventListener(
         'dragenter',
         () => {
@@ -83,7 +86,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
           if (target.classList.contains('circle-shadow')) {
             target.classList.remove('circle-shadow')
           }
-          if (!this.props.modalOpen) {
+          if (modalOpen !== '') {
             this.props.setModalStatus(`form-satelite-${assignment.id}`)
           }
         },
@@ -93,8 +96,9 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
   }
 
   setOrbitDrop(): void {
+    const { modalOpen, orbit } = this.props
     // Droppable area
-    const target = document.getElementById(`circle-${this.props.orbit}`)
+    const target = document.getElementById(`circle-${orbit}`)
 
     // Entering into the droppable area
     target.addEventListener(
@@ -135,8 +139,8 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
         if (target.classList.contains('circle-shadow')) {
           target.classList.remove('circle-shadow')
         }
-        if (!this.props.modalOpen) {
-          this.props.setModalStatus(`form-${this.props.orbit}`)
+        if (!modalOpen) {
+          this.props.setModalStatus(`form-${orbit}`)
         }
       },
       false
@@ -160,20 +164,14 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
   onSelected(e: any) {
     const target: any = e.target.parentNode.children[1] // e.target = .planet-img-container -> div.mark-container
     const targetPlanet: any = e.target.parentNode.parentNode.children[2] // canvas #2-Earth
-    const selectedPlanetId: any = targetPlanet.id.split('-')[0]
-    try {
-      Number(selectedPlanetId)
-      // target.style // 文法的に誤っているので書き直す
-    } catch (e) {
-      return
-    }
+    const selectedPlanet: string = targetPlanet.id
 
     if (target.style.display === 'block') {
       target.style.display = 'none'
-      this.props.disselectAssignment(selectedPlanetId)
+      this.props.disselectAssignment(selectedPlanet)
     } else if (target.style.display === '' || target.style.display === 'none') {
       target.style.display = 'block'
-      this.props.selectAssignment(selectedPlanetId)
+      this.props.selectAssignment(selectedPlanet)
     }
   }
 
@@ -200,9 +198,10 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
               key={assignmentInfo.id}
             >
               <div
+                id={`planet-${assignmentInfo.id}-${assignmentInfo.planet_type}`}
                 className={`planet-${assignmentInfo.planet_size}-${
                   assignmentInfo.orbit_pos
-                }`}
+                } start-animation`}
               >
                 <PopupBox assignmentInfo={assignmentInfo} />
                 <Planet
@@ -226,8 +225,14 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
 }
 
 export default connect(
-  ({ revolvingAssignments, selectedStar, modalOpen }: any) => ({
+  ({
     revolvingAssignments,
+    selectedAssignments,
+    selectedStar,
+    modalOpen,
+  }: any) => ({
+    revolvingAssignments,
+    selectedAssignments,
     selectedStar,
     modalOpen,
   }),

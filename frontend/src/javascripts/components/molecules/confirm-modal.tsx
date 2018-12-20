@@ -4,18 +4,15 @@ import Modal from 'react-modal'
 
 import ConfirmBtn from '../atoms/buttons/confirm-btn'
 
-import {
-  igniteDestroyPlanets,
-  resetDestroyAction,
-  setModalStatus,
-  resetModalStatus,
-} from '../../actions/common'
+import { resetDestroyAction, resetModalStatus } from '../../actions/common'
 
 import '../../../stylesheets/modal.scss'
 
 interface ConfirmModalProps {
-  isDestroyIgnited: any
-  modalOpen: any
+  motionControll: () => void
+
+  modalOpen: string
+  resetDestroyAction: any
   resetModalStatus: any
 }
 
@@ -62,27 +59,28 @@ class ConfirmModal extends React.Component<
     }
   }
 
+  igniteAction() {
+    this.props.resetModalStatus()
+  }
+
   closeModal(/*isDestroy*/) {
-    this.props.resetModalStatus(false)
+    this.props.resetDestroyAction()
+    this.props.resetModalStatus()
+    this.props.motionControll()
   }
 
   render() {
+    const actionTypes = ['Missile', 'Meteorite', 'BlackHole']
     return (
       <Modal
-        isOpen={this.props.modalOpen === 'destroy'}
+        isOpen={actionTypes.includes(this.props.modalOpen)}
         style={customStyles}
-        contentLabel="Example Modal"
+        contentLabel="Confirmation Modal"
       >
         <div className="modal-warning">{this.state.destroy}</div>
         <div className="modal-confirm-buttons">
-          <ConfirmBtn
-            message="いいえ"
-            onClick={this.closeModal.bind(this, false)}
-          />
-          <ConfirmBtn
-            message="はい"
-            onClick={this.closeModal.bind(this, true)}
-          />
+          <ConfirmBtn message="いいえ" onClick={this.closeModal.bind(this)} />
+          <ConfirmBtn message="はい" onClick={this.igniteAction.bind(this)} />
         </div>
       </Modal>
     )
@@ -90,11 +88,9 @@ class ConfirmModal extends React.Component<
 }
 
 export default connect(
-  ({ isDestroyIgnited, modalOpen }: any) => ({ isDestroyIgnited, modalOpen }),
+  ({ modalOpen }: any) => ({ modalOpen }),
   {
-    igniteDestroyPlanets,
     resetDestroyAction,
-    setModalStatus,
     resetModalStatus,
   }
 )(ConfirmModal)

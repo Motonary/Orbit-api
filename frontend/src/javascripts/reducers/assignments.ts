@@ -1,6 +1,10 @@
 import { actionTypes } from '../constants/actiontypes'
 import _ from 'lodash'
 
+/*
+ * revolvingAssignmentsの利用用途
+ * stateには、{primo, secundus, tertius}の各軌道上のassignmentsが軌道名をkeyにして格納される
+ */
 export function revolvingAssignments(state: any = null, action: any) {
   let newState = Object.assign({}, state)
   switch (action.type) {
@@ -24,15 +28,21 @@ export function revolvingAssignments(state: any = null, action: any) {
   }
 }
 
-export function selectedAssignments(state: any = [], action: any) {
+/*
+ * selectedAssignmentsの利用用途
+ * stateには、ユーザがクリックし、UI上でチェックマーク付きのPlanetに紐付いた"3-Earth"のような
+ * ”assignmentId-planetType”というstringが格納される
+ */
+export function selectedAssignments(state: string[] = [], action: any) {
   switch (action.type) {
-    case actionTypes.SELECT_ASSIGNMENT:
+    case actionTypes.SET_SELECTED_ASSIGNMENT:
       return [...state, action.assignmentId]
 
-    case actionTypes.DISSELECT_ASSIGNMENT:
+    case actionTypes.REMOVE_SELECTED_ASSIGNMENT:
+      // この比較文の型付け（potential error）
       return state.filter((item: any) => item !== action.assignmentId)
 
-    case actionTypes.NULLIFY_SELECTED_ASSIGNMENT:
+    case actionTypes.RESET_SELECTED_ASSIGNMENT:
       return []
 
     default:
@@ -40,6 +50,10 @@ export function selectedAssignments(state: any = [], action: any) {
   }
 }
 
+/*
+ * destroyedAssignmentsの利用用途
+ * stateには、UI上からすでに削除され、履歴ページに表示されるためのAssignmentsが格納される
+ */
 export function destroyedAssignments(state: any = null, action: any) {
   switch (action.type) {
     case actionTypes.FETCH_DESTROYED_ASSIGNMENTS:

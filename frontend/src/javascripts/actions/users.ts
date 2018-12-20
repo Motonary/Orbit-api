@@ -6,8 +6,7 @@ export function createUser(
   name: any,
   email: any,
   password: any,
-  password_confirmation: any,
-  callback: any
+  password_confirmation: any
 ) {
   return axios
     .post(`${ROOT_URL}/api/signup`, {

@@ -2,20 +2,21 @@ import { actionTypes } from '../constants/actiontypes'
 
 export function setSelectedStar(star_type: any) {
   return {
-    type: actionTypes.SELECT_STAR,
+    type: actionTypes.SET_SELECTED_STAR,
     star_type,
   }
 }
 
-export function resetSelectedStar() {
+export function resetSelectedStar(status: any) {
   return {
-    type: actionTypes.DISSELECT_STAR,
+    type: actionTypes.RESET_SELECTED_STAR,
+    status,
   }
 }
 
-export function igniteDestroyPlanets(status: any) {
+export function setDestroyAction(status: any) {
   return {
-    type: actionTypes.IGNITE_DESTROY_ACTION,
+    type: actionTypes.SET_DESTROY_ACTION,
     status,
   }
 }

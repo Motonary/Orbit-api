@@ -2,7 +2,7 @@ $available-planet-size: 40px;
 
 #project-bar {
   position: fixed;
-  top: 150px;
+  top: 25%;
   right: 40px;
   z-index: 500;
 
@@ -22,6 +22,7 @@ $available-planet-size: 40px;
       width: $available-planet-size;
       height: $available-planet-size;
       margin: 5px auto;
+      cursor: pointer;
     }
 
     img {

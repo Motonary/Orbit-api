@@ -6,12 +6,13 @@ import {
   destroyedAssignments,
   selectedAssignments,
 } from './assignments'
-import { selectedStar, isDestroyIgnited, modalOpen } from './common'
+import { selectedStar, selectedDestroyAction, modalOpen } from './common'
 
 const rootReducer = combineReducers({
   // commmon
   selectedStar,
-  isDestroyIgnited,
+  selectedDestroyAction,
+  modalOpen,
 
   // Users
   currentUser,
@@ -25,7 +26,6 @@ const rootReducer = combineReducers({
   revolvingAssignments,
   destroyedAssignments,
   selectedAssignments,
-  modalOpen,
 })
 
 export default rootReducer

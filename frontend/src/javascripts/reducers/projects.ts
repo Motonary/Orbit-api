@@ -1,6 +1,10 @@
 import { actionTypes } from '../constants/actiontypes'
 import _ from 'lodash'
 
+/*
+ * revolvingProjectsの利用用途
+ * stateには、current_userの持つ全Projectのidがkeyとなって格納される
+ */
 export function revolvingProjects(state: any = null, action: any) {
   switch (action.type) {
     case actionTypes.FETCH_REVOLVING_PROJECTS:
@@ -18,6 +22,10 @@ export function revolvingProjects(state: any = null, action: any) {
   }
 }
 
+/*
+ * currentProjectsの利用用途
+ * stateには、現在のProjectPageのProjectのオブジェクトが格納される
+ */
 export function currentProject(state: any = null, action: any) {
   switch (action.type) {
     case actionTypes.SET_CURRENT_PROJECT:
@@ -28,6 +36,10 @@ export function currentProject(state: any = null, action: any) {
   }
 }
 
+/*
+ * selectedProjectsの利用用途
+ * stateには、Mypage上でユーザがクリックし、UIとしてはチェックマーク付きのPlanetに紐付いたProjectIdsが格納される
+ */
 export function selectedProjects(state: any = null, action: any) {
   switch (action.type) {
     default:

@@ -65,7 +65,7 @@ export function createAssignment(
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function destroyAssignment(assignmentId: any) {
+export function destroyAssignment(assignmentId: string) {
   return axios({
     method: 'patch',
     url: `${ROOT_URL}/api/assignments/${assignmentId}/destroy`,
@@ -74,7 +74,6 @@ export function destroyAssignment(assignmentId: any) {
     .then(() => {
       return {
         type: actionTypes.DESTROY_ASSIGNMENT,
-        assignmentId,
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
@@ -97,20 +96,27 @@ export function restoreAssignment(assignmentId: any) {
 
 export function selectAssignment(assignmentId: any) {
   return {
-    type: actionTypes.SELECT_ASSIGNMENT,
+    type: actionTypes.SET_SELECTED_ASSIGNMENT,
     assignmentId,
   }
 }
 
 export function disselectAssignment(assignmentId: any) {
   return {
-    type: actionTypes.DISSELECT_ASSIGNMENT,
+    type: actionTypes.REMOVE_SELECTED_ASSIGNMENT,
     assignmentId,
   }
 }
 
-export function nullifySelectedAssignment() {
+export function resetSelectedAssignment() {
   return {
-    type: actionTypes.NULLIFY_SELECTED_ASSIGNMENT,
+    type: actionTypes.RESET_SELECTED_ASSIGNMENT,
+  }
+}
+
+export function setRemovedAssignment(removedAssignmentId: string) {
+  return {
+    type: actionTypes.SET_REMOVED_ASSIGNMENTS,
+    removedAssignmentId,
   }
 }
