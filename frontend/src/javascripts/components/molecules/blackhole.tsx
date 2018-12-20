@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import anime from 'animejs'
 
 import ActionBtn from '../atoms/buttons/action-btn'
@@ -27,39 +28,27 @@ interface BlackHoleProps {
   destroyedAssignments: any
   selectedDestroyAction: any
   modalOpen: any
-  removedAssignments: string[]
 
   setDestroyAction: any
   resetDestroyAction: any
   resetModalStatus: any
   destroyAssignment: any
   resetSelectedAssignment: any
-  setRemovedAssignment: any
 }
 
 class BlackHole extends React.Component<BlackHoleProps, {}> {
-  shouldComponentUpdate(nextProps: any) {
-    let result: boolean = true
-    if (this.props.removedAssignments !== nextProps.removedAssignments) {
-      return false
-    }
-    return result
-  }
-
   componentDidUpdate(/*prevProps, prevState*/) {
-    const selected: boolean =
-      this.props.selectedAssignments.length !== 0 && this.props.modalOpen === ''
-    if (selected && this.props.selectedDestroyAction === 'BlackHole') {
-      this.iginiteBlackHoleAnimation()
-    }
+    if (this.props.selectedAssignments.length === 0) return
+    if (this.props.modalOpen !== '') return
+    if (this.props.selectedDestroyAction !== 'BlackHole') return
+    this.iginiteBlackHoleAnimation()
   }
 
   // 削除されたAssignmentIdをcanvasのidから特定し、destroyedAssignmentsに格納
   removeAssignmentData(parent: any) {
-    parent.map((destroyDom: any) => {
+    _.forEach(parent, (destroyDom: any) => {
       let destroyedCvs: any = destroyDom.children[1]
       let destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
-      this.props.setRemovedAssignment(destroyedAssignmentId)
       this.props.destroyAssignment(destroyedAssignmentId)
     })
   }
@@ -79,8 +68,6 @@ class BlackHole extends React.Component<BlackHoleProps, {}> {
       displayDoms.push(document.getElementById(`planet-${id}`)) // planet-2-Earth <Plant />の親要素
     })
 
-    console.log('got display doms', displayDoms)
-
     function appearBlackHole() {
       let newDiv: HTMLDivElement = document.createElement('div')
       let newImg: HTMLImageElement = document.createElement('img')
@@ -91,8 +78,6 @@ class BlackHole extends React.Component<BlackHoleProps, {}> {
       const clientRectTarget: any = newDiv.getBoundingClientRect()
       targetImgTop = clientRectTarget.top
       targetImgLeft = clientRectTarget.left
-
-      console.log(clientRectTarget, typeof clientRectTarget)
     }
 
     function disappearPlanet() {
@@ -131,7 +116,6 @@ class BlackHole extends React.Component<BlackHoleProps, {}> {
     }
 
     appearBlackHole()
-    console.log(targetImgLeft, targetImgTop, targetIds)
     setTimeout(() => {
       disappearPlanet()
     }, 1800)
@@ -162,13 +146,11 @@ export default connect(
   ({
     selectedAssignments,
     destroyedAssignments,
-    removedAssignments,
     selectedDestroyAction,
     modalOpen,
   }: any) => ({
     selectedAssignments,
     destroyedAssignments,
-    removedAssignments,
     selectedDestroyAction,
     modalOpen,
   }),
@@ -178,6 +160,5 @@ export default connect(
     resetModalStatus,
     destroyAssignment,
     resetSelectedAssignment,
-    setRemovedAssignment,
   }
 )(BlackHole)

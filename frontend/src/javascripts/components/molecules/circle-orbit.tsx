@@ -171,7 +171,6 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
       target.style.display = 'block'
       this.props.selectAssignment(selectedPlanet)
     }
-    console.log(this.props.selectedAssignments)
   }
 
   render() {

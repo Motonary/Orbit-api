@@ -5,7 +5,6 @@ import {
   revolvingAssignments,
   destroyedAssignments,
   selectedAssignments,
-  removedAssignments,
 } from './assignments'
 import { selectedStar, selectedDestroyAction, modalOpen } from './common'
 
@@ -27,7 +26,6 @@ const rootReducer = combineReducers({
   revolvingAssignments,
   destroyedAssignments,
   selectedAssignments,
-  removedAssignments,
 })
 
 export default rootReducer

@@ -23,7 +23,6 @@ interface MissleProps {
   destroyedAssignments: any
   selectedDestroyAction: any
   modalOpen: any
-  removedAssignments: any
 
   resetDestroyAction: any
   resetModalStatus: any
@@ -34,11 +33,10 @@ interface MissleProps {
 
 class Missle extends React.Component<MissleProps, {}> {
   componentDidUpdate(/*prevProps, prevState*/) {
-    const selected: boolean =
-      this.props.selectedAssignments.length !== 0 && this.props.modalOpen === ''
-    if (selected && this.props.selectedDestroyAction === 'Missile') {
-      this.onIgniteDestroyAnimation()
-    }
+    if (this.props.selectedAssignments.length === 0) return
+    if (this.props.modalOpen !== '') return
+    if (this.props.selectedDestroyAction !== 'Missile') return
+    this.onIgniteDestroyAnimation()
   }
 
   onIgniteDestroyAnimation() {
@@ -119,7 +117,6 @@ class Missle extends React.Component<MissleProps, {}> {
     parent.map((destroyDom: any) => {
       let destroyedCvs: any = destroyDom.children[1]
       let destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
-      this.props.setRemovedAssignment(destroyedAssignmentId)
       this.props.destroyAssignment(destroyedAssignmentId)
     })
   }
@@ -277,13 +274,11 @@ export default connect(
   ({
     selectedAssignments,
     destroyedAssignments,
-    removedAssignments,
     selectedDestroyAction,
     modalOpen,
   }: any) => ({
     selectedAssignments,
     destroyedAssignments,
-    removedAssignments,
     selectedDestroyAction,
     modalOpen,
   }),

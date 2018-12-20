@@ -23,7 +23,6 @@ interface MeteoriteProps {
   destroyedAssignments: any
   selectedDestroyAction: any
   modalOpen: any
-  removedAssignments: any
 
   resetDestroyAction: any
   resetModalStatus: any
@@ -34,11 +33,10 @@ interface MeteoriteProps {
 
 class Meteorite extends React.Component<MeteoriteProps, {}> {
   componentDidUpdate(/*prevProps, prevState*/) {
-    const selected: boolean =
-      this.props.selectedAssignments.length !== 0 && this.props.modalOpen === ''
-    if (selected && this.props.selectedDestroyAction === 'Meteorite') {
-      this.onIgniteDestroyAnimation()
-    }
+    if (this.props.selectedAssignments.length === 0) return
+    if (this.props.modalOpen !== '') return
+    if (this.props.selectedDestroyAction !== 'Meteorite') return
+    this.onIgniteDestroyAnimation()
   }
 
   onIgniteDestroyAnimation() {
@@ -277,13 +275,11 @@ export default connect(
   ({
     selectedAssignments,
     destroyedAssignments,
-    removedAssignments,
     selectedDestroyAction,
     modalOpen,
   }: any) => ({
     selectedAssignments,
     destroyedAssignments,
-    removedAssignments,
     selectedDestroyAction,
     modalOpen,
   }),
