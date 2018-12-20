@@ -43,7 +43,12 @@ export type CurrentUserAction =
   | UpdateUserImgAction
   | UpdateProfileAction
 
-export function createUser(name: any, email: any, password: any, password_confirmation: any): Promise<CreateUserAction | void> {
+export function createUser(
+  name: any,
+  email: any,
+  password: any,
+  password_confirmation: any
+): Promise<CreateUserAction | void> {
   return axios
     .post(`${ROOT_URL}/api/signup`, {
       user: { name, email, password, password_confirmation },

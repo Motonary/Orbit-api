@@ -21,7 +21,10 @@ interface DestroyProjectAction extends BaseAction {
   payload: { projectId: number } // TODO: stringかも
 }
 
-export type RevoivingProjectsAction = FetchRevolvingProjectsAction | CreateProjectAction | DestroyProjectAction
+export type RevoivingProjectsAction =
+  | FetchRevolvingProjectsAction
+  | CreateProjectAction
+  | DestroyProjectAction
 
 export function fetchRevolvingProjects(): Promise<FetchRevolvingProjectsAction | void> {
   return axios
@@ -37,7 +40,10 @@ export function fetchRevolvingProjects(): Promise<FetchRevolvingProjectsAction |
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function createProject(title: any, fixed_star_type: any): Promise<CreateProjectAction | void> {
+export function createProject(
+  title: any,
+  fixed_star_type: any
+): Promise<CreateProjectAction | void> {
   return axios({
     method: 'post',
     url: `${ROOT_URL}/api/projects`,
@@ -86,7 +92,10 @@ interface ChangeCurrentProjectAction extends BaseAction {
   payload: { currentProject: Object }
 }
 
-export type CurrentProjectAction = SetCurrentProjectAction | SetDefaultProjectAction | ChangeCurrentProjectAction
+export type CurrentProjectAction =
+  | SetCurrentProjectAction
+  | SetDefaultProjectAction
+  | ChangeCurrentProjectAction
 
 export function setCurrentProject(currentProject: any, callback: any): SetCurrentProjectAction {
   callback()
