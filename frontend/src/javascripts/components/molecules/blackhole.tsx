@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import anime from 'animejs'
 
 import ActionBtn from '../atoms/buttons/action-btn'
 
@@ -8,7 +9,10 @@ import {
   resetDestroyAction,
   resetModalStatus,
 } from '../../actions/common'
-import { resetSelectedAssignment } from '../../actions/assignments'
+import {
+  resetSelectedAssignment,
+  setRemovedAssignment,
+} from '../../actions/assignments'
 
 import { DeleteActions } from '../../constants/images'
 
@@ -22,83 +26,119 @@ interface BlackHoleProps {
   destroyedAssignments: any
   selectedDestroyAction: any
   modalOpen: any
+  removedAssignments: string[]
 
   setDestroyAction: any
   resetDestroyAction: any
   resetModalStatus: any
   resetSelectedAssignment: any
+  setRemovedAssignment: any
 }
 
 class BlackHole extends React.Component<BlackHoleProps, {}> {
+  shouldComponentUpdate(nextProps: any) {
+    let result: boolean = true
+    if (this.props.removedAssignments !== nextProps.removedAssignments) {
+      return false
+    }
+    return result
+  }
+
   componentDidUpdate(/*prevProps, prevState*/) {
     const selected: boolean =
-      this.props.selectedAssignments && !this.props.modalOpen
+      this.props.selectedAssignments.length !== 0 && this.props.modalOpen === ''
     if (selected && this.props.selectedDestroyAction === 'BlackHole') {
       this.iginiteBlackHoleAnimation()
     }
   }
 
+  // 削除されたAssignmentIdをcanvasのidから特定し、destroyedAssignmentsに格納
+  removeAssignmentData(parent: any) {
+    parent.map((destroyDom: any) => {
+      let destroyedCvs: any = destroyDom.children[1]
+      let destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
+      this.props.setRemovedAssignment(destroyedAssignmentId)
+    })
+  }
+
   iginiteBlackHoleAnimation() {
-    const targetIds: any = this.props.selectedAssignments
-    const actionKey: any = this.props.selectedDestroyAction
-    const targetDom: any = document.getElementById('project-orbit')
-    const insertDom: any = document.getElementById('fixed-star')
+    const targetIds: string[] = this.props.selectedAssignments
+    const actionType: string = this.props.selectedDestroyAction
+    const targetDom: HTMLElement = document.getElementById(
+      'project-page-container'
+    )
+    const insertDom: HTMLElement = document.getElementById('project-container')
     const displayDoms: any = []
+    let targetImgTop: number = 0
+    let targetImgLeft: number = 0
 
     targetIds.forEach((id: string) => {
-      displayDoms.push(document.getElementById(id).parentNode)
+      displayDoms.push(document.getElementById(`planet-${id}`)) // planet-2-Earth <Plant />の親要素
     })
 
-    function withFadeOut() {
-      displayDoms.forEach((displayDom: any) => {
-        let removeTarget: any = displayDom.children[1]
-        let blackholeDom: any = document.getElementById(
-          displayDom.children[2].id
-        )
+    console.log('got display doms', displayDoms)
 
-        removeTarget.classList.add('blackhole-action')
-        setTimeout(() => {
-          blackholeDom.classList.add('blackhole-action')
-        }, 2500)
-      })
-    }
-
-    function removeDoms() {
-      displayDoms.forEach((displayDom: any) => {
-        let removeTarget: any = displayDom
-        displayDom.parentNode.removeChild(removeTarget)
-
-        let blackholeDom: any = document.getElementById(
-          displayDom.children[2].id
-        )
-        targetDom.removeChild(blackholeDom)
-      })
-    }
-
-    displayDoms.forEach((displayDom: any) => {
-      // 要素の位置座標を取得
-      let clientRectTarget: any = displayDom.getBoundingClientRect()
-      // 画面の左端から、要素の左端までの距離
-      let xT: any = clientRectTarget.left
-      // 画面の上端から、要素の上端までの距離
-      let yT: any = clientRectTarget.top
-
-      let newDiv: any = document.createElement('div')
-      let newImg: any = document.createElement('img')
-      newDiv.id = displayDom.children[2].id
-      newDiv.classList.add('blackhole')
-      newDiv.style.position = 'fixed'
-      newDiv.style.left = `${xT}px`
-      newDiv.style.top = `${yT}px`
-      newDiv.style.zIndex = '-100'
-      newImg.src = DeleteActions[actionKey]
+    function appearBlackHole() {
+      let newDiv: HTMLDivElement = document.createElement('div')
+      let newImg: HTMLImageElement = document.createElement('img')
+      newDiv.classList.add('blackhole-img')
+      newImg.src = DeleteActions[actionType]
       newDiv.appendChild(newImg)
       targetDom.insertBefore(newDiv, insertDom)
-    })
-    withFadeOut()
+      const clientRectTarget: any = newDiv.getBoundingClientRect()
+      targetImgTop = clientRectTarget.top
+      targetImgLeft = clientRectTarget.left
+
+      console.log(clientRectTarget, typeof clientRectTarget)
+    }
+
+    function disappearPlanet() {
+      const BlackHoleAnimation = anime.timeline()
+      BlackHoleAnimation.add({
+        targets: `#planet-${targetIds[0]} .planet-img-container`,
+        translateX: {
+          value: targetImgLeft,
+          duration: 1000,
+          easing: 'easeInExpo',
+        },
+        translateY: {
+          value: -targetImgTop,
+          duration: 1000,
+          easing: 'easeInExpo',
+        },
+        opacity: {
+          value: [1, 0],
+          duration: 3000,
+          easing: 'easeInOutQuad',
+        },
+      }).add({
+        targets: '#project-page-container .blackhole-img',
+        rotate: {
+          value: '6turn',
+          duration: 2000,
+          easing: 'easeInExpo',
+        },
+        opacity: {
+          value: [1, 0],
+          duration: 2000,
+          easing: 'easeInExpo',
+        },
+        offset: -300,
+      })
+    }
+
+    appearBlackHole()
+    console.log(targetImgLeft, targetImgTop, targetIds)
     setTimeout(() => {
-      removeDoms()
-    }, 3000)
+      disappearPlanet()
+    }, 1800)
+    setTimeout(() => {
+      this.removeAssignmentData(displayDoms)
+      this.props.motionControll()
+    }, 2000)
+    setTimeout(() => {
+      targetDom.removeChild(document.getElementsByClassName('blackhole-img')[0])
+    }, 5000)
   }
 
   render() {
@@ -117,11 +157,13 @@ export default connect(
   ({
     selectedAssignments,
     destroyedAssignments,
+    removedAssignments,
     selectedDestroyAction,
     modalOpen,
   }: any) => ({
     selectedAssignments,
     destroyedAssignments,
+    removedAssignments,
     selectedDestroyAction,
     modalOpen,
   }),
@@ -130,5 +172,6 @@ export default connect(
     resetDestroyAction,
     resetModalStatus,
     resetSelectedAssignment,
+    setRemovedAssignment,
   }
 )(BlackHole)

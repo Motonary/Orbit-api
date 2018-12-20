@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { actionTypes } from '../constants/actiontypes'
 import { ROOT_URL } from '../constants/url'
-import { string } from 'prop-types'
 
 export function fetchRevolvingAssignments(projectId: any) {
   return axios
