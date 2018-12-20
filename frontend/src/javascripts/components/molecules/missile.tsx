@@ -6,6 +6,7 @@ import ActionBtn from '../atoms/buttons/action-btn'
 
 import { resetDestroyAction, resetModalStatus } from '../../actions/common'
 import {
+  destroyAssignment,
   resetSelectedAssignment,
   setRemovedAssignment,
 } from '../../actions/assignments'
@@ -26,6 +27,7 @@ interface MissleProps {
 
   resetDestroyAction: any
   resetModalStatus: any
+  destroyAssignment: any
   resetSelectedAssignment: any
   setRemovedAssignment: any
 }
@@ -118,7 +120,7 @@ class Missle extends React.Component<MissleProps, {}> {
       let destroyedCvs: any = destroyDom.children[1]
       let destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
       this.props.setRemovedAssignment(destroyedAssignmentId)
-      console.log(this.props.removedAssignments)
+      this.props.destroyAssignment(destroyedAssignmentId)
     })
   }
 
@@ -253,7 +255,7 @@ class Missle extends React.Component<MissleProps, {}> {
     removeImg()
     removeDestroyImg()
     animateParticules(pointerX, pointerY)
-    this.props.resetDestroyAction(null)
+    this.props.resetDestroyAction()
     this.props.resetSelectedAssignment()
     this.removeAssignmentData(parent)
     this.props.motionControll()
@@ -288,6 +290,7 @@ export default connect(
   {
     resetDestroyAction,
     resetModalStatus,
+    destroyAssignment,
     resetSelectedAssignment,
     setRemovedAssignment,
   }

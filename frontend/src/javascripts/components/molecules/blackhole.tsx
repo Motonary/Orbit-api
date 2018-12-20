@@ -10,6 +10,7 @@ import {
   resetModalStatus,
 } from '../../actions/common'
 import {
+  destroyAssignment,
   resetSelectedAssignment,
   setRemovedAssignment,
 } from '../../actions/assignments'
@@ -31,6 +32,7 @@ interface BlackHoleProps {
   setDestroyAction: any
   resetDestroyAction: any
   resetModalStatus: any
+  destroyAssignment: any
   resetSelectedAssignment: any
   setRemovedAssignment: any
 }
@@ -58,6 +60,7 @@ class BlackHole extends React.Component<BlackHoleProps, {}> {
       let destroyedCvs: any = destroyDom.children[1]
       let destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
       this.props.setRemovedAssignment(destroyedAssignmentId)
+      this.props.destroyAssignment(destroyedAssignmentId)
     })
   }
 
@@ -137,6 +140,8 @@ class BlackHole extends React.Component<BlackHoleProps, {}> {
       this.props.motionControll()
     }, 2000)
     setTimeout(() => {
+      this.props.resetDestroyAction()
+      this.props.resetSelectedAssignment()
       targetDom.removeChild(document.getElementsByClassName('blackhole-img')[0])
     }, 5000)
   }
@@ -171,6 +176,7 @@ export default connect(
     setDestroyAction,
     resetDestroyAction,
     resetModalStatus,
+    destroyAssignment,
     resetSelectedAssignment,
     setRemovedAssignment,
   }

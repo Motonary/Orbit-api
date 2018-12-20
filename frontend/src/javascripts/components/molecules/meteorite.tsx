@@ -6,6 +6,7 @@ import ActionBtn from '../atoms/buttons/action-btn'
 
 import { resetDestroyAction, resetModalStatus } from '../../actions/common'
 import {
+  destroyAssignment,
   resetSelectedAssignment,
   setRemovedAssignment,
 } from '../../actions/assignments'
@@ -26,6 +27,7 @@ interface MeteoriteProps {
 
   resetDestroyAction: any
   resetModalStatus: any
+  destroyAssignment: any
   resetSelectedAssignment: any
   setRemovedAssignment: any
 }
@@ -78,13 +80,13 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     const disY: number = yT - yM
     const arcvalue: number = -disY / disX
 
-    // Arctanのマクローリン展開（４次近似）により、arctanの整数値から目標物への角度を求める
+    // Arctanのマクローリン展開（４次近似）により、arctanの整数値から目標物への角度(rad)を求める
     const approximateRad: number =
       arcvalue -
       Math.pow(arcvalue, 3) / 3 +
       Math.pow(arcvalue, 5) / 5 -
       Math.pow(arcvalue, 7) / 7
-    const deg: number = (approximateRad * 180) / Math.PI
+    const deg: number = (approximateRad * 180) / Math.PI // rad -> degree
 
     const MissileTransforms = anime({
       targets: '#project-page-container .destroy-action',
@@ -118,7 +120,7 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
       let destroyedCvs: any = destroyDom.children[1]
       let destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
       this.props.setRemovedAssignment(destroyedAssignmentId)
-      console.log(this.props.removedAssignments)
+      this.props.destroyAssignment(destroyedAssignmentId)
     })
   }
 
@@ -253,7 +255,7 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     removeImg()
     removeDestroyImg()
     animateParticules(pointerX, pointerY)
-    this.props.resetDestroyAction(null)
+    this.props.resetDestroyAction()
     this.props.resetSelectedAssignment()
     this.removeAssignmentData(parent)
     this.props.motionControll()
@@ -288,6 +290,7 @@ export default connect(
   {
     resetDestroyAction,
     resetModalStatus,
+    destroyAssignment,
     resetSelectedAssignment,
     setRemovedAssignment,
   }

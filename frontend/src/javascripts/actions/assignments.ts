@@ -65,7 +65,7 @@ export function createAssignment(
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function destroyAssignment(assignmentId: any) {
+export function destroyAssignment(assignmentId: string) {
   return axios({
     method: 'patch',
     url: `${ROOT_URL}/api/assignments/${assignmentId}/destroy`,
@@ -74,7 +74,6 @@ export function destroyAssignment(assignmentId: any) {
     .then(() => {
       return {
         type: actionTypes.DESTROY_ASSIGNMENT,
-        assignmentId,
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))

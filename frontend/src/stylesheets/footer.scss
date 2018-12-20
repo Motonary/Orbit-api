@@ -33,6 +33,7 @@ $holder-height: 100px;
     .planet-holder-img {
       width: $holder-height;
       height: $holder-height;
+      cursor: pointer;
     }
     .open-planet-holder {
       display: none;
@@ -62,6 +63,7 @@ $holder-height: 100px;
           width: $available-planet-size;
           height: $available-planet-size;
           border-radius: 50%;
+          cursor: pointer;
           
           img {
             width: $available-planet-size;
@@ -74,7 +76,7 @@ $holder-height: 100px;
       }
     }
     .is-show {
-      width: 400px;
+      width: 300px;
     }
   }
 

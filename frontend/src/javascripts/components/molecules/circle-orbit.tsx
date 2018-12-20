@@ -39,11 +39,12 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
   }
 
   setPlanetDrop(): void {
+    if (!this.props.revolvingAssignments) return
     // Droppable area
-    _.forEach(this.props.revolvingAssignments, assignment => {
+    _.forEach(this.props.revolvingAssignments[this.props.orbit], assignment => {
       const target: any = document.getElementById(
-        `${assignment.id}-${assignment.planet_type}`
-      ).parentNode
+        `planet-${assignment.id}-${assignment.planet_type}`
+      )
       target.addEventListener(
         'dragenter',
         () => {
