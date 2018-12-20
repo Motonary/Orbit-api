@@ -21,11 +21,7 @@ class HistoryPage extends React.Component<Props, {}> {
 
     return (
       <div className="page-container">
-        <Header
-          currentUser={currentUser}
-          history={history}
-          pathname={pathname}
-        />
+        <Header currentUser={currentUser} history={history} pathname={pathname} />
         <HistoryPageMain />
         <Footer currentUser={currentUser} pathname={pathname} />
       </div>

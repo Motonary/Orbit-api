@@ -24,10 +24,7 @@ interface FooterActionBtnListProps {
   setDestroyAction: any
 }
 
-class FooterActionBtnList extends React.Component<
-  FooterActionBtnListProps,
-  {}
-> {
+class FooterActionBtnList extends React.Component<FooterActionBtnListProps, {}> {
   onClickOpenModal(actionType: string) {
     this.props.setDestroyAction(actionType)
     this.props.setModalStatus(actionType)
@@ -44,9 +41,7 @@ class FooterActionBtnList extends React.Component<
     const deleteBtnsClass: string = classNames({
       'action-btn': true,
       'delete-buttons-show':
-        pathname === `${rootPath}` ||
-        /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
-        pathname === `${rootPath}/history`,
+        pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/history`,
     })
 
     return (

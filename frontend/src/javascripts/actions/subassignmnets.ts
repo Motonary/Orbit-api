@@ -2,14 +2,7 @@ import axios from 'axios'
 import { actionTypes } from '../constants/actiontypes'
 import { ROOT_URL } from '../constants/url'
 
-export function createSubAssignment(
-  title: any,
-  description: any,
-  deadline: any,
-  planet_type: any,
-  planet_size: any,
-  assignmentId: any
-) {
+export function createSubAssignment(title: any, description: any, deadline: any, planet_type: any, planet_size: any, assignmentId: any) {
   return axios({
     method: 'post',
     url: `${ROOT_URL}/api/subassignments`,

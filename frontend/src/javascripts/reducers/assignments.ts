@@ -18,10 +18,7 @@ export function revolvingAssignments(state: any = null, action: any) {
 
     case actionTypes.DESTROY_ASSIGNMENT:
       // TODO: あとでやる
-      return _.remove(
-        [...state],
-        eachState => eachState.id !== action.assignmentId
-      )
+      return _.remove([...state], eachState => eachState.id !== action.assignmentId)
 
     default:
       return state
@@ -60,10 +57,7 @@ export function destroyedAssignments(state: any = null, action: any) {
       return action.destroyedAssignments
 
     case actionTypes.RESTORE_ASSIGNMENT:
-      return _.remove(
-        [...state],
-        eachState => eachState.id !== action.assignmentId
-      )
+      return _.remove([...state], eachState => eachState.id !== action.assignmentId)
 
     default:
       return state

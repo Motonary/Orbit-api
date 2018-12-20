@@ -21,17 +21,11 @@ class HeaderLeftLink extends React.Component<Props, {}> {
     // mypage以外で表示(show: true), 例外判定('hidden': pathname !== rootpathなど)すると404notfound等を拾えない
     const headerleftClasses = classNames({
       'user-info': true,
-      'show-left':
-        /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
-        pathname === `${rootPath}/history` ||
-        pathname === `${rootPath}/edit`,
+      'show-left': /^\/users\/[1-9]\d*\/projects$/.test(pathname) || pathname === `${rootPath}/history` || pathname === `${rootPath}/edit`,
     })
 
     return (
-      <a
-        className={headerleftClasses}
-        onClick={this.onClickHeaderLeft.bind(this)}
-      >
+      <a className={headerleftClasses} onClick={this.onClickHeaderLeft.bind(this)}>
         <UserImg user={currentUser} />
         <UserName user={currentUser} />
       </a>

@@ -3,6 +3,11 @@
   height: 100%;
 }
 
+#background-liner {
+  margin: 20px auto;
+  z-index: -100;
+}
+
 #stored-planet-list {
   display: flex;
   align-content: flex-start;

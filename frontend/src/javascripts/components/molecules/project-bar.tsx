@@ -18,12 +18,9 @@ interface Props {
 
 class ProjectBar extends React.Component<Props, {}> {
   onClickFixedStarOnBar(nextProjectId: any) {
-    this.props.changeCurrentProject(
-      this.props.revolvingProjects[nextProjectId],
-      () => {
-        this.props.fetchRevolvingAssignments(nextProjectId)
-      }
-    )
+    this.props.changeCurrentProject(this.props.revolvingProjects[nextProjectId], () => {
+      this.props.fetchRevolvingAssignments(nextProjectId)
+    })
   }
 
   render() {

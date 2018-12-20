@@ -57,15 +57,7 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
             actions.setSubmitting(false)
           }}
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-          }) => (
+          {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
             <form onSubmit={handleSubmit}>
               <div className="form-line-1">
                 <InputField
@@ -98,12 +90,7 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
                 />
               </div>
               <div className="form-line-3">
-                <SelectField
-                  name="planet_size"
-                  value={values.planet_size}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
+                <SelectField name="planet_size" value={values.planet_size} onChange={handleChange} onBlur={handleBlur} />
                 <FormSubmitBtn label="決定" isSubmit={isSubmitting} />
               </div>
             </form>

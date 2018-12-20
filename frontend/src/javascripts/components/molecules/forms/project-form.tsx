@@ -4,11 +4,7 @@ import { Formik } from 'formik'
 
 import InputField from '../../atoms/input-field'
 
-import {
-  setSelectedStar,
-  resetSelectedStar,
-  resetModalStatus,
-} from '../../../actions/common'
+import { setSelectedStar, resetSelectedStar, resetModalStatus } from '../../../actions/common'
 import { createProject } from '../../../actions/projects'
 
 import '../../../../stylesheets/form_on_modal.scss'
@@ -34,9 +30,7 @@ class ProjectForm extends React.Component<ProjectFormProps, {}> {
           initialValues={{ title: '' }}
           onSubmit={(values: CreateProjectValues, actions: any) => {
             const target: any = document.getElementById('form-balloon')
-            const target_star: any = document.getElementsByClassName(
-              'current-clicked'
-            )[0]
+            const target_star: any = document.getElementsByClassName('current-clicked')[0]
             const fixed_star_type: any = this.props.selectedStar
 
             target_star.classList.remove('current-clicked')
@@ -47,15 +41,7 @@ class ProjectForm extends React.Component<ProjectFormProps, {}> {
             this.props.resetModalStatus()
           }}
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-          }) => (
+          {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
             <form onSubmit={handleSubmit}>
               <div className="form-line-2">
                 <InputField

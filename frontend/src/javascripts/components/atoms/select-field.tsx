@@ -9,12 +9,7 @@ interface SelectFieldProps {
   onBlur: (e: React.SyntheticEvent<HTMLSelectElement>) => void
 }
 
-const SelectField: React.SFC<SelectFieldProps> = ({
-  name,
-  value,
-  onChange,
-  onBlur,
-}) => {
+const SelectField: React.SFC<SelectFieldProps> = ({ name, value, onChange, onBlur }) => {
   return (
     <div className="select-field-style">
       <select name={name} value={value} onChange={onChange} onBlur={onBlur}>
