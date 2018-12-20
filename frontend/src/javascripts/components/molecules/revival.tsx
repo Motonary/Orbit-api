@@ -12,13 +12,7 @@ class Revival extends React.Component<RevivalProps, {}> {
   render() {
     const { icon, actionBtnClass, onClick } = this.props
 
-    return (
-      <ActionBtn
-        icon={icon}
-        actionBtnClass={actionBtnClass}
-        onClick={onClick}
-      />
-    )
+    return <ActionBtn icon={icon} actionBtnClass={actionBtnClass} onClick={onClick} />
   }
 }
 

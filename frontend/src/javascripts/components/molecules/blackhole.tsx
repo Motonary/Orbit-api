@@ -5,16 +5,8 @@ import anime from 'animejs'
 
 import ActionBtn from '../atoms/buttons/action-btn'
 
-import {
-  setDestroyAction,
-  resetDestroyAction,
-  resetModalStatus,
-} from '../../actions/common'
-import {
-  destroyAssignment,
-  resetSelectedAssignment,
-  setRemovedAssignment,
-} from '../../actions/assignments'
+import { setDestroyAction, resetDestroyAction, resetModalStatus } from '../../actions/common'
+import { destroyAssignment, resetSelectedAssignment } from '../../actions/assignments'
 
 import { DeleteActions } from '../../constants/images'
 
@@ -56,9 +48,7 @@ class BlackHole extends React.Component<BlackHoleProps, {}> {
   iginiteBlackHoleAnimation() {
     const targetIds: string[] = this.props.selectedAssignments
     const actionType: string = this.props.selectedDestroyAction
-    const targetDom: HTMLElement = document.getElementById(
-      'project-page-container'
-    )
+    const targetDom: HTMLElement = document.getElementById('project-page-container')
     const insertDom: HTMLElement = document.getElementById('project-container')
     const displayDoms: any = []
     let targetImgTop: number = 0
@@ -132,23 +122,12 @@ class BlackHole extends React.Component<BlackHoleProps, {}> {
 
   render() {
     const { icon, actionBtnClass, onClick } = this.props
-    return (
-      <ActionBtn
-        icon={icon}
-        actionBtnClass={actionBtnClass}
-        onClick={onClick}
-      />
-    )
+    return <ActionBtn icon={icon} actionBtnClass={actionBtnClass} onClick={onClick} />
   }
 }
 
 export default connect(
-  ({
-    selectedAssignments,
-    destroyedAssignments,
-    selectedDestroyAction,
-    modalOpen,
-  }: any) => ({
+  ({ selectedAssignments, destroyedAssignments, selectedDestroyAction, modalOpen }: any) => ({
     selectedAssignments,
     destroyedAssignments,
     selectedDestroyAction,

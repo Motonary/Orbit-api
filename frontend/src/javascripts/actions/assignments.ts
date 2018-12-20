@@ -1,8 +1,29 @@
 import axios from 'axios'
-import { actionTypes } from '../constants/actiontypes'
+import { actionTypes } from '../constants/action-types'
+import { BaseAction } from '../constants/static-types'
 import { ROOT_URL } from '../constants/url'
 
-export function fetchRevolvingAssignments(projectId: any) {
+// -------------------------------------------------------------------------------------
+// RevolvingAssignments
+// -------------------------------------------------------------------------------------
+interface FetchRevolvingAssignmentsAction extends BaseAction {
+  type: string
+  payload: { revolvingAssignments: Object }
+}
+
+interface CreateAssignmentAction extends BaseAction {
+  type: string
+  payload: { newAssignment: any } // newAssignment.idの型エラー回避のため一時的にanyに
+}
+
+interface DestroyAssignmentAction extends BaseAction {
+  type: string
+  payload: { assignmentId: string } // TODO: numberかも
+}
+
+export type RevolvingAssignmentsAction = FetchRevolvingAssignmentsAction | CreateAssignmentAction | DestroyAssignmentAction
+
+export function fetchRevolvingAssignments(projectId: any): Promise<FetchRevolvingAssignmentsAction | void> {
   return axios
     .get(`${ROOT_URL}/api/assignments/revolving`, {
       headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
@@ -11,21 +32,7 @@ export function fetchRevolvingAssignments(projectId: any) {
     .then(res => {
       return {
         type: actionTypes.FETCH_REVOLVING_ASSIGNMENTS,
-        revolvingAssignments: res.data,
-      }
-    })
-    .catch(() => alert('Sorry, something went wrong...'))
-}
-
-export function fetchDestroyedAssignments() {
-  return axios
-    .get(`${ROOT_URL}/api/assignments/destroyed`, {
-      headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
-    })
-    .then(res => {
-      return {
-        type: actionTypes.FETCH_DESTROYED_ASSIGNMENTS,
-        destroyedAssignments: res.data,
+        payload: { revolvingAssignments: res.data },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
@@ -39,7 +46,7 @@ export function createAssignment(
   planet_size: any,
   orbit_pos: any,
   projectId: any
-) {
+): Promise<CreateAssignmentAction | void> {
   return axios({
     method: 'post',
     url: `${ROOT_URL}/api/assignments`,
@@ -59,13 +66,13 @@ export function createAssignment(
     .then(res => {
       return {
         type: actionTypes.CREATE_ASSIGNMENT,
-        newAssignment: res.data,
+        payload: { newAssignment: res.data },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function destroyAssignment(assignmentId: string) {
+export function destroyAssignment(assignmentId: any): Promise<DestroyAssignmentAction | void> {
   return axios({
     method: 'patch',
     url: `${ROOT_URL}/api/assignments/${assignmentId}/destroy`,
@@ -74,12 +81,81 @@ export function destroyAssignment(assignmentId: string) {
     .then(() => {
       return {
         type: actionTypes.DESTROY_ASSIGNMENT,
+        payload: { assignmentId },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function restoreAssignment(assignmentId: any) {
+// -------------------------------------------------------------------------------------
+// SelectedAssignments
+// -------------------------------------------------------------------------------------
+interface SelectAssignmentAction extends BaseAction {
+  type: string
+  payload: { assignmentId: number } // TODO: stringかも
+}
+
+interface DisselectAssignmentAction extends BaseAction {
+  type: string
+  payload: { assignmentId: number } // TODO: stringかも
+}
+
+interface ResetSelectedAssignment extends BaseAction {
+  type: string
+}
+
+export type SelectedAssignmentsAction = SelectAssignmentAction | DisselectAssignmentAction | ResetSelectedAssignment
+
+export function selectAssignment(assignmentId: any): SelectAssignmentAction {
+  return {
+    type: actionTypes.SET_SELECTED_ASSIGNMENT,
+    payload: { assignmentId },
+  }
+}
+
+export function disselectAssignment(assignmentId: any): DisselectAssignmentAction {
+  return {
+    type: actionTypes.REMOVE_SELECTED_ASSIGNMENT,
+    payload: { assignmentId },
+  }
+}
+
+export function resetSelectedAssignment(): ResetSelectedAssignment {
+  return {
+    type: actionTypes.RESET_SELECTED_ASSIGNMENT,
+  }
+}
+
+// -------------------------------------------------------------------------------------
+// DestroyedAssignments
+// -------------------------------------------------------------------------------------
+interface FetchDestroyedAssignmentsAction extends BaseAction {
+  type: string
+  payload: { destroyedAssignments: Object }
+}
+
+interface RestoreAssignmentAction extends BaseAction {
+  type: string
+  payload: { assignmentId: number } // TODO: stringかも
+}
+
+export type DestroyedAssignmentsAction = FetchDestroyedAssignmentsAction | RestoreAssignmentAction
+
+export function fetchDestroyedAssignments(): Promise<FetchDestroyedAssignmentsAction | void> {
+  return axios
+    .get(`${ROOT_URL}/api/assignments/destroyed`, {
+      headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
+    })
+    .then(res => {
+      return {
+        type: actionTypes.FETCH_DESTROYED_ASSIGNMENTS,
+        payload: { destroyedAssignments: res.data },
+      }
+    })
+    .catch(() => alert('Sorry, something went wrong...'))
+}
+
+export function restoreAssignment(assignmentId: any): Promise<RestoreAssignmentAction | void> {
   return axios({
     method: 'patch',
     url: `${ROOT_URL}/api/assignments/${assignmentId}/restore`,
@@ -88,35 +164,8 @@ export function restoreAssignment(assignmentId: any) {
     .then(() => {
       return {
         type: actionTypes.RESTORE_ASSIGNMENT,
-        assignmentId,
+        payload: { assignmentId },
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
-}
-
-export function selectAssignment(assignmentId: any) {
-  return {
-    type: actionTypes.SET_SELECTED_ASSIGNMENT,
-    assignmentId,
-  }
-}
-
-export function disselectAssignment(assignmentId: any) {
-  return {
-    type: actionTypes.REMOVE_SELECTED_ASSIGNMENT,
-    assignmentId,
-  }
-}
-
-export function resetSelectedAssignment() {
-  return {
-    type: actionTypes.RESET_SELECTED_ASSIGNMENT,
-  }
-}
-
-export function setRemovedAssignment(removedAssignmentId: string) {
-  return {
-    type: actionTypes.SET_REMOVED_ASSIGNMENTS,
-    removedAssignmentId,
-  }
 }

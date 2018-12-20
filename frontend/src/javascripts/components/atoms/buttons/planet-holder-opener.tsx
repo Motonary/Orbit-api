@@ -9,9 +9,7 @@ interface Props {
 
 class PlanetHolderOpener extends React.Component<Props, {}> {
   onClickOpenPlanetHolder() {
-    const target_class: any = document.getElementsByClassName(
-      'open-planet-holder'
-    )
+    const target_class: any = document.getElementsByClassName('open-planet-holder')
     const planet_list: any = document.getElementById('planet-list')
     // const planet_holder = document.getElementById("planet-holder")
 
@@ -37,16 +35,11 @@ class PlanetHolderOpener extends React.Component<Props, {}> {
 
     const planetHolderClasses = classNames({
       'open-planet-holder': true,
-      'holder-show':
-        pathname === `${rootPath}` ||
-        /^\/users\/[1-9]\d*\/projects$/.test(pathname),
+      'holder-show': pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname),
     })
 
     return (
-      <div
-        className={planetHolderClasses}
-        onClick={this.onClickOpenPlanetHolder.bind(this)}
-      >
+      <div className={planetHolderClasses} onClick={this.onClickOpenPlanetHolder.bind(this)}>
         <img src={ImgHolderOpen} className="planet-holder-img" />
       </div>
     )

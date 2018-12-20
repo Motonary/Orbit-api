@@ -12,14 +12,7 @@ interface InputFieldProps {
   onBlur: (e: React.SyntheticEvent<HTMLInputElement>) => void
 }
 
-const InputField: React.SFC<InputFieldProps> = ({
-  type,
-  name,
-  placeholder,
-  value,
-  onChange,
-  onBlur,
-}) => {
+const InputField: React.SFC<InputFieldProps> = ({ type, name, placeholder, value, onChange, onBlur }) => {
   const fieldClasses = classNames({
     'field-style': true,
     title: name === 'title',
@@ -40,11 +33,7 @@ const InputField: React.SFC<InputFieldProps> = ({
   })
 
   const inputRadius = classNames({
-    'input-radius':
-      name === 'username' ||
-      name === 'email' ||
-      name === 'password' ||
-      name === 'confirmation',
+    'input-radius': name === 'username' || name === 'email' || name === 'password' || name === 'confirmation',
   })
 
   return (

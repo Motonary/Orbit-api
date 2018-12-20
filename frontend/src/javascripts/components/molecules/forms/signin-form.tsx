@@ -29,15 +29,7 @@ class SignInForm extends React.Component<SignInFormProps, {}> {
             actions.setSubmitting(false)
           }}
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-          }) => (
+          {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
             <form onSubmit={handleSubmit}>
               <InputField
                 type="email"

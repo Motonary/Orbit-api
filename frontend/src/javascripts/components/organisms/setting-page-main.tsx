@@ -12,6 +12,4 @@ const SettingPageMain = ({ currentUser, history }: any) => (
   </div>
 )
 
-export default connect(({ currentUser }: any) => ({ currentUser }))(
-  SettingPageMain
-)
+export default connect(({ currentUser }: any) => ({ currentUser }))(SettingPageMain)

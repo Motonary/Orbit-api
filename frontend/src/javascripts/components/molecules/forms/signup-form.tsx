@@ -32,24 +32,11 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
             confirmation: '',
           }}
           onSubmit={(values: CreateUserValues, actions: any) => {
-            this.props.createUser(
-              values.username,
-              values.email,
-              values.password,
-              values.confirmation
-            )
+            this.props.createUser(values.username, values.email, values.password, values.confirmation)
             actions.setSubmitting(false)
           }}
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-          }) => (
+          {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
             <form onSubmit={handleSubmit}>
               <InputField
                 type="username"
@@ -86,9 +73,7 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {errors.confirmation &&
-                touched.confirmation &&
-                errors.confirmation}
+              {errors.confirmation && touched.confirmation && errors.confirmation}
               <FormSubmitBtn label="SIGN UP" isSubmit={isSubmitting} />
             </form>
           )}

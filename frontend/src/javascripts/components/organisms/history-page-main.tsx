@@ -1,9 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import {
-  fetchDestroyedAssignments,
-  restoreAssignment,
-} from '../../actions/assignments'
+import { fetchDestroyedAssignments, restoreAssignment } from '../../actions/assignments'
 import { PlanetImgs } from '../../constants/images'
 
 interface Props {

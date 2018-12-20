@@ -5,19 +5,8 @@ import PlanetImg from './planet-img'
 
 import { PlanetImgs } from '../../constants/images'
 
-const Planet = ({
-  className,
-  planetType,
-  onClick,
-  onMouseOver,
-  onMouseOut,
-}: any) => (
-  <div
-    className={className}
-    onClick={onClick}
-    onMouseOver={onMouseOver}
-    onMouseOut={onMouseOut}
-  >
+const Planet = ({ className, planetType, onClick, onMouseOver, onMouseOut }: any) => (
+  <div className={className} onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
     <PlanetImg src={PlanetImgs[planetType]} />
     <CheckMark />
   </div>

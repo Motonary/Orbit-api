@@ -31,11 +31,7 @@ class MyPage extends React.Component<MyPageProps, {}> {
 
     return (
       <div className="page-container">
-        <Header
-          currentUser={currentUser}
-          history={history}
-          pathname={pathname}
-        />
+        <Header currentUser={currentUser} history={history} pathname={pathname} />
         <MyPageMain currentUser={currentUser} history={history} match={match} />
         <Footer currentUser={currentUser} pathname={pathname} />
       </div>
