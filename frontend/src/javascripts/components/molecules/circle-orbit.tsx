@@ -5,16 +5,9 @@ import _ from 'lodash'
 import PopupBox from '../atoms/popup-box'
 import Planet from '../atoms/planet'
 
-import {
-  selectAssignment,
-  disselectAssignment,
-} from '../../actions/assignments'
+import { selectAssignment, disselectAssignment } from '../../actions/assignments'
 
-import {
-  setSelectedStar,
-  resetSelectedStar,
-  setModalStatus,
-} from '../../actions/common'
+import { setSelectedStar, resetSelectedStar, setModalStatus } from '../../actions/common'
 
 interface CircleOrbitProps {
   orbit: any
@@ -43,9 +36,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
     if (!revolvingAssignments) return
     // Droppable area
     _.forEach(revolvingAssignments[orbit], assignment => {
-      const target: any = document.getElementById(
-        `planet-${assignment.id}-${assignment.planet_type}`
-      )
+      const target: any = document.getElementById(`planet-${assignment.id}-${assignment.planet_type}`)
       target.addEventListener(
         'dragenter',
         () => {
@@ -191,17 +182,10 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
       <div id={`circle-${orbit}`} className="common-circle">
         {revolvingAssignments[orbit].map((assignmentInfo: any, index: any) => {
           return (
-            <div
-              className={`common ${pos[index % 4]} ${
-                assignmentInfo.orbit_pos
-              }-orbit-motion start-animation`}
-              key={assignmentInfo.id}
-            >
+            <div className={`common ${pos[index % 4]} ${assignmentInfo.orbit_pos}-orbit-motion start-animation`} key={assignmentInfo.id}>
               <div
                 id={`planet-${assignmentInfo.id}-${assignmentInfo.planet_type}`}
-                className={`planet-${assignmentInfo.planet_size}-${
-                  assignmentInfo.orbit_pos
-                } start-animation`}
+                className={`planet-${assignmentInfo.planet_size}-${assignmentInfo.orbit_pos} start-animation`}
               >
                 <PopupBox assignmentInfo={assignmentInfo} />
                 <Planet
@@ -211,10 +195,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
                   onMouseOver={this.onMouseOver.bind(this)}
                   onMouseOut={this.onMouseOut.bind(this)}
                 />
-                <canvas
-                  id={`${assignmentInfo.id}-${assignmentInfo.planet_type}`}
-                  className="canvas"
-                />
+                <canvas id={`${assignmentInfo.id}-${assignmentInfo.planet_type}`} className="canvas" />
               </div>
             </div>
           )
@@ -225,12 +206,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
 }
 
 export default connect(
-  ({
-    revolvingAssignments,
-    selectedAssignments,
-    selectedStar,
-    modalOpen,
-  }: any) => ({
+  ({ revolvingAssignments, selectedAssignments, selectedStar, modalOpen }: any) => ({
     revolvingAssignments,
     selectedAssignments,
     selectedStar,

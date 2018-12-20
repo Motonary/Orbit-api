@@ -39,10 +39,7 @@ export default class TopPage extends React.Component<Props, State> {
 
     return (
       <div className="top-page-container">
-        <TopPageBtn
-          isSignIn={isSignIn}
-          onClick={this.onClickTopPageButton.bind(this)}
-        />
+        <TopPageBtn isSignIn={isSignIn} onClick={this.onClickTopPageButton.bind(this)} />
         <TopPageLogo />
         <ToppageFormContainer isSignIn={isSignIn} history={history} />
         <TopPagePlanet />

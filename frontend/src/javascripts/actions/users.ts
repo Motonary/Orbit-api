@@ -43,12 +43,7 @@ export type CurrentUserAction =
   | UpdateUserImgAction
   | UpdateProfileAction
 
-export function createUser(
-  name: any,
-  email: any,
-  password: any,
-  password_confirmation: any
-): Promise<CreateUserAction | void> {
+export function createUser(name: any, email: any, password: any, password_confirmation: any): Promise<CreateUserAction | void> {
   return axios
     .post(`${ROOT_URL}/api/signup`, {
       user: { name, email, password, password_confirmation },
@@ -63,10 +58,7 @@ export function createUser(
     .catch((err: any) => alert(`Sorry, something went wrong...\n ${err}`))
 }
 
-export function createSession(
-  email: any,
-  password: any
-): Promise<CreateSessionAction | void> {
+export function createSession(email: any, password: any): Promise<CreateSessionAction | void> {
   return axios
     .post(`${ROOT_URL}/api/user_token`, {
       auth: { email: email, password: password },
@@ -102,9 +94,7 @@ export function expireCurrentUser(callback: any): ExpireCurrentUserAction {
   return { type: actionTypes.EXPIRE_CURRENT_USER }
 }
 
-export function updateUserImg(
-  newAvatar: any
-): Promise<UpdateUserImgAction | void> {
+export function updateUserImg(newAvatar: any): Promise<UpdateUserImgAction | void> {
   let avatarFile = new FormData()
   avatarFile.append('avatar', newAvatar, newAvatar.name)
   return axios({

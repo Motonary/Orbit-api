@@ -6,11 +6,7 @@ import anime from 'animejs'
 import ActionBtn from '../atoms/buttons/action-btn'
 
 import { resetDestroyAction, resetModalStatus } from '../../actions/common'
-import {
-  destroyAssignment,
-  resetSelectedAssignment,
-  setRemovedAssignment,
-} from '../../actions/assignments'
+import { destroyAssignment, resetSelectedAssignment, setRemovedAssignment } from '../../actions/assignments'
 
 import { DeleteActions } from '../../constants/images'
 
@@ -55,9 +51,7 @@ class Missle extends React.Component<MissleProps, {}> {
 
   makeMovement(targetDiv: any) {
     const movDom: any = targetDiv
-    const targetDom: any = document.getElementById(
-      `planet-${this.props.selectedAssignments[0]}`
-    ) // should be div.id="planet-2-Earth" class="planet-medium-secundus"
+    const targetDom: any = document.getElementById(`planet-${this.props.selectedAssignments[0]}`) // should be div.id="planet-2-Earth" class="planet-medium-secundus"
 
     // 要素の位置座標を取得.
     const clientRectMov: any = movDom.getBoundingClientRect()
@@ -80,11 +74,7 @@ class Missle extends React.Component<MissleProps, {}> {
     const arcvalue: number = -disY / disX
 
     // Arctanのマクローリン展開（４次近似）により、arctanの整数値から目標物への角度を求める
-    const approximateRad: number =
-      arcvalue -
-      Math.pow(arcvalue, 3) / 3 +
-      Math.pow(arcvalue, 5) / 5 -
-      Math.pow(arcvalue, 7) / 7
+    const approximateRad: number = arcvalue - Math.pow(arcvalue, 3) / 3 + Math.pow(arcvalue, 5) / 5 - Math.pow(arcvalue, 7) / 7
     const deg: number = (approximateRad * 180) / Math.PI
 
     const MissileTransforms = anime({
@@ -258,23 +248,12 @@ class Missle extends React.Component<MissleProps, {}> {
 
   render() {
     const { icon, actionBtnClass, onClick } = this.props
-    return (
-      <ActionBtn
-        icon={icon}
-        actionBtnClass={actionBtnClass}
-        onClick={onClick}
-      />
-    )
+    return <ActionBtn icon={icon} actionBtnClass={actionBtnClass} onClick={onClick} />
   }
 }
 
 export default connect(
-  ({
-    selectedAssignments,
-    destroyedAssignments,
-    selectedDestroyAction,
-    modalOpen,
-  }: any) => ({
+  ({ selectedAssignments, destroyedAssignments, selectedDestroyAction, modalOpen }: any) => ({
     selectedAssignments,
     destroyedAssignments,
     selectedDestroyAction,

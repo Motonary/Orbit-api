@@ -21,14 +21,9 @@ interface DestroyAssignmentAction extends BaseAction {
   payload: { assignmentId: string } // TODO: numberかも
 }
 
-export type RevolvingAssignmentsAction =
-  | FetchRevolvingAssignmentsAction
-  | CreateAssignmentAction
-  | DestroyAssignmentAction
+export type RevolvingAssignmentsAction = FetchRevolvingAssignmentsAction | CreateAssignmentAction | DestroyAssignmentAction
 
-export function fetchRevolvingAssignments(
-  projectId: any
-): Promise<FetchRevolvingAssignmentsAction | void> {
+export function fetchRevolvingAssignments(projectId: any): Promise<FetchRevolvingAssignmentsAction | void> {
   return axios
     .get(`${ROOT_URL}/api/assignments/revolving`, {
       headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
@@ -77,9 +72,7 @@ export function createAssignment(
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function destroyAssignment(
-  assignmentId: any
-): Promise<DestroyAssignmentAction | void> {
+export function destroyAssignment(assignmentId: any): Promise<DestroyAssignmentAction | void> {
   return axios({
     method: 'patch',
     url: `${ROOT_URL}/api/assignments/${assignmentId}/destroy`,
@@ -111,10 +104,7 @@ interface ResetSelectedAssignment extends BaseAction {
   type: string
 }
 
-export type SelectedAssignmentsAction =
-  | SelectAssignmentAction
-  | DisselectAssignmentAction
-  | ResetSelectedAssignment
+export type SelectedAssignmentsAction = SelectAssignmentAction | DisselectAssignmentAction | ResetSelectedAssignment
 
 export function selectAssignment(assignmentId: any): SelectAssignmentAction {
   return {
@@ -123,9 +113,7 @@ export function selectAssignment(assignmentId: any): SelectAssignmentAction {
   }
 }
 
-export function disselectAssignment(
-  assignmentId: any
-): DisselectAssignmentAction {
+export function disselectAssignment(assignmentId: any): DisselectAssignmentAction {
   return {
     type: actionTypes.REMOVE_SELECTED_ASSIGNMENT,
     payload: { assignmentId },
@@ -151,9 +139,7 @@ interface RestoreAssignmentAction extends BaseAction {
   payload: { assignmentId: number } // TODO: stringかも
 }
 
-export type DestroyedAssignmentsAction =
-  | FetchDestroyedAssignmentsAction
-  | RestoreAssignmentAction
+export type DestroyedAssignmentsAction = FetchDestroyedAssignmentsAction | RestoreAssignmentAction
 
 export function fetchDestroyedAssignments(): Promise<FetchDestroyedAssignmentsAction | void> {
   return axios
@@ -169,9 +155,7 @@ export function fetchDestroyedAssignments(): Promise<FetchDestroyedAssignmentsAc
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function restoreAssignment(
-  assignmentId: any
-): Promise<RestoreAssignmentAction | void> {
+export function restoreAssignment(assignmentId: any): Promise<RestoreAssignmentAction | void> {
   return axios({
     method: 'patch',
     url: `${ROOT_URL}/api/assignments/${assignmentId}/restore`,

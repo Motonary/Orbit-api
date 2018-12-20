@@ -21,10 +21,7 @@ interface DestroyProjectAction extends BaseAction {
   payload: { projectId: number } // TODO: stringかも
 }
 
-export type RevoivingProjectsAction =
-  | FetchRevolvingProjectsAction
-  | CreateProjectAction
-  | DestroyProjectAction
+export type RevoivingProjectsAction = FetchRevolvingProjectsAction | CreateProjectAction | DestroyProjectAction
 
 export function fetchRevolvingProjects(): Promise<FetchRevolvingProjectsAction | void> {
   return axios
@@ -40,10 +37,7 @@ export function fetchRevolvingProjects(): Promise<FetchRevolvingProjectsAction |
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function createProject(
-  title: any,
-  fixed_star_type: any
-): Promise<CreateProjectAction | void> {
+export function createProject(title: any, fixed_star_type: any): Promise<CreateProjectAction | void> {
   return axios({
     method: 'post',
     url: `${ROOT_URL}/api/projects`,
@@ -59,9 +53,7 @@ export function createProject(
     .catch(() => alert('Sorry, something went wrong...'))
 }
 
-export function destroyProject(
-  projectId: any
-): Promise<DestroyProjectAction | void> {
+export function destroyProject(projectId: any): Promise<DestroyProjectAction | void> {
   return axios({
     method: 'delete',
     url: `${ROOT_URL}/api/projects/${projectId}`,
@@ -94,15 +86,9 @@ interface ChangeCurrentProjectAction extends BaseAction {
   payload: { currentProject: Object }
 }
 
-export type CurrentProjectAction =
-  | SetCurrentProjectAction
-  | SetDefaultProjectAction
-  | ChangeCurrentProjectAction
+export type CurrentProjectAction = SetCurrentProjectAction | SetDefaultProjectAction | ChangeCurrentProjectAction
 
-export function setCurrentProject(
-  currentProject: any,
-  callback: any
-): SetCurrentProjectAction {
+export function setCurrentProject(currentProject: any, callback: any): SetCurrentProjectAction {
   callback()
   return {
     type: actionTypes.SET_CURRENT_PROJECT,
@@ -110,10 +96,7 @@ export function setCurrentProject(
   }
 }
 
-export function setDefaultProject(
-  defaultProject: any,
-  callback: any
-): SetDefaultProjectAction {
+export function setDefaultProject(defaultProject: any, callback: any): SetDefaultProjectAction {
   callback(defaultProject.id)
   return {
     type: actionTypes.SET_CURRENT_PROJECT,
@@ -121,10 +104,7 @@ export function setDefaultProject(
   }
 }
 
-export function changeCurrentProject(
-  newProject: any,
-  callback: any
-): ChangeCurrentProjectAction {
+export function changeCurrentProject(newProject: any, callback: any): ChangeCurrentProjectAction {
   callback()
   return {
     type: actionTypes.SET_CURRENT_PROJECT,

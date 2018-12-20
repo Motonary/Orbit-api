@@ -46,10 +46,7 @@ const customStyles: any = {
 
 Modal.setAppElement('#app')
 
-class ConfirmModal extends React.Component<
-  ConfirmModalProps,
-  ConfirmModalState
-> {
+class ConfirmModal extends React.Component<ConfirmModalProps, ConfirmModalState> {
   constructor(props: any) {
     super(props)
 
@@ -72,11 +69,7 @@ class ConfirmModal extends React.Component<
   render() {
     const actionTypes = ['Missile', 'Meteorite', 'BlackHole']
     return (
-      <Modal
-        isOpen={actionTypes.includes(this.props.modalOpen)}
-        style={customStyles}
-        contentLabel="Confirmation Modal"
-      >
+      <Modal isOpen={actionTypes.includes(this.props.modalOpen)} style={customStyles} contentLabel="Confirmation Modal">
         <div className="modal-warning">{this.state.destroy}</div>
         <div className="modal-confirm-buttons">
           <ConfirmBtn message="いいえ" onClick={this.closeModal.bind(this)} />

@@ -43,9 +43,7 @@ class ProjectPageMain extends React.Component<Props, {}> {
     return (
       <div id="project-container">
         <div id="project-orbit">
-          <FixedStar
-            fixedStarType={this.props.currentProject.fixed_star_type}
-          />
+          <FixedStar fixedStarType={this.props.currentProject.fixed_star_type} />
           <CircleOrbit orbit="primo" />
           <CircleOrbit orbit="secundus" />
           <CircleOrbit orbit="tertius" />

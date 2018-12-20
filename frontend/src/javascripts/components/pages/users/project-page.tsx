@@ -3,10 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { fetchRevolvingAssignments } from '../../../actions/assignments'
-import {
-  fetchRevolvingProjects,
-  setDefaultProject,
-} from '../../../actions/projects'
+import { fetchRevolvingProjects, setDefaultProject } from '../../../actions/projects'
 
 import Header from '../../organisms/header'
 import ProjectPageMain from '../../organisms/project-page-main'
@@ -31,17 +28,13 @@ class ProjectPage extends React.Component<Props, {}> {
     if (currentProject) {
       this.props.fetchRevolvingAssignments(currentProject.id)
     } else if (revolvingProjects) {
-      this.props.setDefaultProject(
-        revolvingProjects[Object.keys(revolvingProjects)[0]]
-      )
+      this.props.setDefaultProject(revolvingProjects[Object.keys(revolvingProjects)[0]])
     } else {
       this.props.fetchRevolvingProjects().then(() => {
         const { revolvingProjects } = this.props
         if (revolvingProjects) {
-          this.props.setDefaultProject(
-            revolvingProjects[Object.keys(revolvingProjects)[0]],
-            (defaultProjectId: any) =>
-              this.props.fetchRevolvingAssignments(defaultProjectId)
+          this.props.setDefaultProject(revolvingProjects[Object.keys(revolvingProjects)[0]], (defaultProjectId: any) =>
+            this.props.fetchRevolvingAssignments(defaultProjectId)
           )
         }
       })
@@ -68,11 +61,7 @@ class ProjectPage extends React.Component<Props, {}> {
 
     return (
       <div id="project-page-container">
-        <Header
-          currentUser={currentUser}
-          history={history}
-          pathname={pathname}
-        />
+        <Header currentUser={currentUser} history={history} pathname={pathname} />
         <ProjectPageMain currentProject={currentProject} />
         <Footer currentUser={currentUser} pathname={pathname} />
       </div>

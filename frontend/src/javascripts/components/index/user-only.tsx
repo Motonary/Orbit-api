@@ -21,16 +21,8 @@ class UserOnly extends React.Component<Props, {}> {
     return currentUser ? (
       <div id="page-container">
         <Switch>
-          <Route
-            exact
-            path={`${url}/:userId/projects`}
-            component={ProjectPage}
-          />
-          <Route
-            exact
-            path={`${url}/:userId/history`}
-            component={HistoryPage}
-          />
+          <Route exact path={`${url}/:userId/projects`} component={ProjectPage} />
+          <Route exact path={`${url}/:userId/history`} component={HistoryPage} />
           <Route exact path={`${url}/:userId/edit`} component={SettingPage} />
           <Route exact path={`${url}/:userId`} component={Mypage} />
           <Route render={() => <h2>404 Not Found</h2>} />

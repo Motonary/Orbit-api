@@ -4,16 +4,8 @@ import HeaderRightLinkList from '../molecules/header-link-list'
 
 const Header = ({ currentUser, history, pathname }: any) => (
   <div id="header">
-    <HeaderLeftLink
-      pathname={pathname}
-      currentUser={currentUser}
-      history={history}
-    />
-    <HeaderRightLinkList
-      pathname={pathname}
-      currentUser={currentUser}
-      history={history}
-    />
+    <HeaderLeftLink pathname={pathname} currentUser={currentUser} history={history} />
+    <HeaderRightLinkList pathname={pathname} currentUser={currentUser} history={history} />
   </div>
 )
 

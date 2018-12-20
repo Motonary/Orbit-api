@@ -1,18 +1,12 @@
 import { actionTypes } from '../constants/action-types'
 import _ from 'lodash'
-import {
-  RevoivingProjectsAction,
-  CurrentProjectAction,
-} from '../actions/projects'
+import { RevoivingProjectsAction, CurrentProjectAction } from '../actions/projects'
 
 /*
  * revolvingProjectsの利用用途
  * stateには、current_userの持つ全Projectのidがkeyとなって格納される
  */
-export function revolvingProjects(
-  state: any = null,
-  action: RevoivingProjectsAction
-) {
+export function revolvingProjects(state: any = null, action: RevoivingProjectsAction) {
   switch (action.type) {
     case actionTypes.FETCH_REVOLVING_PROJECTS:
       if ('currentUserAllProjects' in action.payload) {
@@ -42,10 +36,7 @@ export function revolvingProjects(
  * currentProjectsの利用用途
  * stateには、現在のProjectPageのProjectのオブジェクトが格納される
  */
-export function currentProject(
-  state: any = null,
-  action: CurrentProjectAction
-) {
+export function currentProject(state: any = null, action: CurrentProjectAction) {
   switch (action.type) {
     case actionTypes.SET_CURRENT_PROJECT:
       if ('currentProject' in action.payload) {
