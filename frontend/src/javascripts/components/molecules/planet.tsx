@@ -19,30 +19,31 @@ interface PlanetProps {
 
 class Planet extends React.Component<PlanetProps, {}> {
   onMouseOver(e: any) {
-    const target_planet = e.target.parentNode.parentNode // e.g. div.planet-secundus-small
-    if (target_planet.firstChild.classList[0] === 'detail-balloon') {
-      target_planet.firstChild.style.display = 'inline-block'
+    const target_planet = e.target.parentNode.parentNode.firstChild // e.g. div.detail-ballon
+
+    if (target_planet.classList[0] === 'detail-balloon') {
+      target_planet.style.display = 'block'
     }
   }
   onMouseOut(e: any) {
-    const target_planet: any = e.target.parentNode.parentNode
+    const target_planet: any = e.target.parentNode.parentNode.firstChild
 
-    if (target_planet.firstChild.classList[0] === 'detail-balloon') {
-      target_planet.firstChild.style.display = 'none'
+    if (target_planet.classList[0] === 'detail-balloon') {
+      target_planet.style.display = 'none'
     }
   }
 
   onSelected(e: any) {
     const target: any = e.target.parentNode.children[1] // e.target = .planet-img-container -> div.mark-container
-    const targetPlanet: any = e.target.parentNode.parentNode.children[2] // canvas #2-Earth
-    const selectedPlanet: string = targetPlanet.id
+    const targetPlanet: any = e.target.parentNode.parentNode // id #planet-2-Earth
+    const selectedPlanet: string = targetPlanet.id.split('-') // Array(planet, 2, Earth)
 
     if (target.style.display === 'block') {
       target.style.display = 'none'
-      this.props.disselectAssignment(selectedPlanet)
+      this.props.disselectAssignment(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
     } else if (target.style.display === '' || target.style.display === 'none') {
       target.style.display = 'block'
-      this.props.selectAssignment(selectedPlanet)
+      this.props.selectAssignment(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
     }
   }
 
