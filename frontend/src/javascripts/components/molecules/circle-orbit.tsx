@@ -196,7 +196,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
                   assignmentInfo.orbit_pos
                 } start-animation`}
               >
-                <PopupBox assignmentInfo={assignmentInfo} />
+                <PopupBox data={assignmentInfo} isProject={false} />
                 <Planet
                   className="planet-img-container"
                   planetType={assignmentInfo.planet_type}

@@ -1,7 +1,10 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import FixedStarInList from '../atoms/fixed-star-in-list'
+
+import PopupBox from '../atoms/popup-box'
+import Planet from '../atoms/planet'
+
 import { setCurrentProject } from '../../actions/projects'
 import { setModalStatus } from '../../actions/common'
 
@@ -87,14 +90,14 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
     const projectList: any = _.map(revolvingProjects, (project: any, index: any) => {
       return (
         <div
-          key={project.id}
+          id={`planet-${project.id}-${project.planet_type}`}
           className={`common ${pos[index % 4]} mypage-orbit-motion start-animation`}
         >
-          <FixedStarInList
-            key={project.id}
-            project={project}
-            className="planet-large-secundus"
-            onClick={this.onClickFixedStar.bind(this, project.id)}
+          <PopupBox data={project} isProject={true} />
+          <Planet
+            className="planet-img-container"
+            imgClassName="planet"
+            planetType={project.planet_type}
           />
         </div>
       )
