@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_07_061502) do
+ActiveRecord::Schema.define(version: 2018_12_21_194451) do
 
   create_table "assignments", force: :cascade do |t|
     t.string "title"
@@ -43,9 +43,9 @@ ActiveRecord::Schema.define(version: 2018_12_07_061502) do
 
   create_table "sub_assignments", force: :cascade do |t|
     t.string "title"
-    t.text "detail"
+    t.text "description"
     t.datetime "deadline"
-    t.integer "satellite_type"
+    t.integer "planet_type"
     t.integer "assignment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

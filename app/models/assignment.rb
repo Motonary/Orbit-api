@@ -23,6 +23,7 @@ class Assignment < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 200 }
+  validates :deadline, presence: true
   validates :planet_type, presence: true
   validates :planet_size, presence: true
   validates :orbit_pos,   presence: true
