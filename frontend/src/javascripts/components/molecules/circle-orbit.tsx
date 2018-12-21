@@ -8,6 +8,7 @@ import Planet from './planet'
 import { selectAssignment, disselectAssignment } from '../../actions/assignments'
 
 import { setSelectedStar, resetSelectedStar, setModalStatus } from '../../actions/common'
+import assignmentForm from './forms/assignment-form'
 
 interface CircleOrbitProps {
   orbit: any
@@ -26,6 +27,10 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
   componentDidMount() {
     this.setOrbitDrop()
     this.setPlanetDrop()
+  }
+
+  componentDidUpdate() {
+    this.addWarningAnimation()
   }
 
   setPlanetDrop(): void {
@@ -135,6 +140,28 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
       },
       false
     )
+  }
+
+  addWarningAnimation() {
+    const { revolvingAssignments, orbit } = this.props
+    if (!revolvingAssignments) return
+
+    const today: any = new Date().getTime()
+    const msPerDay = 24 * 60 * 60 * 1000
+    _.forEach(revolvingAssignments[orbit], (assignment: any) => {
+      if (!assignment || !assignment.deadline) return
+      const deadline: any = new Date(
+        assignment.deadline.replace(/-/g, '/').replace(/T/g, ' ')
+      ).getTime()
+
+      if ((deadline - today) / msPerDay < 3) {
+        const targetDom = document.getElementById(
+          `planet-${assignment.id}-${assignment.planet_type}`
+        )
+        targetDom.classList.add('planet-warning-size')
+        targetDom.children[1].classList.add('warning-animation')
+      }
+    })
   }
 
   render() {
