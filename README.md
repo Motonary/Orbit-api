@@ -3,7 +3,9 @@ A modern todo web application.
 ## Description
 `Orbit` is a SPA with React.js and Ruby on Rails. You can put tasks on orbits as stars and delete them with wonderful animation so instinctively like the demo.
 ## Demo
-> TODO: set gif
+![Test](https://raw.githubusercontent.com/wiki/BuddiX/orbit-app/images/orbit-readme-trimmed.mov%E3%81%AE%E3%82%B3%E3%83%94%E3%83%BC.gif)   
+**Click this image if gif freezes!**
+
 ## Requirement
 - ruby 2.5+
 - Rails 5.2+
