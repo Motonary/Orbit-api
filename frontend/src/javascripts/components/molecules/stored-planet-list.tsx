@@ -41,7 +41,11 @@ class StoredPlanetList extends React.Component<StoredPlanetListProps, {}> {
     function renderPlanetYears(yearDestroyedAssignments: any) {
       const days: any = Object.keys(yearDestroyedAssignments) //
       days.forEach((day: any) => {
-        contentList.push(<div className="day planet-list-row">{day}</div>)
+        contentList.push(
+          <div className="date">
+            <div className="day">{day}</div>
+          </div>
+        )
         renderPlanetDays(yearDestroyedAssignments[day])
       })
     }
@@ -50,7 +54,11 @@ class StoredPlanetList extends React.Component<StoredPlanetListProps, {}> {
       if (!destroyedAssignments) return
       const years: any = Object.keys(destroyedAssignments) //
       years.forEach((year: any) => {
-        contentList.push(<div className="year planet-list-row">{year}</div>)
+        contentList.push(
+          <div className="date">
+            <div className="year planet-list-row">{year}</div>
+          </div>
+        )
         renderPlanetYears(destroyedAssignments[year])
       })
     }

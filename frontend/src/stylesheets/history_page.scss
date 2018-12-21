@@ -1,12 +1,12 @@
 @import 'initializer';
 
-@mixin size() {
+@mixin size($size) {
   display: block;
-  width: 80px;
-  height: 80px;
+  width: $size;
+  height: $size;
   margin: 10px 30px;
-  font-size: 16px;
   border-radius: 50%;
+  text-align: center;
 }
 
 #history-container {
@@ -53,17 +53,36 @@
     z-index: 200;
     overflow-y: scroll;
 
-    .year, .day {
-      @include size();
-      line-height: 80px;
-      text-align: center;
-      border: solid 1px #fff;
-      border-radius: 50%;
-      background-color: $bg-common-color;
+    .date {
+      @include size(80px);
+
+      .year {
+        width: 70px;
+        height: 70px;
+        margin: 5px;
+        padding: 0;
+        line-height: 70px;
+        font-size: 16px;
+        border: solid 1px #fff;
+        border-radius: 50%;
+        background-color: $bg-common-color;
+      }
+  
+      .day {
+        width: 60px;
+        height: 60px;
+        margin: 10px;
+        padding: 0;
+        line-height: 60px;
+        border: solid 1px #fff;
+        border-radius: 50%;
+        background-color: $bg-common-color;
+      }
     }
+
     .stored-planet-container {
       position: relative;
-      @include size();
+      @include size(80px);
       
       .stored-planet {
         position: relative;
