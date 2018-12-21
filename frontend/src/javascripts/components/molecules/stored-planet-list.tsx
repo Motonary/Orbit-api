@@ -11,14 +11,9 @@ interface StoredPlanetListProps {
   selectedAssignments: any
 
   destroyedAssignments: any
-  fetchDestroyedAssignments: any
 }
 
 class StoredPlanetList extends React.Component<StoredPlanetListProps, {}> {
-  componentDidMount() {
-    this.props.fetchDestroyedAssignments()
-  }
-
   renderList() {
     const contentList: any = []
     const { destroyedAssignments } = this.props
@@ -104,12 +99,13 @@ class StoredPlanetList extends React.Component<StoredPlanetListProps, {}> {
   render() {
     const { destroyedAssignments } = this.props
     if (!destroyedAssignments) return <div>Loading....</div>
+    if (Object.keys(destroyedAssignments).length === 0) return <div />
     const contentList = this.renderList()
 
     return (
       <div id="stored-planet-list">
-        {_.forEach(contentList, list => {
-          return list
+        {_.forEach(contentList, (content: any) => {
+          return content
         })}
       </div>
     )
@@ -121,5 +117,5 @@ export default connect(
     selectedAssignments,
     destroyedAssignments,
   }),
-  { fetchDestroyedAssignments }
+  {}
 )(StoredPlanetList)

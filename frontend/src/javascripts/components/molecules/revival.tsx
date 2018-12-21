@@ -36,6 +36,9 @@ class Revival extends React.Component<RevivalProps, {}> {
         this.props.selectedAssignments.forEach((assignment: string) => {
           this.removeImg(assignment)
           this.props.restoreAssignment(assignment.split('-')[0])
+          // DBでupdateのロックに引っかかるためここで本当はres.statusCode === '200'
+          // だったら次の処理とかにしてやらないと500エラーが起きる
+          // setTimeout(() => {}, 500)
         })
       })
       .then(() => {
