@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     get 'assignments/destroyed' => 'assignments#fetch_destroyed'
     patch 'assignments/:id/destroy' => 'assignments#destroy'
     patch 'assignments/:id/restore' => 'assignments#restore'
+
+    resources :sub_assignments, only: :create
+    patch 'sub_assignments/:id/destroy' => 'sub_assignments#destroy'
+    patch 'sub_assignments/:id/restore' => 'sub_assignments#restore'
   end
 
   get '*path', to: "application#fallback_index_html", constraints: ->(request) do
