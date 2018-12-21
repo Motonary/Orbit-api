@@ -94,7 +94,7 @@ body {
     height: 3px;
     background: transparent;
     box-shadow: $shadows-big;
-    animation: animStar 10s ease-in infinite;
+    animation: animStar 8s ease-in-out;
       
     &:after {
       content: " ";
@@ -122,9 +122,9 @@ input {
 
 @keyframes animStar {
   0% {
-    transform: translate(0px, -100px);
+    transform: translate(0px, 0px);
   }
     100% {
-      transform: translate(900px, 200px);
+      transform: translate(1000px, 200px);
   }
 }
