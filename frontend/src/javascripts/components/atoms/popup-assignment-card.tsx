@@ -4,6 +4,8 @@ interface PopupAssignmentCardProps {
   assignment: any
 }
 const PopupAssignmentCard: React.SFC<PopupAssignmentCardProps> = ({ assignment }: any) => {
+  if (!assignment) return
+
   const deadline: any = assignment.deadline.split('T')[0].split('-')
   const { title, description }: any = assignment
 

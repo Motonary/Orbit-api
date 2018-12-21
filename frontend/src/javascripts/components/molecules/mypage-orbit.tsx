@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import PopupBox from '../atoms/popup-box'
-import Planet from '../atoms/planet'
+import Planet from '../molecules/planet'
 
 import { setCurrentProject } from '../../actions/projects'
 import { setModalStatus } from '../../actions/common'
@@ -89,21 +89,22 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
     const pos: any = ['top', 'right', 'left', 'bottom']
     const projectList: any = _.map(revolvingProjects, (project: any, index: any) => {
       return (
-        <div
-          id={`planet-${project.id}-${project.planet_type}`}
-          className={`common ${pos[index % 4]} mypage-orbit-motion start-animation`}
-        >
-          <PopupBox data={project} isProject={true} />
-          <Planet
-            className="planet-img-container"
-            imgClassName="planet"
-            planetType={project.planet_type}
-          />
+        <div className={`mypage-common ${pos[index % 4]} mypage-orbit-motion start-animation`}>
+          <div id={`planet-${project.id}-${project.fixed_star_type}`} className="mypage-planet">
+            <PopupBox data={project} isProject={true} className="resize-balloon" />
+            <Planet className="planet-img-container" planetType={project.fixed_star_type} />
+          </div>
         </div>
       )
     })
 
-    return <ul id="mypage-orbit-circle">{projectList}</ul>
+    return (
+      <div id="mypage-orbit">
+        <div id="mypage-circle" className="common-circle">
+          {projectList}
+        </div>
+      </div>
+    )
   }
 }
 

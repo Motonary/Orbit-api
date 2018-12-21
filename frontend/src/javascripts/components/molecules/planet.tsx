@@ -10,7 +10,6 @@ import { PlanetImgs } from '../../constants/images'
 
 interface PlanetProps {
   className: string
-  imgClassName: string
   planetType: string
 
   selectAssignment: any
@@ -48,7 +47,7 @@ class Planet extends React.Component<PlanetProps, {}> {
   }
 
   render() {
-    const { className, imgClassName, planetType } = this.props
+    const { className, planetType } = this.props
     return (
       <div
         className={className}
@@ -56,7 +55,7 @@ class Planet extends React.Component<PlanetProps, {}> {
         onMouseOver={this.onMouseOver.bind(this)}
         onMouseOut={this.onMouseOut.bind(this)}
       >
-        <PlanetImg src={PlanetImgs[planetType]} classnames={imgClassName} />
+        <PlanetImg src={PlanetImgs[planetType]} />
         <CheckMark />
       </div>
     )

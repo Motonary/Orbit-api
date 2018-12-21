@@ -1,9 +1,10 @@
 //popup-box
 .detail-balloon {
   position: absolute;
-  top: -200px;
-  right: -125px;
+  top: -100px !important;
+  right: 30px !important;
   z-index: 1000;
+  transform: skewX(15deg) skewY(8deg);
 
   display: none;
   margin: 1.5em auto;
@@ -76,8 +77,4 @@
       height: 70px;
     }
   }
-}
-
-.resize-ballon {
-  transform: skewX(15deg) skewY(8deg);
 }

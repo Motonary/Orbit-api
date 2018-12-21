@@ -36,8 +36,8 @@ export function revolvingAssignments(state: any = null, action: RevolvingAssignm
     case actionTypes.DESTROY_ASSIGNMENT:
       // TODO: あとでやる
       if ('assignmentId' in action.payload) {
-        // const { assignmentId } = action.payload
-        // return _.remove([...state], eachState => eachState.id !== assignmentId)
+        const { assignmentId } = action.payload
+        return _.remove([...state], eachState => eachState.id !== assignmentId)
       }
       break
 
