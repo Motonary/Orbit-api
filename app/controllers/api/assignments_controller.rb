@@ -22,7 +22,7 @@ class Api::AssignmentsController < ApplicationController
 
     # 惑星と衛星を混ぜてから、破壊された日時の新しい順にソート
     destroyed_all_assignments =
-      (destroyed_assignments + destroyed_sub_assignments).sort_by(&:destroyed_at).reverse
+      (destroyed_assignments + destroyed_sub_assignments).sort_by(&:destroyed_at)
     
     render json: shape_assignments(destroyed_all_assignments)
   end

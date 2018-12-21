@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import Planet from '../atoms/planet'
+import Planet from './planet'
 
 import { setSelectedStar, resetSelectedStar } from '../../actions/common'
 
@@ -44,7 +44,7 @@ class PlanetList extends React.Component<PlanetListProps, {}> {
 
     return (
       <li id={planetType} className="planet" draggable={true}>
-        <Planet className="planet-img" planetType={planetType} />
+        <Planet className="planet-img" imgClassName="planet" planetType={planetType} />
       </li>
     )
   }
