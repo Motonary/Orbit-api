@@ -5,8 +5,6 @@ import _ from 'lodash'
 import Planet from './planet'
 import PopupBox from '../atoms/popup-box'
 
-import { fetchDestroyedAssignments } from '../../actions/assignments'
-
 interface StoredPlanetListProps {
   selectedAssignments: any
 
@@ -58,8 +56,6 @@ class StoredPlanetList extends React.Component<StoredPlanetListProps, {}> {
       })
     }
 
-    renderStoredPlanetList()
-
     // ゴリ押しアルゴリズム
     function iterator(collection: any, howMany: number) {
       let count = 0
@@ -75,6 +71,8 @@ class StoredPlanetList extends React.Component<StoredPlanetListProps, {}> {
       }
       return { next: next, hasNext: hasNext }
     }
+
+    renderStoredPlanetList()
 
     const itered = iterator(contentList, 6)
     const result: any = []
