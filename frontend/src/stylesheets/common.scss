@@ -42,6 +42,21 @@
   }
 }
 
+/*
+ *  n is number of stars required
+ */
+@function multiple-box-shadow($n){
+  $value: '#{random(2000)}px #{random(2000)}px #FFF';
+  @for $i from 2 through $n{
+    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF';
+  }
+  @return unquote($value);
+}
+
+$shadows-small:  multiple-box-shadow(700);
+$shadows-medium: multiple-box-shadow(200);
+$shadows-big:    multiple-box-shadow(10);
+
 html {
   width: 100%;
   height: 100%;
@@ -63,6 +78,34 @@ body {
 #app {
   width: 100%;
   height: 100%;
+  position: relative
+}
+
+#stars {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  top: 0px;
+  left: 0px;
+  background: transparent;
+
+  #stars3 {
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    box-shadow: $shadows-big;
+    animation: animStar 8s ease-in-out;
+      
+    &:after {
+      content: " ";
+      position: absolute;
+      top: 100px;
+      width: 3px;
+      height: 3px;
+      background: transparent;
+      box-shadow: $shadows-big;
+    }
+  }
 }
 
 input {
@@ -75,4 +118,13 @@ input {
   color: #fff;
   background-color: $bg-common-color;
   padding: 0 5px;
+}
+
+@keyframes animStar {
+  0% {
+    transform: translate(0px, 0px);
+  }
+    100% {
+      transform: translate(1000px, 200px);
+  }
 }

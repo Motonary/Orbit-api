@@ -24,6 +24,7 @@ $tertius-orbit-ratio: 5;      //750px
 $large-planet-ratio: 0.75;
 $medium-planet-ratio: 0.65;
 $small-planet-ratio: 0.55;
+$warning-planet-ratio: 0.8;
 
 /* 各軌道の大きさ */
 $primo-orbit: $fixed-star-scale * $primo-orbit-ratio;
@@ -43,9 +44,10 @@ $primo-orbit-small-planet: $small-planet-ratio / $primo-orbit-ratio;
 $secundus-orbit-large-planet: $large-planet-ratio / $secundus-orbit-ratio;
 $secundus-orbit-medium-planet: $medium-planet-ratio / $secundus-orbit-ratio;
 $secundus-orbit-small-planet: $small-planet-ratio / $secundus-orbit-ratio;
-$tertius-orbit-large-planet: $large-planet-ratio / $secundus-orbit-ratio;
-$tertius-orbit-medium-planet: $medium-planet-ratio / $secundus-orbit-ratio;
-$tertius-orbit-small-planet: $small-planet-ratio / $secundus-orbit-ratio;
+$tertius-orbit-large-planet: $large-planet-ratio / $tertius-orbit-ratio;
+$tertius-orbit-medium-planet: $medium-planet-ratio / $tertius-orbit-ratio;
+$tertius-orbit-small-planet: $small-planet-ratio / $tertius-orbit-ratio;
+$warning-orbit-planet-size: $warning-planet-ratio / $primo-orbit-ratio;
 
 /* 衛星の恒星比 */
 $satelite-star-ratio: 0.07;

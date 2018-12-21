@@ -67,14 +67,16 @@ class ConfirmModal extends React.Component<ConfirmModalProps, ConfirmModalState>
   }
 
   render() {
-    const actionTypes = ['Missile', 'Meteorite', 'BlackHole']
+    const actionTypes = ['Missile', 'Meteorite', 'BlackHole', 'Revival']
+    const { modalOpen } = this.props
+    const { destroy, restore } = this.state
     return (
       <Modal
-        isOpen={actionTypes.includes(this.props.modalOpen)}
+        isOpen={actionTypes.includes(modalOpen)}
         style={customStyles}
         contentLabel="Confirmation Modal"
       >
-        <div className="modal-warning">{this.state.destroy}</div>
+        <div className="modal-warning">{modalOpen !== 'Revival' ? destroy : restore}</div>
         <div className="modal-confirm-buttons">
           <ConfirmBtn message="いいえ" onClick={this.closeModal.bind(this)} />
           <ConfirmBtn message="はい" onClick={this.igniteAction.bind(this)} />
