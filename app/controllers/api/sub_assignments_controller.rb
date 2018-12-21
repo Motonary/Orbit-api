@@ -23,6 +23,6 @@ class Api::AssignmentsController < ApplicationController
 
   private
     def sub_assignment_params
-      params.require(:sub_assignment).permit(:title, :description, :deadline, :planet_type, :assignment_id)
+      params.require(:sub_assignment).permit(:title, :description, :deadline, :planet_type)
     end
 end
