@@ -29,16 +29,12 @@ class ProjectForm extends React.Component<ProjectFormProps, {}> {
         <Formik
           initialValues={{ title: '' }}
           onSubmit={(values: CreateProjectValues, actions: any) => {
-            const target: any = document.getElementById('form-balloon')
-            const target_star: any = document.getElementsByClassName('current-clicked')[0]
             const fixed_star_type: any = this.props.selectedStar
-
-            target_star.classList.remove('current-clicked')
-            target.style.display = 'none'
 
             this.props.createProject(values.title, fixed_star_type)
             this.props.resetSelectedStar()
             this.props.resetModalStatus()
+            actions.setSubmitting(false)
           }}
         >
           {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (

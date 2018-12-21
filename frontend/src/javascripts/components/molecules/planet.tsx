@@ -20,14 +20,14 @@ class Planet extends React.Component<PlanetProps, {}> {
   onMouseOver(e: any) {
     const target_planet = e.target.parentNode.parentNode.firstChild // e.g. div.detail-ballon
 
-    if (target_planet.classList[0] === 'detail-balloon') {
+    if (target_planet.classList[0].includes('popup')) {
       target_planet.style.display = 'block'
     }
   }
   onMouseOut(e: any) {
     const target_planet: any = e.target.parentNode.parentNode.firstChild
 
-    if (target_planet.classList[0] === 'detail-balloon') {
+    if (target_planet.classList[0].includes('popup')) {
       target_planet.style.display = 'none'
     }
   }
