@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import PopupBox from '../atoms/popup-box'
-import Planet from '../atoms/planet'
+import Planet from './planet'
 
 import { selectAssignment, disselectAssignment } from '../../actions/assignments'
 
@@ -21,9 +21,6 @@ interface CircleOrbitProps {
   setSelectedStar: any
   resetSelectedStar: any
   setModalStatus: any
-
-  selectAssignment: any
-  disselectAssignment: any
 }
 
 class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
@@ -167,34 +164,6 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
     })
   }
 
-  onMouseOver(e: any) {
-    const target_planet = e.target.parentNode.parentNode // e.g. div.planet-secundus-small
-    if (target_planet.firstChild.classList[0] === 'detail-balloon') {
-      target_planet.firstChild.style.display = 'inline-block'
-    }
-  }
-  onMouseOut(e: any) {
-    const target_planet: any = e.target.parentNode.parentNode
-
-    if (target_planet.firstChild.classList[0] === 'detail-balloon') {
-      target_planet.firstChild.style.display = 'none'
-    }
-  }
-
-  onSelected(e: any) {
-    const target: any = e.target.parentNode.children[1] // e.target = .planet-img-container -> div.mark-container
-    const targetPlanet: any = e.target.parentNode.parentNode.children[2] // canvas #2-Earth
-    const selectedPlanet: string = targetPlanet.id
-
-    if (target.style.display === 'block') {
-      target.style.display = 'none'
-      this.props.disselectAssignment(selectedPlanet)
-    } else if (target.style.display === '' || target.style.display === 'none') {
-      target.style.display = 'block'
-      this.props.selectAssignment(selectedPlanet)
-    }
-  }
-
   render() {
     const { revolvingAssignments, orbit } = this.props
     if (!revolvingAssignments) {
@@ -226,10 +195,8 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
                 <PopupBox assignmentInfo={assignmentInfo} />
                 <Planet
                   className="planet-img-container"
+                  imgClassName="planet"
                   planetType={assignmentInfo.planet_type}
-                  onClick={this.onSelected.bind(this)}
-                  onMouseOver={this.onMouseOver.bind(this)}
-                  onMouseOut={this.onMouseOut.bind(this)}
                 />
                 <canvas
                   id={`${assignmentInfo.id}-${assignmentInfo.planet_type}`}
@@ -252,8 +219,6 @@ export default connect(
     modalOpen,
   }),
   {
-    selectAssignment,
-    disselectAssignment,
     setSelectedStar,
     resetSelectedStar,
     setModalStatus,
