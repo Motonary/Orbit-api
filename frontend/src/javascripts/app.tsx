@@ -15,8 +15,6 @@ import '../stylesheets/top_page.scss'
 import '../stylesheets/page_container.scss'
 import '../stylesheets/header.scss'
 import '../stylesheets/footer.scss'
-import '../stylesheets/mypage.scss'
-import '../stylesheets/project_page.scss'
 import '../stylesheets/history_page.scss'
 import '../stylesheets/setting_page.scss'
 

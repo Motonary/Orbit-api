@@ -10,7 +10,6 @@ import { PlanetImgs } from '../../constants/images'
 
 interface PlanetProps {
   className: string
-  imgClassName: string
   planetType: string
 
   selectAssignment: any
@@ -21,14 +20,14 @@ class Planet extends React.Component<PlanetProps, {}> {
   onMouseOver(e: any) {
     const target_planet = e.target.parentNode.parentNode.firstChild // e.g. div.detail-ballon
 
-    if (target_planet.classList[0] === 'detail-balloon') {
+    if (target_planet.classList[0].includes('popup')) {
       target_planet.style.display = 'block'
     }
   }
   onMouseOut(e: any) {
     const target_planet: any = e.target.parentNode.parentNode.firstChild
 
-    if (target_planet.classList[0] === 'detail-balloon') {
+    if (target_planet.classList[0].includes('popup')) {
       target_planet.style.display = 'none'
     }
   }
@@ -48,7 +47,7 @@ class Planet extends React.Component<PlanetProps, {}> {
   }
 
   render() {
-    const { className, imgClassName, planetType } = this.props
+    const { className, planetType } = this.props
     return (
       <div
         className={className}
@@ -56,7 +55,7 @@ class Planet extends React.Component<PlanetProps, {}> {
         onMouseOver={this.onMouseOver.bind(this)}
         onMouseOut={this.onMouseOut.bind(this)}
       >
-        <PlanetImg src={PlanetImgs[planetType]} classnames={imgClassName} />
+        <PlanetImg src={PlanetImgs[planetType]} />
         <CheckMark />
       </div>
     )

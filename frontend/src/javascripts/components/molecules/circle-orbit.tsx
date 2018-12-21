@@ -5,10 +5,7 @@ import _ from 'lodash'
 import PopupBox from '../atoms/popup-box'
 import Planet from './planet'
 
-import { selectAssignment, disselectAssignment } from '../../actions/assignments'
-
 import { setSelectedStar, resetSelectedStar, setModalStatus } from '../../actions/common'
-import assignmentForm from './forms/assignment-form'
 
 interface CircleOrbitProps {
   orbit: any
@@ -192,12 +189,8 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
                   assignmentInfo.orbit_pos
                 } start-animation`}
               >
-                <PopupBox assignmentInfo={assignmentInfo} />
-                <Planet
-                  className="planet-img-container"
-                  imgClassName="planet"
-                  planetType={assignmentInfo.planet_type}
-                />
+                <PopupBox data={assignmentInfo} isProject={false} />
+                <Planet className="planet-img-container" planetType={assignmentInfo.planet_type} />
                 <canvas
                   id={`${assignmentInfo.id}-${assignmentInfo.planet_type}`}
                   className="canvas"
