@@ -153,12 +153,14 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
     const msPerDay = 24 * 60 * 60 * 1000
     _.forEach(revolvingAssignments[orbit], (assignment: any) => {
       if (!assignment || !assignment.deadline) return
-      let deadline: any = new Date(
+      const deadline: any = new Date(
         assignment.deadline.replace(/-/g, '/').replace(/T/g, ' ')
       ).getTime()
 
       if ((deadline - today) / msPerDay < 3) {
-        let targetDom = document.getElementById(`planet-${assignment.id}-${assignment.planet_type}`)
+        const targetDom = document.getElementById(
+          `planet-${assignment.id}-${assignment.planet_type}`
+        )
         targetDom.classList.add('planet-warning-size')
         targetDom.children[1].classList.add('warning-animation')
       }
