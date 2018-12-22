@@ -6,7 +6,7 @@
   "author": "UT mafia",
   "license": "ISC",
   "scripts": {
-    "release": "webpack --mode production --history-api-fallback --config webpack.config.js",
+    "release": "webpack --mode production --config webpack.config.js",
     "watch": "webpack-dev-server --mode development --history-api-fallback",
     "lint": "yarn tslint ./src/**/*.{ts,tsx}",
     "fix": "yarn tslint --fix ./src/javascripts/**/*.{ts,tsx}",

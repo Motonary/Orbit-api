@@ -17,9 +17,6 @@
   "description": "== README",
   "dependencies": {},
   "devDependencies": {},
-  "directories": {
-    "test": "test"
-  },
   "engines": {
     "yarn": "1.x"
   }
