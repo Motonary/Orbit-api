@@ -19,4 +19,8 @@ Rails.application.routes.draw do
     patch 'sub_assignments/:id/destroy' => 'sub_assignments#destroy'
     patch 'sub_assignments/:id/restore' => 'sub_assignments#restore'
   end
+
+  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
 end

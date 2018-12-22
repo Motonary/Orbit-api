@@ -10,4 +10,8 @@ class ApplicationController < ActionController::API
     ExceptionNotifier.logger_notify(exception, data: request.params)
     render json: {message: exception.message}, status: status_code
   end
+
+  def fallback_index_html
+    render :file => 'frontend/dist/index.html'
+  end
 end
