@@ -1,9 +1,9 @@
 import * as React from 'react'
+import { ROOT_URL } from '../../constants/url'
 
 const UserImg = ({ user }: any) => (
   <div className="user-img-container">
-    {/* TODO: Production環境ではURL変える */}
-    <img src={`http://localhost:3000${user.avatar.url}`} className="user-img" />
+    <img src={`${ROOT_URL}${user.avatar.url}`} className="user-img" />
   </div>
 )
 
