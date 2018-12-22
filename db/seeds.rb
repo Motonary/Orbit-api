@@ -73,12 +73,14 @@ create_kanojo_assignment2 = Assignment.find_by(id: 8)
 create_kanojo_assignment1.sub_assignments.create!({
   title: Faker::Lorem.word,
   detail: Faker::Lorem.sentence,
+  deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
   satellite_type: planet_keys[rand(0...14)],
 })
 
 create_kanojo_assignment2.sub_assignments.create!({
   title: Faker::Lorem.word,
   detail: Faker::Lorem.sentence,
+  deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
   satellite_type: planet_keys[rand(0...14)],
   destroyed_flag: true,
   destroyed_at: Time.current
