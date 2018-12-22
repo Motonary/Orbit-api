@@ -24,8 +24,8 @@ class StoredPlanetList extends React.Component<StoredPlanetListProps, {}> {
             id={`planet-${assignment.id}-${assignment.planet_type}`}
             className="stored-planet-container"
           >
-            <PopupBox assignmentInfo={assignment} />
-            <Planet className="stored-planet" imgClassName="" planetType={assignment.planet_type} />
+            <PopupBox data={assignment} isProject={false} />
+            <Planet className="stored-planet" planetType={assignment.planet_type} />
           </div>
         )
       })

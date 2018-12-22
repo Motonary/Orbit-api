@@ -44,7 +44,7 @@ class PlanetList extends React.Component<PlanetListProps, {}> {
 
     return (
       <li id={planetType} className="planet" draggable={true}>
-        <Planet className="planet-img" imgClassName="planet" planetType={planetType} />
+        <Planet className="planet-img" planetType={planetType} />
       </li>
     )
   }

@@ -3,6 +3,8 @@ import FixedStar from '../atoms/fixed-star'
 import CircleOrbit from '../molecules/circle-orbit'
 import ProjectBar from '../molecules/project-bar'
 
+import '../../../stylesheets/project_page.scss'
+
 interface Props {
   currentProject: any
 }

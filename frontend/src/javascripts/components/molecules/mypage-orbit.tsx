@@ -1,7 +1,10 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import FixedStarInList from '../atoms/fixed-star-in-list'
+
+import PopupBox from '../atoms/popup-box'
+import Planet from '../molecules/planet'
+
 import { setCurrentProject } from '../../actions/projects'
 import { setModalStatus } from '../../actions/common'
 
@@ -23,7 +26,7 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
 
   setDrop() {
     // Droppable area
-    const target = document.getElementById('mypage-orbit-circle')
+    const target = document.getElementById('mypage-circle')
 
     // Entering into the droppable area
     target.addEventListener(
@@ -65,14 +68,14 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
           target.classList.remove('circle-shadow')
         }
         if (!this.props.modalOpen) {
-          this.props.setModalStatus('form')
+          this.props.setModalStatus('form-project')
         }
       },
       false
     )
   }
 
-  onClickFixedStar(projectId: any) {
+  onClickProjectPlanet(projectId: string) {
     // TODO: プロジェクトページへ遷移する前になんらかのアニメーション追加(Fadeoutとか)
     this.props.setCurrentProject(this.props.revolvingProjects[projectId], () => {
       this.props.history.push(`${this.props.match.url}/projects`)
@@ -81,30 +84,41 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
 
   render() {
     const { revolvingProjects }: any = this.props
-    if (!revolvingProjects) return <ul id="mypage-orbit-circle" />
+    if (!revolvingProjects) {
+      return (
+        <div id="mypage-orbit">
+          <div id="mypage-circle" className="common-circle" />
+        </div>
+      )
+    }
 
     const pos: any = ['top', 'right', 'left', 'bottom']
     const projectList: any = _.map(revolvingProjects, (project: any, index: any) => {
       return (
-        <div
-          key={project.id}
-          className={`common ${pos[index % 4]} mypage-orbit-motion start-animation`}
-        >
-          <FixedStarInList
-            key={project.id}
-            project={project}
-            className="planet-large-secundus"
-            onClick={this.onClickFixedStar.bind(this, project.id)}
-          />
+        <div className={`mypage-common ${pos[index % 4]} mypage-orbit-motion start-animation`}>
+          <div
+            id={`planet-${project.id}-${project.fixed_star_type}`}
+            className="mypage-planet"
+            onClick={this.onClickProjectPlanet.bind(this, project.id)}
+          >
+            <PopupBox data={project} isProject={true} />
+            <Planet className="planet-img-container" planetType={project.fixed_star_type} />
+          </div>
         </div>
       )
     })
 
-    return <ul id="mypage-orbit-circle">{projectList}</ul>
+    return (
+      <div id="mypage-orbit">
+        <div id="mypage-circle" className="common-circle">
+          {projectList}
+        </div>
+      </div>
+    )
   }
 }
 
 export default connect(
   ({ revolvingProjects, modalOpen }: any) => ({ revolvingProjects, modalOpen }),
-  { setCurrentProject, setModalStatus }
+  { setModalStatus, setCurrentProject }
 )(MypageOrbit)

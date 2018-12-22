@@ -15,7 +15,6 @@ export function createSubAssignment(
   description: any,
   deadline: any,
   planet_type: any,
-  planet_size: any,
   assignmentId: any
 ): Promise<CreateSubAssignmentAction | void> {
   return axios({
@@ -23,12 +22,11 @@ export function createSubAssignment(
     url: `${ROOT_URL}/api/subassignments`,
     headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
     data: {
-      assignment: {
+      sub_assignment: {
         title,
         description,
         deadline,
         planet_type,
-        planet_size,
       },
       assignment_id: assignmentId,
     },

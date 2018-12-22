@@ -5,7 +5,7 @@ import { Formik } from 'formik'
 import InputField from '../../atoms/input-field'
 import SelectField from '../../atoms/select-field'
 
-import { setSelectedStar, resetSelectedStar } from '../../../actions/common'
+import { setSelectedStar, resetSelectedStar, resetModalStatus } from '../../../actions/common'
 import { createAssignment } from '../../../actions/assignments'
 import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
 
@@ -17,6 +17,7 @@ interface AssignmentFormProps {
 
   setSelectedStar: any
   resetSelectedStar: any
+  resetModalStatus: any
   createAssignment: any
 }
 
@@ -54,6 +55,7 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
               project_id
             )
             this.props.resetSelectedStar()
+            this.props.resetModalStatus()
             actions.setSubmitting(false)
           }}
         >
@@ -108,5 +110,5 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
 
 export default connect(
   ({ selectedStar, currentProject }: any) => ({ selectedStar, currentProject }),
-  { createAssignment, setSelectedStar, resetSelectedStar }
+  { createAssignment, setSelectedStar, resetSelectedStar, resetModalStatus }
 )(AssignmentForm)

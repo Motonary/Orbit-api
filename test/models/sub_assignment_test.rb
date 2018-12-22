@@ -4,9 +4,9 @@
 #
 #  id             :integer          not null, primary key
 #  title          :string
-#  detail         :text
+#  description    :text
 #  deadline       :datetime
-#  satellite_type :integer
+#  planet_type    :integer
 #  assignment_id  :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

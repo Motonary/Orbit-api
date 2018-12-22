@@ -6,7 +6,7 @@ import { Formik } from 'formik'
 import InputField from '../../atoms/input-field'
 import SelectField from '../../atoms/select-field'
 
-import { setSelectedStar, resetSelectedStar } from '../../../actions/common'
+import { setSelectedStar, resetSelectedStar, resetModalStatus } from '../../../actions/common'
 import { createSubAssignment } from '../../../actions/subassignmnets'
 
 import FormSubmitBtn from '../../atoms/buttons/form-submit-btn'
@@ -19,6 +19,7 @@ interface AssignmentFormProps {
 
   setSelectedStar: any
   resetSelectedStar: any
+  resetModalStatus: any
   createSubAssignment: any
 }
 
@@ -54,6 +55,7 @@ class SubAssignmentForm extends React.Component<AssignmentFormProps> {
               assignmentId
             )
             this.props.resetSelectedStar()
+            this.props.resetModalStatus()
             actions.setSubmitting(false)
           }}
         >
@@ -111,7 +113,10 @@ const mapStateToProps = ({ selectedStar, currentProject }: any) => {
 }
 
 const mapDispatchToProps = (dispatch: any) => {
-  return bindActionCreators({ setSelectedStar, resetSelectedStar, createSubAssignment }, dispatch)
+  return bindActionCreators(
+    { setSelectedStar, resetSelectedStar, resetModalStatus, createSubAssignment },
+    dispatch
+  )
 }
 
 export default connect(

@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom'
 import MypageUserInfo from '../molecules/mypage-user-info'
 import MypageOrbit from '../molecules/mypage-orbit'
 
+import '../../../stylesheets/mypage.scss'
+
 const MyPageMain = ({ currentUser, match, history }: any) => {
   if (!currentUser) return <div>Loading....</div>
 
