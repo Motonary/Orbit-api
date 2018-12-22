@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
+
   namespace :api, { format: 'json' } do
     post '/signup' => 'users#create'
     get '/current_user' => 'users#current'
@@ -18,9 +22,5 @@ Rails.application.routes.draw do
     resources :sub_assignments, only: :create
     patch 'sub_assignments/:id/destroy' => 'sub_assignments#destroy'
     patch 'sub_assignments/:id/restore' => 'sub_assignments#restore'
-  end
-
-  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
-    !request.xhr? && request.format.html?
   end
 end
