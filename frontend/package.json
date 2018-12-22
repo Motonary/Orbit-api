@@ -94,5 +94,8 @@
   },
   "directories": {
     "test": "test"
+  },
+  "engines": {
+    "yarn": "1.x"
   }
 }
