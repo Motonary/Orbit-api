@@ -11,8 +11,7 @@
     "lint": "yarn tslint ./src/**/*.{ts,tsx}",
     "fix": "yarn tslint --fix ./src/javascripts/**/*.{ts,tsx}",
     "precommit": "lint-staged",
-    "test": "jest",
-    "heroku-postbuild": "cd frontend; yarn install; yarn release; cd ../"
+    "test": "jest"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
