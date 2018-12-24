@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_21_194451) do
+ActiveRecord::Schema.define(version: 2018_12_24_024250) do
 
   create_table "assignments", force: :cascade do |t|
     t.string "title"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2018_12_21_194451) do
     t.integer "fixed_star_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "descirption"
   end
 
   create_table "projects_users", id: false, force: :cascade do |t|

@@ -7,6 +7,7 @@
 #  fixed_star_type :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  descirption     :text
 #
 
 class Project < ApplicationRecord
@@ -14,6 +15,7 @@ class Project < ApplicationRecord
   has_many :assignments, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 50 }
+  validates :description, presence: true, length: { maximum: 200 }
   validates :fixed_star_type, presence: true
 
   enum fixed_star_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
