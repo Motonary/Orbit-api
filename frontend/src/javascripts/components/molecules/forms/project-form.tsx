@@ -28,13 +28,26 @@ class ProjectForm extends React.Component<ProjectFormProps, {}> {
         <div className="form-title">New Project</div>
         <Formik
           initialValues={{ title: '' }}
+          validate={(values: CreateProjectValues) => {
+            const errors: any = {}
+
+            if (!values.title) {
+              errors.title = 'Password required to update profile'
+            } else if (values.title.length < 6) {
+              errors.title = 'Password must contain at least 6 characters'
+            }
+
+            return errors
+          }}
           onSubmit={(values: CreateProjectValues, actions: any) => {
             const fixed_star_type: any = this.props.selectedStar
 
-            this.props.createProject(values.title, fixed_star_type)
             this.props.resetSelectedStar()
             this.props.resetModalStatus()
-            actions.setSubmitting(false)
+            this.props
+              .createProject(values.title, fixed_star_type)
+              .then(() => actions.setSubmitting(false))
+              .catch(() => actions.setSubmitting(false))
           }}
         >
           {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (

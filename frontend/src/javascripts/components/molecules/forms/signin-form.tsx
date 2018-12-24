@@ -25,8 +25,30 @@ class SignInForm extends React.Component<SignInFormProps, {}> {
         <Formik
           initialValues={{ email: '', password: '' }}
           onSubmit={(values: CreateSessionValues, actions: any) => {
-            this.props.createSession(values.email, values.password)
-            actions.setSubmitting(false)
+            this.props
+              .createSession(values.email, values.password)
+              .then(() => actions.setSubmitting(false))
+              .catch(() => actions.setSubmitting(false))
+          }}
+          validate={(values: CreateSessionValues) => {
+            const errors: any = {}
+
+            if (values.email && values.email.length > 255) {
+              errors.email = 'Too long email address'
+            } else if (
+              values.email &&
+              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+            ) {
+              errors.email = 'Invalid email address'
+            }
+
+            if (!values.password) {
+              errors.password = 'Password required to update profile'
+            } else if (values.password.length < 6) {
+              errors.password = 'Password must contain at least 6 characters'
+            }
+
+            return errors
           }}
         >
           {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
