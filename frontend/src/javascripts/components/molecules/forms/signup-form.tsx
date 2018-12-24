@@ -34,8 +34,15 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
           validate={(values: CreateUserValues) => {
             const errors: any = {}
 
-            // validation適当
-            if (values.email && values.email.length > 255) {
+            if (!values.username) {
+              errors.username = 'Username required'
+            } else if (values.username && values.username.length > 50) {
+              errors.username = 'Too long username'
+            }
+
+            if (!values.email) {
+              errors.email = 'Email required'
+            } else if (values.email && values.email.length > 255) {
               errors.email = 'Too long email address'
             } else if (
               values.email &&
@@ -45,9 +52,15 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
             }
 
             if (!values.password) {
-              errors.password = 'Password required to update profile'
+              errors.password = 'Password required'
             } else if (values.password.length < 6) {
               errors.password = 'Password must contain at least 6 characters'
+            }
+
+            if (!values.confirmation) {
+              errors.confirmation = 'Password confirmation required'
+            } else if (values.password !== values.confirmation) {
+              errors.confirmation = 'Not match password'
             }
 
             return errors
