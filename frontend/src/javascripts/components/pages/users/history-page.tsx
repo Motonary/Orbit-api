@@ -8,6 +8,7 @@ interface Props {
   currentUser: any
   location: any
   history: any
+  match: any
 }
 
 class HistoryPage extends React.Component<Props, {}> {
@@ -17,12 +18,13 @@ class HistoryPage extends React.Component<Props, {}> {
       currentUser,
       history,
       location: { pathname },
+      match,
     } = this.props
 
     return (
       <div className="page-container">
         <Header currentUser={currentUser} history={history} pathname={pathname} />
-        <HistoryPageMain />
+        <HistoryPageMain history={history} match={match} />
         <Footer currentUser={currentUser} pathname={pathname} />
       </div>
     )

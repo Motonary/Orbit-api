@@ -2,7 +2,10 @@ class Api::ProjectsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    render json: current_user.projects.select_for_res
+    current_user_projects = current_user.projects.select_for_res
+    logger.debug("{'user_id' : #{current_user.id}, 'user_name' : '#{current_user.name}'}")
+    logger.debug(current_user_projects.inspect)
+    render json: current_user_projects
   end
 
   def create

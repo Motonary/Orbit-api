@@ -1,7 +1,12 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
+import ProjectPageLink from './project-page-link'
+
 interface HistoryCanvasProps {
+  history: any
+  match: any
+
   destroyedAssignments: any
 }
 
@@ -62,7 +67,12 @@ class HistoryCanvas extends React.Component<HistoryCanvasProps, {}> {
   render() {
     const { destroyedAssignments } = this.props
     if (!destroyedAssignments || Object.keys(destroyedAssignments).length === 0) {
-      return <div className="non-displayable-assignment">ProjectPageから星を消してみよう！</div>
+      return (
+        <div className="non-displayable">
+          <div className="non-displayable-assignment">ProjectPageから星を消してみよう！</div>
+          <ProjectPageLink history={this.props.history} match={this.props.match} />
+        </div>
+      )
     }
     return (
       <div className="background-liner-parent">

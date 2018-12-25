@@ -5,7 +5,7 @@ import _ from 'lodash'
 import PopupBox from '../atoms/popup-box'
 import Planet from '../molecules/planet'
 
-import { setCurrentProject } from '../../actions/projects'
+import { setCurrentProject, fetchRevolvingProjects } from '../../actions/projects'
 import { setModalStatus } from '../../actions/common'
 
 interface MypageOrbitProps {
@@ -17,11 +17,14 @@ interface MypageOrbitProps {
 
   setModalStatus: any
   setCurrentProject: any
+  fetchRevolvingProjects: any
 }
 
 class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
   componentDidMount() {
     this.setDrop()
+    if (!this.props.revolvingProjects) this.props.fetchRevolvingProjects()
+    // このタイミングでfetchRevolvingProjects()を実行しないとSignUp直後にrevolvingProejctsを表示できない
   }
 
   setDrop() {
@@ -120,5 +123,5 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
 
 export default connect(
   ({ revolvingProjects, modalOpen }: any) => ({ revolvingProjects, modalOpen }),
-  { setModalStatus, setCurrentProject }
+  { setModalStatus, setCurrentProject, fetchRevolvingProjects }
 )(MypageOrbit)
