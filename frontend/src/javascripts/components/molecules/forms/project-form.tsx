@@ -19,6 +19,7 @@ interface ProjectFormProps {
 
 interface CreateProjectValues {
   title: string
+  description: string
 }
 
 class ProjectForm extends React.Component<ProjectFormProps, {}> {
@@ -27,14 +28,33 @@ class ProjectForm extends React.Component<ProjectFormProps, {}> {
       <div id="form-on-modal">
         <div className="form-title">New Project</div>
         <Formik
-          initialValues={{ title: '' }}
+          initialValues={{ title: '', description: '' }}
+          validate={(values: CreateProjectValues) => {
+            const errors: any = {}
+
+            if (!values.title) {
+              errors.title = 'Password required to update profile'
+            } else if (values.title.length < 6) {
+              errors.title = 'Password must contain at least 6 characters'
+            }
+
+            if (!values.description) {
+              errors.description = 'Description required'
+            } else if (values.description.length > 200) {
+              errors.description = 'Too long description'
+            }
+
+            return errors
+          }}
           onSubmit={(values: CreateProjectValues, actions: any) => {
             const fixed_star_type: any = this.props.selectedStar
 
-            this.props.createProject(values.title, fixed_star_type)
             this.props.resetSelectedStar()
             this.props.resetModalStatus()
-            actions.setSubmitting(false)
+            this.props
+              .createProject(values.title, values.description, fixed_star_type)
+              .then(() => actions.setSubmitting(false))
+              .catch(() => actions.setSubmitting(false))
           }}
         >
           {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
@@ -48,7 +68,18 @@ class ProjectForm extends React.Component<ProjectFormProps, {}> {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {errors.title && touched.title && errors.title}
+                <div style={{ color: 'red' }}>{errors.title && touched.title && errors.title}</div>
+                <InputField
+                  type="textarea"
+                  name="description"
+                  placeholder="description"
+                  value={values.description}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                <div style={{ color: 'red' }}>
+                  {errors.description && touched.description && errors.description}
+                </div>
               </div>
               <div className="form-line-4">
                 <FormSubmitBtn label="決定" isSubmit={isSubmitting} />

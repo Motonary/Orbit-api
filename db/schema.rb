@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2018_12_25_155321) do
     t.integer "fixed_star_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
   end
 
   create_table "projects_users", id: false, force: :cascade do |t|

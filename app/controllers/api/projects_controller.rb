@@ -22,6 +22,6 @@ class Api::ProjectsController < ApplicationController
   private
 
     def project_params
-        params.require(:project).permit(:title, :fixed_star_type)
+        params.require(:project).permit(:title, :description, :fixed_star_type)
     end
 end
