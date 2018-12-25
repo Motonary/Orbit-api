@@ -42,13 +42,14 @@ export function fetchRevolvingProjects(): Promise<FetchRevolvingProjectsAction |
 
 export function createProject(
   title: any,
+  description: any,
   fixed_star_type: any
 ): Promise<CreateProjectAction | void> {
   return axios({
     method: 'post',
     url: `${ROOT_URL}/api/projects`,
     headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
-    data: { project: { title, fixed_star_type } },
+    data: { project: { title, description, fixed_star_type } },
   })
     .then(res => {
       return {

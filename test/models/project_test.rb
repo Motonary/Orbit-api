@@ -7,6 +7,7 @@
 #  fixed_star_type :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  description     :text
 #
 
 require 'test_helper'
