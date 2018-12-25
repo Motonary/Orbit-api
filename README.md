@@ -1,4 +1,4 @@
-# OrbitApp
+# Orbit
 A modern todo web application.
 ## Description
 `Orbit` is a SPA with React.js and Ruby on Rails. You can put tasks on orbits as stars and delete them with wonderful animation so instinctively like the demo.
