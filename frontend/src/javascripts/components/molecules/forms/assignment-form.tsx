@@ -93,7 +93,7 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {errors.title && touched.title && errors.title}
+                <div style={{ color: 'red' }}>{errors.title && touched.title && errors.title}</div>
                 <InputField
                   type="date"
                   name="deadline"
@@ -102,7 +102,9 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {errors.deadline && touched.deadline && errors.deadline}
+                <div style={{ color: 'red' }}>
+                  {errors.deadline && touched.deadline && errors.deadline}
+                </div>
               </div>
               <div className="form-line-2">
                 <InputField
@@ -113,6 +115,9 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                <div style={{ color: 'red' }}>
+                  {errors.description && touched.description && errors.description}
+                </div>
               </div>
               <div className="form-line-3">
                 <SelectField
@@ -121,6 +126,9 @@ class AssignmentForm extends React.Component<AssignmentFormProps> {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                <div style={{ color: 'red' }}>
+                  {errors.planet_size && touched.planet_size && errors.planet_size}
+                </div>
                 <FormSubmitBtn label="決定" isSubmit={isSubmitting} />
               </div>
             </form>

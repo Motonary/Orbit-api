@@ -68,6 +68,7 @@ class ProjectForm extends React.Component<ProjectFormProps, {}> {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                <div style={{ color: 'red' }}>{errors.title && touched.title && errors.title}</div>
                 <InputField
                   type="textarea"
                   name="description"
@@ -76,7 +77,9 @@ class ProjectForm extends React.Component<ProjectFormProps, {}> {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {errors.title && touched.title && errors.title}
+                <div style={{ color: 'red' }}>
+                  {errors.description && touched.description && errors.description}
+                </div>
               </div>
               <div className="form-line-4">
                 <FormSubmitBtn label="決定" isSubmit={isSubmitting} />

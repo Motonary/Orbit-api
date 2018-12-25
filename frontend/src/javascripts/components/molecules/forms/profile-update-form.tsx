@@ -36,7 +36,9 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
             errors.username = 'Too long username'
           }
 
-          if (values.email && values.email.length > 255) {
+          if (!values.email) {
+            errors.email = 'Email required'
+          } else if (values.email && values.email.length > 255) {
             errors.email = 'Too long email address'
           } else if (
             values.email &&
@@ -79,7 +81,7 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.email && touched.email && errors.email}
+            <div style={{ color: 'red' }}>{errors.email && touched.email && errors.email}</div>
             <InputField
               type="password"
               name="password"
@@ -88,7 +90,9 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.password && touched.password && errors.password}
+            <div style={{ color: 'red' }}>
+              {errors.password && touched.password && errors.password}
+            </div>
             <InputField
               type="password"
               name="confirmation"
@@ -97,7 +101,9 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.confirmation && touched.confirmation && errors.confirmation}
+            <div style={{ color: 'red' }}>
+              {errors.confirmation && touched.confirmation && errors.confirmation}
+            </div>
             <FormSubmitBtn label="SIGN UP" isSubmit={isSubmitting} />
           </form>
         )}

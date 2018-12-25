@@ -82,7 +82,9 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {errors.username && touched.username && errors.username}
+              <div style={{ color: 'red' }}>
+                {errors.username && touched.username && errors.username}
+              </div>
               <InputField
                 type="email"
                 name="email"
@@ -91,7 +93,7 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {errors.email && touched.email && errors.email}
+              <div style={{ color: 'red' }}>{errors.email && touched.email && errors.email}</div>
               <InputField
                 type="password"
                 name="password"
@@ -100,7 +102,9 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {errors.password && touched.password && errors.password}
+              <div style={{ color: 'red' }}>
+                {errors.password && touched.password && errors.password}
+              </div>
               <InputField
                 type="password"
                 name="confirmation"
@@ -109,7 +113,9 @@ class SignUpForm extends React.Component<SignUpFormProps, {}> {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {errors.confirmation && touched.confirmation && errors.confirmation}
+              <div style={{ color: 'red' }}>
+                {errors.confirmation && touched.confirmation && errors.confirmation}
+              </div>
               <FormSubmitBtn label="SIGN UP" isSubmit={isSubmitting} />
             </form>
           )}
