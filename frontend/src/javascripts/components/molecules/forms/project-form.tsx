@@ -19,6 +19,7 @@ interface ProjectFormProps {
 
 interface CreateProjectValues {
   title: string
+  description: string
 }
 
 class ProjectForm extends React.Component<ProjectFormProps, {}> {
@@ -27,7 +28,7 @@ class ProjectForm extends React.Component<ProjectFormProps, {}> {
       <div id="form-on-modal">
         <div className="form-title">New Project</div>
         <Formik
-          initialValues={{ title: '' }}
+          initialValues={{ title: '', description: '' }}
           validate={(values: CreateProjectValues) => {
             const errors: any = {}
 
@@ -35,6 +36,12 @@ class ProjectForm extends React.Component<ProjectFormProps, {}> {
               errors.title = 'Password required to update profile'
             } else if (values.title.length < 6) {
               errors.title = 'Password must contain at least 6 characters'
+            }
+
+            if (!values.description) {
+              errors.description = 'Description required'
+            } else if (values.description.length > 200) {
+              errors.description = 'Too long description'
             }
 
             return errors
@@ -45,7 +52,7 @@ class ProjectForm extends React.Component<ProjectFormProps, {}> {
             this.props.resetSelectedStar()
             this.props.resetModalStatus()
             this.props
-              .createProject(values.title, fixed_star_type)
+              .createProject(values.title, values.description, fixed_star_type)
               .then(() => actions.setSubmitting(false))
               .catch(() => actions.setSubmitting(false))
           }}
@@ -58,6 +65,14 @@ class ProjectForm extends React.Component<ProjectFormProps, {}> {
                   name="title"
                   placeholder="title"
                   value={values.title}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                <InputField
+                  type="textarea"
+                  name="description"
+                  placeholder="description"
+                  value={values.description}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />

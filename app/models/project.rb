@@ -7,7 +7,7 @@
 #  fixed_star_type :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  descirption     :text
+#  description     :text
 #
 
 class Project < ApplicationRecord
@@ -21,5 +21,5 @@ class Project < ApplicationRecord
   enum fixed_star_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
                          :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
 
-  scope :select_for_res, -> { select(:id, :title, :fixed_star_type) }
+  scope :select_for_res, -> { select(:id, :title, :description, :fixed_star_type) }
 end
