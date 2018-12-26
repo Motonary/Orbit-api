@@ -4,7 +4,7 @@ class Api::UsersController < ApplicationController
   def create
     new_user = User.create(user_params)
     new_user.save!
-    new_project = new_user.projects.create(title: 'PROJECT', fixed_star_type: 4)
+    new_project = new_user.projects.new(title: 'PROJECT', fixed_star_type: 4, description: 'This is your first Project!!')
     new_project.save! and render json: new_user
   end
 

@@ -24,7 +24,6 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
   componentDidMount() {
     this.setDrop()
     if (!this.props.revolvingProjects) this.props.fetchRevolvingProjects()
-    // このタイミングでfetchRevolvingProjects()を実行しないとSignUp直後にrevolvingProejctsを表示できない
   }
 
   setDrop() {
@@ -98,7 +97,10 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
     const pos: any = ['top', 'right', 'left', 'bottom']
     const projectList: any = _.map(revolvingProjects, (project: any, index: any) => {
       return (
-        <div className={`mypage-common ${pos[index % 4]} mypage-orbit-motion start-animation`}>
+        <div
+          key={project.id}
+          className={`mypage-common ${pos[index % 4]} mypage-orbit-motion start-animation`}
+        >
           <div
             id={`planet-${project.id}-${project.fixed_star_type}`}
             className="mypage-planet"

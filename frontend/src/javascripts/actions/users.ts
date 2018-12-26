@@ -54,7 +54,7 @@ export function createUser(
       user: { name, email, password, password_confirmation },
     })
     .then(res => {
-      createSession(email, password) // Promise
+      createSession(email, password)
       return {
         type: actionTypes.SET_CURRENT_USER,
         payload: { currentUser: res.data },
