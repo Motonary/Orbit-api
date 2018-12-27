@@ -6,11 +6,7 @@ import anime from 'animejs'
 import ActionBtn from '../atoms/buttons/action-btn'
 
 import { resetDestroyAction, resetModalStatus } from '../../actions/common'
-import {
-  destroyAssignment,
-  resetSelectedAssignment,
-  selectAssignment,
-} from '../../actions/assignments'
+import { destroyAssignment, resetSelectedAssignment } from '../../actions/assignments'
 import { destroyProject, resetSelectedProject } from '../../actions/projects'
 
 import { DeleteActions } from '../../constants/images'
@@ -38,7 +34,7 @@ interface MissleProps {
 class Missle extends React.Component<MissleProps, {}> {
   componentDidUpdate(/*prevProps, prevState*/) {
     const { selectedAssignments, selectedProject, modalOpen, selectedDestroyAction } = this.props
-    if (selectedAssignments.length === 0 && selectedProject === '') return
+    if (selectedAssignments.length === 0 && selectedProject.length === 0) return
     if (modalOpen !== '') return
     if (selectedDestroyAction !== 'Missile') return
     this.onIgniteDestroyAnimation()
@@ -99,13 +95,13 @@ class Missle extends React.Component<MissleProps, {}> {
         easing: 'easeInQuart',
       },
       translateX: {
-        value: disX - TargetWidth,
+        value: disX + TargetWidth,
         duration: 2000,
         easing: 'easeInExpo',
         delay: 500,
       },
       traslateY: {
-        value: disY - TargetHeight,
+        value: disY + TargetHeight,
         duration: 2000,
         easing: 'easeInExpo',
         delay: 500,
@@ -180,8 +176,8 @@ class Missle extends React.Component<MissleProps, {}> {
 
     function updateCoords() {
       if (isProject) {
-        pointerX = 500
-        pointerY = 300
+        pointerX = 300
+        pointerY = 150
       } else {
         pointerX = 60
         pointerY = 60

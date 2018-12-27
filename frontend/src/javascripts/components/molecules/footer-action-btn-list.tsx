@@ -19,6 +19,7 @@ interface FooterActionBtnListProps {
   motionControll: () => void
 
   modalOpen: string
+  selectedProject: any
 
   setModalStatus: any
   setDestroyAction: any
@@ -32,7 +33,7 @@ class FooterActionBtnList extends React.Component<FooterActionBtnListProps, {}> 
   }
 
   render() {
-    const { pathname, rootPath } = this.props
+    const { pathname, rootPath, selectedProject } = this.props
     const actionType = Object.keys(ActionIcons)
     const rivivalBtnClass = classNames({
       'action-btn': true,
@@ -44,6 +45,9 @@ class FooterActionBtnList extends React.Component<FooterActionBtnListProps, {}> 
         pathname === `${rootPath}` ||
         /^\/users\/[1-9]\d*\/projects$/.test(pathname) ||
         pathname === `${rootPath}/history`,
+    })
+    const blackHoleBtnClass: string = classNames({
+      'restrict-button-style': selectedProject.length !== 0,
     })
 
     return (
@@ -73,7 +77,7 @@ class FooterActionBtnList extends React.Component<FooterActionBtnListProps, {}> 
         />
         <BlackHole
           icon={ActionIcons[actionType[3]]}
-          actionBtnClass={deleteBtnsClass}
+          actionBtnClass={`${deleteBtnsClass} ${blackHoleBtnClass}`}
           motionControll={() => this.props.motionControll()}
           onClick={() => {
             this.onClickOpenModal(actionType[3])
@@ -85,6 +89,6 @@ class FooterActionBtnList extends React.Component<FooterActionBtnListProps, {}> 
 }
 
 export default connect(
-  ({ modalOpen }: any) => ({ modalOpen }),
+  ({ modalOpen, selectedProject }: any) => ({ modalOpen, selectedProject }),
   { setModalStatus, setDestroyAction }
 )(FooterActionBtnList)
