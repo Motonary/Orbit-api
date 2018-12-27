@@ -128,7 +128,7 @@ class Missle extends React.Component<MissleProps, {}> {
     const destroyedCvs: any = destroyDom[0].firstChild
     const destroyedProjectId: string = destroyedCvs.id.split('-')[0]
     this.props.destroyProject(destroyedProjectId).then(() => {
-      this.props.history(`/users/${this.props.currentUser.id}`)
+      this.props.history.push(`/users/${this.props.currentUser.id}`)
     })
   }
 
