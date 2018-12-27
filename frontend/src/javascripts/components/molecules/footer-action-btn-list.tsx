@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
-import Rival from './revival'
+import Revival from './revival'
 import Meteorite from './meteorite'
 import Missle from './missile'
 import BlackHole from './blackhole'
@@ -16,6 +16,8 @@ import '../../../stylesheets/destroy_animate.scss'
 interface FooterActionBtnListProps {
   pathname: any
   rootPath: any
+  history: any
+  currentUser: any
   motionControll: () => void
 
   modalOpen: string
@@ -33,7 +35,7 @@ class FooterActionBtnList extends React.Component<FooterActionBtnListProps, {}> 
   }
 
   render() {
-    const { pathname, rootPath, selectedProject } = this.props
+    const { pathname, rootPath, currentUser, selectedProject } = this.props
     const actionType = Object.keys(ActionIcons)
     const rivivalBtnClass = classNames({
       'action-btn': true,
@@ -52,7 +54,7 @@ class FooterActionBtnList extends React.Component<FooterActionBtnListProps, {}> 
 
     return (
       <ul id="action-button-list">
-        <Rival
+        <Revival
           icon={ActionIcons[actionType[0]]}
           actionBtnClass={rivivalBtnClass}
           onClick={() => {
@@ -62,6 +64,8 @@ class FooterActionBtnList extends React.Component<FooterActionBtnListProps, {}> 
         <Meteorite
           icon={ActionIcons[actionType[1]]}
           actionBtnClass={deleteBtnsClass}
+          history={history}
+          currentUser={currentUser}
           motionControll={() => this.props.motionControll()}
           onClick={() => {
             this.onClickOpenModal(actionType[1])
@@ -70,6 +74,8 @@ class FooterActionBtnList extends React.Component<FooterActionBtnListProps, {}> 
         <Missle
           icon={ActionIcons[actionType[2]]}
           actionBtnClass={deleteBtnsClass}
+          history={history}
+          currentUser={currentUser}
           motionControll={() => this.props.motionControll()}
           onClick={() => {
             this.onClickOpenModal(actionType[2])

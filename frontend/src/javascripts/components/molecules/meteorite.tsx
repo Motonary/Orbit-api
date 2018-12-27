@@ -14,6 +14,8 @@ import { DeleteActions } from '../../constants/images'
 interface MeteoriteProps {
   icon: string
   actionBtnClass: string
+  history: any
+  currentUser: any
   motionControll: () => void
   onClick: () => void
 
@@ -126,7 +128,9 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
   removeProjectData(destroyDom: any) {
     const destroyedCvs: any = destroyDom[0].firstChild
     const destroyedProjectId: string = destroyedCvs.id.split('-')[0]
-    this.props.destroyProject(destroyedProjectId)
+    this.props.destroyProject(destroyedProjectId).then(() => {
+      this.props.history(`/users/${this.props.currentUser.id}`)
+    })
   }
 
   destroyPlanets(selectedPlanetIds: any) {

@@ -14,6 +14,8 @@ import { DeleteActions } from '../../constants/images'
 interface MissleProps {
   icon: string
   actionBtnClass: string
+  history: any
+  currentUser: any
   motionControll: () => void
   onClick: () => void
 
@@ -125,7 +127,9 @@ class Missle extends React.Component<MissleProps, {}> {
   removeProjectData(destroyDom: any) {
     const destroyedCvs: any = destroyDom[0].firstChild
     const destroyedProjectId: string = destroyedCvs.id.split('-')[0]
-    this.props.destroyProject(destroyedProjectId)
+    this.props.destroyProject(destroyedProjectId).then(() => {
+      this.props.history(`/users/${this.props.currentUser.id}`)
+    })
   }
 
   destroyPlanets(selectedPlanetIds: any) {
@@ -274,12 +278,12 @@ class Missle extends React.Component<MissleProps, {}> {
     this.props.resetDestroyAction()
     this.props.resetSelectedAssignment()
     this.props.resetSelectedProject()
+    this.props.motionControll()
     if (isProject) {
       this.removeProjectData(parent)
     } else {
       this.removeAssignmentData(parent)
     }
-    this.props.motionControll()
   }
 
   render() {

@@ -33,7 +33,7 @@ kanojo_project = Project.first
   kanojo_project.assignments.create!({
     title: Faker::HarryPotter.character,
     description: Faker::HarryPotter.quote,
-    deadline: Time.zone.local(2019, 01, 23, 00, 00, 00),
+    deadline: Time.zone.now + 15.days,
     planet_type: planet_keys[rand(0...10)],
     planet_size: size_keys[rand(0...2)],
     orbit_pos: pos_keys[rand(0...2)],
@@ -46,7 +46,7 @@ end
   kanojo_project.assignments.create!({
     title: Faker::Lorem.word,
     description: Faker::Lorem.sentence,
-    deadline: Time.zone.local(2019, 01, 21, 00, 00, 00),
+    deadline: Time.zone.now + 15.days,
     planet_type: planet_keys[rand(0...10)],
     planet_size: size_keys[rand(0...2)],
     orbit_pos: pos_keys[rand(0...2)],
@@ -58,7 +58,7 @@ end
   kanojo_project.assignments.create!({
     title: Faker::Lorem.word,
     description: Faker::Lorem.sentence,
-    deadline: Time.zone.local(2019, 01, 29, 00, 00, 00),
+    deadline: Time.zone.now + 15.days,
     planet_type: planet_keys[rand(0...10)],
     planet_size: size_keys[rand(0...2)],
     orbit_pos: pos_keys[rand(0...2)],
@@ -74,14 +74,14 @@ create_kanojo_assignment2 = Assignment.find_by(id: 8)
 create_kanojo_assignment1.sub_assignments.create!({
   title: Faker::Lorem.word,
   description: Faker::Lorem.sentence,
-  deadline: Time.zone.local(2019, 01, 25, 00, 00, 00),
+  deadline: Time.zone.now + 15.days,
   planet_type: planet_keys[rand(0...10)],
 })
 
 create_kanojo_assignment2.sub_assignments.create!({
   title: Faker::Lorem.word,
   description: Faker::Lorem.sentence,
-  deadline: Time.zone.local(2019, 01, 25, 00, 00, 00),
+  deadline: Time.zone.now + 15.days,
   planet_type: planet_keys[rand(0...10)],
   destroyed_flag: true,
   destroyed_at: Time.current
