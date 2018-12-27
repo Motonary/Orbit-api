@@ -2,16 +2,24 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 
+import MyPageTutorial from '../../atoms/mypage-tutorial'
+import ProjectPageTutorial from '../../atoms/projectpage-tutorial'
 import ConfirmBtn from '../../atoms/buttons/confirm-btn'
 
 import { removeFirstVisitFlag } from '../../../actions/users'
 
-import '../../../stylesheets/modal.scss'
+import '../../../../stylesheets/tutorial_modal.scss'
 
 interface TutorialModalProps {
   currentUser: any
+  pathname: any
 
   removeFirstVisitFlag: any
+}
+
+interface TutorialModalState {
+  isFirstMyPgae: boolean
+  isFirstProjectPage: boolean
 }
 
 const customStyles: any = {
@@ -39,25 +47,35 @@ const customStyles: any = {
 
 Modal.setAppElement('#app')
 
-class TutorialModal extends React.Component<TutorialModalProps, {}> {
-  closeModal(/*isDestroy*/) {
-    this.props.removeFirstVisitFlag()
+class TutorialModal extends React.Component<TutorialModalProps, TutorialModalState> {
+  constructor(props: any) {
+    super(props)
+
+    this.state = {
+      isFirstMyPgae:
+        props.curretUser.first_visit_flag && props.pathname === `/users/${props.curretUser.id}`,
+      isFirstProjectPage: props.curretUser.first_visit_flag && props.pathname.includes('projects'),
+    }
+  }
+
+  closeModal() {
+    this.setState({ isFirstMyPgae: false })
+    if (this.state.isFirstProjectPage) {
+      this.props.removeFirstVisitFlag()
+      this.setState({ isFirstProjectPage: false })
+    }
   }
 
   render() {
-    const { currentUser } = this.props
+    const { isFirstMyPgae, isFirstProjectPage } = this.state
     return (
       <Modal
-        isOpen={currentUser.first_visit_flag}
+        isOpen={isFirstMyPgae || isFirstProjectPage}
         style={customStyles}
         contentLabel="Tutorial Modal"
       >
-        <div className="tutorial-modal">
-          <ul>
-            <li>回っている惑星をクリックしてProjectPageへ遷移してみよう！</li>
-            <li>遷移したら</li>
-            <li>Assignmentのドラッグ&ドロップ、作成</li>
-          </ul>
+        <div id="tutorial-modal">
+          {isFirstMyPgae && !isFirstProjectPage ? <MyPageTutorial /> : <ProjectPageTutorial />}
         </div>
         <div className="modal-confirm-buttons">
           <ConfirmBtn message="閉じる" onClick={this.closeModal.bind(this)} />
