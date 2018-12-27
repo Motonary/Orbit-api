@@ -69,9 +69,13 @@ export function createAssignment(
     },
   })
     .then(res => {
-      return {
-        type: actionTypes.CREATE_ASSIGNMENT,
-        payload: { newAssignment: res.data },
+      if (res.status === 200) {
+        return {
+          type: actionTypes.CREATE_ASSIGNMENT,
+          payload: { newAssignment: res.data },
+        }
+      } else if (res.status === 204) {
+        alert('一度に軌道に乗せることができる星は4個までです')
       }
     })
     .catch(() => alert('Sorry, something went wrong...'))
