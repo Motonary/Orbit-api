@@ -22,3 +22,4 @@ export type SelectedAssignmentsState = Array<Object | null>
 export type DestroyedAssignmentsState = Array<any>
 
 // Projects
+export type SelectedProjectsAction = string

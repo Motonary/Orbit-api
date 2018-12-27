@@ -1,6 +1,10 @@
 import { actionTypes } from '../constants/action-types'
 import _ from 'lodash'
-import { RevoivingProjectsAction, CurrentProjectAction } from '../actions/projects'
+import {
+  RevoivingProjectsAction,
+  CurrentProjectAction,
+  SelectedProjectsAction,
+} from '../actions/projects'
 
 /*
  * revolvingProjectsの利用用途
@@ -51,10 +55,20 @@ export function currentProject(state: any = null, action: CurrentProjectAction) 
 
 /*
  * selectedProjectsの利用用途
- * stateには、Mypage上でユーザがクリックし、UIとしてはチェックマーク付きのPlanetに紐付いたProjectIdsが格納される
+ * stateには、ユーザがクリックし、UI上でチェックマーク付きのPlanetに紐付いた"project-3-Earth"のような
+ * ”project-projectId-fixedStarType”というstringが一つのみ格納される
  */
-export function selectedProjects(state: any = null, action: any) {
+export function selectedProjects(state: any = '', action: SelectedProjectsAction) {
   switch (action.type) {
+    case actionTypes.SET_SELECTED_PROJECT:
+      return action.payload.projectId
+
+    case actionTypes.REMOVE_SELECTED_PROJECT:
+      return state.filter((item: any) => item !== action.payload.projectId)
+
+    case actionTypes.RESET_SELECTED_PROJECT:
+      return ''
+
     default:
       return state
   }

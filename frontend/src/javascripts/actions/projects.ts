@@ -121,3 +121,45 @@ export function changeCurrentProject(newProject: any, callback: any): ChangeCurr
     payload: { currentProject: newProject },
   }
 }
+
+// -------------------------------------------------------------------------------------
+// SelectedProjects
+// -------------------------------------------------------------------------------------
+interface SelectProjectAction extends BaseAction {
+  type: string
+  payload: { projectId: string } // TODO: stringかも
+}
+
+interface DisselectProjectAction extends BaseAction {
+  type: string
+  payload: { projectId: string } // TODO: stringかも
+}
+
+interface ResetSelectedProject extends BaseAction {
+  type: string
+}
+
+export type SelectedProjectsAction =
+  | SelectProjectAction
+  | DisselectProjectAction
+  | ResetSelectedProject
+
+export function selectProject(projectId: any): SelectProjectAction {
+  return {
+    type: actionTypes.SET_SELECTED_PROJECT,
+    payload: { projectId },
+  }
+}
+
+export function disselectProject(projectId: any): DisselectProjectAction {
+  return {
+    type: actionTypes.REMOVE_SELECTED_PROJECT,
+    payload: { projectId },
+  }
+}
+
+export function resetSelectedProject(): ResetSelectedProject {
+  return {
+    type: actionTypes.RESET_SELECTED_PROJECT,
+  }
+}
