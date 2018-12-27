@@ -57,6 +57,27 @@ export const TopPageImgs: any = {
   signUp: SignUpButton,
 }
 
+export const FixedStarImgs: any = {
+  Sun: ImgStar11,
+  Venus: ImgStar12,
+  Takoyaki: ImgStar13,
+  Ball: ImgStar14,
+}
+
+export const NormalPlanetImgs: any = {
+  Uranus: ImgStar1,
+  Mercury: ImgStar2,
+  Pluto: ImgStar3,
+  Jupitar: ImgStar4,
+  Earth: ImgStar5,
+  Moon: ImgStar6,
+  Love: ImgStar7,
+  Mars: ImgStar8,
+  Neputune: ImgStar9,
+  Sirius: ImgStar10,
+  Egg: ImgStar15,
+}
+
 export const PlanetImgs: any = {
   Uranus: ImgStar1,
   Mercury: ImgStar2,
