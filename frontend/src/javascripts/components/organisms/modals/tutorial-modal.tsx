@@ -32,7 +32,6 @@ const customStyles: any = {
     justifyContent: 'center',
     flexWrap: 'wrap',
     width: '400px',
-    height: '100px',
     backgroundColor: 'rgba(13, 25, 36, 0.7)',
     top: '50%',
     left: '50%',
@@ -53,8 +52,8 @@ class TutorialModal extends React.Component<TutorialModalProps, TutorialModalSta
 
     this.state = {
       isFirstMyPgae:
-        props.curretUser.first_visit_flag && props.pathname === `/users/${props.curretUser.id}`,
-      isFirstProjectPage: props.curretUser.first_visit_flag && props.pathname.includes('projects'),
+        props.currentUser.first_visit_flag && props.pathname === `/users/${props.currentUser.id}`,
+      isFirstProjectPage: props.currentUser.first_visit_flag && props.pathname.includes('projects'),
     }
   }
 
