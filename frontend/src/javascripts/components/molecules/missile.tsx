@@ -89,7 +89,7 @@ class Missle extends React.Component<MissleProps, {}> {
       arcvalue = disY / disX
     }
 
-    const deg: number = (Math.atan(arcvalue) * 180) / Math.PI - 2
+    const deg: number = (Math.atan(arcvalue) * 180) / Math.PI - 4
 
     const MissileTransforms = anime({
       targets: '#project-page-container .destroy-action',
@@ -100,15 +100,15 @@ class Missle extends React.Component<MissleProps, {}> {
       },
       translateX: {
         value: disX - TargetWidth,
-        duration: 1850,
+        duration: 1780,
         easing: 'easeInExpo',
-        delay: 480,
+        delay: 500,
       },
       traslateY: {
         value: disY + TargetHeight,
-        duration: 1850,
+        duration: 1780,
         easing: 'easeInExpo',
-        delay: 480,
+        delay: 500,
       },
     })
 
