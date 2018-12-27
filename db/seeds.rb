@@ -19,7 +19,7 @@ User.create!({
 # A project
 ririco = User.first
 
-5.times do |i|
+4.times do |i|
   ririco.projects.create!({
     title: Faker::HarryPotter.house,
     description: Faker::Lorem.sentence,
