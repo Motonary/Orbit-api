@@ -18,9 +18,12 @@ export const actionTypes = keyMirror({
 
   // Projects
   FETCH_REVOLVING_PROJECTS: null,
-  SET_CURRENT_PROJECT: null,
   CREATE_PROJECT: null,
   DESTROY_PROJECT: null,
+  SET_CURRENT_PROJECT: null,
+  SET_SELECTED_PROJECT: null,
+  REMOVE_SELECTED_PROJECT: null,
+  RESET_SELECTED_PROJECT: null,
 
   // Assignments
   FETCH_REVOLVING_ASSIGNMENTS: null,

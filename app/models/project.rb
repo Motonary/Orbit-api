@@ -18,8 +18,7 @@ class Project < ApplicationRecord
   validates :description, presence: true, length: { maximum: 200 }
   validates :fixed_star_type, presence: true
 
-  enum fixed_star_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
-                         :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
+  enum fixed_star_type: [:Sun, :Venus, :Takoyaki, :Ball]
 
   scope :select_for_res, -> { select(:id, :title, :description, :fixed_star_type) }
 end

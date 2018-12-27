@@ -5,7 +5,7 @@ import PlanetHolderList from '../molecules/planet-holder-list'
 const PlanetHolder = ({ pathname, currentUser }: any) => (
   <div id="planet-holder">
     <PlanetHolderOpener currentUser={currentUser} pathname={pathname} />
-    <PlanetHolderList />
+    <PlanetHolderList pathname={pathname} />
   </div>
 )
 

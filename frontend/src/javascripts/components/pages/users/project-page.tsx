@@ -64,7 +64,7 @@ class ProjectPage extends React.Component<Props, {}> {
       <div id="project-page-container">
         <Header currentUser={currentUser} history={history} pathname={pathname} />
         <ProjectPageMain currentProject={currentProject} />
-        <Footer currentUser={currentUser} pathname={pathname} />
+        <Footer currentUser={currentUser} pathname={pathname} history={history} />
       </div>
     )
   }

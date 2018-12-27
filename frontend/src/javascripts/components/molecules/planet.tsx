@@ -5,6 +5,7 @@ import CheckMark from '../atoms/check-mark'
 import PlanetImg from '../atoms/planet-img'
 
 import { selectAssignment, disselectAssignment } from '../../actions/assignments'
+import { selectProject, disselectProject } from '../../actions/projects'
 
 import { PlanetImgs } from '../../constants/images'
 
@@ -12,8 +13,12 @@ interface PlanetProps {
   className: string
   planetType: string
 
+  selectedProject: any
+
   selectAssignment: any
   disselectAssignment: any
+  selectProject: any
+  disselectProject: any
 }
 
 class Planet extends React.Component<PlanetProps, {}> {
@@ -39,10 +44,18 @@ class Planet extends React.Component<PlanetProps, {}> {
 
     if (target.style.display === 'block') {
       target.style.display = 'none'
-      this.props.disselectAssignment(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+      if (selectedPlanet[0] === 'planet') {
+        this.props.disselectAssignment(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+      } else {
+        this.props.disselectProject(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+      }
     } else if (target.style.display === '' || target.style.display === 'none') {
       target.style.display = 'block'
-      this.props.selectAssignment(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+      if (selectedPlanet[0] === 'planet') {
+        this.props.selectAssignment(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+      } else {
+        this.props.selectProject(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+      }
     }
   }
 
@@ -63,6 +76,6 @@ class Planet extends React.Component<PlanetProps, {}> {
 }
 
 export default connect(
-  null,
-  { selectAssignment, disselectAssignment }
+  ({ selectedProject }: any) => ({ selectedProject }),
+  { selectAssignment, disselectAssignment, selectProject, disselectProject }
 )(Planet)
