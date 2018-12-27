@@ -18,7 +18,7 @@ class SubAssignment < ApplicationRecord
   belongs_to :assignment
 
   validates :title, presence: true, length: { maximum: 50 }
-  validates :description, length: { maximum: 140 }
+  validates :description, presence: true, length: { maximum: 140 }
   validates :deadline, presence: true
   validates :planet_type, presence: true
   validates :assignment_id, presence: true

@@ -22,6 +22,7 @@ ririco = User.first
 5.times do |i|
   ririco.projects.create!({
     title: Faker::HarryPotter.house,
+    description: Faker::Lorem.sentence,
     fixed_star_type: fixed_star_keys[rand(0...4)]
   })
 end
@@ -72,13 +73,15 @@ create_kanojo_assignment2 = Assignment.find_by(id: 8)
 
 create_kanojo_assignment1.sub_assignments.create!({
   title: Faker::Lorem.word,
-  detail: Faker::Lorem.sentence,
+  description: Faker::Lorem.sentence,
+  deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
   satellite_type: planet_keys[rand(0...10)],
 })
 
 create_kanojo_assignment2.sub_assignments.create!({
   title: Faker::Lorem.word,
-  detail: Faker::Lorem.sentence,
+  description: Faker::Lorem.sentence,
+  deadline: Time.zone.local(2018, 12, 25, 00, 00, 00),
   satellite_type: planet_keys[rand(0...10)],
   destroyed_flag: true,
   destroyed_at: Time.current

@@ -7,6 +7,7 @@
 #  fixed_star_type :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  description     :text
 #
 
 class Project < ApplicationRecord
@@ -14,9 +15,10 @@ class Project < ApplicationRecord
   has_many :assignments, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 50 }
+  validates :description, presence: true, length: { maximum: 200 }
   validates :fixed_star_type, presence: true
 
   enum fixed_star_type: [:Sun, :Venus, :Takoyaki, :Ball]
 
-  scope :select_for_res, -> { select(:id, :title, :fixed_star_type) }
+  scope :select_for_res, -> { select(:id, :title, :description, :fixed_star_type) }
 end

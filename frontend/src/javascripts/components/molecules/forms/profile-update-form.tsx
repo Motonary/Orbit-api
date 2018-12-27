@@ -29,13 +29,45 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
           password: '',
           confirmation: '',
         }}
+        validate={(values: UpdateProfileValues) => {
+          const errors: any = {}
+
+          if (values.username && values.username.length > 50) {
+            errors.username = 'Too long username'
+          }
+
+          if (!values.email) {
+            errors.email = 'Email required'
+          } else if (values.email && values.email.length > 255) {
+            errors.email = 'Too long email address'
+          } else if (
+            values.email &&
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+          ) {
+            errors.email = 'Invalid email address'
+          }
+
+          if (!values.password) {
+            errors.password = 'Password required to update profile'
+          } else if (values.password.length < 6) {
+            errors.password = 'Password must contain at least 6 characters'
+          }
+
+          if (!values.confirmation) {
+            errors.confirmation = 'Password confirmation required'
+          } else if (values.password !== values.confirmation) {
+            errors.confirmation = 'Not match password'
+          }
+          return errors
+        }}
         onSubmit={(values: UpdateProfileValues, actions: any) => {
           // TODO: Flashメッセージの実装
           if (window.confirm('プロフィール情報を更新していいですか？')) {
             this.props
               .updateProfile(values.username, values.email, values.password, values.confirmation)
-              .then(this.props.history.push('/'))
-            actions.setSubmitting(false)
+              .then(() => this.props.history.push('/'))
+              .then(() => actions.setSubmitting(false))
+              .catch(() => actions.setSubmitting(false))
           }
         }}
       >
@@ -49,7 +81,7 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.email && touched.email && errors.email}
+            <div style={{ color: 'red' }}>{errors.email && touched.email && errors.email}</div>
             <InputField
               type="password"
               name="password"
@@ -58,7 +90,9 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.password && touched.password && errors.password}
+            <div style={{ color: 'red' }}>
+              {errors.password && touched.password && errors.password}
+            </div>
             <InputField
               type="password"
               name="confirmation"
@@ -67,7 +101,9 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.confirmation && touched.confirmation && errors.confirmation}
+            <div style={{ color: 'red' }}>
+              {errors.confirmation && touched.confirmation && errors.confirmation}
+            </div>
             <FormSubmitBtn label="SIGN UP" isSubmit={isSubmitting} />
           </form>
         )}
@@ -75,36 +111,6 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
     )
   }
 }
-//  参考資料として
-// function validate(values: any) {
-//   const errors: any= {}
-
-//   if (values.username && values.username.length > 50) {
-//     errors.username = 'Too long username'
-//   }
-
-//   if (values.email && values.email.length > 255) {
-//     errors.email = 'Too long email address'
-//   } else if (
-//     values.email &&
-//     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-//   ) {
-//     errors.email = 'Invalid email address'
-//   }
-
-//   if (!values.password) {
-//     errors.password = 'Password required to update profile'
-//   } else if (values.password.length < 6) {
-//     errors.password = 'Password must contain at least 6 characters'
-//   }
-
-//   if (!values.confirmation) {
-//     errors.confirmation = 'Password confirmation required'
-//   } else if (values.password !== values.confirmation) {
-//     errors.confirmation = 'Not match password'
-//   }
-//   return errors
-// }
 
 export default connect(
   null,
