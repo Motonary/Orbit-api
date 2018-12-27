@@ -105,11 +105,14 @@ export function expireCurrentUser(callback: any): ExpireCurrentUserAction {
   return { type: actionTypes.EXPIRE_CURRENT_USER }
 }
 
-export function removeFirstVisitFlag(): Promise<RemoveFirstVisitFlagAction | void> {
-  return axios
-    .get(`${ROOT_URL}/api/remove_flag`, {
-      headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
-    })
+export function removeFirstVisitFlag(currentUser: any): Promise<RemoveFirstVisitFlagAction | void> {
+  const { name, email } = currentUser
+  return axios({
+    method: 'post',
+    url: `${ROOT_URL}/api/users/remove_flag`,
+    data: { user: { name, email } },
+    headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
+  })
     .then(res => {
       return {
         type: actionTypes.REMOVE_FIRST_VISIT_FLAG,

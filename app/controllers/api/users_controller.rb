@@ -12,6 +12,7 @@ class Api::UsersController < ApplicationController
   end
 
   def remove_flag
+    current_user = User.find_by(email: user_params[:email])
     current_user.first_visit_flag = false
     current_user.save! and render json: current_user
   end

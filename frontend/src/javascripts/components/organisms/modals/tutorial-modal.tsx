@@ -9,6 +9,7 @@ import ConfirmBtn from '../../atoms/buttons/confirm-btn'
 import { removeFirstVisitFlag } from '../../../actions/users'
 
 import '../../../../stylesheets/tutorial_modal.scss'
+import currentUser from '../../../reducers/current-user'
 
 interface TutorialModalProps {
   currentUser: any
@@ -31,8 +32,8 @@ const customStyles: any = {
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    width: '400px',
-    backgroundColor: 'rgba(13, 25, 36, 0.7)',
+    width: '550px',
+    backgroundColor: 'rgba(13, 25, 36, 0.9)',
     top: '50%',
     left: '50%',
     right: 'auto',
@@ -60,7 +61,7 @@ class TutorialModal extends React.Component<TutorialModalProps, TutorialModalSta
   closeModal() {
     this.setState({ isFirstMyPgae: false })
     if (this.state.isFirstProjectPage) {
-      this.props.removeFirstVisitFlag()
+      this.props.removeFirstVisitFlag(this.props.currentUser)
       this.setState({ isFirstProjectPage: false })
     }
   }
