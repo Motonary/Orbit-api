@@ -2,8 +2,7 @@ class Api::UsersController < ApplicationController
   before_action :authenticate_user, except: :create
 
   def create
-    new_user = User.create(user_params)
-    new_user.save!
+    new_user = User.create!(user_params)
     new_project = new_user.projects.new(title: 'PROJECT', fixed_star_type: 4, description: 'This is your first Project!!')
     new_project.save! and render json: new_user
   end
