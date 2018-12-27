@@ -23,7 +23,7 @@ class HistoryPage extends React.Component<Props, {}> {
       <div className="page-container">
         <Header currentUser={currentUser} history={history} pathname={pathname} />
         <HistoryPageMain />
-        <Footer currentUser={currentUser} pathname={pathname} />
+        <Footer currentUser={currentUser} pathname={pathname} history={history} />
       </div>
     )
   }

@@ -22,7 +22,7 @@ class SettingPage extends React.Component<Props, {}> {
       <div id="page-container">
         <Header currentUser={currentUser} history={history} pathname={pathname} />
         <SettingPageMain currentUser={currentUser} history={history} />
-        <Footer currentUser={currentUser} pathname={pathname} />
+        <Footer currentUser={currentUser} pathname={pathname} history={history} />
       </div>
     )
   }
