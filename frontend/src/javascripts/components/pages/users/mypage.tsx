@@ -33,7 +33,7 @@ class MyPage extends React.Component<MyPageProps, {}> {
       <div className="page-container">
         <Header currentUser={currentUser} history={history} pathname={pathname} />
         <MyPageMain currentUser={currentUser} history={history} match={match} />
-        <Footer currentUser={currentUser} pathname={pathname} />
+        <Footer currentUser={currentUser} pathname={pathname} history={history} />
       </div>
     )
   }

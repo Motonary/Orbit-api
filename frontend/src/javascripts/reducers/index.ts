@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import currentUser from './current-user'
-import { revolvingProjects, currentProject } from './projects'
+import { revolvingProjects, currentProject, selectedProject } from './projects'
 import { revolvingAssignments, destroyedAssignments, selectedAssignments } from './assignments'
 import { selectedStar, selectedDestroyAction, modalOpen } from './common'
 
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   // Projects
   revolvingProjects,
   currentProject,
-  // selectedProjects,
+  selectedProject,
 
   // Assignments
   revolvingAssignments,

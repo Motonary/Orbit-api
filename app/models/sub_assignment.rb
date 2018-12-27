@@ -23,8 +23,7 @@ class SubAssignment < ApplicationRecord
   validates :planet_type, presence: true
   validates :assignment_id, presence: true
 
-  enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Neputune,
-                     :Sirius, :Love, :Mars, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
+  enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Love, :Mars, :Neputune, :Sirius, :Egg]
 
   scope :fetch_with_user, -> user { joins(assignment: [project: :users]).merge(User.id_is user.id) }
   scope :fetch_destroyed, -> { where(destroyed_flag: true) }

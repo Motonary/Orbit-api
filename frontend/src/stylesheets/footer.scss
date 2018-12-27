@@ -105,6 +105,29 @@ $holder-height: 100px;
     li.revival-button-show {
       display: flex;
     }
+    li.restrict-button-style {
+      position: relative;
+      opacity: 0.5;
+      z-index: -2000;
+      cursor: none;
+    }
+    li.restrict-button-style:before,
+    li.restrict-button-style:after {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      content: "";
+      display: block;
+      width: 100px;
+      border-top: 1px solid #C00;
+    }
+    li.restrict-button-style::before {
+      transform: skewY(-45deg);
+    }
+     
+    li.restrict-button-style::after {
+      transform: skewY(45deg);
+    }
   }
 
   .holder-border {
