@@ -1,5 +1,5 @@
 import * as React from 'react'
-import FixedStar from '../atoms/fixed-star'
+import FixedStar from '../molecules/fixed-star'
 import CircleOrbit from '../molecules/circle-orbit'
 import ProjectBar from '../molecules/project-bar'
 
@@ -45,7 +45,7 @@ class ProjectPageMain extends React.Component<Props, {}> {
     return (
       <div id="project-container">
         <div id="project-orbit">
-          <FixedStar fixedStarType={this.props.currentProject.fixed_star_type} />
+          <FixedStar project={this.props.currentProject} />
           <CircleOrbit orbit="primo" />
           <CircleOrbit orbit="secundus" />
           <CircleOrbit orbit="tertius" />
