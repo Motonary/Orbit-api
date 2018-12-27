@@ -54,11 +54,12 @@ export function createUser(
       user: { name, email, password, password_confirmation },
     })
     .then(res => {
-      createSession(email, password) // Promise
-      return {
-        type: actionTypes.SET_CURRENT_USER,
-        payload: { currentUser: res.data },
-      }
+      return createSession(email, password).then(() => {
+        return {
+          type: actionTypes.SET_CURRENT_USER,
+          payload: { currentUser: res.data },
+        }
+      })
     })
     .catch((err: any) => alert(`Sorry, something went wrong...\n ${err}`))
 }
