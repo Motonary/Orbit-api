@@ -9,14 +9,9 @@ import { removeFirstVisitFlag } from '../../../actions/users'
 import '../../../stylesheets/modal.scss'
 
 interface TutorialModalProps {
-  curretUser: any
+  currentUser: any
 
   removeFirstVisitFlag: any
-}
-
-interface TutorialModalState {
-  destroy: string
-  restore: string
 }
 
 const customStyles: any = {
@@ -44,26 +39,16 @@ const customStyles: any = {
 
 Modal.setAppElement('#app')
 
-class TutorialModal extends React.Component<TutorialModalProps, TutorialModalState> {
-  constructor(props: any) {
-    super(props)
-
-    this.state = {
-      destroy: '本当に選択タスクを破壊しますか？',
-      restore: '本当に選択したタスクを元の場所に戻しますか？',
-    }
-  }
-
+class TutorialModal extends React.Component<TutorialModalProps, {}> {
   closeModal(/*isDestroy*/) {
     this.props.removeFirstVisitFlag()
   }
 
   render() {
-    const { curretUser } = this.props
-    const { destroy, restore } = this.state
+    const { currentUser } = this.props
     return (
       <Modal
-        isOpen={curretUser.first_visit_flag}
+        isOpen={currentUser.first_visit_flag}
         style={customStyles}
         contentLabel="Tutorial Modal"
       >
