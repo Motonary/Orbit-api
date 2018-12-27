@@ -11,7 +11,7 @@ class Api::ProjectsController < ApplicationController
     if current_user.projects.count <= 3
       new_project = current_user.projects.create!(project_params) and render json: new_project
     else
-      head :no_content # TODO: statuscode204は不適切かも
+      head :no_content # TODO: statuscode204は不適切だから変えたい
     end
   end
 

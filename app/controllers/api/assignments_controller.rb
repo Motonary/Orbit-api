@@ -32,7 +32,7 @@ class Api::AssignmentsController < ApplicationController
       new_assignment = @current_project.assignments.new(assignment_params)
       new_assignment.save! and render json: new_assignment
     else
-      head :no_content
+      head :no_content # TODO: statuscode204は不適切だから変えたい
     end
   end
 
