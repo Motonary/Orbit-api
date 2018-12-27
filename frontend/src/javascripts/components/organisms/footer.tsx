@@ -51,7 +51,7 @@ class Footer extends React.Component<FooterProps, {}> {
         />
         <ConfirmModal motionControll={() => this.motionControll()} />
         <FormModal pathname={pathname} />
-        <TutorialModal currentUser={currentUser} />
+        <TutorialModal currentUser={currentUser} pathname={pathname} />
       </div>
     )
   }

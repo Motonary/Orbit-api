@@ -52,6 +52,13 @@ class TutorialModal extends React.Component<TutorialModalProps, {}> {
         style={customStyles}
         contentLabel="Tutorial Modal"
       >
+        <div className="tutorial-modal">
+          <ul>
+            <li>回っている惑星をクリックしてProjectPageへ遷移してみよう！</li>
+            <li>遷移したら</li>
+            <li>Assignmentのドラッグ&ドロップ、作成</li>
+          </ul>
+        </div>
         <div className="modal-confirm-buttons">
           <ConfirmBtn message="閉じる" onClick={this.closeModal.bind(this)} />
         </div>
