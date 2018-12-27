@@ -11,6 +11,11 @@ class Api::UsersController < ApplicationController
     render json: current_user
   end
 
+  def remove_flag
+    current_user.first_visit_flag = false
+    current_user.save! and render json: current_user
+  end
+
   def update_avatar
     current_user.avatar = params[:avatar]
     current_user.save! and render json: current_user.avatar

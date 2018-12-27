@@ -2,8 +2,9 @@ import * as React from 'react'
 
 import PlanetHolder from '../molecules/planet-holder'
 import FooterActionBtnList from '../molecules/footer-action-btn-list'
-import ConfirmModal from '../molecules/confirm-modal'
-import FormModal from '../molecules/form-modal'
+import ConfirmModal from './modals/confirm-modal'
+import FormModal from './modals/form-modal'
+import TutorialModal from './modals/tutorial-modal'
 
 import '../../../stylesheets/destroy_animate.scss'
 
@@ -50,6 +51,7 @@ class Footer extends React.Component<FooterProps, {}> {
         />
         <ConfirmModal motionControll={() => this.motionControll()} />
         <FormModal pathname={pathname} />
+        <TutorialModal currentUser={currentUser} />
       </div>
     )
   }

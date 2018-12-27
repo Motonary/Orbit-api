@@ -25,6 +25,10 @@ interface ExpireCurrentUserAction extends BaseAction {
   type: string
 }
 
+interface RemoveFirstVisitFlagAction extends BaseAction {
+  type: string
+}
+
 interface UpdateUserImgAction extends BaseAction {
   type: string
   payload: { newAvatarUrl: string }
@@ -40,6 +44,7 @@ export type CurrentUserAction =
   | CreateSessionAction
   | FetchCurrentUserAction
   | ExpireCurrentUserAction
+  | RemoveFirstVisitFlagAction
   | UpdateUserImgAction
   | UpdateProfileAction
 
@@ -98,6 +103,20 @@ export function expireCurrentUser(callback: any): ExpireCurrentUserAction {
   sessionStorage.removeItem('jwt')
   callback()
   return { type: actionTypes.EXPIRE_CURRENT_USER }
+}
+
+export function removeFirstVisitFlag(): Promise<RemoveFirstVisitFlagAction | void> {
+  return axios
+    .get(`${ROOT_URL}/api/remove_flag`, {
+      headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
+    })
+    .then(res => {
+      return {
+        type: actionTypes.REMOVE_FIRST_VISIT_FLAG,
+        payload: { currentUser: res.data },
+      }
+    })
+    .catch(() => alert('Sorry, something went wrong...'))
 }
 
 export function updateUserImg(newAvatar: any): Promise<UpdateUserImgAction | void> {
