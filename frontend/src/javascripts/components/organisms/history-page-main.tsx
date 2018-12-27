@@ -7,6 +7,9 @@ import StoredPlanetList from '../molecules/stored-planet-list'
 import { fetchDestroyedAssignments } from '../../actions/assignments'
 
 interface HistoryPageMainProps {
+  history: any
+  match: any
+
   fetchDestroyedAssignments: any
 }
 
@@ -18,7 +21,7 @@ class HistoryPageMain extends React.Component<HistoryPageMainProps, {}> {
   render() {
     return (
       <div id="history-container">
-        <HistoryCanvas />
+        <HistoryCanvas history={this.props.history} match={this.props.match} />
         <StoredPlanetList />
       </div>
     )

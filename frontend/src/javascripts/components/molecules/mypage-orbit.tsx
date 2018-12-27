@@ -5,7 +5,7 @@ import _ from 'lodash'
 import PopupBox from '../atoms/popup-box'
 import Planet from '../molecules/planet'
 
-import { setCurrentProject } from '../../actions/projects'
+import { setCurrentProject, fetchRevolvingProjects } from '../../actions/projects'
 import { setModalStatus } from '../../actions/common'
 
 interface MypageOrbitProps {
@@ -17,11 +17,13 @@ interface MypageOrbitProps {
 
   setModalStatus: any
   setCurrentProject: any
+  fetchRevolvingProjects: any
 }
 
 class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
   componentDidMount() {
     this.setDrop()
+    if (!this.props.revolvingProjects) this.props.fetchRevolvingProjects()
   }
 
   setDrop() {
@@ -95,7 +97,10 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
     const pos: any = ['top', 'right', 'left', 'bottom']
     const projectList: any = _.map(revolvingProjects, (project: any, index: any) => {
       return (
-        <div className={`mypage-common ${pos[index % 4]} mypage-orbit-motion start-animation`}>
+        <div
+          key={project.id}
+          className={`mypage-common ${pos[index % 4]} mypage-orbit-motion start-animation`}
+        >
           <div
             id={`planet-${project.id}-${project.fixed_star_type}`}
             className="mypage-planet"
@@ -120,5 +125,5 @@ class MypageOrbit extends React.Component<MypageOrbitProps, {}> {
 
 export default connect(
   ({ revolvingProjects, modalOpen }: any) => ({ revolvingProjects, modalOpen }),
-  { setModalStatus, setCurrentProject }
+  { setModalStatus, setCurrentProject, fetchRevolvingProjects }
 )(MypageOrbit)
