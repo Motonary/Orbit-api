@@ -3,7 +3,7 @@ import _ from 'lodash'
 import {
   RevoivingProjectsAction,
   CurrentProjectAction,
-  SelectedProjectsAction,
+  SelectedProjectAction,
 } from '../actions/projects'
 
 /*
@@ -58,16 +58,16 @@ export function currentProject(state: any = null, action: CurrentProjectAction) 
  * stateには、ユーザがクリックし、UI上でチェックマーク付きのPlanetに紐付いた"project-3-Earth"のような
  * ”project-projectId-fixedStarType”というstringが一つのみ格納される
  */
-export function selectedProjects(state: any = '', action: SelectedProjectsAction) {
+export function selectedProject(state: any = [], action: SelectedProjectAction) {
   switch (action.type) {
     case actionTypes.SET_SELECTED_PROJECT:
-      return action.payload.projectId
+      return [...state, action.payload.projectId]
 
     case actionTypes.REMOVE_SELECTED_PROJECT:
       return state.filter((item: any) => item !== action.payload.projectId)
 
     case actionTypes.RESET_SELECTED_PROJECT:
-      return ''
+      return []
 
     default:
       return state

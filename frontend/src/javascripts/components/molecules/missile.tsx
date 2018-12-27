@@ -6,7 +6,12 @@ import anime from 'animejs'
 import ActionBtn from '../atoms/buttons/action-btn'
 
 import { resetDestroyAction, resetModalStatus } from '../../actions/common'
-import { destroyAssignment, resetSelectedAssignment } from '../../actions/assignments'
+import {
+  destroyAssignment,
+  resetSelectedAssignment,
+  selectAssignment,
+} from '../../actions/assignments'
+import { destroyProject, resetSelectedProject } from '../../actions/projects'
 
 import { DeleteActions } from '../../constants/images'
 
@@ -20,18 +25,22 @@ interface MissleProps {
   destroyedAssignments: any
   selectedDestroyAction: any
   modalOpen: any
+  selectedProject: any
 
   resetDestroyAction: any
   resetModalStatus: any
   destroyAssignment: any
   resetSelectedAssignment: any
+  destroyProject: any
+  resetSelectedProject: any
 }
 
 class Missle extends React.Component<MissleProps, {}> {
   componentDidUpdate(/*prevProps, prevState*/) {
-    if (this.props.selectedAssignments.length === 0) return
-    if (this.props.modalOpen !== '') return
-    if (this.props.selectedDestroyAction !== 'Missile') return
+    const { selectedAssignments, selectedProject, modalOpen, selectedDestroyAction } = this.props
+    if (selectedAssignments.length === 0 && selectedProject === '') return
+    if (modalOpen !== '') return
+    if (selectedDestroyAction !== 'Missile') return
     this.onIgniteDestroyAnimation()
   }
 
@@ -49,8 +58,13 @@ class Missle extends React.Component<MissleProps, {}> {
   }
 
   makeMovement(targetDiv: any) {
+    const { selectedAssignments, selectedProject } = this.props
     const movDom: any = targetDiv
-    const targetDom: any = document.getElementById(`planet-${this.props.selectedAssignments[0]}`) // should be div.id="planet-2-Earth" class="planet-medium-secundus"
+    const targetIdName =
+      selectedAssignments.length !== 0
+        ? `planet-${selectedAssignments[0]}`
+        : `project-${selectedProject[0]}`
+    const targetDom: any = document.getElementById(targetIdName) // should be div.id="planet-2-Earth" class="planet-medium-secundus"
 
     // 要素の位置座標を取得.
     const clientRectMov: any = movDom.getBoundingClientRect()
@@ -99,29 +113,36 @@ class Missle extends React.Component<MissleProps, {}> {
     })
 
     setTimeout(() => {
-      this.destroyPlanets(this.props.selectedAssignments)
+      this.destroyPlanets(selectedProject.length !== 0 ? selectedProject : selectedAssignments)
     }, 2450)
   }
 
   // 削除されたAssignmentIdをcanvasのidから特定し、destroyedAssignmentsに格納
   removeAssignmentData(parent: any) {
     _.forEach(parent, (destroyDom: any) => {
-      let destroyedCvs: any = destroyDom.children[1]
-      let destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
+      const destroyedCvs: any = destroyDom.children[1]
+      const destroyedAssignmentId: string = destroyedCvs.id.split('-')[1]
       this.props.destroyAssignment(destroyedAssignmentId)
     })
   }
+  // 削除されたProjectIdをcanvasのidから特定し、destroyedProjectに格納
+  removeProjectData(destroyDom: any) {
+    const destroyedCvs: any = destroyDom[0].firstChild
+    const destroyedProjectId: string = destroyedCvs.id.split('-')[0]
+    this.props.destroyProject(destroyedProjectId)
+  }
 
-  destroyPlanets(selectedAssignments: any) {
-    const target_ids: any = selectedAssignments
+  destroyPlanets(selectedPlanetIds: any) {
+    const target_ids: any = selectedPlanetIds
+    const isProject: boolean = this.props.selectedProject.length !== 0
 
-    let parent: any = []
-    let canvasEl: any = []
-    let ctx: any = []
+    const parent: any = []
+    const canvasEl: any = []
+    const ctx: any = []
 
     if (target_ids.length > 0) {
       target_ids.forEach((id: string) => {
-        let tar: any = document.getElementById(id)
+        const tar: any = document.getElementById(id)
         parent.push(tar.parentNode)
         canvasEl.push(tar)
         ctx.push(tar.getContext('2d'))
@@ -135,26 +156,41 @@ class Missle extends React.Component<MissleProps, {}> {
     let pointerY: number = 0
 
     function setCanvasSize() {
-      canvasEl.forEach((target: any, i: number) => {
-        target.style.width = parent[i].parentNode.clientWidth + 'px'
-        target.style.height = parent[i].parentNode.clientHeight + 'px'
-        target.style.top = `-${parent[i].parentNode.clientWidth / 2}px`
-        target.style.left = `-${parent[i].parentNode.clientHeight / 2}px`
-        target.width = parent[i].parentNode.clientWidth
-        target.height = parent[i].parentNode.clientHeight
+      if (isProject) {
+        const target = canvasEl[0]
+        target.style.width = '100vw'
+        target.style.height = '100vh'
+        target.width = 1000
+        target.height = 600
         target.style.zIndex = 500
         target.getContext('2d').scale(2, 2)
-      })
+      } else {
+        canvasEl.forEach((target: any, i: number) => {
+          target.style.width = parent[i].parentNode.clientWidth + 'px'
+          target.style.height = parent[i].parentNode.clientHeight + 'px'
+          target.style.top = `-${parent[i].parentNode.clientWidth / 2}px`
+          target.style.left = `-${parent[i].parentNode.clientHeight / 2}px`
+          target.width = parent[i].parentNode.clientWidth
+          target.height = parent[i].parentNode.clientHeight
+          target.style.zIndex = 500
+          target.getContext('2d').scale(2, 2)
+        })
+      }
     }
 
     function updateCoords() {
-      pointerX = 60
-      pointerY = 60
+      if (isProject) {
+        pointerX = 500
+        pointerY = 300
+      } else {
+        pointerX = 60
+        pointerY = 60
+      }
     }
 
     function removeImg() {
       _.forEach(parent, (doc: any) => {
-        const child: any = doc.children[1]
+        const child: any = isProject ? doc.children[0] : doc.children[1]
         doc.removeChild(child)
       })
     }
@@ -167,9 +203,9 @@ class Missle extends React.Component<MissleProps, {}> {
     }
 
     function setParticuleDirection(p: any) {
-      let angle: any = (anime.random(0, 360) * Math.PI) / 180
-      let value: any = anime.random(50, 180)
-      let radius: any = [-1, 1][anime.random(0, 1)] * value
+      const angle: any = (anime.random(0, 360) * Math.PI) / 180
+      const value: any = anime.random(50, 180)
+      const radius: any = [-1, 1][anime.random(0, 1)] * value
       return {
         x: p.x + radius * Math.cos(angle),
         y: p.y + radius * Math.sin(angle),
@@ -201,7 +237,7 @@ class Missle extends React.Component<MissleProps, {}> {
     }
 
     function animateParticules(x: number, y: number) {
-      let particules = []
+      const particules = []
       for (let i = 0; i < numberOfParticules; i++) {
         particules.push(createParticule(x, y))
       }
@@ -241,7 +277,12 @@ class Missle extends React.Component<MissleProps, {}> {
     animateParticules(pointerX, pointerY)
     this.props.resetDestroyAction()
     this.props.resetSelectedAssignment()
-    this.removeAssignmentData(parent)
+    this.props.resetSelectedProject()
+    if (isProject) {
+      this.removeProjectData(parent)
+    } else {
+      this.removeAssignmentData(parent)
+    }
     this.props.motionControll()
   }
 
@@ -252,16 +293,25 @@ class Missle extends React.Component<MissleProps, {}> {
 }
 
 export default connect(
-  ({ selectedAssignments, destroyedAssignments, selectedDestroyAction, modalOpen }: any) => ({
+  ({
     selectedAssignments,
     destroyedAssignments,
     selectedDestroyAction,
     modalOpen,
+    selectedProject,
+  }: any) => ({
+    selectedAssignments,
+    destroyedAssignments,
+    selectedDestroyAction,
+    modalOpen,
+    selectedProject,
   }),
   {
     resetDestroyAction,
     resetModalStatus,
     destroyAssignment,
     resetSelectedAssignment,
+    destroyProject,
+    resetSelectedProject,
   }
 )(Missle)

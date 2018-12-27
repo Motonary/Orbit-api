@@ -14,7 +14,7 @@ class FixedStar extends React.Component<FixedStarProps, {}> {
       <div id="fixed-star">
         <div id={`project-${id}-${fixed_star_type}`}>
           <Planet className="planet-img-container" planetType={fixed_star_type} />
-          <canvas id={`project-${id}-${fixed_star_type}`} className="project-canvas" />
+          <canvas id={`${id}-${fixed_star_type}`} className="project-canvas" />
         </div>
       </div>
     )

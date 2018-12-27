@@ -127,19 +127,19 @@ export function changeCurrentProject(newProject: any, callback: any): ChangeCurr
 // -------------------------------------------------------------------------------------
 interface SelectProjectAction extends BaseAction {
   type: string
-  payload: { projectId: string } // TODO: stringかも
+  payload: { projectId: string }
 }
 
 interface DisselectProjectAction extends BaseAction {
   type: string
-  payload: { projectId: string } // TODO: stringかも
+  payload: { projectId: string }
 }
 
 interface ResetSelectedProject extends BaseAction {
   type: string
 }
 
-export type SelectedProjectsAction =
+export type SelectedProjectAction =
   | SelectProjectAction
   | DisselectProjectAction
   | ResetSelectedProject
