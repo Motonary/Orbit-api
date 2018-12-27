@@ -70,34 +70,37 @@ class BlackHole extends React.Component<BlackHoleProps, {}> {
     }
 
     function disappearPlanet() {
+      const clientRectPlanet: any = displayDoms[0].getBoundingClientRect()
+      const planetImgTop: number = clientRectPlanet.top
+      const planetImgLeft: number = clientRectPlanet.left
       const BlackHoleAnimation = anime.timeline()
       BlackHoleAnimation.add({
         targets: `#planet-${targetIds[0]} .planet-img-container`,
         translateX: {
-          value: targetImgLeft,
+          value: targetImgLeft - planetImgLeft,
           duration: 1000,
           easing: 'easeInExpo',
         },
         translateY: {
-          value: -targetImgTop,
+          value: targetImgTop - planetImgTop,
           duration: 1000,
           easing: 'easeInExpo',
         },
         opacity: {
           value: [1, 0],
-          duration: 3000,
-          easing: 'easeInOutQuad',
+          duration: 1200,
+          easing: 'easeInQuad',
         },
       }).add({
         targets: '#project-page-container .blackhole-img',
         rotate: {
           value: '6turn',
-          duration: 2000,
+          duration: 1800,
           easing: 'easeInExpo',
         },
         opacity: {
           value: [1, 0],
-          duration: 2000,
+          duration: 1800,
           easing: 'easeInExpo',
         },
         offset: -300,
