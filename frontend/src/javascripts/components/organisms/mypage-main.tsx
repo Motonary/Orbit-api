@@ -15,7 +15,6 @@ interface MyPageMainProps {
 const MyPageMain: React.SFC<MyPageMainProps> = ({ currentUser, match, history }) => {
   if (!currentUser) return <div>Loading....</div>
 
-  // currentUser.id: number, match.param.userId: string
   if (currentUser.id !== parseInt(match.params.userId, 10)) {
     return <Redirect to={`/users/${currentUser.id}`} />
   }

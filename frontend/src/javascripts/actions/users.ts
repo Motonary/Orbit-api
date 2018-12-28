@@ -93,6 +93,7 @@ export function createSession(email: any, password: any): Promise<CreateSessionA
     })
     .then(res => {
       sessionStorage.setItem('jwt', res.data.jwt.token)
+      setTimeout(() => showSuccessFlash('Successfully signed in!'), 300)
       const user: Object = res.data.signinUser
       return {
         type: actionTypes.SET_CURRENT_USER,
@@ -119,6 +120,7 @@ export function fetchCurrentUser(): Promise<FetchCurrentUserAction | void> {
 export function expireCurrentUser(callback: any): ExpireCurrentUserAction {
   sessionStorage.removeItem('jwt')
   callback()
+  setTimeout(() => showSuccessFlash('Successfully signed out.'), 300)
   return { type: actionTypes.EXPIRE_CURRENT_USER }
 }
 

@@ -34,24 +34,6 @@ export default class TopPage extends React.Component<Props, State> {
     }
   }
 
-  showSuccessFlash(successMessage: string) {
-    Alert.success(successMessage, {
-      position: 'top-right',
-      effect: 'jelly',
-      timeout: 3000,
-      offset: 80,
-    })
-  }
-
-  showErrorFlash(errorMessage: string) {
-    Alert.error(errorMessage, {
-      position: 'top-right',
-      effect: 'jelly',
-      timeout: 3000,
-      offset: 80,
-    })
-  }
-
   render() {
     const { isSignIn } = this.state
     const { history } = this.props
