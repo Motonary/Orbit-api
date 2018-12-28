@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Alert from 'react-s-alert'
-import FixedStar from '../atoms/fixed-star'
+import FixedStar from '../molecules/fixed-star'
 import CircleOrbit from '../molecules/circle-orbit'
 import ProjectBar from '../molecules/project-bar'
 
@@ -13,7 +13,7 @@ interface Props {
 const ProjectPageMain: React.SFC<Props> = ({ currentProject }) => (
   <div id="project-container">
     <div id="project-orbit">
-      <FixedStar fixedStarType={currentProject.fixed_star_type} />
+      <FixedStar project={currentProject} />
       <CircleOrbit orbit="primo" />
       <CircleOrbit orbit="secundus" />
       <CircleOrbit orbit="tertius" />
