@@ -30,7 +30,7 @@ export default class TopPage extends React.Component<Props, State> {
     } else if (!isSignIn) {
       this.setState({ isSignIn: true })
     } else {
-      throw new Error('Sorry, something went wrong...') // 暫定の例外処理
+      throw new Error('Sorry, something went wrong. Please reload.') // 暫定の例外処理
     }
   }
 

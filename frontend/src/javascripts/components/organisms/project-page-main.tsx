@@ -10,39 +10,17 @@ interface Props {
   currentProject: any
 }
 
-class ProjectPageMain extends React.Component<Props, {}> {
-  showSuccessFlash(successMessage: string) {
-    Alert.success(successMessage, {
-      position: 'top-right',
-      effect: 'jelly',
-      timeout: 3000,
-      offset: 80,
-    })
-  }
-
-  showErrorFlash(errorMessage: string) {
-    Alert.error(errorMessage, {
-      position: 'top-right',
-      effect: 'jelly',
-      timeout: 3000,
-      offset: 80,
-    })
-  }
-
-  render() {
-    return (
-      <div id="project-container">
-        <div id="project-orbit">
-          <FixedStar fixedStarType={this.props.currentProject.fixed_star_type} />
-          <CircleOrbit orbit="primo" />
-          <CircleOrbit orbit="secundus" />
-          <CircleOrbit orbit="tertius" />
-        </div>
-        <ProjectBar currentProject={this.props.currentProject} />
-        <Alert />
-      </div>
-    )
-  }
-}
+const ProjectPageMain: React.SFC<Props> = ({ currentProject }) => (
+  <div id="project-container">
+    <div id="project-orbit">
+      <FixedStar fixedStarType={currentProject.fixed_star_type} />
+      <CircleOrbit orbit="primo" />
+      <CircleOrbit orbit="secundus" />
+      <CircleOrbit orbit="tertius" />
+    </div>
+    <ProjectBar currentProject={currentProject} />
+    <Alert />
+  </div>
+)
 
 export default ProjectPageMain

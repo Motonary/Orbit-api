@@ -1,7 +1,29 @@
 import axios from 'axios'
+import Alert from 'react-s-alert'
 import { actionTypes } from '../constants/action-types'
 import { BaseAction } from '../constants/static-types'
 import { ROOT_URL } from '../constants/url'
+
+// -------------------------------------------------------------------------------------
+// Flash
+// -------------------------------------------------------------------------------------
+function showSuccessFlash(successMessage: string) {
+  Alert.success(successMessage, {
+    position: 'top-right',
+    effect: 'jelly',
+    timeout: 3000,
+    offset: 80,
+  })
+}
+
+function showErrorFlash(errorMessage: string) {
+  Alert.error(errorMessage, {
+    position: 'top-right',
+    effect: 'jelly',
+    timeout: 3000,
+    offset: 80,
+  })
+}
 
 // -------------------------------------------------------------------------------------
 // RevolvingAssignments
@@ -40,7 +62,7 @@ export function fetchRevolvingAssignments(
         payload: { revolvingAssignments: res.data },
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
 }
 
 export function createAssignment(
@@ -70,15 +92,16 @@ export function createAssignment(
   })
     .then(res => {
       if (res.status === 200) {
+        showSuccessFlash('Successfully created!')
         return {
           type: actionTypes.CREATE_ASSIGNMENT,
           payload: { newAssignment: res.data },
         }
       } else if (res.status === 204) {
-        alert('一度に軌道に乗せることができる星は4個までです')
+        showErrorFlash('Unable to put 5 stars on an orbit...')
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
 }
 
 export function destroyAssignment(assignmentId: any): Promise<DestroyAssignmentAction | void> {
@@ -88,12 +111,13 @@ export function destroyAssignment(assignmentId: any): Promise<DestroyAssignmentA
     headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
   })
     .then(() => {
+      showSuccessFlash('Successfully destroyed!')
       return {
         type: actionTypes.DESTROY_ASSIGNMENT,
         payload: { assignmentId },
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
 }
 
 // -------------------------------------------------------------------------------------
@@ -164,7 +188,7 @@ export function fetchDestroyedAssignments(): Promise<FetchDestroyedAssignmentsAc
         payload: { destroyedAssignments: res.data },
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
 }
 
 export function restoreAssignment(assignmentId: any): Promise<RestoreAssignmentAction | void> {
@@ -174,10 +198,11 @@ export function restoreAssignment(assignmentId: any): Promise<RestoreAssignmentA
     headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
   })
     .then(() => {
+      showSuccessFlash('Successfully restored!')
       return {
         type: actionTypes.RESTORE_ASSIGNMENT,
         payload: { assignmentId },
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
 }
