@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Alert from 'react-s-alert'
 import TopPageBtn from '../../atoms/buttons/toppage-btn'
 import TopPageLogo from '../../atoms/toppage-logo'
 import TopPagePlanet from '../../atoms/toppage-planet-img'
@@ -33,6 +34,24 @@ export default class TopPage extends React.Component<Props, State> {
     }
   }
 
+  showSuccessFlash(successMessage: string) {
+    Alert.success(successMessage, {
+      position: 'top-right',
+      effect: 'jelly',
+      timeout: 3000,
+      offset: 80,
+    })
+  }
+
+  showErrorFlash(errorMessage: string) {
+    Alert.error(errorMessage, {
+      position: 'top-right',
+      effect: 'jelly',
+      timeout: 3000,
+      offset: 80,
+    })
+  }
+
   render() {
     const { isSignIn } = this.state
     const { history } = this.props
@@ -40,6 +59,7 @@ export default class TopPage extends React.Component<Props, State> {
     return (
       <div className="top-page-container">
         <TopPageBtn isSignIn={isSignIn} onClick={this.onClickTopPageButton.bind(this)} />
+        <Alert />
         <TopPageLogo />
         <ToppageFormContainer isSignIn={isSignIn} history={history} />
         <TopPagePlanet />
