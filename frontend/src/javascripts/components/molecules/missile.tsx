@@ -80,14 +80,16 @@ class Missle extends React.Component<MissleProps, {}> {
     const yT: number = clientRectTarget.top
 
     // 目標惑星中心までの距離(px)とArctanへの引数
-    const disX: number = xT - xM
+    let disX: number = xT - xM
     const disY: number = yT - yM
-    const arcvalue: number = -disY / disX
+    let arcvalue: number
+    if (disX < 0) {
+      arcvalue = -disY / disX
+    } else {
+      arcvalue = disY / disX
+    }
 
-    // Arctanのマクローリン展開（４次近似）により、arctanの整数値から目標物への角度を求める
-    const approximateRad: number =
-      arcvalue - Math.pow(arcvalue, 3) / 3 + Math.pow(arcvalue, 5) / 5 - Math.pow(arcvalue, 7) / 7
-    const deg: number = (approximateRad * 180) / Math.PI
+    const deg: number = (Math.atan(arcvalue) * 180) / Math.PI - 4
 
     const MissileTransforms = anime({
       targets: '#project-page-container .destroy-action',
@@ -97,14 +99,14 @@ class Missle extends React.Component<MissleProps, {}> {
         easing: 'easeInQuart',
       },
       translateX: {
-        value: disX + TargetWidth,
-        duration: 2000,
+        value: disX - TargetWidth,
+        duration: 1780,
         easing: 'easeInExpo',
         delay: 500,
       },
       traslateY: {
         value: disY + TargetHeight,
-        duration: 2000,
+        duration: 1780,
         easing: 'easeInExpo',
         delay: 500,
       },
@@ -119,7 +121,7 @@ class Missle extends React.Component<MissleProps, {}> {
   removeAssignmentData(parent: any) {
     _.forEach(parent, (destroyDom: any) => {
       const destroyedCvs: any = destroyDom.children[1]
-      const destroyedAssignmentId: string = destroyedCvs.id.split('-')[1]
+      const destroyedAssignmentId: string = destroyedCvs.id.split('-')[0]
       this.props.destroyAssignment(destroyedAssignmentId)
     })
   }
@@ -191,6 +193,11 @@ class Missle extends React.Component<MissleProps, {}> {
     function removeImg() {
       _.forEach(parent, (doc: any) => {
         const child: any = isProject ? doc.children[0] : doc.children[1]
+        if (!isProject) {
+          if (child.classList.contains('warning-animation')) {
+            child.classList.remove('warning-animation')
+          }
+        }
         doc.removeChild(child)
       })
     }
