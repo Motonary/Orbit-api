@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Alert from 'react-s-alert'
 import TopPageBtn from '../../atoms/buttons/toppage-btn'
 import TopPageLogo from '../../atoms/toppage-logo'
 import TopPagePlanet from '../../atoms/toppage-planet-img'
@@ -29,7 +30,7 @@ export default class TopPage extends React.Component<Props, State> {
     } else if (!isSignIn) {
       this.setState({ isSignIn: true })
     } else {
-      throw new Error('Sorry, something went wrong...') // 暫定の例外処理
+      throw new Error('Sorry, something went wrong. Please reload.') // 暫定の例外処理
     }
   }
 
@@ -40,6 +41,7 @@ export default class TopPage extends React.Component<Props, State> {
     return (
       <div className="top-page-container">
         <TopPageBtn isSignIn={isSignIn} onClick={this.onClickTopPageButton.bind(this)} />
+        <Alert />
         <TopPageLogo />
         <ToppageFormContainer isSignIn={isSignIn} history={history} />
         <TopPagePlanet />

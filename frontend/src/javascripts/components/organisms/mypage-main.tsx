@@ -1,14 +1,20 @@
 import * as React from 'react'
 import { Redirect } from 'react-router-dom'
+import Alert from 'react-s-alert'
 import MypageUserInfo from '../molecules/mypage-user-info'
 import MypageOrbit from '../molecules/mypage-orbit'
 
 import '../../../stylesheets/mypage.scss'
 
-const MyPageMain = ({ currentUser, match, history }: any) => {
+interface MyPageMainProps {
+  currentUser: any
+  match: any
+  history: any
+}
+
+const MyPageMain: React.SFC<MyPageMainProps> = ({ currentUser, match, history }) => {
   if (!currentUser) return <div>Loading....</div>
 
-  // currentUser.id: number, match.param.userId: string
   if (currentUser.id !== parseInt(match.params.userId, 10)) {
     return <Redirect to={`/users/${currentUser.id}`} />
   }
@@ -17,6 +23,7 @@ const MyPageMain = ({ currentUser, match, history }: any) => {
     <div id="mypage-container">
       <MypageUserInfo currentUser={currentUser} />
       <MypageOrbit history={history} match={match} />
+      <Alert />
     </div>
   )
 }
