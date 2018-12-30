@@ -28,7 +28,7 @@ class Api::AssignmentsController < ApplicationController
   end
 
   def create
-    if @current_project.assignments.where(orbit_pos: assignment_params[:orbit_pos]).count <= 3
+    if @current_project.assignments.fetch_not_destroyed_in_orbit(assignment_params[:orbit_pos]).count < 5
       new_assignment = @current_project.assignments.new(assignment_params)
       new_assignment.save! and render json: new_assignment
     else

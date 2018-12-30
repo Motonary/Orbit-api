@@ -1,7 +1,29 @@
 import axios from 'axios'
+import Alert from 'react-s-alert'
 import { actionTypes } from '../constants/action-types'
 import { BaseAction } from '../constants/static-types'
 import { ROOT_URL } from '../constants/url'
+
+// -------------------------------------------------------------------------------------
+// Flash
+// -------------------------------------------------------------------------------------
+function showSuccessFlash(successMessage: string) {
+  Alert.success(successMessage, {
+    position: 'top-right',
+    effect: 'jelly',
+    timeout: 3000,
+    offset: 80,
+  })
+}
+
+function showErrorFlash(errorMessage: string) {
+  Alert.error(errorMessage, {
+    position: 'top-right',
+    effect: 'jelly',
+    timeout: 3000,
+    offset: 80,
+  })
+}
 
 // -------------------------------------------------------------------------------------
 // CurrentUser
@@ -66,7 +88,7 @@ export function createUser(
         }
       })
     })
-    .catch((err: any) => alert(`Sorry, something went wrong...\n ${err}`))
+    .catch(() => showErrorFlash(`Sorry, something went wrong. Please reload.`))
 }
 
 export function createSession(email: any, password: any): Promise<CreateSessionAction | void> {
@@ -76,13 +98,14 @@ export function createSession(email: any, password: any): Promise<CreateSessionA
     })
     .then(res => {
       sessionStorage.setItem('jwt', res.data.jwt.token)
+      setTimeout(() => showSuccessFlash('Successfully signed in!'), 100)
       const user: Object = res.data.signinUser
       return {
         type: actionTypes.SET_CURRENT_USER,
         payload: { currentUser: user },
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 export function fetchCurrentUser(): Promise<FetchCurrentUserAction | void> {
@@ -96,12 +119,13 @@ export function fetchCurrentUser(): Promise<FetchCurrentUserAction | void> {
         payload: { currentUser: res.data },
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 export function expireCurrentUser(callback: any): ExpireCurrentUserAction {
   sessionStorage.removeItem('jwt')
   callback()
+  setTimeout(() => showSuccessFlash('Successfully signed out.'), 100)
   return { type: actionTypes.EXPIRE_CURRENT_USER }
 }
 
@@ -140,7 +164,7 @@ export function updateUserImg(newAvatar: any): Promise<UpdateUserImgAction | voi
         payload: { newAvatarUrl: res.data },
       }
     })
-    .catch(error => alert(error))
+    .catch(error => showErrorFlash(error))
 }
 
 export function updateProfile(
@@ -161,5 +185,5 @@ export function updateProfile(
         payload: { updatedUser: res.data },
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }

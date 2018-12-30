@@ -1,15 +1,20 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
+import Alert from 'react-s-alert'
 import UserImgUpdater from '../molecules/user-img-updater'
 import ProfileUpdateForm from '../molecules/forms/profile-update-form'
 import SignOutBtn from '../atoms/buttons/sign-out-btn'
 
-const SettingPageMain = ({ currentUser, history }: any) => (
+interface SettingPageMainProps {
+  currentUser: any
+  history: any
+}
+const SettingPageMain: React.SFC<SettingPageMainProps> = ({ currentUser, history }) => (
   <div id="setting-page">
     <UserImgUpdater currentUser={currentUser} />
     <ProfileUpdateForm history={history} />
     <SignOutBtn history={history} />
+    <Alert />
   </div>
 )
 
-export default connect(({ currentUser }: any) => ({ currentUser }))(SettingPageMain)
+export default SettingPageMain

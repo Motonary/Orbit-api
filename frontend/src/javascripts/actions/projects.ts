@@ -1,7 +1,29 @@
 import axios from 'axios'
+import Alert from 'react-s-alert'
 import { actionTypes } from '../constants/action-types'
 import { BaseAction } from '../constants/static-types'
 import { ROOT_URL } from '../constants/url'
+
+// -------------------------------------------------------------------------------------
+// Flash
+// -------------------------------------------------------------------------------------
+function showSuccessFlash(successMessage: string) {
+  Alert.success(successMessage, {
+    position: 'top-right',
+    effect: 'jelly',
+    timeout: 3000,
+    offset: 80,
+  })
+}
+
+function showErrorFlash(errorMessage: string) {
+  Alert.error(errorMessage, {
+    position: 'top-right',
+    effect: 'jelly',
+    timeout: 3000,
+    offset: 80,
+  })
+}
 
 // -------------------------------------------------------------------------------------
 // RevolvingProjects
@@ -37,7 +59,7 @@ export function fetchRevolvingProjects(): Promise<FetchRevolvingProjectsAction |
         payload: { currentUserAllProjects: res.data },
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 export function createProject(
@@ -53,15 +75,16 @@ export function createProject(
   })
     .then(res => {
       if (res.status === 200) {
+        showSuccessFlash('Successfully created!')
         return {
           type: actionTypes.CREATE_PROJECT,
           payload: { newProject: res.data },
         }
       } else if (res.status === 204) {
-        alert('一度に軌道に乗せることができる星は4個までです')
+        showErrorFlash('Unable to put 5 stars on an orbit...')
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 export function destroyProject(projectId: any): Promise<DestroyProjectAction | void> {
@@ -71,12 +94,13 @@ export function destroyProject(projectId: any): Promise<DestroyProjectAction | v
     headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
   })
     .then(() => {
+      showSuccessFlash('Successfully destroyed!')
       return {
         type: actionTypes.DESTROY_PROJECT,
         payload: { projectId },
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 // -------------------------------------------------------------------------------------

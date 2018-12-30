@@ -82,12 +82,14 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     // 目標惑星中心までの距離(px)とArctanへの引数
     const disX: number = xT - xM
     const disY: number = yT - yM
-    const arcvalue: number = -disY / disX
+    let arcvalue: number
+    if (disX < 0) {
+      arcvalue = -disY / disX
+    } else {
+      arcvalue = disY / disX
+    }
 
-    // Arctanのマクローリン展開（４次近似）により、arctanの整数値から目標物への角度(rad)を求める
-    const approximateRad: number =
-      arcvalue - Math.pow(arcvalue, 3) / 3 + Math.pow(arcvalue, 5) / 5 - Math.pow(arcvalue, 7) / 7
-    const deg: number = (approximateRad * 180) / Math.PI // rad -> degree
+    const deg: number = (Math.atan(arcvalue) * 180) / Math.PI - 4
 
     const MissileTransforms = anime({
       targets: '#project-page-container .destroy-action',
@@ -97,14 +99,14 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
         easing: 'easeInQuart',
       },
       translateX: {
-        value: disX + TargetWidth,
-        duration: 2000,
+        value: disX - TargetWidth,
+        duration: 1700,
         easing: 'easeInExpo',
         delay: 500,
       },
       traslateY: {
         value: disY + TargetHeight,
-        duration: 2000,
+        duration: 1700,
         easing: 'easeInExpo',
         delay: 500,
       },

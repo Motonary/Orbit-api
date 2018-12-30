@@ -37,5 +37,5 @@ export function createSubAssignment(
         payload: { newSubAssignment: res.data },
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => alert('Sorry, something went wrong. Please reload.'))
 }
