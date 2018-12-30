@@ -23,7 +23,7 @@ ririco = User.first
   ririco.projects.create!({
     title: Faker::HarryPotter.house,
     description: Faker::Lorem.sentence,
-    fixed_star_type: fixed_star_keys[rand(0...4)]
+    fixed_star_type: fixed_star_keys[rand(0...3)]
   })
 end
 
