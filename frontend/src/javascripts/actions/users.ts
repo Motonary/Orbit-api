@@ -143,7 +143,7 @@ export function removeFirstVisitFlag(currentUser: any): Promise<RemoveFirstVisit
         payload: { currentUser: res.data },
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload and try it again.'))
 }
 
 export function updateUserImg(newAvatar: any): Promise<UpdateUserImgAction | void> {
