@@ -9,7 +9,6 @@ import ConfirmBtn from '../../atoms/buttons/confirm-btn'
 import { removeFirstVisitFlag } from '../../../actions/users'
 
 import '../../../../stylesheets/tutorial_modal.scss'
-import currentUser from '../../../reducers/current-user'
 
 interface TutorialModalProps {
   currentUser: any

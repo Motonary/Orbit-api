@@ -3,10 +3,12 @@ import * as React from 'react'
 const ProjectPageTutorial: React.SFC<{}> = () => {
   return (
     <ul className="tutorial-list">
+      <label>リストの削除</label>
+      <li>軌道上の惑星を１つクリックしてチェックマークを付けよう！</li>
+      <li>そのまま右下の3つのボタンから好きなものをクリックしてみよう！</li>
+      <label>リストの追加</label>
       <li>左下のプラスボタンを押してみよう！</li>
-      <li>惑星をドラッグして軌道の上に移動させてみよう！</li>
-      <li>軌道が光ったらドロップしてみよう！</li>
-      <li>Assignment作成フォームを埋めたら自動で追加されるよ！</li>
+      <li>出てきた惑星をドラッグ＆ドロップして軌道上に追加しよう！</li>
     </ul>
   )
 }

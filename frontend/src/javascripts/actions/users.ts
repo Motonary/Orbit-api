@@ -132,7 +132,7 @@ export function expireCurrentUser(callback: any): ExpireCurrentUserAction {
 export function removeFirstVisitFlag(currentUser: any): Promise<RemoveFirstVisitFlagAction | void> {
   const { name, email } = currentUser
   return axios({
-    method: 'post',
+    method: 'patch',
     url: `${ROOT_URL}/api/users/remove_flag`,
     data: { user: { name, email } },
     headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
