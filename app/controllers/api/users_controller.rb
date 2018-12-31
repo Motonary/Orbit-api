@@ -3,7 +3,17 @@ class Api::UsersController < ApplicationController
 
   def create
     new_user = User.create!(user_params)
-    new_user.projects.create!(title: 'PROJECT', fixed_star_type: 0, description: 'This is your first Project!!')
+    new_project = new_user.projects.create!(title: "PROJECT", fixed_star_type: 0, description: "This is your first Project!!")
+    3.times do |i|
+      new_project.assignments.create!({
+        title: "TEST",
+        description: "This is a Test Assignment to be destroyed",
+        deadline: Time.zone.now + 15.days,
+        planet_type: i,
+        planet_size: 1,
+        orbit_pos: i
+      })
+    end
     render json: new_user
   end
 
