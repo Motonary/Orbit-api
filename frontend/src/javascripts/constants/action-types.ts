@@ -12,6 +12,7 @@ export const actionTypes = keyMirror({
   // User
   SET_CURRENT_USER: null,
   EXPIRE_CURRENT_USER: null,
+  REMOVE_FIRST_VISIT_FLAG: null,
   UPDATE_AVATAR: null,
   UPDATE_PROFILE: null,
 

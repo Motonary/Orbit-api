@@ -47,6 +47,10 @@ interface ExpireCurrentUserAction extends BaseAction {
   type: string
 }
 
+interface RemoveFirstVisitFlagAction extends BaseAction {
+  type: string
+}
+
 interface UpdateUserImgAction extends BaseAction {
   type: string
   payload: { newAvatarUrl: string }
@@ -62,6 +66,7 @@ export type CurrentUserAction =
   | CreateSessionAction
   | FetchCurrentUserAction
   | ExpireCurrentUserAction
+  | RemoveFirstVisitFlagAction
   | UpdateUserImgAction
   | UpdateProfileAction
 
@@ -122,6 +127,23 @@ export function expireCurrentUser(callback: any): ExpireCurrentUserAction {
   callback()
   setTimeout(() => showSuccessFlash('Successfully signed out.'), 100)
   return { type: actionTypes.EXPIRE_CURRENT_USER }
+}
+
+export function removeFirstVisitFlag(currentUser: any): Promise<RemoveFirstVisitFlagAction | void> {
+  const { name, email } = currentUser
+  return axios({
+    method: 'patch',
+    url: `${ROOT_URL}/api/users/remove_flag`,
+    data: { user: { name, email } },
+    headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
+  })
+    .then(res => {
+      return {
+        type: actionTypes.REMOVE_FIRST_VISIT_FLAG,
+        payload: { currentUser: res.data },
+      }
+    })
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload and try it again.'))
 }
 
 export function updateUserImg(newAvatar: any): Promise<UpdateUserImgAction | void> {

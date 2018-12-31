@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :api, { format: 'json' } do
     post '/signup' => 'users#create'
     get '/current_user' => 'users#current'
+    patch 'users/remove_flag' => 'users#remove_flag'
     post 'users/update_avatar' => 'users#update_avatar'
     patch 'users/update_profile' => 'users#update_profile'
 
