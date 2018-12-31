@@ -23,17 +23,20 @@ interface PlanetProps {
 
 class Planet extends React.Component<PlanetProps, {}> {
   onMouseOver(e: any) {
-    const target_planet = e.target.parentNode.parentNode.firstChild // e.g. div.detail-ballon
+    const targetPlanet = e.target.parentNode.parentNode.firstChild // e.g. div.detail-ballon
+    const firstClass = targetPlanet.classList[0]
 
-    if (target_planet.classList[0].includes('popup')) {
-      target_planet.style.display = 'block'
+    if (firstClass && firstClass.includes('popup')) {
+      targetPlanet.style.display = 'block'
     }
   }
-  onMouseOut(e: any) {
-    const target_planet: any = e.target.parentNode.parentNode.firstChild
 
-    if (target_planet.classList[0].includes('popup')) {
-      target_planet.style.display = 'none'
+  onMouseOut(e: any) {
+    const targetPlanet: any = e.target.parentNode.parentNode.firstChild
+    const firstClass = targetPlanet.classList[0]
+
+    if (firstClass && firstClass.includes('popup')) {
+      targetPlanet.style.display = 'none'
     }
   }
 
