@@ -168,37 +168,42 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
     }
 
     const pos = ['top', 'right', 'left', 'bottom']
+    const assignmentsOnEachOrbit = revolvingAssignments[orbit]
 
-    if (revolvingAssignments[orbit].length === 0) {
+    if (assignmentsOnEachOrbit && assignmentsOnEachOrbit.length === 0) {
       return <div id={`circle-${this.props.orbit}`} className="common-circle" />
     }
 
     return (
       <div id={`circle-${orbit}`} className="common-circle">
-        {revolvingAssignments[orbit].map((assignmentInfo: any, index: any) => {
-          return (
-            <div
-              className={`common ${pos[index % 4]} ${
-                assignmentInfo.orbit_pos
-              }-orbit-motion start-animation`}
-              key={assignmentInfo.id}
-            >
+        {assignmentsOnEachOrbit &&
+          assignmentsOnEachOrbit.map((assignmentInfo: any, index: any) => {
+            return (
               <div
-                id={`planet-${assignmentInfo.id}-${assignmentInfo.planet_type}`}
-                className={`planet-${assignmentInfo.planet_size}-${
+                className={`common ${pos[index % 4]} ${
                   assignmentInfo.orbit_pos
-                } start-animation`}
+                }-orbit-motion start-animation`}
+                key={assignmentInfo.id}
               >
-                <PopupBox data={assignmentInfo} isProject={false} />
-                <Planet className="planet-img-container" planetType={assignmentInfo.planet_type} />
-                <canvas
-                  id={`${assignmentInfo.id}-${assignmentInfo.planet_type}`}
-                  className="canvas"
-                />
+                <div
+                  id={`planet-${assignmentInfo.id}-${assignmentInfo.planet_type}`}
+                  className={`planet-${assignmentInfo.planet_size}-${
+                    assignmentInfo.orbit_pos
+                  } start-animation`}
+                >
+                  <PopupBox data={assignmentInfo} isProject={false} />
+                  <Planet
+                    className="planet-img-container"
+                    planetType={assignmentInfo.planet_type}
+                  />
+                  <canvas
+                    id={`${assignmentInfo.id}-${assignmentInfo.planet_type}`}
+                    className="canvas"
+                  />
+                </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
       </div>
     )
   }
