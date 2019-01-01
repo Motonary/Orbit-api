@@ -9,7 +9,9 @@ interface Props {
 
 class SignOutBtn extends React.Component<Props, {}> {
   onClickSignOutButton() {
-    this.props.expireCurrentUser(() => this.props.history.push('/'))
+    if (window.confirm('サインアウトしますか？')) {
+      this.props.expireCurrentUser(() => this.props.history.push('/'))
+    }
   }
 
   render() {

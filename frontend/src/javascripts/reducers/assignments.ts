@@ -37,7 +37,7 @@ export function revolvingAssignments(state: any = null, action: RevolvingAssignm
       // TODO: あとでやる
       if ('assignmentId' in action.payload) {
         const { assignmentId } = action.payload
-        return _.remove([...state], eachState => eachState.id !== assignmentId)
+        return _.remove({ ...state }, (eachAssignment: any) => eachAssignment.id !== assignmentId)
       }
       break
 
@@ -82,7 +82,7 @@ export function destroyedAssignments(state: any = null, action: DestroyedAssignm
     case actionTypes.RESTORE_ASSIGNMENT:
       if ('assignmentId' in action.payload) {
         const { assignmentId } = action.payload
-        return _.remove([...state], eachState => eachState.id !== assignmentId)
+        return _.remove({ ...state }, (eachAssignment: any) => eachAssignment.id !== assignmentId)
       }
       break
 

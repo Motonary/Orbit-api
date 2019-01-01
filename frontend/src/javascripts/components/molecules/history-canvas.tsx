@@ -2,16 +2,20 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 
 import ProjectPageLink from './project-page-link'
+import { fetchDestroyedAssignments } from '../../actions/assignments'
 
 interface HistoryCanvasProps {
   history: any
   match: any
 
   destroyedAssignments: any
+
+  fetchDestroyedAssignments: any
 }
 
 class HistoryCanvas extends React.Component<HistoryCanvasProps, {}> {
   componentDidMount() {
+    this.props.fetchDestroyedAssignments()
     this.updateCanvas()
   }
 
@@ -84,5 +88,5 @@ class HistoryCanvas extends React.Component<HistoryCanvasProps, {}> {
 
 export default connect(
   ({ destroyedAssignments }: any) => ({ destroyedAssignments }),
-  null
+  { fetchDestroyedAssignments }
 )(HistoryCanvas)

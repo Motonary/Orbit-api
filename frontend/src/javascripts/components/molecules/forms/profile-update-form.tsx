@@ -104,7 +104,7 @@ class ProfileUpdateForm extends React.Component<ProfileUpdateFormProps, {}> {
             <div style={{ color: 'red' }}>
               {errors.confirmation && touched.confirmation && errors.confirmation}
             </div>
-            <FormSubmitBtn label="SIGN UP" isSubmit={isSubmitting} />
+            <FormSubmitBtn label="UPDATE" isSubmit={isSubmitting} />
           </form>
         )}
       </Formik>
