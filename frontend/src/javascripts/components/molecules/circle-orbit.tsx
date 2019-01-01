@@ -171,7 +171,7 @@ class CircleOrbit extends React.Component<CircleOrbitProps, {}> {
     const assignmentsOnEachOrbit = revolvingAssignments[orbit]
 
     if (assignmentsOnEachOrbit && assignmentsOnEachOrbit.length === 0) {
-      return <div id={`circle-${this.props.orbit}`} className="common-circle" />
+      return <div id={`circle-${orbit}`} className="common-circle" />
     }
 
     return (
