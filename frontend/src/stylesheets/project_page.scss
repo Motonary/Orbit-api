@@ -24,7 +24,7 @@
       position: absolute;
       top: $fixed-star-position-top;
       left: $fixed-star-position-left;
-      z-index: -1000;
+      z-index: 100;
 
       img {
         width: $fixed-star-scale;
