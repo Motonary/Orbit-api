@@ -35,7 +35,7 @@ class FooterActionBtnList extends React.Component<FooterActionBtnListProps, {}> 
   }
 
   render() {
-    const { pathname, rootPath, currentUser, selectedProject } = this.props
+    const { pathname, rootPath, currentUser, history, selectedProject } = this.props
     const actionType = Object.keys(ActionIcons)
     const rivivalBtnClass = classNames({
       'action-btn': true,

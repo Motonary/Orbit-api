@@ -2,6 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import anime from 'animejs'
+import Alert from 'react-s-alert'
 
 import ActionBtn from '../atoms/buttons/action-btn'
 
@@ -117,6 +118,24 @@ class Missle extends React.Component<MissleProps, {}> {
     }, 2450)
   }
 
+  showSuccessFlash(successMessage: string) {
+    Alert.success(successMessage, {
+      position: 'top-right',
+      effect: 'jelly',
+      timeout: 3000,
+      offset: 80,
+    })
+  }
+
+  showErrorFlash(errorMessage: string) {
+    Alert.error(errorMessage, {
+      position: 'top-right',
+      effect: 'jelly',
+      timeout: 3000,
+      offset: 80,
+    })
+  }
+
   // 削除されたAssignmentIdをcanvasのidから特定し、destroyedAssignmentsに格納
   removeAssignmentData(parent: any) {
     _.forEach(parent, (destroyDom: any) => {
@@ -129,9 +148,17 @@ class Missle extends React.Component<MissleProps, {}> {
   removeProjectData(destroyDom: any) {
     const destroyedCvs: any = destroyDom[0].firstChild
     const destroyedProjectId: string = destroyedCvs.id.split('-')[0]
-    this.props.destroyProject(destroyedProjectId).then(() => {
-      this.props.history.push(`/users/${this.props.currentUser.id}`)
-    })
+    this.props
+      .destroyProject(destroyedProjectId)
+      .then(() => {
+        this.showSuccessFlash('Successfully destroyed. Moving to mypage...')
+        setTimeout(() => {
+          this.props.history.push(`/users/${this.props.currentUser.id}`)
+        }, 3000)
+      })
+      .catch(() =>
+        this.showErrorFlash('Sorry, something went wrong. Please reload and try again...')
+      )
   }
 
   destroyPlanets(selectedPlanetIds: any) {
