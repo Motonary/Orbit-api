@@ -16,7 +16,7 @@ import {
  * stateには、{primo, secundus, tertius}の各軌道上のassignmentsが軌道名をkeyにして格納される
  */
 export function revolvingAssignments(state: any = null, action: RevolvingAssignmentsAction) {
-  let newState = Object.assign({}, state)
+  let cloneState = Object.assign({}, state)
   switch (action.type) {
     case actionTypes.FETCH_REVOLVING_ASSIGNMENTS:
       if ('revolvingAssignments' in action.payload) {
@@ -28,16 +28,16 @@ export function revolvingAssignments(state: any = null, action: RevolvingAssignm
       if ('newAssignment' in action.payload) {
         const newAssignmentOrbit: 'primo' | 'secundus' | 'tertius' =
           action.payload.newAssignment.orbit_pos
-        newState[newAssignmentOrbit].push(action.payload.newAssignment)
-        return newState
+        cloneState[newAssignmentOrbit].push(action.payload.newAssignment)
+        return cloneState
       }
       break
 
     case actionTypes.DESTROY_ASSIGNMENT:
-      // TODO: あとでやる
-      if ('assignmentId' in action.payload) {
-        const { assignmentId } = action.payload
-        return _.remove({ ...state }, (eachAssignment: any) => eachAssignment.id !== assignmentId)
+      if ('destroyedAssignment' in action.payload) {
+        const { id, orbit_pos } = action.payload.destroyedAssignment
+        _.remove(cloneState[orbit_pos], (eachAssignment: any) => eachAssignment.id === id)
+        return cloneState
       }
       break
 
@@ -72,6 +72,7 @@ export function selectedAssignments(state: any = [], action: SelectedAssignments
  * stateには、UI上からすでに削除され、履歴ページに表示されるためのAssignmentsが格納される
  */
 export function destroyedAssignments(state: any = null, action: DestroyedAssignmentsAction) {
+  let cloneState = Object.assign({}, state)
   switch (action.type) {
     case actionTypes.FETCH_DESTROYED_ASSIGNMENTS:
       if ('destroyedAssignments' in action.payload) {
@@ -82,7 +83,7 @@ export function destroyedAssignments(state: any = null, action: DestroyedAssignm
     case actionTypes.RESTORE_ASSIGNMENT:
       if ('assignmentId' in action.payload) {
         const { assignmentId } = action.payload
-        return _.remove({ ...state }, (eachAssignment: any) => eachAssignment.id !== assignmentId)
+        return _.remove([...state], (eachAssignment: any) => eachAssignment.id !== assignmentId)
       }
       break
 
