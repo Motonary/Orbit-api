@@ -158,7 +158,7 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
         }, 3000)
       })
       .catch(() =>
-        this.showErrorFlash('Sprry, something went wrong. Please reload and try again...')
+        this.showErrorFlash('Sorry, something went wrong. Please reload and try again...')
       )
   }
 
