@@ -81,9 +81,9 @@ export function destroyedAssignments(state: any = null, action: DestroyedAssignm
       break
 
     case actionTypes.RESTORE_ASSIGNMENT:
-      if ('assignmentId' in action.payload) {
-        const { assignmentId } = action.payload
-        return _.remove([...state], (eachAssignment: any) => eachAssignment.id !== assignmentId)
+      if ('restoredAssignment' in action.payload) {
+        const { id } = action.payload.restoredAssignment
+        _.remove(cloneState, (eachAssignment: any) => eachAssignment.id === id)
       }
       break
 

@@ -172,7 +172,7 @@ interface FetchDestroyedAssignmentsAction extends BaseAction {
 
 interface RestoreAssignmentAction extends BaseAction {
   type: string
-  payload: { assignmentId: number } // TODO: stringかも
+  payload: { restoredAssignment: any }
 }
 
 export type DestroyedAssignmentsAction = FetchDestroyedAssignmentsAction | RestoreAssignmentAction

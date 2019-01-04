@@ -38,12 +38,14 @@ class Api::AssignmentsController < ApplicationController
 
   def destroy
     destroyed_assignment = Assignment.find(params[:id])
-    destroyed_assignment.update_attributes(destroyed_flag: true, destroyed_at: Time.current) and render json: destroyed_assignment
+    destroyed_assignment.update_attributes(destroyed_flag: true, destroyed_at: Time.current) and \
+      render json: destroyed_assignment
   end
 
   def restore
     restored_assignment = Assignment.find(params[:id])
-    restored_assignment.update_attributes(destroyed_flag: false, destroyed_at: nil) and render json: restored_assignment
+    restored_assignment.update_attributes(destroyed_flag: false, destroyed_at: nil) and \
+      render json: restored_assignment
   end
 
   private
