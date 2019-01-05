@@ -197,12 +197,14 @@ export function restoreAssignment(assignmentId: any): Promise<RestoreAssignmentA
     url: `${ROOT_URL}/api/assignments/${assignmentId}/restore`,
     headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
   })
-    .then(res => {
+    .then(() => {
       showSuccessFlash('Successfully restored!')
-      return {
-        type: actionTypes.RESTORE_ASSIGNMENT,
-        payload: { restoredAssignment: res.data },
-      }
+      // FIXME: ここの問題に関してはreducerに詳述。actionが値をreturnしてないよという
+      //        エラーが起きるが見た目上は何も問題がおきていないのでとりあえずコメントアウトして放置。
+      // return {
+      //   type: actionTypes.RESTORE_ASSIGNMENT,
+      //   payload: { restoredAssignment: res.data },
+      // }
     })
     .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
 }
