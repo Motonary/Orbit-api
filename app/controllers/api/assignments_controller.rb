@@ -23,13 +23,17 @@ class Api::AssignmentsController < ApplicationController
     # 惑星と衛星を混ぜてから、破壊された日時の新しい順にソート
     destroyed_all_assignments =
       (destroyed_assignments + destroyed_sub_assignments).sort_by(&:destroyed_at)
-    
+
     render json: shape_assignments(destroyed_all_assignments)
   end
 
   def create
-    new_assignment = @current_project.assignments.new(assignment_params)
-    new_assignment.save! and render json: new_assignment
+    if @current_project.assignments.fetch_not_destroyed_in_orbit(assignment_params[:orbit_pos]).count < 5
+      new_assignment = @current_project.assignments.new(assignment_params)
+      new_assignment.save! and render json: new_assignment
+    else
+      head :no_content # TODO: statuscode204は不適切だから変えたい
+    end
   end
 
   def destroy

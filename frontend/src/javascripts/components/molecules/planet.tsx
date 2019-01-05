@@ -5,6 +5,7 @@ import CheckMark from '../atoms/check-mark'
 import PlanetImg from '../atoms/planet-img'
 
 import { selectAssignment, disselectAssignment } from '../../actions/assignments'
+import { selectProject, disselectProject } from '../../actions/projects'
 
 import { PlanetImgs } from '../../constants/images'
 
@@ -12,23 +13,30 @@ interface PlanetProps {
   className: string
   planetType: string
 
+  selectedProject: any
+
   selectAssignment: any
   disselectAssignment: any
+  selectProject: any
+  disselectProject: any
 }
 
 class Planet extends React.Component<PlanetProps, {}> {
   onMouseOver(e: any) {
-    const target_planet = e.target.parentNode.parentNode.firstChild // e.g. div.detail-ballon
+    const targetPlanet = e.target.parentNode.parentNode.firstChild // e.g. div.detail-ballon
+    const firstClass = targetPlanet.classList[0]
 
-    if (target_planet.classList[0].includes('popup')) {
-      target_planet.style.display = 'block'
+    if (firstClass && firstClass.includes('popup')) {
+      targetPlanet.style.display = 'block'
     }
   }
-  onMouseOut(e: any) {
-    const target_planet: any = e.target.parentNode.parentNode.firstChild
 
-    if (target_planet.classList[0].includes('popup')) {
-      target_planet.style.display = 'none'
+  onMouseOut(e: any) {
+    const targetPlanet: any = e.target.parentNode.parentNode.firstChild
+    const firstClass = targetPlanet.classList[0]
+
+    if (firstClass && firstClass.includes('popup')) {
+      targetPlanet.style.display = 'none'
     }
   }
 
@@ -39,10 +47,18 @@ class Planet extends React.Component<PlanetProps, {}> {
 
     if (target.style.display === 'block') {
       target.style.display = 'none'
-      this.props.disselectAssignment(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+      if (selectedPlanet[0] === 'planet') {
+        this.props.disselectAssignment(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+      } else {
+        this.props.disselectProject(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+      }
     } else if (target.style.display === '' || target.style.display === 'none') {
       target.style.display = 'block'
-      this.props.selectAssignment(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+      if (selectedPlanet[0] === 'planet') {
+        this.props.selectAssignment(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+      } else {
+        this.props.selectProject(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+      }
     }
   }
 
@@ -63,6 +79,6 @@ class Planet extends React.Component<PlanetProps, {}> {
 }
 
 export default connect(
-  null,
-  { selectAssignment, disselectAssignment }
+  ({ selectedProject }: any) => ({ selectedProject }),
+  { selectAssignment, disselectAssignment, selectProject, disselectProject }
 )(Planet)

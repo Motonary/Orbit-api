@@ -2,14 +2,16 @@ import * as React from 'react'
 
 import PlanetHolder from '../molecules/planet-holder'
 import FooterActionBtnList from '../molecules/footer-action-btn-list'
-import ConfirmModal from '../molecules/confirm-modal'
-import FormModal from '../molecules/form-modal'
+import ConfirmModal from './modals/confirm-modal'
+import FormModal from './modals/form-modal'
+import TutorialModal from './modals/tutorial-modal'
 
 import '../../../stylesheets/destroy_animate.scss'
 
 interface FooterProps {
   currentUser: any
   pathname: any
+  history: any
 }
 
 class Footer extends React.Component<FooterProps, {}> {
@@ -37,7 +39,7 @@ class Footer extends React.Component<FooterProps, {}> {
   }
 
   render() {
-    const { currentUser, pathname }: any = this.props
+    const { currentUser, pathname, history }: any = this.props
     const rootPath = `/users/${currentUser.id}`
 
     return (
@@ -46,10 +48,13 @@ class Footer extends React.Component<FooterProps, {}> {
         <FooterActionBtnList
           pathname={pathname}
           rootPath={rootPath}
+          currentUser={currentUser}
+          history={history}
           motionControll={() => this.motionControll()}
         />
         <ConfirmModal motionControll={() => this.motionControll()} />
         <FormModal pathname={pathname} />
+        <TutorialModal currentUser={currentUser} pathname={pathname} />
       </div>
     )
   }

@@ -29,7 +29,7 @@ class Assignment < ApplicationRecord
   validates :orbit_pos,   presence: true
   validates :project_id,  presence: true
 
-  enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Love, :Mars, :Neputune, :Sirius, :Sun, :Venus, :Takoyaki, :Ball, :Egg]
+  enum planet_type: [:Uranus, :Mercury, :Pluto, :Jupitar, :Earth, :Moon, :Love, :Mars, :Neputune, :Sirius, :Egg]
   enum planet_size: [:small, :medium, :large]
   enum orbit_pos:   [:primo, :secundus, :tertius]
 
@@ -37,6 +37,9 @@ class Assignment < ApplicationRecord
   scope :fetch_destroyed, -> { where(destroyed_flag: true) }
   scope :fetch_revolving_on_orbit, -> (project_id, orbit_pos) {
     where(project_id: project_id).where(orbit_pos: orbit_pos).where(destroyed_flag: false)
+  }
+  scope :fetch_not_destroyed_in_orbit, -> (orbit_pos) {
+    where(orbit_pos: orbit_pos).where(destroyed_flag: false)
   }
   scope :select_for_revolving, -> { select(:id, :title, :description, :deadline, :planet_type, :planet_size, :orbit_pos) }
   scope :select_for_destroyed, -> { select(:id, :title, :description, :deadline, :planet_type, :planet_size, :orbit_pos, :destroyed_at) }

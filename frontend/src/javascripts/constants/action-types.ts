@@ -12,14 +12,18 @@ export const actionTypes = keyMirror({
   // User
   SET_CURRENT_USER: null,
   EXPIRE_CURRENT_USER: null,
+  REMOVE_FIRST_VISIT_FLAG: null,
   UPDATE_AVATAR: null,
   UPDATE_PROFILE: null,
 
   // Projects
   FETCH_REVOLVING_PROJECTS: null,
-  SET_CURRENT_PROJECT: null,
   CREATE_PROJECT: null,
   DESTROY_PROJECT: null,
+  SET_CURRENT_PROJECT: null,
+  SET_SELECTED_PROJECT: null,
+  REMOVE_SELECTED_PROJECT: null,
+  RESET_SELECTED_PROJECT: null,
 
   // Assignments
   FETCH_REVOLVING_ASSIGNMENTS: null,

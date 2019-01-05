@@ -1,7 +1,29 @@
 import axios from 'axios'
+import Alert from 'react-s-alert'
 import { actionTypes } from '../constants/action-types'
 import { BaseAction } from '../constants/static-types'
 import { ROOT_URL } from '../constants/url'
+
+// -------------------------------------------------------------------------------------
+// Flash
+// -------------------------------------------------------------------------------------
+function showSuccessFlash(successMessage: string) {
+  Alert.success(successMessage, {
+    position: 'top-right',
+    effect: 'jelly',
+    timeout: 3000,
+    offset: 80,
+  })
+}
+
+function showErrorFlash(errorMessage: string) {
+  Alert.error(errorMessage, {
+    position: 'top-right',
+    effect: 'jelly',
+    timeout: 3000,
+    offset: 80,
+  })
+}
 
 // -------------------------------------------------------------------------------------
 // RevolvingProjects
@@ -37,7 +59,7 @@ export function fetchRevolvingProjects(): Promise<FetchRevolvingProjectsAction |
         payload: { currentUserAllProjects: res.data },
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 export function createProject(
@@ -52,12 +74,17 @@ export function createProject(
     data: { project: { title, description, fixed_star_type } },
   })
     .then(res => {
-      return {
-        type: actionTypes.CREATE_PROJECT,
-        payload: { newProject: res.data },
+      if (res.status === 200) {
+        showSuccessFlash('Successfully created!')
+        return {
+          type: actionTypes.CREATE_PROJECT,
+          payload: { newProject: res.data },
+        }
+      } else if (res.status === 204) {
+        showErrorFlash('Unable to put 5 stars on an orbit...')
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 export function destroyProject(projectId: any): Promise<DestroyProjectAction | void> {
@@ -67,12 +94,13 @@ export function destroyProject(projectId: any): Promise<DestroyProjectAction | v
     headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
   })
     .then(() => {
+      showSuccessFlash('Successfully destroyed!')
       return {
         type: actionTypes.DESTROY_PROJECT,
         payload: { projectId },
       }
     })
-    .catch(() => alert('Sorry, something went wrong...'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 // -------------------------------------------------------------------------------------
@@ -119,5 +147,47 @@ export function changeCurrentProject(newProject: any, callback: any): ChangeCurr
   return {
     type: actionTypes.SET_CURRENT_PROJECT,
     payload: { currentProject: newProject },
+  }
+}
+
+// -------------------------------------------------------------------------------------
+// SelectedProjects
+// -------------------------------------------------------------------------------------
+interface SelectProjectAction extends BaseAction {
+  type: string
+  payload: { projectId: string }
+}
+
+interface DisselectProjectAction extends BaseAction {
+  type: string
+  payload: { projectId: string }
+}
+
+interface ResetSelectedProject extends BaseAction {
+  type: string
+}
+
+export type SelectedProjectAction =
+  | SelectProjectAction
+  | DisselectProjectAction
+  | ResetSelectedProject
+
+export function selectProject(projectId: any): SelectProjectAction {
+  return {
+    type: actionTypes.SET_SELECTED_PROJECT,
+    payload: { projectId },
+  }
+}
+
+export function disselectProject(projectId: any): DisselectProjectAction {
+  return {
+    type: actionTypes.REMOVE_SELECTED_PROJECT,
+    payload: { projectId },
+  }
+}
+
+export function resetSelectedProject(): ResetSelectedProject {
+  return {
+    type: actionTypes.RESET_SELECTED_PROJECT,
   }
 }

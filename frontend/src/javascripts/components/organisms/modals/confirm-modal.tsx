@@ -2,11 +2,11 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 
-import ConfirmBtn from '../atoms/buttons/confirm-btn'
+import ConfirmBtn from '../../atoms/buttons/confirm-btn'
 
-import { resetDestroyAction, resetModalStatus } from '../../actions/common'
+import { resetDestroyAction, resetModalStatus } from '../../../actions/common'
 
-import '../../../stylesheets/modal.scss'
+import '../../../../stylesheets/modal.scss'
 
 interface ConfirmModalProps {
   motionControll: () => void

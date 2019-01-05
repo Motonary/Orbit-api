@@ -1,31 +1,21 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import Alert from 'react-s-alert'
 
 import HistoryCanvas from '../molecules/history-canvas'
 import StoredPlanetList from '../molecules/stored-planet-list'
 
-import { fetchDestroyedAssignments } from '../../actions/assignments'
-
 interface HistoryPageMainProps {
-  fetchDestroyedAssignments: any
+  history: any
+  match: any
 }
 
-class HistoryPageMain extends React.Component<HistoryPageMainProps, {}> {
-  componentDidMount() {
-    this.props.fetchDestroyedAssignments()
-  }
+const HistoryPageMain: React.SFC<HistoryPageMainProps> = ({ history, match }) => (
+  <div id="history-container">
+    <HistoryCanvas history={history} match={match} />
+    <StoredPlanetList />
+    <Alert />
+  </div>
+)
 
-  render() {
-    return (
-      <div id="history-container">
-        <HistoryCanvas />
-        <StoredPlanetList />
-      </div>
-    )
-  }
-}
-
-export default connect(
-  null,
-  { fetchDestroyedAssignments }
-)(HistoryPageMain)
+export default HistoryPageMain

@@ -17,6 +17,7 @@ import '../stylesheets/header.scss'
 import '../stylesheets/footer.scss'
 import '../stylesheets/history_page.scss'
 import '../stylesheets/setting_page.scss'
+import '../stylesheets/flash.scss'
 
 const createStoreWithMiddleware: any = applyMiddleware(promise)(createStore)
 

@@ -2,17 +2,21 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import anime from 'animejs'
+import Alert from 'react-s-alert'
 
 import ActionBtn from '../atoms/buttons/action-btn'
 
 import { resetDestroyAction, resetModalStatus } from '../../actions/common'
 import { destroyAssignment, resetSelectedAssignment } from '../../actions/assignments'
+import { destroyProject, resetSelectedProject } from '../../actions/projects'
 
 import { DeleteActions } from '../../constants/images'
 
 interface MeteoriteProps {
   icon: string
   actionBtnClass: string
+  history: any
+  currentUser: any
   motionControll: () => void
   onClick: () => void
 
@@ -20,18 +24,22 @@ interface MeteoriteProps {
   destroyedAssignments: any
   selectedDestroyAction: any
   modalOpen: any
+  selectedProject: any
 
   resetDestroyAction: any
   resetModalStatus: any
   destroyAssignment: any
   resetSelectedAssignment: any
+  destroyProject: any
+  resetSelectedProject: any
 }
 
 class Meteorite extends React.Component<MeteoriteProps, {}> {
   componentDidUpdate(/*prevProps, prevState*/) {
-    if (this.props.selectedAssignments.length === 0) return
-    if (this.props.modalOpen !== '') return
-    if (this.props.selectedDestroyAction !== 'Meteorite') return
+    const { selectedAssignments, selectedProject, modalOpen, selectedDestroyAction } = this.props
+    if (selectedAssignments.length === 0 && selectedProject.length === 0) return
+    if (modalOpen !== '') return
+    if (selectedDestroyAction !== 'Meteorite') return
     this.onIgniteDestroyAnimation()
   }
 
@@ -49,8 +57,13 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
   }
 
   makeMovement(targetDiv: any) {
+    const { selectedAssignments, selectedProject } = this.props
     const movDom: any = targetDiv
-    const targetDom: any = document.getElementById(`planet-${this.props.selectedAssignments[0]}`) // should be div.id="planet-2-Earth" class="planet-medium-secundus"
+    const targetIdName =
+      selectedAssignments.length !== 0
+        ? `planet-${selectedAssignments[0]}`
+        : `project-${selectedProject[0]}`
+    const targetDom: any = document.getElementById(targetIdName) // should be div.id="planet-2-Earth" class="planet-medium-secundus"
 
     // 要素の位置座標を取得.
     const clientRectMov: any = movDom.getBoundingClientRect()
@@ -70,12 +83,14 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     // 目標惑星中心までの距離(px)とArctanへの引数
     const disX: number = xT - xM
     const disY: number = yT - yM
-    const arcvalue: number = -disY / disX
+    let arcvalue: number
+    if (disX < 0) {
+      arcvalue = -disY / disX
+    } else {
+      arcvalue = disY / disX
+    }
 
-    // Arctanのマクローリン展開（４次近似）により、arctanの整数値から目標物への角度(rad)を求める
-    const approximateRad: number =
-      arcvalue - Math.pow(arcvalue, 3) / 3 + Math.pow(arcvalue, 5) / 5 - Math.pow(arcvalue, 7) / 7
-    const deg: number = (approximateRad * 180) / Math.PI // rad -> degree
+    const deg: number = (Math.atan(arcvalue) * 180) / Math.PI - 4
 
     const MissileTransforms = anime({
       targets: '#project-page-container .destroy-action',
@@ -86,21 +101,39 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
       },
       translateX: {
         value: disX - TargetWidth,
-        duration: 2000,
+        duration: 1700,
         easing: 'easeInExpo',
         delay: 500,
       },
       traslateY: {
-        value: disY - TargetHeight,
-        duration: 2000,
+        value: disY + TargetHeight,
+        duration: 1700,
         easing: 'easeInExpo',
         delay: 500,
       },
     })
 
     setTimeout(() => {
-      this.destroyPlanets(this.props.selectedAssignments)
+      this.destroyPlanets(selectedProject.length !== 0 ? selectedProject : selectedAssignments)
     }, 2450)
+  }
+
+  showSuccessFlash(successMessage: string) {
+    Alert.success(successMessage, {
+      position: 'top-right',
+      effect: 'jelly',
+      timeout: 3000,
+      offset: 80,
+    })
+  }
+
+  showErrorFlash(errorMessage: string) {
+    Alert.error(errorMessage, {
+      position: 'top-right',
+      effect: 'jelly',
+      timeout: 3000,
+      offset: 80,
+    })
   }
 
   // 削除されたAssignmentIdをcanvasのidから特定し、destroyedAssignmentsに格納
@@ -112,8 +145,26 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     })
   }
 
-  destroyPlanets(selectedAssignments: any) {
-    const target_ids: any = selectedAssignments
+  // 削除されたProjectIdをcanvasのidから特定し、destroyedProjectに格納
+  removeProjectData(destroyDom: any) {
+    const destroyedCvs: any = destroyDom[0].firstChild
+    const destroyedProjectId: string = destroyedCvs.id.split('-')[0]
+    this.props
+      .destroyProject(destroyedProjectId)
+      .then(() => {
+        this.showSuccessFlash('Successfully destroyed. Moving to mypage...')
+        setTimeout(() => {
+          this.props.history.push(`/users/${this.props.currentUser.id}`)
+        }, 3000)
+      })
+      .catch(() =>
+        this.showErrorFlash('Sorry, something went wrong. Please reload and try again...')
+      )
+  }
+
+  destroyPlanets(selectedPlanetIds: any) {
+    const target_ids: any = selectedPlanetIds
+    const isProject: boolean = this.props.selectedProject.length !== 0
 
     let parent: any = []
     let canvasEl: any = []
@@ -135,26 +186,41 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     let pointerY: number = 0
 
     function setCanvasSize() {
-      canvasEl.forEach((target: any, i: number) => {
-        target.style.width = parent[i].parentNode.clientWidth + 'px'
-        target.style.height = parent[i].parentNode.clientHeight + 'px'
-        target.style.top = `-${parent[i].parentNode.clientWidth / 2}px`
-        target.style.left = `-${parent[i].parentNode.clientHeight / 2}px`
-        target.width = parent[i].parentNode.clientWidth
-        target.height = parent[i].parentNode.clientHeight
+      if (isProject) {
+        const target = canvasEl[0]
+        target.style.width = '100vw'
+        target.style.height = '100vh'
+        target.width = 1000
+        target.height = 600
         target.style.zIndex = 500
         target.getContext('2d').scale(2, 2)
-      })
+      } else {
+        canvasEl.forEach((target: any, i: number) => {
+          target.style.width = parent[i].parentNode.clientWidth + 'px'
+          target.style.height = parent[i].parentNode.clientHeight + 'px'
+          target.style.top = `-${parent[i].parentNode.clientWidth / 2}px`
+          target.style.left = `-${parent[i].parentNode.clientHeight / 2}px`
+          target.width = parent[i].parentNode.clientWidth
+          target.height = parent[i].parentNode.clientHeight
+          target.style.zIndex = 500
+          target.getContext('2d').scale(2, 2)
+        })
+      }
     }
 
     function updateCoords() {
-      pointerX = 60
-      pointerY = 60
+      if (isProject) {
+        pointerX = 300
+        pointerY = 150
+      } else {
+        pointerX = 60
+        pointerY = 60
+      }
     }
 
     function removeImg() {
       _.forEach(parent, (doc: any) => {
-        let child: any = doc.children[1]
+        const child: any = isProject ? doc.children[0] : doc.children[1]
         doc.removeChild(child)
       })
     }
@@ -241,7 +307,11 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
     animateParticules(pointerX, pointerY)
     this.props.resetDestroyAction()
     this.props.resetSelectedAssignment()
-    this.removeAssignmentData(parent)
+    if (isProject) {
+      this.removeProjectData(parent)
+    } else {
+      this.removeAssignmentData(parent)
+    }
     this.props.motionControll()
   }
 
@@ -252,16 +322,25 @@ class Meteorite extends React.Component<MeteoriteProps, {}> {
 }
 
 export default connect(
-  ({ selectedAssignments, destroyedAssignments, selectedDestroyAction, modalOpen }: any) => ({
+  ({
     selectedAssignments,
     destroyedAssignments,
     selectedDestroyAction,
     modalOpen,
+    selectedProject,
+  }: any) => ({
+    selectedAssignments,
+    destroyedAssignments,
+    selectedDestroyAction,
+    modalOpen,
+    selectedProject,
   }),
   {
     resetDestroyAction,
     resetModalStatus,
     destroyAssignment,
     resetSelectedAssignment,
+    destroyProject,
+    resetSelectedProject,
   }
 )(Meteorite)

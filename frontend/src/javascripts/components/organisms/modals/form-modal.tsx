@@ -2,14 +2,14 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 
-import AssignmentForm from './forms/assignment-form'
-import SubAssignmentForm from './forms/subassignmnet-form'
-import ProjectForm from './forms/project-form'
+import AssignmentForm from '../../molecules/forms/assignment-form'
+import SubAssignmentForm from '../../molecules/forms/subassignmnet-form'
+import ProjectForm from '../../molecules/forms/project-form'
 
-import { resetModalStatus, resetSelectedStar } from '../../actions/common'
+import { resetModalStatus, resetSelectedStar } from '../../../actions/common'
 
-import '../../../stylesheets/modal.scss'
-import '../../../stylesheets/form_on_modal.scss'
+import '../../../../stylesheets/modal.scss'
+import '../../../../stylesheets/form_on_modal.scss'
 
 interface FormModalProps {
   pathname: any
