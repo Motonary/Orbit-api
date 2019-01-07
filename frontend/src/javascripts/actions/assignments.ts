@@ -62,7 +62,7 @@ export function fetchRevolvingAssignments(
         payload: { revolvingAssignments: res.data },
       }
     })
-    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 export function createAssignment(
@@ -101,7 +101,7 @@ export function createAssignment(
         showErrorFlash('Unable to put 5 stars on an orbit...')
       }
     })
-    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 export function destroyAssignment(assignmentId: any): Promise<DestroyAssignmentAction | void> {
@@ -117,7 +117,7 @@ export function destroyAssignment(assignmentId: any): Promise<DestroyAssignmentA
         payload: { destroyedAssignment: res.data },
       }
     })
-    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 // -------------------------------------------------------------------------------------
@@ -188,7 +188,7 @@ export function fetchDestroyedAssignments(): Promise<FetchDestroyedAssignmentsAc
         payload: { destroyedAssignments: res.data },
       }
     })
-    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 export function restoreAssignment(assignmentId: any): Promise<RestoreAssignmentAction | void> {
@@ -204,5 +204,5 @@ export function restoreAssignment(assignmentId: any): Promise<RestoreAssignmentA
         payload: { restoredAssignment: res.data },
       }
     })
-    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
