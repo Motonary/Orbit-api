@@ -53,9 +53,12 @@ class Planet extends React.Component<PlanetProps, {}> {
 
   onSelected(e: any) {
     // TODO: ifがネストしているなど可読性が低いので要リファクタリング
+    // この条件分岐は仕様的にリファクタは厳しいと思います
     const target: any = e.target.parentNode.children[1] // e.target = .planet-img-container -> div.mark-container
     const targetPlanet: any = e.target.parentNode.parentNode // id #planet-2-Earth
     const selectedPlanet: string = targetPlanet.id.split('-') // Array(planet, 2, Earth)
+
+    if (target.style === 'undefined') return
 
     if (target.style.display === 'block') {
       target.style.display = 'none'
