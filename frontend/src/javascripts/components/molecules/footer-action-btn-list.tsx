@@ -44,7 +44,7 @@ class FooterActionBtnList extends React.Component<FooterActionBtnListProps, {}> 
     const deleteBtnsClass: string = classNames({
       'action-btn': true,
       'delete-buttons-show':
-        pathname === (`${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname)),
+        pathname === `${rootPath}` || /^\/users\/[1-9]\d*\/projects$/.test(pathname),
     })
     const blackHoleBtnClass: string = classNames({
       'restrict-button-style': selectedProject.length !== 0,
