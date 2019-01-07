@@ -84,14 +84,13 @@ export function destroyedAssignments(state: any = null, action: DestroyedAssignm
     case actionTypes.RESTORE_ASSIGNMENT:
       if ('restoredAssignment' in action.payload) {
         const { id, destroyed_at } = action.payload.restoredAssignment
-        // FIXME: 帰ってくるrestoredAssignmentはcontroller側でdestroyed_at: nil
-        //        にupdateされてしまっているのでこれだとうまくいかない
         const destroyedYear = moment(destroyed_at).format('YYYY')
         const destroyedDate = moment(destroyed_at).format('MM/DD')
         _.remove(
           cloneState[destroyedYear][destroyedDate],
           (eachAssignment: any) => eachAssignment.id === id
         )
+        return cloneState
       }
       break
 

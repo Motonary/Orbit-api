@@ -44,8 +44,9 @@ class Api::AssignmentsController < ApplicationController
 
   def restore
     restored_assignment = Assignment.find(params[:id])
+    restored_assignment_with_destroyed_at = restored_assignment.dup
     restored_assignment.update_attributes(destroyed_flag: false, destroyed_at: nil) and \
-      render json: restored_assignment
+      render json: restored_assignment_with_destroyed_at # reducer側でdestroyed_atの情報が必要
   end
 
   private
