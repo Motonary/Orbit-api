@@ -52,7 +52,7 @@ class Planet extends React.Component<PlanetProps, {}> {
   }
 
   onSelected(e: any) {
-    // TODO: 要リファクタリング
+    // TODO: ifがネストしているなど可読性が低いので要リファクタリング
     const target: any = e.target.parentNode.children[1] // e.target = .planet-img-container -> div.mark-container
     const targetPlanet: any = e.target.parentNode.parentNode // id #planet-2-Earth
     const selectedPlanet: string = targetPlanet.id.split('-') // Array(planet, 2, Earth)
