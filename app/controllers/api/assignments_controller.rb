@@ -28,7 +28,7 @@ class Api::AssignmentsController < ApplicationController
   end
 
   def create
-    if @current_project.assignments.fetch_not_destroyed_in_orbit(assignment_params[:orbit_pos]).count < 5
+    if @current_project.assignments.fetch_not_destroyed_in_orbit(assignment_params[:orbit_pos]).count < 4
       new_assignment = @current_project.assignments.new(assignment_params)
       new_assignment.save! and render json: new_assignment
     else
@@ -38,12 +38,15 @@ class Api::AssignmentsController < ApplicationController
 
   def destroy
     destroyed_assignment = Assignment.find(params[:id])
-    destroyed_assignment.update_attributes(destroyed_flag: true, destroyed_at: Time.current) and head :ok
+    destroyed_assignment.update_attributes(destroyed_flag: true, destroyed_at: Time.current) and \
+      render json: destroyed_assignment
   end
 
   def restore
     restored_assignment = Assignment.find(params[:id])
-    restored_assignment.update_attributes(destroyed_flag: false, destroyed_at: nil) and head :ok
+    restored_assignment_with_destroyed_at = restored_assignment.dup
+    restored_assignment.update_attributes(destroyed_flag: false, destroyed_at: nil) and \
+      render json: restored_assignment_with_destroyed_at # reducer側でdestroyed_atの情報が必要
   end
 
   private

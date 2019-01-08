@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import Alert from 'react-s-alert'
 
 import CheckMark from '../atoms/check-mark'
 import PlanetImg from '../atoms/planet-img'
@@ -14,6 +15,7 @@ interface PlanetProps {
   planetType: string
 
   selectedProject: any
+  selectedAssignments: any
 
   selectAssignment: any
   disselectAssignment: any
@@ -40,10 +42,23 @@ class Planet extends React.Component<PlanetProps, {}> {
     }
   }
 
+  showErrorFlash(errorMessage: string) {
+    Alert.error(errorMessage, {
+      position: 'top-right',
+      effect: 'jelly',
+      timeout: 3000,
+      offset: 80,
+    })
+  }
+
   onSelected(e: any) {
+    // TODO: ifがネストしているなど可読性が低いので要リファクタリング
+    // この条件分岐は仕様的にリファクタは厳しいと思います
     const target: any = e.target.parentNode.children[1] // e.target = .planet-img-container -> div.mark-container
     const targetPlanet: any = e.target.parentNode.parentNode // id #planet-2-Earth
     const selectedPlanet: string = targetPlanet.id.split('-') // Array(planet, 2, Earth)
+
+    if (target.style === 'undefined') return
 
     if (target.style.display === 'block') {
       target.style.display = 'none'
@@ -53,11 +68,20 @@ class Planet extends React.Component<PlanetProps, {}> {
         this.props.disselectProject(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
       }
     } else if (target.style.display === '' || target.style.display === 'none') {
-      target.style.display = 'block'
       if (selectedPlanet[0] === 'planet') {
-        this.props.selectAssignment(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+        if (this.props.selectedProject.length === 0) {
+          target.style.display = 'block'
+          this.props.selectAssignment(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+        } else {
+          this.showErrorFlash('Unable to select both fixed star and planets at the same time...')
+        }
       } else {
-        this.props.selectProject(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+        if (this.props.selectedAssignments.length === 0) {
+          target.style.display = 'block'
+          this.props.selectProject(`${selectedPlanet[1]}-${selectedPlanet[2]}`)
+        } else {
+          this.showErrorFlash('Unable to select both fixed star and planets at the same time...')
+        }
       }
     }
   }
@@ -79,6 +103,6 @@ class Planet extends React.Component<PlanetProps, {}> {
 }
 
 export default connect(
-  ({ selectedProject }: any) => ({ selectedProject }),
+  ({ selectedProject, selectedAssignments }: any) => ({ selectedProject, selectedAssignments }),
   { selectAssignment, disselectAssignment, selectProject, disselectProject }
 )(Planet)

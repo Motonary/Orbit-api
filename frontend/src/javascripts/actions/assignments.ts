@@ -40,7 +40,7 @@ interface CreateAssignmentAction extends BaseAction {
 
 interface DestroyAssignmentAction extends BaseAction {
   type: string
-  payload: { assignmentId: string } // TODO: numberかも
+  payload: { destroyedAssignment: any }
 }
 
 export type RevolvingAssignmentsAction =
@@ -62,7 +62,7 @@ export function fetchRevolvingAssignments(
         payload: { revolvingAssignments: res.data },
       }
     })
-    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 export function createAssignment(
@@ -101,7 +101,7 @@ export function createAssignment(
         showErrorFlash('Unable to put 5 stars on an orbit...')
       }
     })
-    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 export function destroyAssignment(assignmentId: any): Promise<DestroyAssignmentAction | void> {
@@ -110,14 +110,14 @@ export function destroyAssignment(assignmentId: any): Promise<DestroyAssignmentA
     url: `${ROOT_URL}/api/assignments/${assignmentId}/destroy`,
     headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
   })
-    .then(() => {
+    .then(res => {
       showSuccessFlash('Successfully destroyed!')
       return {
         type: actionTypes.DESTROY_ASSIGNMENT,
-        payload: { assignmentId },
+        payload: { destroyedAssignment: res.data },
       }
     })
-    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 // -------------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ interface FetchDestroyedAssignmentsAction extends BaseAction {
 
 interface RestoreAssignmentAction extends BaseAction {
   type: string
-  payload: { assignmentId: number } // TODO: stringかも
+  payload: { restoredAssignment: any }
 }
 
 export type DestroyedAssignmentsAction = FetchDestroyedAssignmentsAction | RestoreAssignmentAction
@@ -188,7 +188,7 @@ export function fetchDestroyedAssignments(): Promise<FetchDestroyedAssignmentsAc
         payload: { destroyedAssignments: res.data },
       }
     })
-    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
 
 export function restoreAssignment(assignmentId: any): Promise<RestoreAssignmentAction | void> {
@@ -197,12 +197,12 @@ export function restoreAssignment(assignmentId: any): Promise<RestoreAssignmentA
     url: `${ROOT_URL}/api/assignments/${assignmentId}/restore`,
     headers: { Authorization: `Bearer ${sessionStorage.getItem('jwt')}` },
   })
-    .then(() => {
+    .then(res => {
       showSuccessFlash('Successfully restored!')
       return {
         type: actionTypes.RESTORE_ASSIGNMENT,
-        payload: { assignmentId },
+        payload: { restoredAssignment: res.data },
       }
     })
-    .catch(() => showErrorFlash('Sorry, something went wrong. Prease reload.'))
+    .catch(() => showErrorFlash('Sorry, something went wrong. Please reload.'))
 }
