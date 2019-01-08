@@ -12,6 +12,7 @@ class ApplicationController < ActionController::API
   end
 
   def fallback_index_html
-    render :file => 'frontend/dist/index.html'
+    # render :file => 'frontend/dist/index.html'
+    render :file => '../../frontend/dist/index.html'
   end
 end
