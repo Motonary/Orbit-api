@@ -64,6 +64,10 @@ class Missle extends React.Component<MissleProps, {}> {
         ? `planet-${selectedAssignments[0]}`
         : `project-${selectedProject[0]}`
     const targetDom: any = document.getElementById(targetIdName) // should be div.id="planet-2-Earth" class="planet-medium-secundus"
+    if (!targetDom) {
+      this.showErrorFlash('Sorry, something went wrong. Please reload and try again...')
+      return
+    }
 
     // 要素の位置座標を取得.
     const clientRectMov: any = movDom.getBoundingClientRect()
