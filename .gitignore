@@ -16,26 +16,14 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-/node_modules
 
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
-/node_modules
 
 .byebug_history
-/frontend/node_modules
-/frontend/dist/bundle.js
-/node_modules
 /public/uploads
 /.vscode
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-
-# Ignore snapchat
-/frontend/src/__tests__/**/__snapshots__
-
-# Ignore coverage files.
-/coverage
-/frontend/coverage
