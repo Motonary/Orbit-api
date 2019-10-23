@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2018_12_25_155321) do
 
-  create_table "assignments", force: :cascade do |t|
+  create_table "assignments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.datetime "deadline"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2018_12_25_155321) do
     t.datetime "destroyed_at"
   end
 
-  create_table "projects", force: :cascade do |t|
+  create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.integer "fixed_star_type"
     t.datetime "created_at", null: false
@@ -35,14 +35,14 @@ ActiveRecord::Schema.define(version: 2018_12_25_155321) do
     t.text "description"
   end
 
-  create_table "projects_users", id: false, force: :cascade do |t|
-    t.integer "project_id", null: false
-    t.integer "user_id", null: false
+  create_table "projects_users", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
     t.index ["project_id"], name: "index_projects_users_on_project_id"
     t.index ["user_id"], name: "index_projects_users_on_user_id"
   end
 
-  create_table "sub_assignments", force: :cascade do |t|
+  create_table "sub_assignments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.datetime "deadline"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2018_12_25_155321) do
     t.boolean "destroyed_flag", default: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
