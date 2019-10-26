@@ -10,6 +10,8 @@ require 'rspec/rails'
 require 'simplecov'
 SimpleCov.start
 
+require 'factory_bot'
+require 'faker'
 require 'database_cleaner'
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -46,6 +48,8 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  config.include FactoryBot::Syntax::Methods
 
   # Clear the DB for test after executing the test
   config.before(:suite) do
