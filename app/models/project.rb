@@ -19,6 +19,4 @@ class Project < ApplicationRecord
   validates :fixed_star_type, presence: true
 
   enum fixed_star_type: [:Sun, :Venus, :Takoyaki, :Ball]
-
-  scope :select_for_res, -> { select(:id, :title, :description, :fixed_star_type) }
 end
