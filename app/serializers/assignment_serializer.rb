@@ -8,5 +8,5 @@ class AssignmentSerializer
   attribute :planet_type
   attribute :planet_size
   attribute :orbit_pos
-  attribute :destroyed_at, if: @instance_options[:with_destroyed]
+  attribute :destroyed_at, if: -> (obj, opts) { opts && opts[:with_destroyed] == true }
 end

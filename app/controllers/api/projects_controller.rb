@@ -3,11 +3,11 @@ class Api::ProjectsController < ApplicationController
 
   def index
     current_user_projects = current_user.projects
-    serializer = current_user_projects.each { |project| ProjectSerialzer.new(project) }
+    serializer = current_user_projects.each { |project| ProjectSerializer.new(project) }
     logger.debug("{'user_id' : #{current_user.id}, 'user_name' : '#{current_user.name}'}")
     logger.debug(serializer.inspect)
 
-    render json: serializer.serialized_json
+    render json: serializer.to_json
   end
 
   def create

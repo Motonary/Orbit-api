@@ -17,7 +17,7 @@ class Api::AssignmentsController < ApplicationController
       'tertius': tertius.each { |assignment| AssignmentSerializer.new(assignment) }
     }
     logger.debug "#{manageable_revolving_assignments}"
-    render json: manageable_revolving_assignments.serialized_json
+    render json: manageable_revolving_assignments.to_json
   end
 
   def fetch_destroyed
