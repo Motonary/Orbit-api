@@ -23,4 +23,10 @@ test:
   reconnect: false
 
 production:
-  url: <%= ENV['DATABASE_URL'] %>
+  <<: *default
+  database: Orbit
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+  port: 3306
+
