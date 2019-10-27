@@ -6,6 +6,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: root
+    volumes:
+      - mysql-data:/var/lib/mysql
     ports:
       - "3306:3306"
 
@@ -13,8 +15,14 @@ services:
     build: .
     command: /bin/sh -c "rm -f /app/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - .:/app
+      - .:/app:cached
+      - bundle:/usr/local/bundle:cached
     ports:
       - "3000:3000"
     links:
       - db
+    tty: true
+
+volumes:
+  mysql-data:
+  bundle:

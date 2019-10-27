@@ -12,6 +12,7 @@ gem 'knock'
 gem 'annotate'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'fast_jsonapi'
 gem 'mysql2'
 
 group :development, :test do
