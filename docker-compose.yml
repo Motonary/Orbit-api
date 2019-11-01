@@ -6,6 +6,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: root
+    volumes:
+      - mysql-data:/var/lib/mysql
     ports:
       - "3306:3306"
 
@@ -13,8 +15,14 @@ services:
     build: .
     command: /bin/sh -c "rm -f /app/tmp/pids/server.pid /app/tmp/pids/unicorn.pid && RAILS_ENV=development bundle exec unicorn -p 3000 -c /app/config/unicorn.rb"
     volumes:
-      - .:/app
+      - .:/app:cached
+      - bundle:/usr/local/bundle:cached
     ports:
       - "3000:3000"
     links:
       - db
+    tty: true
+
+volumes:
+  mysql-data:
+  bundle:

@@ -4,11 +4,10 @@ class Api::UserTokenController < Knock::AuthTokenController
 
   def create
     signin_user = User.find_by(email: authenticate_params[:email])
-    render json: { jwt: auth_token, signinUser: signin_user }
+    render json: { jwt: auth_token, signinUser: UserSerializer.new(signin_user) }
   end
 
   private
-
     def authenticate_params
       params.require(:auth).permit(:email, :password)
     end

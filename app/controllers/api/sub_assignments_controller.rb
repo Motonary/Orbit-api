@@ -8,7 +8,7 @@ class Api::AssignmentsController < ApplicationController
 
   def create
     new_sub_assignment = @belonged_assignment.sub_assignments.new(sub_assignment_params)
-    new_sub_assignment.save! and render json: new_assignment
+    new_sub_assignment.save! and render json: SubAssignmentSerializer.new(new_sub_assignment)
   end
 
   def destroy

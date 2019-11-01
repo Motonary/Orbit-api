@@ -1,1 +1,8 @@
---require spec_helper
+# 出力結果を色分け
+--color
+
+# rails_helperの読み込み
+--require rails_helper
+
+# 出力結果をドキュメント風に
+--format documentation
