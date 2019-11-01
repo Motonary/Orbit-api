@@ -6,11 +6,9 @@ LABEL Name=orbit-api Version=0.0.1
 EXPOSE 3000
 
 RUN apt-get update -qq && \
-    apt-get install -y apt-utils \
-                       build-essential \
-                       libpq-dev \
+    apt-get install -y build-essential \ 
+                       libpq-dev \        
                        nodejs \
-                       mysql-client \
     && rm -rf /var/lib/apt/lists/*      
 
 RUN mkdir /app
@@ -21,7 +19,7 @@ RUN mkdir /app
 WORKDIR /app
 COPY . /app
 
-COPY Gemfile Gemfile.lock ./
-RUN bundle install
+# COPY Gemfile Gemfile.lock ./
+RUN bundle install --no-deployment --verbose
 
 CMD ["bash"]
