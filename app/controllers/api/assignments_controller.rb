@@ -7,17 +7,13 @@ class Api::AssignmentsController < ApplicationController
   end
 
   def fetch_revolving
-    primo = Assignment.fetch_revolving_on_orbit(@current_project.id, 0)
-    secundus = Assignment.fetch_revolving_on_orbit(@current_project.id, 1)
-    tertius = Assignment.fetch_revolving_on_orbit(@current_project.id, 2)
-
     manageable_revolving_assignments = {
-      'primo': primo.each { |assignment| AssignmentSerializer.new(assignment) },
-      'secundus': secundus.each { |assignment| AssignmentSerializer.new(assignment) },
-      'tertius': tertius.each { |assignment| AssignmentSerializer.new(assignment) }
+      'primo': Assignment.fetch_revolving_on_orbit(@current_project.id, 0).select_for_revolving,
+      'secundus': Assignment.fetch_revolving_on_orbit(@current_project.id, 1).select_for_revolving,
+      'tertius': Assignment.fetch_revolving_on_orbit(@current_project.id, 2).select_for_revolving
     }
     logger.debug "#{manageable_revolving_assignments}"
-    render json: manageable_revolving_assignments.to_json
+    render json: manageable_revolving_assignments
   end
 
   def fetch_destroyed
@@ -34,7 +30,7 @@ class Api::AssignmentsController < ApplicationController
   def create
     if @current_project.assignments.fetch_not_destroyed_in_orbit(assignment_params[:orbit_pos]).count < 4
       new_assignment = @current_project.assignments.new(assignment_params)
-      new_assignment.save! and render json: AssignmentSerializer.new(new_assignment)
+      new_assignment.save! and render json: new_assignment
     else
       head :no_content # TODO: statuscode204は不適切だから変えたい
     end
@@ -43,18 +39,18 @@ class Api::AssignmentsController < ApplicationController
   def destroy
     destroyed_assignment = Assignment.find(params[:id])
     destroyed_assignment.update_attributes(destroyed_flag: true, destroyed_at: Time.current) and \
-      render json: AssignmentSerializer.new(destroyed_assignment).serialized_json
+      render json: destroyed_assignment
   end
 
   def restore
     restored_assignment = Assignment.find(params[:id])
     restored_assignment_with_destroyed_at = restored_assignment.dup
-    opts = { opts: { with_destroyed: true } }
     restored_assignment.update_attributes(destroyed_flag: false, destroyed_at: nil) and \
-      render json: AssignmentSerializer.new(restored_assignment_with_destroyed_at, opts) # reducer側でdestroyed_atの情報が必要
+      render json: restored_assignment_with_destroyed_at # reducer側でdestroyed_atの情報が必要
   end
 
   private
+
     def assignment_params
       params.require(:assignment).permit(:title, :description, :deadline, :planet_type, :planet_size, :orbit_pos)
     end
