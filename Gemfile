@@ -14,6 +14,10 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'mysql2'
 
+# Use unicorn as the app server
+gem "unicorn"
+gem "unicorn-worker-killer"
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
@@ -37,10 +41,6 @@ end
 
 group :production do
   gem 'fog'
-end
-
-group :production, :staging do
-    gem 'unicorn'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
