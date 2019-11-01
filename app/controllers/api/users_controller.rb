@@ -14,17 +14,17 @@ class Api::UsersController < ApplicationController
         orbit_pos: i
       })
     end
-    render json: UserSerializer.new(new_user)
+    render json: new_user
   end
 
   def current
-    render json: UserSerializer.new(current_user)
+    render json: current_user
   end
 
   def remove_flag
     current_user = User.find_by(email: user_params[:email])
     current_user.first_visit_flag = false
-    current_user.save! and render json: UserSerializer.new(current_user)
+    current_user.save! and render json: current_user
   end
 
   def update_avatar
@@ -37,11 +37,11 @@ class Api::UsersController < ApplicationController
     current_user.email = user_params[:email] if user_params[:email]
     current_user.password = user_params[:password]
     current_user.password_confirmation = params[:password_confirmation]
-
-    current_user.save! and render json: UserSerializer.new(current_user)
+    current_user.save! and render json: current_user
   end
 
   private
+
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
