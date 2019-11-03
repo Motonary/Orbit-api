@@ -10,11 +10,9 @@ gem 'bcrypt'
 gem 'rack-cors'
 gem 'knock'
 gem 'annotate'
-gem 'mini_magick'
 gem 'mysql2'
 gem 'aws-sdk-s3'
 gem 'dotenv-rails'
-
 
 # Use unicorn as the app server
 gem "unicorn"
