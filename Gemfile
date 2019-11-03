@@ -13,7 +13,7 @@ gem 'annotate'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'mysql2'
-gem 'aws-sdk'
+gem 'aws-sdk-s3'
 gem 'dotenv-rails'
 
 
