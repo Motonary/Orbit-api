@@ -29,8 +29,6 @@ class User < ApplicationRecord
   # validates :password, presence: true, length: { minimum: 6 }
   validates :avatar, presence: true
 
-  # mount_uploader :avatar, AvatarUploader
-
   scope :id_is, -> user_id { where(id: user_id) }
 
   # 渡された文字列のハッシュ値を返す
