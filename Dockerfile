@@ -11,7 +11,7 @@ RUN apt-get update -qq && \
                        libpq-dev \
                        nodejs \
                        mysql-client \
-    && rm -rf /var/lib/apt/lists/*      
+    && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /app
 

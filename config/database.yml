@@ -10,7 +10,7 @@ development:
   username: root
   password: password # docker-compose.ymlのMYSQL_ROOT_PASSWORD
   host: db # docker-compose.ymlのservice名
-  database: development
+  database: orbit-dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
