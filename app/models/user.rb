@@ -27,8 +27,9 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   # passwordのvalidationがあるとアバター変える時エラーが起きる
   # validates :password, presence: true, length: { minimum: 6 }
+  validates :avatar, presence: true
 
-  mount_uploader :avatar, AvatarUploader
+  # mount_uploader :avatar, AvatarUploader
 
   scope :id_is, -> user_id { where(id: user_id) }
 

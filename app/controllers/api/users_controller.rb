@@ -2,7 +2,9 @@ class Api::UsersController < ApplicationController
   before_action :authenticate_user, except: :create
 
   def create
-    new_user = User.create!(user_params)
+    new_user = User.new(user_params)
+    new_user.avatar = "https://d111fnfgjqj6t5.cloudfront.net/user_default_icon.png"
+    new_user.save!
     new_project = new_user.projects.create!(title: "PROJECT", fixed_star_type: 0, description: "This is your first Project!!")
     3.times do |i|
       new_project.assignments.create!({
