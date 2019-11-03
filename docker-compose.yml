@@ -4,7 +4,7 @@ services:
   db:
     image: mysql:5.7
     environment:
-      MYSQL_DATABASE: orbit-dev
+      MYSQL_DATABASE: development
       MYSQL_ROOT_PASSWORD: password
     ports:
       - "3306:3306"
