@@ -13,6 +13,9 @@ gem 'annotate'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'mysql2'
+gem 'aws-sdk'
+gem 'dotenv-rails'
+
 
 # Use unicorn as the app server
 gem "unicorn"
