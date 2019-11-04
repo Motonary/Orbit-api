@@ -10,9 +10,9 @@ gem 'bcrypt'
 gem 'rack-cors'
 gem 'knock'
 gem 'annotate'
-gem 'carrierwave'
-gem 'mini_magick'
 gem 'mysql2'
+gem 'aws-sdk-s3'
+gem 'dotenv-rails'
 
 # Use unicorn as the app server
 gem "unicorn"
@@ -34,13 +34,9 @@ end
 
 group :test do
   gem 'database_cleaner'  # テスト実行後にDBをクリア
-  gem 'simplecov', :require=>false    # テストカバレッジ(テストカバー率)
+  gem 'simplecov', :require => false    # テストカバレッジ(テストカバー率)
   gem 'minitest',                 '5.10.3'
   gem 'minitest-reporters',       '1.1.14'
-end
-
-group :production do
-  gem 'fog'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

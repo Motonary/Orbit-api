@@ -2,7 +2,9 @@ class Api::UsersController < ApplicationController
   before_action :authenticate_user, except: :create
 
   def create
-    new_user = User.create!(user_params)
+    new_user = User.new(user_params)
+    new_user.avatar = "https://d111fnfgjqj6t5.cloudfront.net/user_default_icon.png"
+    new_user.save!
     new_project = new_user.projects.create!(title: "PROJECT", fixed_star_type: 0, description: "This is your first Project!!")
     3.times do |i|
       new_project.assignments.create!({
@@ -28,7 +30,18 @@ class Api::UsersController < ApplicationController
   end
 
   def update_avatar
-    current_user.avatar = params[:avatar]
+    root_url = Rails.env.production? ? "https://d111fnfgjqj6t5.cloudfront.net" : "https://d1xhez4u7g5090.cloudfront.net"
+    bucket_name = Rails.env.production? ? "orbit-prod" : "orbit-dev"
+    avatar_path = "avatars/user_id_#{current_user.id}/#{Time.now.to_i}"
+
+    bucket = Aws::S3::Resource.new(
+      :region            => 'ap-northeast-1',
+      :access_key_id     => ENV['AWS_ACCESS_KEY'],
+      :secret_access_key => ENV['AWS_ACCESS_SECRET_KEY'],
+    ).bucket(bucket_name)
+    bucket.object(avatar_path).put(body: params[:avatar])
+
+    current_user.avatar = "#{root_url}/#{avatar_path}"
     current_user.save! and render json: current_user.avatar
   end
 
