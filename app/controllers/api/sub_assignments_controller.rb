@@ -1,4 +1,4 @@
-class Api::AssignmentsController < ApplicationController
+class Api::SubAssignmentsController < ApplicationController
   before_action :authenticate_user
   before_action :set_belonged_assignment, only: [:create]
 
