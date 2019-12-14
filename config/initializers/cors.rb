@@ -8,7 +8,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # origins 'localhost:4000', 'https://the-orbit-app.com', 'http://the-orbit-app.com'
-    origins '*'
+    origins 'localhost:4000', 'https://the-orbit-app.com'
 
     resource '*',
       headers: :any,
